@@ -1,0 +1,34 @@
+Package: climenv
+Type: Package
+Title: climenv: an R package for downloading, exctracting and plotting climatic envelopes
+Version: 0.1.0
+Author: James L. Tsakalos, Frederico Luebert, Ladislav Mucina
+Maintainer: James L. Tsakalos <jamestsakalos@gmail.com>
+Description: This package facilitates easy dowloading, extration and plotting of
+    climatological data. It provides access to three most globally recognizable 
+    modelled data sets, including WorldClim 2, CHELSA and NASA’s SRTM. climenv 
+    works with multi or single geospatial polygon and point data and the 
+    extracted outputs can be used, for example as covariates, for any number of 
+    ecological studies. Easy access and extraction of globally recognizable data
+    sets greatly extend this packages usability and flexibility for a wide range
+    of applications.
+License: GPL-3
+BugReports: https://github.com/jamestsakalos/climenv/issues
+URL: https://github.com/jamestsakalos/climenv
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+VignetteBuilder: knitr
+Depends: R (>= 4.2.2),
+    terra,
+    dplyr,
+    sp,
+    sf,
+    exactextractr,
+    elevatr,
+    geodata,
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown,
+    glue
+RoxygenNote: 7.2.3
