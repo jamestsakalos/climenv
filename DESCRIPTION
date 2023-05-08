@@ -2,8 +2,18 @@ Package: climenv
 Type: Package
 Title: climenv: an R package for downloading, exctracting and plotting climatic envelopes
 Version: 0.1.0
-Author: James L. Tsakalos, Frederico Luebert, Ladislav Mucina
-Maintainer: James L. Tsakalos <jamestsakalos@gmail.com>
+Authors@R: c(
+    person("James L.", "Tsakalos", role = c("aut", "cre", "cph"),
+           email = "jamestsakalos@gmail.com",
+           comment = c(ORCID = "0000-0001-5067-196X")),
+    person("Frederico", "Luebert", role = c("aut"),
+           comment = c(ORCID = "0000-0003-2251-4056")),
+    person("Martin R.", 'Smith', role = c("aut"),
+           email = "martin.smith@durham.ac.uk",
+           comment = c(ORCID = "0000-0001-5660-1727")),
+    person("Ladislav", "Mucina", role = c("aut"),
+           comment = c(ORCID = "0000-0003-0317-8886"))
+    )
 Description: This package facilitates easy dowloading, extration and plotting of
     climatological data. It provides access to three most globally recognizable 
     modelled data sets, including WorldClim 2, CHELSA and NASA’s SRTM. climenv 
@@ -27,12 +37,12 @@ Imports:
     geodata,
     glue,
     ggplotify,
-    knitr,
     macroBiome,
     sf,
     sp,
     terra,
 Suggests: 
+    knitr,
     rmarkdown,
     testthat (>= 3.0.0),
     vdiffr,
