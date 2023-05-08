@@ -64,6 +64,11 @@
 #' type = 'H')
 #' }
 #'
+#' @importFrom climaemet ggclimat_walter_lieth
+#' @importFrom ggplotify as.ggplot
+#' @importFrom Ternary HoldridgePlot holdridgeLifeZonesUp
+#'                     HoldridgeBelts HoldridgePoints
+#' @importFrom macroBiome cliHoldridgePoints
 #' @export
 ce_plot <- function(data = NULL, c_source = NULL,
                          location_g = NULL, type = NULL) {
