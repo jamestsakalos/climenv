@@ -17,6 +17,20 @@ Sibillini_pt
 Sibillini_py
 }
 \description{
-TODO: Description of \code{Sibillini_pt} and \code{Sibillini_py}
+Geospatial polygon and point data sets capturing Italy's Monti
+'Sibillini' National Park.
+}
+\details{
+The polygon data set ('Sibillini_py') contains two polygons dividing
+the park into regions of 'high' and 'low' altitude.
+The point data set ('Sibillini_pt') contains 100 points distributed randomly
+within the 'high' and 'low' sections.
+
+TODO: Complete description of \code{Sibillini_pt} and \code{Sibillini_py}
+}
+\examples{
+data("Sibillini_pt")
+#TODO: Do something with this data
+
 }
 \keyword{datasets}
