@@ -17,9 +17,10 @@ BugReports: https://github.com/jamestsakalos/climenv/issues
 URL: https://github.com/jamestsakalos/climenv
 Encoding: UTF-8
 LazyData: true
-Suggests: 
+Suggests: knitr
 VignetteBuilder: knitr
-Depends: R (>= 4.2.2),
+Depends: R (>= 4.2.2)
+Imports:
     terra,
     dplyr,
     sp,
@@ -31,4 +32,5 @@ Depends: R (>= 4.2.2),
     knitr,
     rmarkdown,
     glue
+Config/Needs/website: pkgdown
 RoxygenNote: 7.2.3
