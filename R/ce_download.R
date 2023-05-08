@@ -20,7 +20,6 @@
 #' See documentation from \code{worldclim}, \code{chelsa} and \code{elev}.
 #'
 #' @author James L. Tsakalos
-#' @seealso \code{\link{ce_download.R}}
 #'
 #' @examples
 #' \dontrun{

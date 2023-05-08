@@ -59,9 +59,6 @@ e_location = Sibillini_py)
 See also chelsa(), worldclim() or elev() functions.
 }
 }
-\seealso{
-\code{\link{ce_download.R}}
-}
 \author{
 James L. Tsakalos
 }
