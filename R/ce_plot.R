@@ -110,7 +110,7 @@ ce_plot <- function(data = NULL, c_source = NULL,
         alt = round(data$elev[location_g, 2]),
         per = switch(c_source,
                       "CHELSA" = "1981\u20132010",
-                      "WorldClim" = "1970\20132000"
+                      "WorldClim" = "1970\u20132000"
         ),
         est = location_g,
         mlab = "en",
