@@ -25,7 +25,7 @@
 #' minimum, maximum and mean.
 #'
 #' @author James L. Tsakalos
-#' @seealso \code{\link{ce_download.R}}
+#' @seealso Download climate data: [`ce_download()`]
 #' @references{ Karger, D.N., et al. (2016). CHELSA climatologies at high
 #' resolution for the earth’s land surface areas (Version 1.0). World Data
 #' Center for Climate. DOI: 10.1594/WDCC/CHELSA_v1

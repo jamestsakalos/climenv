@@ -18,7 +18,7 @@
 #' macroBiome and Ternary packages to create a Holdridge simplex plot.
 #'
 #' @author James L. Tsakalos
-#' @seealso \code{\link{ce_download.R}}
+#' @seealso Download climate data: [`ce_download()`]
 #' @references{ Holdridge (1947), Determination of world plant formations from
 #' simple climatic data. Science, 105:367&ndash;368.
 #' \doi{10.1126/science.105.2727.367}
@@ -110,7 +110,7 @@ ce_plot <- function(data = NULL, c_source = NULL,
         alt = round(data$elev[location_g, 2]),
         per = switch(c_source,
                       "CHELSA" = "1981\u20132010",
-                      "WorldClim" = "1970\u20132000"
+                      "WorldClim" = "1970\20132000"
         ),
         est = location_g,
         mlab = "en",

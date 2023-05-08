@@ -22,7 +22,7 @@
 #' WorldClim2, are provided in °C.
 #'
 #' @author James L. Tsakalos
-#' @seealso \code{\link{ce_download.R}}
+#' @seealso Download climate data: [`ce_download()`]
 #' @references{ Fick, S.E. and R.J. Hijmans. (2017). WorldClim 2: new 1km
 #' spatial resolution climate surfaces for global land areas. International
 #' Journal of Climatology. 37, 4302–4315.

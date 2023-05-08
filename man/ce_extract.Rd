@@ -61,7 +61,7 @@ See also PLOTTTTTTTIN XXXXX functions.
 }
 }
 \seealso{
-\code{\link{ce_download.R}}
+Download climate data: \code{\link[=ce_download]{ce_download()}}
 }
 \author{
 James L. Tsakalos

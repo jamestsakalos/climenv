@@ -239,7 +239,7 @@
 #' tmin) or mm (prec).
 #'
 #' @author James L. Tsakalos
-#' @seealso \code{\link{ce_download.R}}
+#' @seealso Download climate data: [`ce_download()`]
 #'
 #' @examples
 #' \dontrun{

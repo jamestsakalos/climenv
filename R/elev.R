@@ -22,7 +22,7 @@
 #' resolution at 60° latitude 864.8 m at 45° and 1223 m at 0°.
 #'
 #' @author James L. Tsakalos
-#' @seealso \code{\link{ce_download.R}}
+#' @seealso Download climate data: [`ce_download()`]
 #' @references{ Hijmans, R.J., et al., (2023). geodata: Download Geographic
 #' Data. R package version 0.5-8. https://CRAN.R-project.org/package=geodata
 #'

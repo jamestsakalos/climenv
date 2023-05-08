@@ -53,7 +53,7 @@ DOI: 10.3390/ijgi8030108
 }
 }
 \seealso{
-\code{\link{ce_download.R}}
+Download climate data: \code{\link[=ce_download]{ce_download()}}
 }
 \author{
 James L. Tsakalos
