@@ -2,15 +2,17 @@
                           location_type, location_g,
                           sd, temp, c_source, dir_clim, dir_elev) {
 
+
   file_path <- paste0(dir_clim, "/", which_clim)
 
   if (isTRUE(which_clim == "elev") && !is.null(dir_elev)) {
     raster_files <- list.files(path = dir_elev, pattern = "\\.tif$",
                                all.files = FALSE, full.names = TRUE)
+    # What happens in case `which_clim == "elev" && is.null(dir_elev)`?
 
   } else {
 
-    switch(
+    switch( # Why switch when all outputs are the same?
       c_source,
       "CHELSA" = {
         raster_files <- list.files(path = file_path, pattern = "\\.tif$",
@@ -222,13 +224,16 @@
 #' @param dir_clim Character. Directory containing the climate data. Must
 #' feature prec, tmax, tmean and tmin subfolders.
 #' @param dir_elev Character. Directory containing the elevation data.
+# Suggest linking to definition of these classes so user can find out how
+# to format data as required.
 #' @param location A \code{sp}, \code{sf} polygon or point object.
 #' @param location_g Character. Informs how the zonal statistics are exported.
 #' Should correspond to a column of the \code{location} argument. If NULL,
 #' the zonal statistics are calculated for all features of \code{location}.
 #' @param c_source Character. Supply either \code{"CHELSA"} or
 #' \code{"WorldClim"} argument.
-#' @param var Character. If supplied will export a subset of the climate or
+#' If `NULL`, then ((what happens?)).
+#' @param var Character. If supplied will export a subset ((which?)) of the climate or
 #' elevation data.
 #'
 #' @return
@@ -246,17 +251,18 @@
 #'
 #' # Extraction time will depend on the size of the polygon or point file.
 #' # Import the Sibillini National Park Boundary
-#' data(Sibillini_py)
+#' data("Sibillini_py")
 #' # Run the download function
 #' ce_extract(
-#' dir_clim = "../WorkingDirectory/CHELSA",
-#' dir_elev = "../WorkingDirectory/elev",
-#' location = Sibillini_py,
-#' location_g = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-#' c_source = "CHELSA")
+#'   dir_clim = "../WorkingDirectory/CHELSA",
+#'   dir_elev = "../WorkingDirectory/elev",
+#'   location = Sibillini_py,
+#'   location_g = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+#'   c_source = "CHELSA"
+#' )
 #'
-#' See also PLOTTTTTTTIN XXXXX functions.
 #' }
+#' @seealso PLOTTTTTTTIN XXXXX functions.
 #' @importFrom exactextractr exact_extract
 #' @importFrom glue glue
 #' @importFrom sp SpatialPointsDataFrame SpatialPolygonsDataFrame
@@ -270,14 +276,16 @@ ce_extract <- function(
     c_source = NULL, var = "ALL") {
 
   # Convert sf locations to SP
-  if (("sf" %in% class(location)) || ("sfc" %in% class(location))) {
+  if (inherits(location, c("sf", "sfc"))) {
     location <- sf::as_Spatial(sf::st_zm(location))
   }
 
-  location@data$id <- 0:c(length(seq_along(location)) - 1)
+  # Why not:
+  location@data$id <- seq_along(location) - 1
   location_df <- data.frame(location)
 
   # Check if the c_source argument is correct
+  # See comments in ce_download
   if (is.na(match(c_source, c("NULL", "CHELSA", "WorldClim"))))
     stop("c_source must be either NULL, CHELSA, WorldClim")
 
@@ -302,9 +310,9 @@ ce_extract <- function(
   switch(
     var,
     "prec" = {
-      if (isFALSE(
-        sum(c("prec") %in% list.files(dir_clim)) == 1
-      )) stop("dir_clim must contain prec subfolder")
+      # Why not use this simpler formulation?
+      if (sum(c("prec") %in% list.files(dir_clim)) != 1)
+        stop("dir_clim must contain prec subfolder")
     },
     "tmax" = {
       if (isFALSE(
@@ -325,7 +333,6 @@ ce_extract <- function(
 
   # Format the location file
 
-  sd <- TRUE # if no 'grouping' factor doesn't make sense to calculate sd.
   if (is.null(location_g)) {
     message(
       paste(
@@ -339,6 +346,9 @@ ce_extract <- function(
     location$Name <- location$id
     location_g <- "id"
     sd <- FALSE
+  } else {
+    # clearer if explicitly specified that this is an "else"
+    sd <- TRUE # if no 'grouping' factor doesn't make sense to calculate sd.
   }
 
   filter <- colnames(location_df)[
@@ -396,26 +406,11 @@ ce_extract <- function(
   )
 
   # extracting the data ####
-  switch(var,
-    "ALL" = {
-      files <- c("tmean", "tmin", "tmax", "prec", "elev")
-    },
-    "tmean" = {
-      files <- "tmean"
-    },
-    "tmin" = {
-      files <- "tmin"
-    },
-    "tmax" = {
-      files <- "tmax"
-    },
-    "prec" = {
-      files <- "prec"
-    },
-    "elev" = {
-      files <- "elev"
-    }
-  )
+  if (var == "ALL") {
+    files <- c("tmean", "tmin", "tmax", "prec", "elev")
+  } else {
+    files <- var
+  }
 
   # If no directory provided for elev, no data to be extracted
   if (is.null(dir_elev)) {
@@ -425,6 +420,9 @@ ce_extract <- function(
 
   temp <- NULL
   for (vars in files) {
+    # This requires copying temp `length(vars)` times: memory-hungry & slow!
+    # Better if possible to remove `temp` argument and do something like:
+    # temp <- unlist(lapply(vars, .clim_extract), recursive = FALSE)
     temp <- .clim_extract(which_clim = vars,
                           location = location,
                           location_type = location_type,
