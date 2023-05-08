@@ -11,7 +11,9 @@
 #' @param var Character. If supplied will download a subset of the climate data.
 #'
 #' @return
-#' Returns four subfolders named prec, tmax, tmin and tmean. Each folder
+# MS: consider returning `TRUE` on success or `FALSE` on failure.
+#' Called for its side effects.
+#' Creates four subfolders named prec, tmax, tmin and tmean. Each folder
 #' contains 12 GeoTiff (.tif) files, one for each month of the year
 #' (January is 1; December is 12) for the time period 1970–2000. Each of the
 #' files are downloaded at a spatial resolution of 30 arc seconds (~1 km2).
@@ -127,8 +129,12 @@ worldclim <- function(output_dir = NULL, mode = "wb",
             destfile = tmean_temp, mode = mode,
             cacheOK = FALSE, quiet = quiet)
           )
+          # Prefer on.exit as this will be called even if unzip fails
+          # We wish to avoid clogging up our users' storage in this case!
+          on.exit(unlink(tmean_temp))
           unzip(tmean_temp, exdir = paste0(output_dir, "/tmean"))
-          rm(tmean_temp)
+          # unlink is preferable to rm as it avoids access issues
+          unlink(tmean_temp) # Redundant to on.exit suggestion above
         }
       }
     )
