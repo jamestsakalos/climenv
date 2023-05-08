@@ -1,6 +1,4 @@
-# Testing the ce_extract() function ####
-
-test_that("ce_plot works", {
+test_that("ce_plot() works", {
 
   # Set testing data ####
 
