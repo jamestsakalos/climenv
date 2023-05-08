@@ -21,18 +21,17 @@ VignetteBuilder: knitr
 Depends: R (>= 4.2.2)
 Imports:
     climaemet,
-    terra,
     dplyr,
-    sp,
-    sf,
-    exactextractr,
     elevatr,
+    exactextractr,
     geodata,
-    testthat (>= 3.0.0),
-    knitr,
     glue,
+    knitr,
+    sf,
+    sp,
+    terra,
 Suggests: 
     rmarkdown,
-    testthat,
+    testthat (>= 3.0.0),
     vdiffr,
 RoxygenNote: 7.2.3

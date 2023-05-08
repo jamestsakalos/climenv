@@ -8,6 +8,5 @@
 #' @importFrom elevatr get_elev_raster
 #' @importFrom fs file_temp
 #' @importFrom dplyr %>% group_by summarize
-#' @importFrom vdiffr expect_doppelganger
 utils::globalVariables(c("Name"))
 NULL
