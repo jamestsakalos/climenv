@@ -10,6 +10,8 @@
 #' @param mode Character. See documentation in /code{download.file()}.
 #' @param quiet Logical. If TRUE, suppress status messages (if any), and the
 #' progress bar.
+#' @param var Character specifying which variables to extract.
+#' Options are "prec", "tmax", "tmin", "tmean".
 #'
 #' @return
 #' Returns four subfolders named prec, tmax, tmin and tmean. Each folder
@@ -65,7 +67,7 @@ chelsa <- function(output_dir = NULL, mode = "wb",
   if (!is.null(var)) {
 
     if (is.na(match(var, c("prec", "tmax", "tmin", "tmean"))))
-      stop("mode must be one of prec, tmax, tmin, tmean.")
+      stop("Valid options for `var` are prec, tmax, tmin, tmean.")
 
     var <- var_t[var_t %in% var] # to assign the names
 

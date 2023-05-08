@@ -14,6 +14,9 @@ the data will be stored.}
 
 \item{quiet}{Logical. If TRUE, suppress status messages (if any), and the
 progress bar.}
+
+\item{var}{Character specifying which variables to extract.
+Options are "prec", "tmax", "tmin", "tmean".}
 }
 \value{
 Returns four subfolders named prec, tmax, tmin and tmean. Each folder
@@ -30,8 +33,8 @@ minimum, maximum and mean.
 }
 \description{
 \code{chelsa} downloads the CHELSA (Climatologies at high resolution for the
- earth’s land surface areas) V2.1 data of downscaled temperature and
- precipitation to a resolution of 30 arc sections.
+earth’s land surface areas) V2.1 data of downscaled temperature and
+precipitation to a resolution of 30 arc sections.
 }
 \examples{
 \dontrun{
@@ -48,12 +51,12 @@ earth’s land surface areas (Version 1.1). World Data Center for Climate. DOI:
 10.1594/WDCC/CHELSA_v1_1
 
 Karger, D.N., et al. (2018). Data from: Climatologies at high
- resolution for the earth’s land surface areas. EnviDat.
- DOI: 10.16904/envidat.228.v2.1
+resolution for the earth’s land surface areas. EnviDat.
+DOI: 10.16904/envidat.228.v2.1
 }
 }
 \seealso{
-\code{\link{ce_download.R}}
+Download climate data: \code{\link[=ce_download]{ce_download()}}
 }
 \author{
 James L. Tsakalos
