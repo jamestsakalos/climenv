@@ -3,7 +3,7 @@ test_that("ce_plot() works", {
   # Set testing data ####
 
   # Create temporary file to supply to the ce_extract
-  temp_path <- fs::file_temp(pattern = "Temp", tmp_dir = tempdir(), ext = "")
+  temp_path <- tempfile()
 
   # Create the required subdirectories
   dir.create(file.path(temp_path, "elev"), recursive = TRUE)

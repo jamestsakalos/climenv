@@ -5,6 +5,5 @@
 #' @importFrom terra rast extract vect crs ext intersect mosaic writeRaster
 #' @importFrom geodata elevation_3s
 #' @importFrom elevatr get_elev_raster
-#' @importFrom fs file_temp
 #' @importFrom dplyr %>% group_by summarize
 NULL
