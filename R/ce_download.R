@@ -84,6 +84,7 @@ ce_download <- function(
 
   if ("WORLDCLIM" %in% toupper(c_source)) {
     worldclim(output_dir = output_dir, quiet = TRUE, var = var)
+  }
 
   # if (!match(elev, c(TRUE, FALSE))) # Fails for elev = c(NA_logical_, TRUE, FALSE)
   if (!is.logical(elev) || length(elev) > 1) { # or avoid with isTRUE below
