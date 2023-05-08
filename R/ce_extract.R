@@ -300,10 +300,10 @@ ce_extract <- function(
      stop("dir_clim must contain prec, tmax, tmean, tmin subfolders")
     }
 
-    if (!is.null(dir_elev)) {
-      if (length(list.files(dir_elev)) != 1) {
-        stop("dir_elev is empty")
-      }
+    if (!is.null(dir_elev) && !length(list.files(dir_elev))) {
+      # Do we need to consider case length(list.files(dir_elev)) > 1?
+      stop("dir_elev is empty")
+    }
   }
 
   # Proposed replacement for the below code:
