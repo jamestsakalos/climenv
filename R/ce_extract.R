@@ -260,6 +260,7 @@
 #' @importFrom exactextractr exact_extract
 #' @importFrom glue glue
 #' @importFrom sp SpatialPointsDataFrame SpatialPolygonsDataFrame
+#' @importFrom stats aggregate
 #' @importFrom terra centroids crds extract rast vect
 #' @export
 ce_extract <- function(

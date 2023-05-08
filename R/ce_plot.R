@@ -66,11 +66,12 @@
 #'
 #' @importFrom climaemet ggclimat_walter_lieth
 #' @importFrom ggplotify as.ggplot
+#' @importFrom graphics par
 #' @importFrom Ternary HoldridgePlot HoldridgeBelts HoldridgePoints
 #' @importFrom macroBiome cliHoldridgePoints
 #' @export
 ce_plot <- function(data = NULL, c_source = NULL,
-                         location_g = NULL, type = NULL) {
+                    location_g = NULL, type = NULL) {
 
   # Set location_g as the row.names for all data
   data <- lapply(
