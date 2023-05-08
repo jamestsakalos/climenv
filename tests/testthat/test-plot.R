@@ -77,6 +77,8 @@ test_that("ce_plot() works", {
   p <- ce_plot(data = data, c_source = "WorldClim", location_g = "high",
                      type = "WL")
 
+  # vdiffr is used only for testing so not required
+  skip_if_not_installed("vdiffr")
   vdiffr::expect_doppelganger("py test WL plot", p)
 
   p <- ce_plot(data = data, c_source = "WorldClim", location_g = "high",
