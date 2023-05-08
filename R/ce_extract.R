@@ -257,6 +257,11 @@
 #'
 #' See also PLOTTTTTTTIN XXXXX functions.
 #' }
+#' @importFrom exactextractr exact_extract
+#' @importFrom glue glue
+#' @importFrom sp SpatialPointsDataFrame SpatialPolygonsDataFrame
+#' @importFrom stats aggregate
+#' @importFrom terra centroids crds extract rast vect
 #' @export
 ce_extract <- function(
     dir_clim = NULL, dir_elev = NULL,

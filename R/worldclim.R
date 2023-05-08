@@ -35,6 +35,7 @@
 #'
 #' worldclim(output_dir = "...Desktop/worldclim")
 #' }
+#' @importFrom utils data download.file unzip
 #' @export
 worldclim <- function(output_dir = NULL, mode = "wb",
                       quiet = FALSE, var = NULL) {

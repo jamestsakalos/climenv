@@ -10,7 +10,7 @@
 #' \code{"WorldClim"} argument.
 #' @param location_g Character. Corresponding to the area for which the diagram
 #' will be produced.
-#' @param type Character. To produce Walter-Lieth ("WL") or Holdidge ("H")
+#' @param type Character. To produce Walter-Lieth ("WL") or Holdridge ("H")
 #' diagrams
 #'
 #' @return Returns a 'ggplot2' family of plot. This function uses the climaemet
@@ -20,16 +20,17 @@
 #' @author James L. Tsakalos
 #' @seealso \code{\link{ce_download.R}}
 #' @references{ Holdridge (1947), Determination of world plant formations from
-#' simple climatic data. Science, 105:367–368.
+#' simple climatic data. Science, 105:367&ndash;368.
 #' \doi{10.1126/science.105.2727.367}
 #'
-#' Holdridge (1967), Life Zone Ecology. Tropical Science Center, San José.
+#' Holdridge (1967), Life Zone Ecology. Tropical Science Center, San Jos&eacute;.
 #'
-#' Pizarro, M, Hernangómez, D. & Fernández-Avilés G. (2023). climaemet: Climate
-#' AEMET Tools. Comprehensive R Archive Network. \doi{10.5281/zenodo.5205573}
+#' Pizarro, M, Hernang&oacute;mez, D. & Fern&aacute;ndez-Avil&eacute;s G. (2023).
+#' climaemet: Climate AEMET Tools. Comprehensive R Archive Network.
+#' \doi{10.5281/zenodo.5205573}
 #'
-#' Szelepcsényi, Z. (2023) macroBiome: A Tool for Mapping the Distribution of
-#' the Biomes and Bioclimate. Comprehensive R Archive Network.
+#' Szelepcs&eacute;nyi, Z. (2023) macroBiome: A Tool for Mapping the
+#' Distribution of the Biomes and Bioclimate. Comprehensive R Archive Network.
 #' \doi{10.5281/zenodo.7633367}
 #'
 #' Smith, M.R (2017). Ternary: An R Package for Creating Ternary Plots.
@@ -64,9 +65,14 @@
 #' type = 'H')
 #' }
 #'
+#' @importFrom climaemet ggclimat_walter_lieth
+#' @importFrom ggplotify as.ggplot
+#' @importFrom graphics par
+#' @importFrom Ternary HoldridgePlot HoldridgeBelts HoldridgePoints
+#' @importFrom macroBiome cliHoldridgePoints
 #' @export
 ce_plot <- function(data = NULL, c_source = NULL,
-                         location_g = NULL, type = NULL) {
+                    location_g = NULL, type = NULL) {
 
   # Set location_g as the row.names for all data
   data <- lapply(
@@ -103,8 +109,8 @@ ce_plot <- function(data = NULL, c_source = NULL,
         ),
         alt = round(data$elev[location_g, 2]),
         per = switch(c_source,
-                      "CHELSA" = "1981–2010",
-                      "WorldClim" = "1970–2000"
+                      "CHELSA" = "1981\u20132010",
+                      "WorldClim" = "1970\u20132000"
         ),
         est = location_g,
         mlab = "en",

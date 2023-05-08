@@ -43,6 +43,11 @@
 #' # elevation will be saved in the output_dir (i.e. output directory)
 #' elev(output_dir = "...Desktop/elev", location = Sibillini_py)
 #' }
+#' @importFrom elevatr get_elev_raster
+#' @importFrom geodata elevation_3s
+#' @importFrom sf as_Spatial
+#' @importFrom sp Polygon Polygons SpatialPolygons spTransform
+#' @importFrom terra crs ext intersect mosaic rast vect
 #' @export
 elev <- function(output_dir = NULL, location = NULL, source = "mapzen") {
 
