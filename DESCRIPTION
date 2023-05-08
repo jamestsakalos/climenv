@@ -31,4 +31,6 @@ Depends: R (>= 4.2.2),
     knitr,
     rmarkdown,
     glue
+Config/Needs/check: rcmdcheck
+Config/Needs/coverage: covr
 RoxygenNote: 7.2.3
