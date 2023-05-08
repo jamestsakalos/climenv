@@ -76,7 +76,7 @@ elev <- function(output_dir = NULL, location = NULL, source = "mapzen") {
   }
 
   # Read in the SRTM tiles
-  srtm_tiles <- data("srtm.tiles")
+  srtm_tiles <- climenv::srtm.tiles # preferable to data("srtm.tiles"); see ?data
 
   # Set projection
   location <- sp::spTransform(location, terra::crs(srtm_tiles))
