@@ -5,8 +5,7 @@
 #' (SRTM) , specifically the hole-filled CGIAR-SRTM (90 m resolution) for
 #' latitudes between -60 and 60 or Mapzen's synthesis digital elevation product.
 #'
-#' @param output_dir Character (e.g., ".../Desktop/chelsa"). Pathway to where
-#' the data will be stored.
+#' @template output_dir_param
 #' @param location A \code{sp}, \code{sf} polygon or point object.
 #' @param source Character. Elevation sourced from mapzen (default) or geodata.
 #'

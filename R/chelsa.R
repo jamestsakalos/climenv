@@ -5,8 +5,7 @@
 #'  earth’s land surface areas) V2.1 data of downscaled temperature and
 #'  precipitation to a resolution of 30 arc sections.
 #'
-#' @param output_dir Character (e.g., ".../Desktop/chelsa"). Pathway to where
-#' the data will be stored.
+#' @template output_dir_param
 #' @param mode Character. See documentation in /code{download.file()}.
 #' @param quiet Logical. If TRUE, suppress status messages (if any), and the
 #' progress bar.

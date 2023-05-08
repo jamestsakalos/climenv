@@ -7,7 +7,7 @@
 chelsa(output_dir = NULL, mode = "wb", quiet = FALSE, var = NULL)
 }
 \arguments{
-\item{output_dir}{Character (e.g., ".../Desktop/chelsa"). Pathway to where
+\item{output_dir}{Character (e.g., \code{"../Desktop/chelsa"}). Pathway to where
 the data will be stored.}
 
 \item{mode}{Character. See documentation in /code{download.file()}.}

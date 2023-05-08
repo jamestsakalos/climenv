@@ -3,9 +3,8 @@
 #' @description
 #' \code{worldclim} downloads the WorldClim V2 data.
 #'
-#' @param output_dir Character (e.g., ".../Desktop/chelsa"). Pathway to where
-#' the data will be stored.
-#' @param mode Character. See documentation in /code{download.file()}.
+#' @template output_dir_param
+#' @param mode Character. See documentation in \code{download.file()}.
 #' @param quiet Logical. If TRUE, suppress status messages (if any), and the
 #' progress bar.
 #' @param var Character. If supplied will download a subset of the climate data.
