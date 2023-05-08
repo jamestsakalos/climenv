@@ -1,13 +1,14 @@
-#' worldclim
+#' Download WorldClim data
 #'
 #' @description
-#' \code{worldclim} downloads the WorldClim V2 data.
+#' \code{worldclim()} downloads the WorldClim V2 data. ((Explanation?))
 #'
 #' @template output_dir_param
 #' @param mode Character. See documentation in \code{download.file()}.
 #' @param quiet Logical. If TRUE, suppress status messages (if any), and the
 #' progress bar.
-#' @param var Character. If supplied will download a subset of the climate data.
+#' @param var Character. If supplied will download a subset ((which?))
+#' of the climate data.
 #'
 #' @return
 # MS: consider returning `TRUE` on success or `FALSE` on failure.
