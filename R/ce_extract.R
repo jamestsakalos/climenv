@@ -296,43 +296,49 @@ ce_extract <- function(
   # Check if the directory paths are correct
   if (var == "ALL" || var == "elev") {
 
-    if (isFALSE(
-      sum(c("prec", "tmax", "tmean", "tmin") %in% list.files(dir_clim)) == 4
-    )) stop("dir_clim must contain prec, tmax, tmean, tmin subfolders")
+    if (!all(c("prec", "tmax", "tmean", "tmin") %in% list.files(dir_clim))) {
+     stop("dir_clim must contain prec, tmax, tmean, tmin subfolders")
+    }
 
     if (!is.null(dir_elev)) {
-      if (isFALSE(
-        length(list.files(dir_elev)) == 1
-      )) stop("dir_elev is empty")
-    }
+      if (length(list.files(dir_elev)) != 1) {
+        stop("dir_elev is empty")
+      }
   }
 
-  switch(
-    var,
-    "prec" = {
-      # Why not use this simpler formulation?
-      if (sum(c("prec") %in% list.files(dir_clim)) != 1)
-        stop("dir_clim must contain prec subfolder")
-    },
-    "tmax" = {
-      if (isFALSE(
-        sum(c("tmax") %in% list.files(dir_clim)) == 1
-      )) stop("dir_clim must contain tmax subfolder")
-    },
-    "tmean" = {
-      if (isFALSE(
-        sum(c("tmean") %in% list.files(dir_clim)) == 1
-      )) stop("dir_clim must contain tmean subfolder")
-    },
-    "tmin" = {
-      if (isFALSE(
-        sum(c("tmin") %in% list.files(dir_clim)) == 1
-      )) stop("dir_clim must contain tmin subfolder")
-    }
-  )
+  # Proposed replacement for the below code:
+  if (!dir.exists(paste0(dir_clim, "/", var))) {
+    stop("Subfolder '", var, "' not found in directory ", dir_clim)
+  }
+  # switch(
+  #   var,
+  #   "prec" = {
+  #     # Why not use this simpler formulation?
+  #     # if (sum(c("prec") %in% list.files(dir_clim)) != 1)
+  #     # or better still
+  #     # if (!("prec" %in% list.files(dir_clim)))
+  #     # or, I think the intention:
+  #     if (!dir.exists(paste0(dir_clim, "/", prec)))
+  #       stop("dir_clim must contain prec subfolder")
+  #   },
+  #   "tmax" = {
+  #     if (isFALSE(
+  #       sum(c("tmax") %in% list.files(dir_clim)) == 1
+  #     )) stop("dir_clim must contain tmax subfolder")
+  #   },
+  #   "tmean" = {
+  #     if (isFALSE(
+  #       sum(c("tmean") %in% list.files(dir_clim)) == 1
+  #     )) stop("dir_clim must contain tmean subfolder")
+  #   },
+  #   "tmin" = {
+  #     if (isFALSE(
+  #       sum(c("tmin") %in% list.files(dir_clim)) == 1
+  #     )) stop("dir_clim must contain tmin subfolder")
+  #   }
+  # )
 
   # Format the location file
-
   if (is.null(location_g)) {
     message(
       paste(
@@ -342,7 +348,7 @@ ce_extract <- function(
         ]), collapse = ", "), sep = ": "
       )
     )
-    message("Defaulting to id")
+    message("Defaulting to id") # MS: will a user know what this means?
     location$Name <- location$id
     location_g <- "id"
     sd <- FALSE
@@ -371,9 +377,10 @@ ce_extract <- function(
     if (!is.na(match(location_g, colnames(location_df)))) {
       location_df$Name <- as.factor(location_df[, location_g])
 
-      if (class(location) %in% c("SpatialPoints", "SpatialPointsDataFrame")) {
+      if (inherits(location, c("SpatialPoints", "SpatialPointsDataFrame"))) {
+        # because `length(class(location))` may be > 1
         location <- sp::SpatialPointsDataFrame(location, location_df)
-      }else {
+      } else {
         location <- sp::SpatialPolygonsDataFrame(location, location_df)
       }
       rm(location_df)
@@ -414,6 +421,8 @@ ce_extract <- function(
 
   # If no directory provided for elev, no data to be extracted
   if (is.null(dir_elev)) {
+    # MS: I'm not quite clear why elev is treated separately from the other
+    # four options for var, here and elsewhere
     var <- var[var %in% c("tmean", "tmin", "tmax", "prec")]
     files <- files[files %in% c("tmean", "tmin", "tmax", "prec")]
   }
@@ -473,7 +482,7 @@ ce_extract <- function(
             terra::crds(terra::centroids(terra::vect(location)))[, 2], 3)
         )
 
-        ifelse(location_g == "id",
+        ifelse(location_g == "id", # Strange use for ifelse; why not if()?
                {colnames(lat)[1] <- "id"},
                {colnames(lat)[1] <- "location_g"})
         temp[["lat"]] <- lat
@@ -496,5 +505,7 @@ ce_extract <- function(
 
     }
   )
+  # temp is a misleading name if this is what's being returned!
+  # consider `result` instead?
   return(temp)
 }
