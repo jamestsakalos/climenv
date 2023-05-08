@@ -1,6 +1,4 @@
-# Testing the ce_extract() function ####
-
-test_that("ce_extract works", {
+test_that("ce_extract() works", {
 
   # Set testing data ####
 
@@ -9,11 +7,13 @@ test_that("ce_extract works", {
 
   # Create the required subdirectories
   dir.create(file.path(temp_path, "elev"), recursive = TRUE)
+  on.exit(unlink(file.path(temp_path, "elev")))
 
   dir.create(file.path(temp_path, "clim/prec"), recursive = TRUE)
   dir.create(file.path(temp_path, "clim/tmax"), recursive = TRUE)
   dir.create(file.path(temp_path, "clim/tmean"), recursive = TRUE)
   dir.create(file.path(temp_path, "clim/tmin"), recursive = TRUE)
+  on.exit(unlink(file.path(temp_path, "clim")), add = TRUE)
 
   # Create a empty raster serving as a base
   r <- terra::rast(ncol = 10, nrow = 10)
