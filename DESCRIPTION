@@ -46,7 +46,10 @@ Suggests:
     knitr,
     raster,
     rmarkdown,
+    glue
     testthat (>= 3.0.0),
     vdiffr,
+Config/Needs/check: rcmdcheck
+Config/Needs/coverage: covr
 RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
