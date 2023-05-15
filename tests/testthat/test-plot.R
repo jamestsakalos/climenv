@@ -1,19 +1,19 @@
-# Testing the ce_extract() function ####
-
-test_that("ce_plot works", {
+test_that("ce_plot() works", {
 
   # Set testing data ####
 
   # Create temporary file to supply to the ce_extract
-  temp_path <- fs::file_temp(pattern = "Temp", tmp_dir = tempdir(), ext = "")
+  temp_path <- tempfile()
 
   # Create the required subdirectories
   dir.create(file.path(temp_path, "elev"), recursive = TRUE)
+  on.exit(unlink(file.path(temp_path, "elev")))
 
   dir.create(file.path(temp_path, "clim/prec"), recursive = TRUE)
   dir.create(file.path(temp_path, "clim/tmax"), recursive = TRUE)
   dir.create(file.path(temp_path, "clim/tmean"), recursive = TRUE)
   dir.create(file.path(temp_path, "clim/tmin"), recursive = TRUE)
+  on.exit(unlink(file.path(temp_path, "clim")), add = TRUE)
 
   # Create a empty raster serving as a base
   r <- terra::rast(ncol = 10, nrow = 10)
@@ -75,14 +75,14 @@ test_that("ce_plot works", {
                      c_source = "WorldClim", var = "ALL")
 
   p <- ce_plot(data = data, c_source = "WorldClim", location_g = "high",
-                     type = 'WL')
-  p
+                     type = "WL")
 
+  # vdiffr is used only for testing so not required
+  skip_if_not_installed("vdiffr")
   vdiffr::expect_doppelganger("py test WL plot", p)
 
   p <- ce_plot(data = data, c_source = "WorldClim", location_g = "high",
-               type = 'H')
-  p
+               type = "H")
 
   vdiffr::expect_doppelganger("py test H plot", p)
 
@@ -94,14 +94,12 @@ test_that("ce_plot works", {
                      c_source = "WorldClim", var = "ALL")
 
   p <- ce_plot(data = data, c_source = "WorldClim", location_g = "low",
-               type = 'WL')
-  p
+               type = "WL")
 
   vdiffr::expect_doppelganger("pt test WL plot", p)
 
   p <- ce_plot(data = data, c_source = "WorldClim", location_g = "low",
-               type = 'H')
-  p
+               type = "H")
 
   vdiffr::expect_doppelganger("pt test H plot", p)
 

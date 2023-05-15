@@ -4,32 +4,43 @@
 #' @description Creates a graph using the climate and elevation data which has
 #' been extracted for a given \code{location}. It accepts the data formatted
 #' from the \code{ce_extract} function.
-#' @param data list. A list storing matrices containing the mean and standard
+# MS: We expect a very specific format for `data`, e.g. the first row should
+# be named "location_g".  This should be specified in the params.
+#' @param data List. A list storing matrices containing the mean and standard
 #' deviation of the climate and/or elevation data.
-#' @param c_source Character. Supply either \code{"CHELSA"} or
-#' \code{"WorldClim"} argument.
+#' @param c_source Character specifying source of climate data.
+#' Acceptable values: \code{"CHELSA"} \code{"WorldClim"}.
+# MS: We should support partial, case-insensitive matching.
+#
+# I don't understand what I should specify for `location_g`
 #' @param location_g Character. Corresponding to the area for which the diagram
 #' will be produced.
-#' @param type Character. To produce Walter-Lieth ("WL") or Holdidge ("H")
+# MS: Unclear.  And: this is a weird way to set things up.
+# Why not have two functions, `wl_plot()` and `holdridge_plot()`?
+#' @param type Character. To produce Walter-Lieth ("WL") or Holdridge ("H")
 #' diagrams
+#' @param pt.col,pt.pch,\dots Arguments to control point styling in
+#' `HoldridgePoints()`.
 #'
 #' @return Returns a 'ggplot2' family of plot. This function uses the climaemet
 #' package to create the Walter and Lieth (XXXX) climatic diagram and the
-#' macroBiome and Ternary packages to create a Holdridge simplex plot.
+#' \pkg{macroBiome} and \pkg{Ternary} packages to create a Holdridge simplex
+#' plot.
 #'
 #' @author James L. Tsakalos
-#' @seealso \code{\link{ce_download.R}}
+#' @seealso Download climate data: [`ce_download()`]
 #' @references{ Holdridge (1947), Determination of world plant formations from
-#' simple climatic data. Science, 105:367–368.
+#' simple climatic data. Science, 105:367&ndash;368.
 #' \doi{10.1126/science.105.2727.367}
 #'
-#' Holdridge (1967), Life Zone Ecology. Tropical Science Center, San José.
+#' Holdridge (1967), Life Zone Ecology. Tropical Science Center, San Jos&eacute;.
 #'
-#' Pizarro, M, Hernangómez, D. & Fernández-Avilés G. (2023). climaemet: Climate
-#' AEMET Tools. Comprehensive R Archive Network. \doi{10.5281/zenodo.5205573}
+#' Pizarro, M, Hernang&oacute;mez, D. & Fern&aacute;ndez-Avil&eacute;s G. (2023).
+#' climaemet: Climate AEMET Tools. Comprehensive R Archive Network.
+#' \doi{10.5281/zenodo.5205573}
 #'
-#' Szelepcsényi, Z. (2023) macroBiome: A Tool for Mapping the Distribution of
-#' the Biomes and Bioclimate. Comprehensive R Archive Network.
+#' Szelepcs&eacute;nyi, Z. (2023) macroBiome: A Tool for Mapping the
+#' Distribution of the Biomes and Bioclimate. Comprehensive R Archive Network.
 #' \doi{10.5281/zenodo.7633367}
 #'
 #' Smith, M.R (2017). Ternary: An R Package for Creating Ternary Plots.
@@ -41,6 +52,9 @@
 #' @encoding UTF-8
 #' @examples
 #' \dontrun{
+#'
+#' # Is it possible to construct a small "toy" example that could be run from
+#' # the data directory, for example?
 #'
 #' # Extraction time will depend on the size of the polygon or point file.
 #' # Import the Sibillini National Park Boundary
@@ -64,14 +78,24 @@
 #' type = 'H')
 #' }
 #'
+#' @importFrom climaemet ggclimat_walter_lieth
+#' @importFrom ggplotify as.ggplot
+#' @importFrom graphics par
+#' @importFrom Ternary HoldridgePlot HoldridgeBelts HoldridgePoints
+#' @importFrom macroBiome cliHoldridgePoints
 #' @export
-ce_plot <- function(data = NULL, c_source = NULL,
-                         location_g = NULL, type = NULL) {
+ce_plot <- function(data, c_source, location_g, type = c("WL", "H"),
+                    pt.col = "red", pt.pch = 19, ... # ... other ternary options
+                    ) {
 
   # Set location_g as the row.names for all data
+  # MS: Not clear why this is necessary
   data <- lapply(
     data, FUN = function(x) {
-      row.names(x) <- x[, 1]
+      row.names(x) <- x[, "location_g"]
+      # MS:
+      # - makes comment redundant
+      # - survives if data has extra columns or funny column order
       return(x)
     }
   )
@@ -79,12 +103,10 @@ ce_plot <- function(data = NULL, c_source = NULL,
   # Check if the c_source argument is correct
   if (is.na(match(location_g, data$abmt[, 1])))
     stop(
-      print(
-        paste(
-          c("location_g must be either:",
-            paste(as.character(data$abmt[, 1]), collapse = ", ")),
-          collapse = " "
-        )
+      paste(
+        c("location_g must be either:",
+          paste(as.character(data$abmt[, 1]), collapse = ", ")),
+        collapse = " "
       )
     )
 
@@ -103,8 +125,8 @@ ce_plot <- function(data = NULL, c_source = NULL,
         ),
         alt = round(data$elev[location_g, 2]),
         per = switch(c_source,
-                      "CHELSA" = "1981–2010",
-                      "WorldClim" = "1970–2000"
+                      "CHELSA" = "1981\u20132010",
+                      "WorldClim" = "1970\u20132000"
         ),
         est = location_g,
         mlab = "en",
@@ -113,11 +135,14 @@ ce_plot <- function(data = NULL, c_source = NULL,
     },
     "H" = {
 
-      ggplotify::as.ggplot(
+      ggplotify::as.ggplot( # Do we need to do this?
+        # If it's worth doing, we could set it as the default option and
+        # allow the user to turn it off
         function() {
 
           # Suppress plot margins
-          par(mar = c(0, 0, 0, 0))
+          oPar <- par(mar = c(0, 0, 0, 0))
+          on.exit(par(oPar)) # Restore initial parameters
 
           # Create blank Holdridge plot
           Ternary::HoldridgePlot(hex.labels = Ternary::holdridgeLifeZonesUp)
@@ -130,9 +155,11 @@ ce_plot <- function(data = NULL, c_source = NULL,
           )
 
           # Plot the data
+          # MS: might we not allow the user some flexibility in how the specify
+          # these options, e.g. by allowing them to specify a pt.col option?
           Ternary::HoldridgePoints(hold$per, hold$tap,
-                                   col = "red", cex = 2, pch = 19,
-                                   lwd = 2)
+                                   col = pt.col, cex = 2, pch = pt.pch,
+                                   lwd = 2, ...)
 
         }
       )

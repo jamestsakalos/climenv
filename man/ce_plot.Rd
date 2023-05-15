@@ -17,7 +17,7 @@ deviation of the climate and/or elevation data.}
 \item{location_g}{Character. Corresponding to the area for which the diagram
 will be produced.}
 
-\item{type}{Character. To produce Walter-Lieth ("WL") or Holdidge ("H")
+\item{type}{Character. To produce Walter-Lieth ("WL") or Holdridge ("H")
 diagrams}
 }
 \value{
@@ -63,11 +63,12 @@ simple climatic data. Science, 105:367–368.
 
 Holdridge (1967), Life Zone Ecology. Tropical Science Center, San José.
 
-Pizarro, M, Hernangómez, D. & Fernández-Avilés G. (2023). climaemet: Climate
-AEMET Tools. Comprehensive R Archive Network. \doi{10.5281/zenodo.5205573}
+Pizarro, M, Hernangómez, D. & Fernández-Avilés G. (2023).
+climaemet: Climate AEMET Tools. Comprehensive R Archive Network.
+\doi{10.5281/zenodo.5205573}
 
-Szelepcsényi, Z. (2023) macroBiome: A Tool for Mapping the Distribution of
-the Biomes and Bioclimate. Comprehensive R Archive Network.
+Szelepcsényi, Z. (2023) macroBiome: A Tool for Mapping the
+Distribution of the Biomes and Bioclimate. Comprehensive R Archive Network.
 \doi{10.5281/zenodo.7633367}
 
 Smith, M.R (2017). Ternary: An R Package for Creating Ternary Plots.
@@ -78,7 +79,7 @@ Walter, H. & Lieth, H. (1960). Klimadiagramm Weltatlas. G. Fischer, Jena.
 }
 }
 \seealso{
-\code{\link{ce_download.R}}
+Download climate data: \code{\link[=ce_download]{ce_download()}}
 }
 \author{
 James L. Tsakalos

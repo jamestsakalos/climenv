@@ -2,8 +2,18 @@ Package: climenv
 Type: Package
 Title: climenv: an R package for downloading, exctracting and plotting climatic envelopes
 Version: 0.1.0
-Author: James L. Tsakalos, Frederico Luebert, Ladislav Mucina
-Maintainer: James L. Tsakalos <jamestsakalos@gmail.com>
+Authors@R: c(
+    person("James L.", "Tsakalos", role = c("aut", "cre", "cph"),
+           email = "jamestsakalos@gmail.com",
+           comment = c(ORCID = "0000-0001-5067-196X")),
+    person("Frederico", "Luebert", role = c("aut"),
+           comment = c(ORCID = "0000-0003-2251-4056")),
+    person("Martin R.", 'Smith', role = c("aut"),
+           email = "martin.smith@durham.ac.uk",
+           comment = c(ORCID = "0000-0001-5660-1727")),
+    person("Ladislav", "Mucina", role = c("aut"),
+           comment = c(ORCID = "0000-0003-0317-8886"))
+    )
 Description: This package facilitates easy dowloading, extration and plotting of
     climatological data. It provides access to three most globally recognizable 
     modelled data sets, including WorldClim 2, CHELSA and NASA’s SRTM. climenv 
@@ -17,20 +27,30 @@ BugReports: https://github.com/jamestsakalos/climenv/issues
 URL: https://github.com/jamestsakalos/climenv
 Encoding: UTF-8
 LazyData: true
-Suggests: knitr
 VignetteBuilder: knitr
-Depends: R (>= 4.2.2)
+Depends: R (>= 4.0)
 Imports:
-    terra,
+    climaemet,
     dplyr,
-    sp,
-    sf,
-    exactextractr,
     elevatr,
+    exactextractr,
     geodata,
-    testthat (>= 3.0.0),
+    glue,
+    ggplotify,
+    macroBiome,
+    sf,
+    sp,
+    Ternary,
+    terra,
+Suggests:
     knitr,
+    raster,
     rmarkdown,
     glue
 Config/Needs/website: pkgdown
+    testthat (>= 3.0.0),
+    vdiffr,
+Config/Needs/check: rcmdcheck
+Config/Needs/coverage: covr
 RoxygenNote: 7.2.3
+Roxygen: list(markdown = TRUE)

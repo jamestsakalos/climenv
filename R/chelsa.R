@@ -5,11 +5,12 @@
 #'  earth’s land surface areas) V2.1 data of downscaled temperature and
 #'  precipitation to a resolution of 30 arc sections.
 #'
-#' @param output_dir Character (e.g., ".../Desktop/chelsa"). Pathway to where
-#' the data will be stored.
+#' @template output_dir_param
 #' @param mode Character. See documentation in /code{download.file()}.
 #' @param quiet Logical. If TRUE, suppress status messages (if any), and the
 #' progress bar.
+#' @param var Character specifying which variables to extract.
+#' Options are "prec", "tmax", "tmin", "tmean".
 #'
 #' @return
 #' Returns four subfolders named prec, tmax, tmin and tmean. Each folder
@@ -25,7 +26,7 @@
 #' minimum, maximum and mean.
 #'
 #' @author James L. Tsakalos
-#' @seealso \code{\link{ce_download.R}}
+#' @seealso Download climate data: [`ce_download()`]
 #' @references{ Karger, D.N., et al. (2016). CHELSA climatologies at high
 #' resolution for the earth’s land surface areas (Version 1.0). World Data
 #' Center for Climate. DOI: 10.1594/WDCC/CHELSA_v1
@@ -65,7 +66,7 @@ chelsa <- function(output_dir = NULL, mode = "wb",
   if (!is.null(var)) {
 
     if (is.na(match(var, c("prec", "tmax", "tmin", "tmean"))))
-      stop("mode must be one of prec, tmax, tmin, tmean.")
+      stop("Valid options for `var` are prec, tmax, tmin, tmean.")
 
     var <- var_t[var_t %in% var] # to assign the names
 

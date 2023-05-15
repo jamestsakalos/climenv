@@ -15,7 +15,7 @@ ce_download(
 )
 }
 \arguments{
-\item{output_dir}{Character (e.g., ".../Desktop/chelsa"). Pathway to where
+\item{output_dir}{Character (e.g., "../Desktop/chelsa"). Pathway to where
 the data will be stored.}
 
 \item{c_source}{Character. Climatic data source, must be either
@@ -58,9 +58,6 @@ e_location = Sibillini_py)
 
 See also chelsa(), worldclim() or elev() functions.
 }
-}
-\seealso{
-\code{\link{ce_download.R}}
 }
 \author{
 James L. Tsakalos

@@ -7,7 +7,7 @@
 elev(output_dir = NULL, location = NULL, source = "mapzen")
 }
 \arguments{
-\item{output_dir}{Character (e.g., ".../Desktop/chelsa"). Pathway to where
+\item{output_dir}{Character (e.g., \code{"../Desktop/chelsa"}). Pathway to where
 the data will be stored.}
 
 \item{location}{A \code{sp}, \code{sf} polygon or point object.}
@@ -53,7 +53,7 @@ DOI: 10.3390/ijgi8030108
 }
 }
 \seealso{
-\code{\link{ce_download.R}}
+Download climate data: \code{\link[=ce_download]{ce_download()}}
 }
 \author{
 James L. Tsakalos
