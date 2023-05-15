@@ -1,16 +1,17 @@
-#' elev
+# MS comment: Each documentation page should open with a brief informative title
+#' Download SRTM elevation data
 #'
 #' @description
-#' \code{elev} downloads elevation data the Shuttle Radar Topography Mission
+#' \code{elev()} downloads elevation data the Shuttle Radar Topography Mission
 #' (SRTM) , specifically the hole-filled CGIAR-SRTM (90 m resolution) for
 #' latitudes between -60 and 60 or Mapzen's synthesis digital elevation product.
 #'
-#' @param output_dir Character (e.g., ".../Desktop/chelsa"). Pathway to where
-#' the data will be stored.
+#' @template output_dir_param
 #' @param location A \code{sp}, \code{sf} polygon or point object.
 #' @param source Character. Elevation sourced from mapzen (default) or geodata.
 #'
 #' @return
+# MS: This is false; at present it returns `NULL`, the output of `rm()`.
 #' Returns one elevation tile (tiff). If elevation is sourced from geodata the
 #' elevation is downloaded at a spatial resolution of 30 arc seconds (~1 km2).
 #' If elevation data is sourced from mapzen then the product will be a mosaic.
@@ -18,8 +19,8 @@
 #' of digital elevation models, including SRTM, the ArcticDEM (covering all
 #' areas north of 60°), EUDEM (digital elevation model over Europe; for review,
 #' see Mouratidis & Ampatzidis, 2019), and others into a single product. The
-#' resolution of this product was set to 7, corresponding to 611.5 m ground
-#' resolution at 60° latitude 864.8 m at 45° and 1223 m at 0°.
+#' resolution of this product was set to 7, corresponding to 611.5&nbsp;m ground
+#' resolution at 60° latitude 864.8&nbsp;m at 45° and 1223&nbsp;m at 0°.
 #'
 #' @author James L. Tsakalos
 #' @seealso Download climate data: [`ce_download()`]
@@ -49,13 +50,7 @@
 #' @importFrom sp Polygon Polygons SpatialPolygons spTransform
 #' @importFrom terra crs ext intersect mosaic rast vect
 #' @export
-elev <- function(output_dir = NULL, location = NULL, source = "mapzen") {
-
-  if (is.null(output_dir))
-    stop("Set output directory")
-
-  if (is.null(location))
-    stop("Set location polygon/s")
+elev <- function(output_dir, location, source = "mapzen") {
 
   if (is.na(match(source, c("mapzen", "geodata"))))
     stop("source must be one of mapzen or geodata")
@@ -69,7 +64,7 @@ elev <- function(output_dir = NULL, location = NULL, source = "mapzen") {
   if (!dir.exists(paste0(output_dir))) {
     dir.create(paste0(output_dir),
                recursive = TRUE, showWarnings = FALSE)
-  }else {
+  } else {
     file.remove(list.files(paste0(output_dir),
                            include.dirs = FALSE, full.names = TRUE,
                recursive = TRUE))

@@ -1,17 +1,19 @@
-#' worldclim
+#' Download WorldClim data
 #'
 #' @description
-#' \code{worldclim} downloads the WorldClim V2 data.
+#' \code{worldclim()} downloads the WorldClim V2 data. ((Explanation?))
 #'
-#' @param output_dir Character (e.g., ".../Desktop/chelsa"). Pathway to where
-#' the data will be stored.
-#' @param mode Character. See documentation in /code{download.file()}.
+#' @template output_dir_param
+#' @param mode Character. See documentation in \code{download.file()}.
 #' @param quiet Logical. If TRUE, suppress status messages (if any), and the
 #' progress bar.
-#' @param var Character. If supplied will download a subset of the climate data.
+#' @param var Character. If supplied will download a subset ((which?))
+#' of the climate data.
 #'
 #' @return
-#' Returns four subfolders named prec, tmax, tmin and tmean. Each folder
+# MS: consider returning `TRUE` on success or `FALSE` on failure.
+#' Called for its side effects.
+#' Creates four subfolders named prec, tmax, tmin and tmean. Each folder
 #' contains 12 GeoTiff (.tif) files, one for each month of the year
 #' (January is 1; December is 12) for the time period 1970–2000. Each of the
 #' files are downloaded at a spatial resolution of 30 arc seconds (~1 km2).
@@ -37,8 +39,17 @@
 #' }
 #' @importFrom utils data download.file unzip
 #' @export
-worldclim <- function(output_dir = NULL, mode = "wb",
+worldclim <- function(output_dir, mode = "wb",
                       quiet = FALSE, var = NULL) {
+
+  # MS comment: I assume that the user will typically download these files
+  # no more than once.  Should we consider setting an R environment variable
+  # or equivalent that points to output_dir, so that when the user loads
+  # the package on subsequent occasions they don't have to re-download the
+  # data (or remember where they saved it)?
+
+  # MS comment: Should we check that `output_dir` is empty - or that it doesn't
+  # already contain the desired files?
 
   if (is.na(match(mode, c("w", "wb", "a", "ab"))))
     stop("mode must be one of w, wb, a, ab.")
@@ -50,16 +61,46 @@ worldclim <- function(output_dir = NULL, mode = "wb",
     vars <- c("prec", "tmax", "tmin", "tmean")
   }
 
-  if (is.null(output_dir))
-    stop("Set output directory")
-
   # If you're sitting on a train with bad wifi, maybe we need to have a
   # longer default timeout
   options(timeout = 10000)
+  # MS: Consider how to handle the cases:
+  # - User option is already > 10000
+  #
+  # MS: Also ensure that the option is re-set once the function exits
+  # perhaps with
+  # origOpt <- options(timeout = max(10000, getOption("timeout")))
+  # on.exit(options(origOpt))
 
   # this is the main website path
   site <- "http://biogeo.ucdavis.edu/data/worldclim/v2.1/base/"
+  # MS: Consider using secure access with https://
 
+  .download_dir <- function(what) {
+    dir.create(paste0(output_dir, "/", what),
+               recursive = TRUE, showWarnings = FALSE)
+    remote_path <- paste0(site, "wc2.1_30s_", what, ".zip")
+
+    # This part checks if the files have downloaded correctly
+    if (file.size(paste0(output_dir, "/", what)) != 4096) {
+      # !file.size(...) is `FALSE` (!)
+      temp_path <- tempfile()
+      # MS: Can we fail informatively here?
+      tryCatch(
+        download.file(
+          remote_path,
+          destfile = temp_path, mode = mode,
+          cacheOK = FALSE, quiet = quiet
+        ),
+        error = function(e) message("Could not download from URL ", remote_path)
+      )
+      on.exit(unlink(temp_path))
+      unzip(temp_path, exdir = paste0(output_dir, "/", what))
+    }
+  }
+
+  #MS I think this line can replace the for loop below.
+  lapply(vars, .download_dir)
 
   for (i in vars) {
 
@@ -71,7 +112,8 @@ worldclim <- function(output_dir = NULL, mode = "wb",
         prec_path <- paste0(site, "wc2.1_30s_prec.zip")
 
         # This part checks if the files have downloaded correctly
-        if (!file.size(paste0(output_dir, "/prec")) == 4096) {
+        if (file.size(paste0(output_dir, "/prec")) != 4096) {
+          # !file.size(...) is `FALSE` (!)
           prec_temp <- tempfile()
           try(download.file(
             prec_path,
@@ -83,9 +125,14 @@ worldclim <- function(output_dir = NULL, mode = "wb",
         }
       },
       "tmin" = {
+        # This looks like a repetition of what goes above.
+        # Why not create an internal function `.download()` and call it
+        #
+
         dir.create(paste0(output_dir, "/tmin"),
                    recursive = TRUE, showWarnings = FALSE)
         tmin_path <- paste0(site, "wc2.1_30s_tmin.zip")
+
 
         if (!file.size(paste0(output_dir, "/tmin")) == 4096) {
           tmin_temp <- tempfile()
@@ -127,8 +174,12 @@ worldclim <- function(output_dir = NULL, mode = "wb",
             destfile = tmean_temp, mode = mode,
             cacheOK = FALSE, quiet = quiet)
           )
+          # Prefer on.exit as this will be called even if unzip fails
+          # We wish to avoid clogging up our users' storage in this case!
+          on.exit(unlink(tmean_temp))
           unzip(tmean_temp, exdir = paste0(output_dir, "/tmean"))
-          rm(tmean_temp)
+          # unlink is preferable to rm as it avoids access issues
+          unlink(tmean_temp) # Redundant to on.exit suggestion above
         }
       }
     )
