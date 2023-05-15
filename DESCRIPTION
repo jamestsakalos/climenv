@@ -47,6 +47,7 @@ Suggests:
     raster,
     rmarkdown,
     glue
+Config/Needs/website: pkgdown
     testthat (>= 3.0.0),
     vdiffr,
 Config/Needs/check: rcmdcheck
