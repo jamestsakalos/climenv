@@ -43,14 +43,14 @@ Imports:
     Ternary,
     terra,
 Suggests:
+    glue,
     knitr,
     raster,
     rmarkdown,
-    glue
-Config/Needs/website: pkgdown
     testthat (>= 3.0.0),
     vdiffr,
 Config/Needs/check: rcmdcheck
 Config/Needs/coverage: covr
+Config/Needs/website: pkgdown
 RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
