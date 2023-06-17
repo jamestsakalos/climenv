@@ -1,6 +1,6 @@
 ---
 title: "Introduction to *climenv*"
-author: "James L. Tsakalos (james.tsakalos@gmail.com), Frederico Luebert, Martin R. Smith, Ladislav Mucina"
+author: "James L. Tsakalos (james.tsakalos@gmail.com), Martin R. Smith, Frederico Luebert, Ladislav Mucina"
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
@@ -32,31 +32,31 @@ knitr::opts_chunk$set(
 This vignette shows on example application of `climenv` (short for ***C***limati
 c ***E***nvelope) to illustrate the concepts and functionality incorporated in
 the package. Specifically, the example facilitates easy downloading, extraction
-and visualization of three of the most globally recognizable modelled data sets
+and visualization of three of the most globally recognizable modeled data sets
 (CHELSA, WorldClim 2 and NASA’s SRTM elevation) using example multi and single
 geospatial polygon and point data.
 
 Specifically, supplied with geospatial polygon and point data the package can
 easily download, extract and visualize climatic data. The visualization options
-include Holdridge's (1967) life zone classification and Walter-Leight's (1960)
-climate diagrams; to our knowledge this is the first time that the Holdridge 
+include a custom plot coupled with helpful tabulated climatic properties,
+Holdridge's (1967) life zone classification and Walter-Leight's (1960)
+climate diagrams. To our knowledge this is the first time that the Holdridge 
 diagram has been presented in R.
 
 ### Downloading climate and elevation data
 
-`climenv.download` downloads WorldClim 2 (Fick & Hijmans, 2017),
-CHELSA (Karger et al., 2017) and NASA Earth Explorer's SRTM (Farr et al., 2007).
-CHELA and WorldClim are available at a spatial resolution of 30 arc-seconds
-(~1 km2). The data are freely available as a series of raster tiles
-(one for each month) with their spatial extent spanning the globe. Specifically,
-the function downloads the mean, minimum and maximum temperature and mean
-precipitation using the climatic predictions for periods 1979–2013 (CHELSA)
-and 1970–2000 (WorldClim 2). 
+`ce_download` downloads WorldClim 2 (Fick & Hijmans, 2017), CHELSA (Karger et 
+al., 2017) and NASA Earth Explorer's SRTM (Farr et al., 2007). CHESLA and 
+WorldClim are available at a spatial resolution of 30 arc-seconds (~1 km2). The 
+data are freely available as a series of raster tiles (one for each month) with 
+their spatial extent spanning the globe. Specifically, the function downloads 
+the mean, minimum and maximum temperature and mean precipitation using the 
+climatic predictions for periods 1979–2013 (CHELSA) and 1970–2000 (WorldClim 2). 
 
-`climenv.download` also downloads NASA's SRTM data at the same 30 arc-second
+`ce_download` also downloads NASA's SRTM data at the same 30 arc-second
 (~1 km2) resolution. However, unlike CHELSA and WorldClim, the SRTM data can be
 downloaded as a series of individual tiles. While the spatial extent of CHELSA
-and WorldClim 2 spans the globe, `climenv.download` derives and mosaics the SRTM
+and WorldClim 2 spans the globe, `ce_download` derives and mosaics the SRTM
 tiles matching the extent provided by the user. Downloading a subset of tiles
 is advantageous because it will download quicker and occupy less storage.
 
@@ -76,56 +76,77 @@ library(sf)
 ```
 
 ```{r}
-# Create a temporary file to supply to the climenv.extract
-temp.path<-file_temp(pattern = "Temp", tmp_dir = tempdir(), ext = "")
+# Lets make some training data
 
-# Create the required subdirectories
-dir.create(file.path(temp.path, 'elev'), recursive = TRUE)
-dir.create(file.path(temp.path, 'prec'), recursive = TRUE)
-dir.create(file.path(temp.path, 'tmax'), recursive = TRUE)
-dir.create(file.path(temp.path, 'tmean'), recursive = TRUE)
-dir.create(file.path(temp.path, 'tmin'), recursive = TRUE)
+# Create temporary file path
+temp_path <- tempfile()
 
-# Create a empy raster serving as a base
-r <- raster(ncol=10, nrow=10)
+# Create the  sub-folders
+dir.create(file.path(temp_path, "elev"), recursive = TRUE)
+on.exit(unlink(file.path(temp_path, "elev")))
+dir.create(file.path(temp_path, "clim/prec"), recursive = TRUE)
+dir.create(file.path(temp_path, "clim/tmax"), recursive = TRUE)
+dir.create(file.path(temp_path, "clim/tmean"), recursive = TRUE)
+dir.create(file.path(temp_path, "clim/tmin"), recursive = TRUE)
+on.exit(unlink(file.path(temp_path, "clim")), add = TRUE)
+
+# Create a empty raster serving as a base
+r <- terra::rast(ncol = 10, nrow = 10)
 
 # Modify the base Raster values and save them in correct configuration
 
-# Elevation
-values(r)<-100
-writeRaster(r, paste0(temp.path,"/elev/srtm.tif"))
+#* Elevation 100m ####
+terra::values(r) <- 1:100
+terra::writeRaster(r, paste0(temp_path, "/elev/srtm.tif"))
 
 # Prec
 x<-c(5,10,15,20,25,34.40666,25,20,15,10,5,0)*8
-temp2<-paste0("prec_", sprintf("%02d", 1:12), ".tiff")
-for(i in 1:length(temp2)){values(r)<-x[i];writeRaster(r, paste0(temp.path,"/prec/",temp2[i]))}
+temp2<-paste0("prec_", sprintf("%02d", 1:12), ".tif")
+for (i in seq_along(temp2)) {
+  terra::values(r) <- x[i]
+  terra::writeRaster(r, paste0(temp_path, "/clim/prec/", temp2[i]))
+}
 
 # tmax
 x<-c(43,38,33,29,25,19.8,17.01,21,25,30,37,44)
-temp2<-paste0("tmax_", sprintf("%02d", 1:12), ".tiff")
-for(i in 1:length(temp2)){values(r)<-x[i];writeRaster(r, paste0(temp.path,"/tmax/",temp2[i]))}
+temp2<-paste0("tmax_", sprintf("%02d", 1:12), ".tif")
+for(i in 1:length(temp2)){
+  values(r)<-x[i]
+  writeRaster(r, paste0(temp_path, "/clim/tmax/",temp2[i]))
+}
 
 # tmin
 x<-c(43,38,33,29,25,19.8,17.01,21,25,30,37,44)/2
-temp2<-paste0("tmin_", sprintf("%02d", 1:12), ".tiff")
-for(i in 1:length(temp2)){values(r)<-x[i];writeRaster(r, paste0(temp.path,"/tmin/",temp2[i]))}
+temp2<-paste0("tmin_", sprintf("%02d", 1:12), ".tif")
+for(i in 1:length(temp2)){
+  values(r)<-x[i]
+  writeRaster(r, paste0(temp_path, "/clim/tmin/",temp2[i]))
+}
 
 # tmean
-x<-c(43,38,33,29,25,19.8,17.01,21,25,30,37,44)-c(c(43,38,33,29,25,19.8,17.01,21,25,30,37,44)/2)/2
-temp2<-paste0("tavg_", sprintf("%02d", 1:12), ".tiff")
-for(i in 1:length(temp2)){values(r)<-x[i];writeRaster(r, paste0(temp.path,"/tmean/",temp2[i]))}
+x<-c(43,38,33,29,25,19.8,17.01,21,25,30,37,44)-
+  c(c(43,38,33,29,25,19.8,17.01,21,25,30,37,44)/2)/2
+temp2<-paste0("tavg_", sprintf("%02d", 1:12), ".tif")
+for(i in 1:length(temp2)){
+  values(r)<-x[i]
+  writeRaster(r, paste0(temp_path, "/clim/tmean/",temp2[i]))
+}
 
 # Create a polygon file from the raster
-pol_py<-group_by(st_as_sf(rasterToPolygons(r)),layer)
+terra::values(r) <- 1:100
+pol_py <- sf::st_as_sf(terra::as.polygons(r))
+pol_py$grp <- c(rep("low", 25), rep("high", 75))
+
 # Create a point file from the raster
-pol_pt<-group_by(st_as_sf(rasterToPoints(r, spatial = TRUE)),layer)
+pol_pt <- sf::st_as_sf(terra::as.points(r))
+pol_pt$grp <- c(rep("low", 25), rep("high", 75))
 
 ```
 
 ### Extracting the statistics of the distribution of values for each climatic variable within the area
 
 Now that the climate and elevation data have been created, the next step is to
-use `climenv.extract` to extract the climatic data using the pol_py and 
+use `ce_extract` to extract the climatic data using the pol_py and 
 pol_pt geospatial data sets. This function's general workflow is to read in the
 newly downloaded data as a series of raster stacks (processing time should be
 shorter when using a raster stack, see Hijmans, 2020). Once the stacks are read
@@ -135,43 +156,76 @@ and environmental data can be extracted for all Sibillini National Park or high
 and low sections. This feature is controlled by the 'location.g' argument,
 specifying a column in the geospatial data set.
 
-`climenv.extract` adds a buffer of 2 km when small polygon sizes return no
+`ce_extract` adds a buffer of 2 km when small polygon sizes return no
 results. The polygon is transformed from a geographic coordinate system into
 a projected coordinate system using the 'spTransform' function. This
 transformation allows for a metric buffer to be added to the polygon.
 
 ```{r}
 # Extract the climate data
-data_py<-climenv.extract(output_dir = temp.path, location = pol_py,location.g = NULL,c.source = "WorldClim")
-data_pt<-climenv.extract(output_dir = temp.path, location = pol_pt,location.g = NULL,c.source = "WorldClim")
+
+data_py<-ce_extract(file.path(temp_path, "clim"),
+                    file.path(temp_path, "elev"),
+                    location = pol_py, location_g = NULL,
+                    c_source = "WorldClim")
+
+data_pt<-ce_extract(file.path(temp_path, "clim"),
+                    file.path(temp_path, "elev"),
+                    location = pol_pt, location_g = NULL,
+                    c_source = "WorldClim")
 ```
 
 The returned data object is a list containing five data sets. Specifically, one 
-data set each is returned for precipitation and  mean-, maximum- and minimum-temperature. 
-One data set is produced for altitude and continentality. These data sets are
-amenable to further use by the user, such as covariates in any number of
-modelling exercises. 
+data set each is returned for precipitation and  mean-, maximum- and 
+minimum-temperature. One data set is produced for altitude and continentality. 
+These data sets are amenable to further use by the user, such as covariates in 
+any number of modelling exercises. 
 
 ### Visualizing the climatic and elevation data
 
-`climenv.plot` is a helper function that brings together the newly simulated and
-exported data into three climate diagrams. The first option is Holdridge’s (1967)
-life zone classification plot; here our package makes this classic diagram
-readily available in R for the first time. The second option is Walter and 
-Leith’s (1960) climatic diagram; here our package depends on the `diagwl` function
-of the `climatol` package (Guijarro, 2019). The third climate diagram is one of 
+`climenv` offers three functions for visualising the climatic data extracted 
+from points or polygons in various formats.
+
+The third climate diagram is one of 
 our own design (see Macintyre & Mucina, 2021).
+
+`plot_h` produces Holdridge's life zone classification plot, also known as the 
+Holdridge Life Zone System or Holdridge Bioclimatic Classification System, is 
+based on three main factors that influence the distribution of vegetation and 
+ecosystems. By combining temperature, precipitation, and potential 
+evapotranspiration Holdridge’s classification plot divides the Earth’s surface
+into distinct life zones or biomes (sensu Holdridge). It allows for the 
+identification and characterization of different biomes, such as tropical 
+rainforests, deserts, grasslands, and tundra, based on their distinct climatic 
+conditions and provides a unified framework for studying vegetation patterns, 
+ecological dynamics, and potential shifts in response to climate change. To 
+simplify the visualization of life zone data, we have implemented the automatic 
+creation of Holdridge plots by the addition of the `plot_h` function which 
+provides a convenient wrapper from within `climenv` for the function 
+`PlotHoldridge` within the `Ternary` R package (Smith 2017). This paper is the 
+formal description of this plotting tool which has been developed to complement 
+`climenv`
+
+`plot_wl` produces the Walter-Lieth (1960) climatic diagram. This diagram
+consists of two primary components: temperature and precipitation, which when 
+combined in a single diagram allows for a comprehensive visualisation of 
+climate patterns. Specifically, it provides insights into seasonal variations, 
+the duration and intensity of wet and dry periods, and the overall climate 
+regime of a particular location (or the average for an area encompassed by a 
+spatial polygon). Here our package is a wrapper for the existing `diagwl` 
+function of the `climatol` R package (Guijarro, 2019).
+
 
 ```{r, fig.height = 5, fig.width = 5, fig.align = "center", fig.cap="Fig 1. Placeholder for Holdridge’s (1967) life zone classification"}
 # Make Holdridge’s (1967) life zone classification diagram
-climenv.plot(data=data_py, filter="Total", c.source = "WorldClim",shem=FALSE, WL=TRUE)
+plot_h(data=data_py, "0")
 ```
 ```{r, fig.height = 5, fig.width = 5, fig.align = "center", fig.cap="Fig 2. Walter-Leigh’s (1960) climate diagram"}
 # Make Walter-Leigh's (1960) climate diagram
-climenv.plot(data=data_py, filter="Total", c.source = "WorldClim",shem=FALSE, WL=TRUE)
+plot_wl(data=data_py, "0")
 ```
 ```{r, fig.height = 4, fig.width = 7, fig.align = "center", fig.cap="Fig 3. Custom climate diagram."}
 # Make the custom climate diagram
 par(mar=c(1.5, 2.8, 2, 17))
-climenv.plot(data=data_py, filter="Total", c.source = "WorldClim",shem=FALSE, p.max = 500, t.max=50)
+#climenv.plot(data=data_py, filter="Total", c.source = "WorldClim",shem=FALSE, p.max = 500, t.max=50)
 ```
