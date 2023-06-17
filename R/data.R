@@ -24,12 +24,8 @@ NULL
 #' @rdname Sibillini
 "Sibillini_py"
 
-#' Torricchio data
-#'
-#' TODO: Description of `Torricchio`
-#'
-#' @keywords datasets
-"Torricchio"
+#' @rdname Sibillini
+"s_data"
 
 #' STRM tile data
 #'
