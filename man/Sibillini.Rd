@@ -5,16 +5,21 @@
 \alias{Sibillini}
 \alias{Sibillini_pt}
 \alias{Sibillini_py}
+\alias{s_data}
 \title{Sibillini data}
 \format{
 An object of class \code{SpatialPointsDataFrame} with 100 rows and 3 columns.
 
 An object of class \code{SpatialPolygonsDataFrame} with 4 rows and 2 columns.
+
+An object of class \code{list} of length 12.
 }
 \usage{
 Sibillini_pt
 
 Sibillini_py
+
+s_data
 }
 \description{
 Geospatial polygon and point data sets capturing Italy's Monti
