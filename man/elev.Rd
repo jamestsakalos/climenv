@@ -2,40 +2,41 @@
 % Please edit documentation in R/elev.R
 \name{elev}
 \alias{elev}
-\title{elev}
+\title{Download elevation data}
 \usage{
-elev(output_dir = NULL, location = NULL, source = "mapzen")
+elev(output_dir, loc, e_source = "mapzen")
 }
 \arguments{
 \item{output_dir}{Character (e.g., \code{"../Desktop/chelsa"}). Pathway to where
 the data will be stored.}
 
-\item{location}{A \code{sp}, \code{sf} polygon or point object.}
+\item{loc}{A \code{"sp"}, \code{"sf"} polygon or point object.}
 
-\item{source}{Character. Elevation sourced from mapzen (default) or geodata.}
+\item{e_source}{Character. Elevation sourced from \code{"mapzen"} (default) or
+\code{"geodata"}.}
 }
 \value{
-Returns one elevation tile (tiff). If elevation is sourced from geodata the
-elevation is downloaded at a spatial resolution of 30 arc seconds (~1 km2).
-If elevation data is sourced from mapzen then the product will be a mosaic.
-Specfically, Mapzen’s product is unique in that it combines several sources
-of digital elevation models, including SRTM, the ArcticDEM (covering all
-areas north of 60°), EUDEM (digital elevation model over Europe; for review,
-see Mouratidis & Ampatzidis, 2019), and others into a single product. The
-resolution of this product was set to 7, corresponding to 611.5 m ground
-resolution at 60° latitude 864.8 m at 45° and 1223 m at 0°.
+Creates one subfolder named elev storing a raster (.tiff). If elevation is
+sourced from geodata the elevation is downloaded at a spatial resolution of
+30 arc seconds (~1 km  sq.). If elevation data is from mapzen then the
+product will be a mosaic. Specifically, Mapzen’s product is unique as it
+combines several sources of digital elevation models, including SRTM, the
+ArcticDEM (covering all areas north of 60°), EUDEM (digital elevation model
+over Europe; for review, see Mouratidis & Ampatzidis, 2019), and others into
+a single product. The resolution of this product was set to 7, corresponding
+to 611.5 m ground resolution at 60° latitude 864.8 m at 45° and 1223 m at 0°.
 }
 \description{
-\code{elev} downloads elevation data the Shuttle Radar Topography Mission
+\code{elev()} downloads elevation data the Shuttle Radar Topography Mission
 (SRTM) , specifically the hole-filled CGIAR-SRTM (90 m resolution) for
 latitudes between -60 and 60 or Mapzen's synthesis digital elevation product.
 }
 \examples{
 \dontrun{
 # Start by loading Italy's Mount Sibillini National Park boundary
-data("Sibillini_py")
+data("Sibillini_py", package = "climenv")
 # elevation will be saved in the output_dir (i.e. output directory)
-elev(output_dir = "...Desktop/elev", location = Sibillini_py)
+   elev(output_dir = "...Desktop/elev", loc = Sibillini_py)
 }
 }
 \references{
@@ -53,7 +54,8 @@ DOI: 10.3390/ijgi8030108
 }
 }
 \seealso{
-Download climate data: \code{\link[=ce_download]{ce_download()}}
+A more convenient function for other climate and elevation data
+\code{\link[=ce_download]{ce_download()}}.
 }
 \author{
 James L. Tsakalos

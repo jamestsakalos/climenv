@@ -2,41 +2,44 @@
 % Please edit documentation in R/worldclim.R
 \name{worldclim}
 \alias{worldclim}
-\title{worldclim}
+\title{Download WorldClim climate data}
 \usage{
-worldclim(output_dir = NULL, mode = "wb", quiet = FALSE, var = NULL)
+worldclim(output_dir, mode = "wb", quiet = FALSE, var = NULL)
 }
 \arguments{
-\item{output_dir}{Character (e.g., ".../Desktop/chelsa"). Pathway to where
+\item{output_dir}{Character (e.g., \code{"../Desktop/chelsa"}). Pathway to where
 the data will be stored.}
 
-\item{mode}{Character. See documentation in /code{download.file()}.}
+\item{mode}{Character. See documentation in \code{\link[=download.file]{download.file()}}.}
 
 \item{quiet}{Logical. If TRUE, suppress status messages (if any), and the
 progress bar.}
 
-\item{var}{Character. If supplied will download a subset of the climate data.}
+\item{var}{Character. If supplied will download a subset of the climate data.
+Must be one of \code{"ALL"} (default), \code{"prec"}, \code{"tmax"}, \code{"tmin"} or \code{"tmean"}
+to download the corresponding climate data.}
 }
 \value{
-Returns four subfolders named prec, tmax, tmin and tmean. Each folder
+Creates four subfolders named prec, tmax, tmin and tmean. Each folder
 contains 12 GeoTiff (.tif) files, one for each month of the year
 (January is 1; December is 12) for the time period 1970–2000. Each of the
-files are downloaded at a spatial resolution of 30 arc seconds (~1 km2).
+files are downloaded at a spatial resolution of 30 arc seconds (~1 km  sq.).
 The precipitation folder contains average monthly precipitation (mm). The
 tmax folder contains maximum monthly temperature. The tmin folder contains
 minimum monthly temperature. The tmean folder contains the average monthly
-temperature. The units for all temperature derived layers, as provided by
-WorldClim2, are provided in °C.
+temperature. The unit of measure for temperature is in °C.
 }
 \description{
-\code{worldclim} downloads the WorldClim V2 data.
+\code{worldclim()} downloads the WorldClim V2.1 climate data for 1970-2000. This
+includes monthly climate data for minimum, mean, and maximum temperature and
+precipitation at a resolution of 30 arc sections.
 }
 \examples{
 \dontrun{
 # Note that the function requires ~13.5 GB of space.
 # Download time will depend on your internet connection speed.
 
-worldclim(output_dir = "...Desktop/worldclim")
+   worldclim(output_dir = "...Desktop/worldclim")
 }
 }
 \references{
@@ -46,7 +49,8 @@ Journal of Climatology. 37, 4302–4315.
 }
 }
 \seealso{
-Download climate data: \code{\link[=ce_download]{ce_download()}}
+Downloading from WorldClim V2.1 \code{\link[=worldclim]{worldclim()}} or a more convenient
+function for other climate and elevation data \code{\link[=ce_download]{ce_download()}}.
 }
 \author{
 James L. Tsakalos

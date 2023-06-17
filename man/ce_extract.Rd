@@ -9,27 +9,34 @@ ce_extract(
   dir_elev = NULL,
   location = NULL,
   location_g = NULL,
-  c_source = NULL,
+  c_source = "WorldClim",
   var = "ALL"
 )
 }
 \arguments{
 \item{dir_clim}{Character. Directory containing the climate data. Must
-feature prec, tmax, tmean and tmin subfolders.}
+feature prec, tmax, tmean and tmin subfolders. Within each subfolder there
+should be a 12 raster files (e.g. \code{"prec01.tif"}) corresponding to the
+monthly climate data and with a spatial extent that encompasses the area
+covered by the polygon or point object.}
 
-\item{dir_elev}{Character. Directory containing the elevation data.}
+\item{dir_elev}{Character. Directory containing the elevation data. Within
+the folder there should be a raster file ("strm.tif") with a spatial extent
+that encompasses the area covered by the polygon or point object.}
 
-\item{location}{A \code{sp}, \code{sf} polygon or point object.}
+\item{location}{A \code{"sp"}, \code{"sf"} polygon or point object.}
 
 \item{location_g}{Character. Informs how the zonal statistics are exported.
-Should correspond to a column of the \code{location} argument. If NULL,
-the zonal statistics are calculated for all features of \code{location}.}
+Must correspond to a column of the \code{"location"} argument. If NULL,
+the zonal statistics are calculated for all features of \code{"location"}.}
 
-\item{c_source}{Character. Supply either \code{"CHELSA"} or
-\code{"WorldClim"} argument.}
+\item{c_source}{Character. Climatic data source, must be either \code{"CHELSA"} or
+\code{"WorldClim"} (default). MS: We should support partial, case-insensitive
+matching.}
 
-\item{var}{Character. If supplied will export a subset of the climate or
-elevation data.}
+\item{var}{Character. If supplied will download a subset of the climate data.
+Must be one of \code{"ALL"} (default), \code{"prec"}, \code{"tmax"}, \code{"tmin"} or \code{"tmean"}
+to download the corresponding climate data.}
 }
 \value{
 Returns a list storing matrices containing the mean and standard deviation
@@ -39,29 +46,29 @@ or point object. Values returned are either degrees Celsius for (tmax, tmean,
 tmin) or mm (prec).
 }
 \description{
-\code{ce_extract} brings together the \code{worldclim},
-\code{chelsa} and \code{elev} functions into one location to streamline data
-downloading.
+Extracts climate and/or elevation data for generated over an area or at fixed
+point/s.
 }
 \examples{
 \dontrun{
 
 # Extraction time will depend on the size of the polygon or point file.
 # Import the Sibillini National Park Boundary
-data(Sibillini_py)
+data("Sibillini_py")
 # Run the download function
 ce_extract(
-dir_clim = "../WorkingDirectory/CHELSA",
-dir_elev = "../WorkingDirectory/elev",
-location = Sibillini_py,
-location_g = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-c_source = "CHELSA")
+  dir_clim = "../WorkingDirectory/CHELSA",
+  dir_elev = "../WorkingDirectory/elev",
+  location = Sibillini_py,
+  location_g = "Position",
+  c_source = "CHELSA"
+)
 
-See also PLOTTTTTTTIN XXXXX functions.
 }
 }
 \seealso{
-Download climate data: \code{\link[=ce_download]{ce_download()}}
+The downloading (\code{\link[=ce_download]{ce_download()}}), and the plotting
+(\code{\link[=plot_h]{plot_h()}} & \code{\link[=plot_wl]{plot_wl()}}) functions.
 }
 \author{
 James L. Tsakalos

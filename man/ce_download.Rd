@@ -2,62 +2,71 @@
 % Please edit documentation in R/ce_download.R
 \name{ce_download}
 \alias{ce_download}
-\title{ce_download}
+\title{Download climate and elevation data}
 \usage{
 ce_download(
-  output_dir = NULL,
-  c_source = NULL,
+  output_dir,
+  c_source = "CHELSA",
+  e_source = "mapzen",
   mode = "wb",
   var = NULL,
-  elev = TRUE,
-  e_source = NULL,
-  e_location = NULL
+  elev = "mapzen",
+  loc
 )
 }
 \arguments{
-\item{output_dir}{Character (e.g., "../Desktop/chelsa"). Pathway to where
+\item{output_dir}{Character (e.g., \code{"../Desktop/chelsa"}). Pathway to where
 the data will be stored.}
 
-\item{c_source}{Character. Climatic data source, must be either
-\code{"CHELSA"} or \code{"WorldClim"}.}
+\item{c_source}{Character. Climatic data source, must be either \code{"CHELSA"} or
+\code{"WorldClim"} (default). MS: We should support partial, case-insensitive
+matching.}
 
-\item{mode}{Character. See documentation in /code{download.file()}.}
+\item{e_source}{Character. Elevation sourced from \code{"mapzen"} (default) or
+\code{"geodata"}.}
 
-\item{var}{Character. If supplied will download a subset of the climate data.}
+\item{mode}{Character. See documentation in \code{\link[=download.file]{download.file()}}.}
 
-\item{elev}{Logical. If TRUE, elevation data will be downloaded}
+\item{var}{Character. If supplied will download a subset of the climate data.
+Must be one of \code{"ALL"} (default), \code{"prec"}, \code{"tmax"}, \code{"tmin"} or \code{"tmean"}
+to download the corresponding climate data.}
 
-\item{e_source}{Character. Elevation sourced from mapzen (default) or
-geodata.}
+\item{elev}{Character. Elevation source, must be either \code{"mapzen"} (default)
+or \code{"geodata"}.}
 
-\item{e_location}{A \code{sp}, \code{sf} polygon or point object.}
+\item{loc}{A \code{"sp"}, \code{"sf"} polygon or point object.}
 }
 \value{
-See documentation from \code{worldclim}, \code{chelsa} and \code{elev}.
+See documentation from \code{\link[=chelsa]{chelsa()}}, \code{\link[=worldclim]{worldclim()}} and
+\code{\link[=elev]{elev()}}.
 }
 \description{
-\code{ce_download} brings together the \code{worldclim},
-\code{chelsa} and \code{elev} functions into one location to streamline data
-downloading.
+\code{ce_download()} brings together the \code{worldclim()},
+\code{chelsa()} and \code{elev()} functions to streamline downloading.
 }
 \examples{
 \dontrun{
 
 # Note that the function requires ~13.5 GB of space.
 # Download time will depend on your internet connection speed.
+
 # Import the Sibillini National Park Boundary
-data(Sibillini_py)
+data("Sibillini_py", package = "climenv")
+
 # Run the download function
 ce_download(
-output_dir = "../WorkingDirectory",
-c_source = "WorldClim",
-mode = "wb",
-elev = TRUE,
-e_source = "mapzen",
-e_location = Sibillini_py)
+  output_dir = "../WorkingDirectory",
+  c_source = "WorldClim",
+  mode = "wb",
+  elev = "mapzen",
+  loc = Sibillini_py
+)
 
-See also chelsa(), worldclim() or elev() functions.
 }
+}
+\seealso{
+The underlying functions \code{\link[=chelsa]{chelsa()}}, \code{\link[=worldclim]{worldclim()}} and
+\code{\link[=elev]{elev()}}.
 }
 \author{
 James L. Tsakalos

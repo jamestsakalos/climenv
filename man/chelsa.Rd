@@ -2,7 +2,7 @@
 % Please edit documentation in R/chelsa.R
 \name{chelsa}
 \alias{chelsa}
-\title{chelsa}
+\title{Download CHELSA climate data}
 \usage{
 chelsa(output_dir = NULL, mode = "wb", quiet = FALSE, var = NULL)
 }
@@ -10,13 +10,14 @@ chelsa(output_dir = NULL, mode = "wb", quiet = FALSE, var = NULL)
 \item{output_dir}{Character (e.g., \code{"../Desktop/chelsa"}). Pathway to where
 the data will be stored.}
 
-\item{mode}{Character. See documentation in /code{download.file()}.}
+\item{mode}{Character. See documentation in \code{\link[=download.file]{download.file()}}.}
 
 \item{quiet}{Logical. If TRUE, suppress status messages (if any), and the
 progress bar.}
 
-\item{var}{Character specifying which variables to extract.
-Options are "prec", "tmax", "tmin", "tmean".}
+\item{var}{Character. If supplied will download a subset of the climate data.
+Must be one of \code{"ALL"} (default), \code{"prec"}, \code{"tmax"}, \code{"tmin"} or \code{"tmean"}
+to download the corresponding climate data.}
 }
 \value{
 Returns four subfolders named prec, tmax, tmin and tmean. Each folder
@@ -26,19 +27,16 @@ files are downloaded at a spatial resolution of 30 arc seconds (~1 km sq.).
 The precipitation folder contains average monthly precipitation (mm). The
 tmax folder contains maximum monthly temperature. The tmin folder contains
 minimum monthly temperature. The tmean folder contains the average monthly
-temperature. The units for all temperature derived layers, as provided by
-CHELSA Version 1.2, are multiplied by a factor of 10; hence, the unit of
-measure for temperature is in °C X 10.. Specifically, monthly values of
-minimum, maximum and mean.
+temperature. The unit of measure for temperature is in °C.
 }
 \description{
-\code{chelsa} downloads the CHELSA (Climatologies at high resolution for the
-earth’s land surface areas) V2.1 data of downscaled temperature and
-precipitation to a resolution of 30 arc sections.
+\code{chelsa()} downloads the CHELSA (Climatologies at high resolution for the
+earth’s land surface areas) V2.1 data of temperature and precipitation at a
+resolution of 30 arc sections.
 }
 \examples{
 \dontrun{
-chelsa(output_dir = "...Desktop/Chelsa", quiet = FALSE)
+   chelsa(output_dir = "...Desktop/Chelsa", quiet = FALSE)
 }
 }
 \references{
@@ -56,7 +54,8 @@ DOI: 10.16904/envidat.228.v2.1
 }
 }
 \seealso{
-Download climate data: \code{\link[=ce_download]{ce_download()}}
+Downloading from WorldClim V2.1 \code{\link[=worldclim]{worldclim()}} or a more convenient
+function for other climate and elevation data \code{\link[=ce_download]{ce_download()}}.
 }
 \author{
 James L. Tsakalos
