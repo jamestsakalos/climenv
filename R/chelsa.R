@@ -1,16 +1,14 @@
-#' chelsa
+#' Download CHELSA climate data
 #'
 #' @description
-#' \code{chelsa} downloads the CHELSA (Climatologies at high resolution for the
-#'  earth’s land surface areas) V2.1 data of downscaled temperature and
-#'  precipitation to a resolution of 30 arc sections.
+#' `chelsa()` downloads the CHELSA (Climatologies at high resolution for the
+#'  earth’s land surface areas) V2.1 data of temperature and precipitation at a
+#'  resolution of 30 arc sections.
 #'
 #' @template output_dir_param
-#' @param mode Character. See documentation in /code{download.file()}.
-#' @param quiet Logical. If TRUE, suppress status messages (if any), and the
-#' progress bar.
-#' @param var Character specifying which variables to extract.
-#' Options are "prec", "tmax", "tmin", "tmean".
+#' @template output_mode_param
+#' @template output_quiet_param
+#' @template output_var_param
 #'
 #' @return
 #' Returns four subfolders named prec, tmax, tmin and tmean. Each folder
@@ -20,13 +18,11 @@
 #' The precipitation folder contains average monthly precipitation (mm). The
 #' tmax folder contains maximum monthly temperature. The tmin folder contains
 #' minimum monthly temperature. The tmean folder contains the average monthly
-#' temperature. The units for all temperature derived layers, as provided by
-#' CHELSA Version 1.2, are multiplied by a factor of 10; hence, the unit of
-#' measure for temperature is in °C X 10.. Specifically, monthly values of
-#' minimum, maximum and mean.
+#' temperature. The unit of measure for temperature is in °C.
 #'
 #' @author James L. Tsakalos
-#' @seealso Download climate data: [`ce_download()`]
+#' @seealso Downloading from WorldClim V2.1 [`worldclim()`] or a more convenient
+#' function for other climate and elevation data [`ce_download()`].
 #' @references{ Karger, D.N., et al. (2016). CHELSA climatologies at high
 #' resolution for the earth’s land surface areas (Version 1.0). World Data
 #' Center for Climate. DOI: 10.1594/WDCC/CHELSA_v1
@@ -42,7 +38,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' chelsa(output_dir = "...Desktop/Chelsa", quiet = FALSE)
+#'    chelsa(output_dir = "...Desktop/Chelsa", quiet = FALSE)
 #' }
 #' @export
 chelsa <- function(output_dir = NULL, mode = "wb",
@@ -61,7 +57,6 @@ chelsa <- function(output_dir = NULL, mode = "wb",
   # I want to use these as a template, to apply correct names later.
   var_t <- c("prec", "tmax", "tmin", "tmean")
   names(var_t) <- c("pr", "tasmin", "tasmax", "tas")
-
 
   if (!is.null(var)) {
 
