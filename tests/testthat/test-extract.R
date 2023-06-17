@@ -82,11 +82,11 @@ test_that("ce_extract() works", {
   #* length / names of output data.frames ####
   expect_named(data_py, c("tmean_m", "tmean_sd", "tmin_m", "abmt", "tmin_sd",
                           "tmax_m", "tmax_sd", "prec_m", "prec_sd",
-                          "elev", "lat"))
+                          "elev", "lat", "Readme"))
   #* nr. of observations ####
   expect_length(data_py$tmean_m[, 1], 100) # One for each value, pt
   #* Elev values are what I expect ####
-  expect_equal(data_py$elev, data.frame(id = as.factor(c(0:99)),
+  expect_equal(data_py$elev, data.frame(row.names = as.character(0:99),
                                         mean = c(1:100),
                                         stdev = 0))
 
@@ -103,12 +103,12 @@ test_that("ce_extract() works", {
   #* length / names of output data.frames ####
   expect_named(data_py, c("tmean_m", "tmean_sd", "tmin_m", "abmt", "tmin_sd",
                           "tmax_m", "tmax_sd", "prec_m", "prec_sd",
-                          "elev", "lat"))
+                          "elev", "lat", "Readme"))
   #* nr. of observations ####
   expect_length(data_py$tmean_m[, 1], 2) # One for each group
   #* Elev values are what I expect ####
   expect_equal(data_py$elev,
-               data.frame(location_g = as.factor(c("high", "low")),
+               data.frame(row.names = as.factor(c("high", "low")),
                           mean = c(63, 13),
                           stdev = c(21.648710 + 2.51e-07, 7.211102 + 4.86e-07)))
 
@@ -124,7 +124,8 @@ test_that("ce_extract() works", {
 
   #* length / names of output data.frames ####
   expect_named(data_py, c("tmean_m", "tmean_sd", "tmin_m", "abmt", "tmin_sd",
-                          "tmax_m", "tmax_sd", "prec_m", "prec_sd", "lat"))
+                          "tmax_m", "tmax_sd", "prec_m", "prec_sd", "lat",
+                          "Readme"))
   #* nr. of observations ####
   expect_length(data_py$tmean_m[, 1], 2) # One for each group
   #* Tmin values are what I expect ####
@@ -144,7 +145,7 @@ test_that("ce_extract() works", {
                              location = pol_py, location_g = "grp",
                              c_source = "WorldClim", var = "prec")
   #* length / names of output data.frames ####
-  expect_named(data_py, c("prec_m", "prec_sd", "lat"))
+  expect_named(data_py, c("prec_m", "prec_sd", "lat", "Readme"))
 
   # pt tests ####
 
@@ -160,12 +161,12 @@ test_that("ce_extract() works", {
 
   #* length / names of output data.frames ####
   expect_named(data_pt, c("tmean", "tmin", "tmax",
-                          "prec", "elev", "lat"))
+                          "prec", "elev", "lat", "Readme"))
 
   #* nr. of observations ####
   expect_length(data_pt$tmean[, 1], 100) # One for each value, pt
   #* Elev values are what I expect ####
-  expect_equal(data_pt$elev, data.frame(id = as.factor(c(0:99)),
+  expect_equal(data_pt$elev, data.frame(row.names = as.character(c(0:99)),
                                         mean = c(1:100)))
 
   #** Location group ####
@@ -181,13 +182,13 @@ test_that("ce_extract() works", {
   #* length / names of output data.frames ####
   expect_named(data_pt, c("tmean_m", "tmean_sd", "abmt", "tmin_m", "tmin_sd",
                           "tmax_m", "tmax_sd", "prec_m", "prec_sd",
-                          "elev", "lat"))
+                          "elev", "lat", "Readme"))
 
   #* nr. of observations ####
   expect_length(data_pt$tmean_m[, 1], 2) # One for each group
   #* Elev values are what I expect ####
   expect_equal(data_pt$elev,
-               data.frame(location_g = as.factor(c("high", "low")),
+               data.frame(row.names = as.character(c("high", "low")),
                           mean = c(63, 13),
                           stdev = c(21.79449, 7.359801)), tolerance = 1e-3)
 
@@ -203,7 +204,8 @@ test_that("ce_extract() works", {
 
   #* length / names of output data.frames ####
   expect_named(data_pt, c("tmean_m", "tmean_sd", "abmt", "tmin_m", "tmin_sd",
-                          "tmax_m", "tmax_sd", "prec_m", "prec_sd", "lat"))
+                          "tmax_m", "tmax_sd", "prec_m", "prec_sd", "lat",
+                          "Readme"))
   #* nr. of observations ####
   expect_length(data_pt$tmean_m[, 1], 2) # One for each group
   #* Tmin values are what I expect ####
@@ -223,6 +225,6 @@ test_that("ce_extract() works", {
                              location = pol_pt, location_g = "grp",
                              c_source = "WorldClim", var = "prec")
   #* length / names of output data.frames ####
-  expect_named(data_pt, c("prec_m", "prec_sd", "lat"))
+  expect_named(data_pt, c("prec_m", "prec_sd", "lat", "Readme"))
 
 })

@@ -25,6 +25,15 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MTcuMzB8NTc2LjAw)'>
+</g>
+<defs>
+  <clipPath id='cpODQuMzR8Njc2LjgwfDgyLjc1fDQ5NC41OQ=='>
+    <rect x='84.34' y='82.75' width='592.46' height='411.84' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpODQuMzR8Njc2LjgwfDgyLjc1fDQ5NC41OQ==)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MTcuMzB8NTc2LjAw)'>
 <polygon points='360.00,126.95 612.53,466.35 107.47,466.35 360.00,126.95 ' style='stroke-width: 0.75; stroke: none; fill: none;' />
 <polygon points='107.47,466.35 107.47,452.21 139.04,438.07 170.61,452.21 170.61,466.35 ' style='stroke-width: 0.75; stroke: none; fill: #EAD6C4;' />
 <polyline points='107.47,466.35 107.47,452.21 139.04,438.07 170.61,452.21 170.61,466.35 ' style='stroke-width: 0.75; stroke: #888888;' />

@@ -74,15 +74,13 @@ test_that("ce_plot() works", {
                      location = pol_py, location_g = "grp",
                      c_source = "WorldClim", var = "ALL")
 
-  p <- ce_plot(data = data, c_source = "WorldClim", location_g = "high",
-                     type = "WL")
+  p <- plot_wl(data = data, location_g = "high")
 
   # vdiffr is used only for testing so not required
   skip_if_not_installed("vdiffr")
   vdiffr::expect_doppelganger("py test WL plot", p)
 
-  p <- ce_plot(data = data, c_source = "WorldClim", location_g = "high",
-               type = "H")
+  p <- plot_h(data = data, location_g = "high")
 
   vdiffr::expect_doppelganger("py test H plot", p)
 
@@ -93,13 +91,11 @@ test_that("ce_plot() works", {
                      location = pol_pt, location_g = "grp",
                      c_source = "WorldClim", var = "ALL")
 
-  p <- ce_plot(data = data, c_source = "WorldClim", location_g = "low",
-               type = "WL")
+  p <- plot_wl(data = data, location_g = "low")
 
   vdiffr::expect_doppelganger("pt test WL plot", p)
 
-  p <- ce_plot(data = data, c_source = "WorldClim", location_g = "low",
-               type = "H")
+  p <- plot_h(data = data, location_g = "low")
 
   vdiffr::expect_doppelganger("pt test H plot", p)
 
