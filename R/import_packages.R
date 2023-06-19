@@ -6,4 +6,3 @@
 #' @importFrom geodata elevation_3s
 #' @importFrom elevatr get_elev_raster
 #' @importFrom dplyr %>% group_by summarize
-NULL

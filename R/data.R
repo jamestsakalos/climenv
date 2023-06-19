@@ -16,7 +16,6 @@
 #'
 #' @keywords datasets
 #' @name Sibillini
-NULL
 
 #' @rdname Sibillini
 "Sibillini_pt"
