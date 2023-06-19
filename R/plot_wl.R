@@ -4,8 +4,6 @@
 #' @description Creates a graph using the climate and elevation data which has
 #' been extracted for a given \code{location}. It accepts the data formatted
 #' from the \code{ce_extract} function.
-# MS: We expect a very specific format for `data`, e.g. the first row should
-# be named "location_g".  This should be specified in the params.
 #' @param data List. A list storing matrices containing the mean and standard
 #' deviation of the climate and/or elevation data.
 #' @template output_location_g_param
@@ -44,8 +42,7 @@
 #'
 #' @importFrom climaemet ggclimat_walter_lieth
 #' @export
-plot_wl <- function(data, location_g, ...
-) {
+plot_wl <- function(data, location_g, ...) {
 
   # Needed to print the climate date range on the plot
   c_source <- strsplit(data$Readme, " ")[[1]][5]
