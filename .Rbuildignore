@@ -27,3 +27,4 @@ vignettes/.RData
 ^data-raw$
 ^pkgdown$
 ^revdep$
+^README.Rmd
