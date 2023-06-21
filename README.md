@@ -1,10 +1,10 @@
 
 <!-- badges: start -->
 
-[![test-coverage](https://github.com/jamestsakalos/comspat/workflows/test-coverage/badge.svg)](https://github.com/jamestsakalos/comspat/actions)
+[![test-coverage](https://github.com/jamestsakalos/climenv/workflows/test-coverage/badge.svg)](https://github.com/jamestsakalos/climenv/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/jamestsakalos/comspat/branch/master/graph/badge.svg)](https://app.codecov.io/gh/jamestsakalos/comspat?branch=master)
-[![R-CMD-check](https://github.com/jamestsakalos/comspat/workflows/R-CMD-check/badge.svg)](https://github.com/jamestsakalos/comspat/actions)
+coverage](https://codecov.io/gh/jamestsakalos/climenv/branch/master/graph/badge.svg)](https://app.codecov.io/gh/jamestsakalos/climenv?branch=master)
+[![R-CMD-check](https://github.com/jamestsakalos/climenv/workflows/R-CMD-check/badge.svg)](https://github.com/jamestsakalos/climenv/actions)
 <!-- badges: end -->
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -77,7 +77,17 @@ function:
 ``` r
 library(climenv)
 
-#data("grid_random") #input data frame
+# Step 1. Import the Sibillini National Park Boundary
+# Step 2. Run the download function
+# Step 3. Run the extract function
+#* See ce_download & ce_extract documentation
+
+#' # Steps 1, 2 & 3 can be skipped by loading the extracted data
+#' data(s_data)
+#'
+#' # Step 4. Visualise the climatic envelope using a Holdridge diagram
+#'
+#' plot_h(data = s_data, location_g = "High")
 ```
 
 The package vignette provides detailed explanation and demonstration on
