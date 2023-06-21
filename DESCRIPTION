@@ -1,6 +1,6 @@
 Package: climenv
 Type: Package
-Title: Climenv: An R Package for Downloading, Exctracting and Plotting Climatic Envelopes
+Title: Downloading, Extracting and Plotting Climatic Envelopes
 Version: 1.0.0
 Authors@R: c(
     person("James L.", "Tsakalos", role = c("aut", "cre", "cph"),
