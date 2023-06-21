@@ -73,12 +73,13 @@ library(fs)
 library(raster)
 library(dplyr)
 library(sf)
+library(terra)
 ```
 
 ```{r}
 # Lets make some training data
 
-# Create temporary file path
+# Create temporary file to supply to the ce_extract
 temp_path <- tempfile()
 
 # Create the  sub-folders
@@ -124,8 +125,7 @@ for(i in 1:length(temp2)){
 }
 
 # tmean
-x<-c(43,38,33,29,25,19.8,17.01,21,25,30,37,44)-
-  c(c(43,38,33,29,25,19.8,17.01,21,25,30,37,44)/2)/2
+x<-c(43,38,33,29,25,19.8,17.01,21,25,30,37,44)-c(c(43,38,33,29,25,19.8,17.01,21,25,30,37,44)/2)/2
 temp2<-paste0("tavg_", sprintf("%02d", 1:12), ".tif")
 for(i in 1:length(temp2)){
   values(r)<-x[i]
@@ -227,5 +227,5 @@ plot_wl(data=data_py, "0")
 ```{r, fig.height = 4, fig.width = 7, fig.align = "center", fig.cap="Fig 3. Custom climate diagram."}
 # Make the custom climate diagram
 par(mar=c(1.5, 2.8, 2, 17))
-#climenv.plot(data=data_py, filter="Total", c.source = "WorldClim",shem=FALSE, p.max = 500, t.max=50)
+
 ```
