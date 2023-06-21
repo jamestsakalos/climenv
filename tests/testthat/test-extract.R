@@ -1,5 +1,8 @@
 test_that("ce_extract() works", {
 
+  library(sf)
+  library(terra)
+
   # Set testing data ####
 
   # Create temporary file to supply to the ce_extract
