@@ -28,3 +28,4 @@ vignettes/.RData
 ^pkgdown$
 ^revdep$
 ^README.Rmd
+^\.github$
