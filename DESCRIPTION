@@ -49,19 +49,14 @@ Imports:
     terra,
 Suggests:
     fs,
-    knitr,
-    raster,
-    rmarkdown,
-    testthat,
-    vdiffr
-Config/Needs/website: pkgdown
     glue,
     knitr,
     raster,
     rmarkdown,
     testthat (>= 3.0.0),
-    vdiffr
+    vdiffr,
 Config/Needs/check: rcmdcheck
 Config/Needs/coverage: covr
+Config/Needs/website: pkgdown
 RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
