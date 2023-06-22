@@ -37,16 +37,27 @@ always welcome.
 
 ## News
 
-- June-2023: Version 1.o.0
+- June-2023: Version 1.0.0
 
 ## Main functionalities
 
 - Downloads climate data from two main sources;
-  - CHELSA
-  - WorldClim 2
+  - CHELSA, short for “Climatologies at High resolution for the Earth’s
+    Land Surface Areas,” encompasses a high-resolution gridded dataset
+    containing extensive climate data, including temperature and
+    precipitation for the period 1981–2010
+  - WorldClim 2, short for “World Climate”, is a comprehensive global
+    dataset offers fine-scale gridded climate data including temperature
+    and precipitation for the period 1970–2000
 - Downloads elevation data from two main sources;
-  - get_data()
-  - elevatr
+  - SRTM, which stands for ‘Shuttle Radar Topography Mission,’ refers
+    specifically to the hole-filled CGIAR-SRTM dataset, providing
+    90-meter resolution elevation data for the Earth’s surface within
+    latitudes ranging from -60 to 60 degrees
+  - Mapzen’s synthesis digital elevation product which combines several
+    sources of digital elevation models, including SRTM, the ArcticDEM
+    (covering all areas north of 60°), EUDEM (digital elevation model
+    over Europe)
 - Extracts the data;
   - as raw data for points
   - as zonal statistics for a group of points or over a spatial extent
@@ -82,34 +93,40 @@ library(climenv)
 # Step 3. Run the extract function
 #* See ce_download & ce_extract documentation
 
-#' # Steps 1, 2 & 3 can be skipped by loading the extracted data
-#' data(s_data)
-#'
-#' # Step 4. Visualise the climatic envelope using a Holdridge diagram
-#'
-#' plot_h(data = s_data, location_g = "High")
+# Steps 1, 2 & 3 can be skipped by loading the extracted data
+data("it_data")
+
+# Step 4. Visualise the climatic envelope using a Holdridge diagram
+p1 <- plot_h(data = it_data, location_g = "MED")
+p2 <- plot_h(data = it_data, location_g = "NEM")
+gridExtra::grid.arrange(p1, p2, ncol = 2)
 ```
+
+<img src="man/figures/README-example-1.png" width="100%" />
 
 The package vignette provides detailed explanation and demonstration on
 the application of climenv.
 
 ## References
 
-Juhász-Nagy, P. (1967). On association among plant populations I. *Acta
-Biologica Debrecina*, 5, 43–56.
+Fick, S.E. and R.J. Hijmans. (2017). WorldClim 2: new 1km spatial
+resolution climate surfaces for global land areas. *International
+Journal of Climatology*. 37, 4302–4315.
 
-Juhász-Nagy, P. (1976). Spatial dependence of plant populations. Part 1.
-Equivalence analysis (an outline for a new model). *Acta Botanica
-Academiae Scientiarum Hungaricae*, 22, 61–78.
+Hijmans, R.J., et al., (2023). geodata: Download Geographic Data. R
+package version 0.5-8. <https://CRAN.R-project.org/package=geodata>
 
-Juhász-Nagy, P. & Podani, J. (1983). Information theory methods for the
-study of spatial processes and succession. *Vegetatio*, 51, 129–140.
+Hollister, J. W., et al. (2021). elevatr: Access Elevation Data from
+Various APIs. R package version 0.4.2.
+<https://CRAN.R-project.org/package=elevatr>
 
-Juhász-Nagy, P. (1984a). Notes on diversity. Part I. Introduction.
-*Abstracta Botanica*, 8, 43–55.
+Karger, D.N., et al. (2016). CHELSA climatologies at high resolution for
+the earth’s land surface areas (Version 1.0). *World Data Center for
+Climate*.
 
-Juhász-Nagy, P. (1984b). Spatial dependence of plant populations. Part
-2. A family of new models. *Acta Botanica Hungarica*, 30, 363–402.
+Karger, D.N., et al. (2016). CHELSA climatologies at high resolution for
+the earth’s land surface areas (Version 1.1). *World Data Center for
+Climate*.
 
-Juhász-Nagy, P. (1993). Notes on compositional diversity.
-*Hydrobiologia*, 249, 173–182.
+Karger, D.N., et al. (2018). Data from: Climatologies at high resolution
+for the earth’s land surface areas. *EnviDat*.
