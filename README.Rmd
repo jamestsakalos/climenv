@@ -85,7 +85,7 @@ devtools::install_github("jamestsakalos/climenv", build_vignettes = TRUE)
 
 This is a basic example which shows you how to use the main climenv function:
 
-```{r example}
+```{r fig1, fig.width = 16, fig.height = 8, fig.align = "center"}
 library(climenv)
 
 # Step 1. Import the Sibillini National Park Boundary
@@ -97,11 +97,12 @@ library(climenv)
 data("it_data")
 
 # Step 4. Visualise the climatic envelope using a Holdridge diagram
-p1 <- plot_h(data = it_data, location_g = "MED")
-p2 <- plot_h(data = it_data, location_g = "NEM")
+p1 <- plot_h(data = it_data, "MED") + ggplot2::ggtitle("Mediterranean biome")
+p2 <- plot_h(data = it_data, "NEM") + ggplot2::ggtitle("Nemoral biome")
 gridExtra::grid.arrange(p1, p2, ncol = 2)
 
 ```
+
 
 The package vignette provides detailed explanation and demonstration on
 the application of climenv.

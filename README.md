@@ -97,12 +97,12 @@ library(climenv)
 data("it_data")
 
 # Step 4. Visualise the climatic envelope using a Holdridge diagram
-p1 <- plot_h(data = it_data, location_g = "MED")
-p2 <- plot_h(data = it_data, location_g = "NEM")
+p1 <- plot_h(data = it_data, "MED") + ggplot2::ggtitle("Mediterranean biome")
+p2 <- plot_h(data = it_data, "NEM") + ggplot2::ggtitle("Nemoral biome")
 gridExtra::grid.arrange(p1, p2, ncol = 2)
 ```
 
-<img src="man/figures/README-example-1.png" width="100%" />
+<img src="man/figures/README-fig1-1.png" width="100%" style="display: block; margin: auto;" />
 
 The package vignette provides detailed explanation and demonstration on
 the application of climenv.
