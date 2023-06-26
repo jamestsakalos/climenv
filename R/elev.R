@@ -1,52 +1,35 @@
-.elev_geodata <- function(loc) {
+.elev_geodata <- function(location, output_dir) {
 
-  # Read in the SRTM tiles
-  srtm_tiles <- climenv::srtm_tiles
-
-  # Make a bounding box around the location
-  bbox <- matrix(terra::ext(terra::vect(loc))[c(1, 3, 2, 4)], 2, 2)
-  x <- c(bbox[1, 1], bbox[1, 1], bbox[1, 2], bbox[1, 2], bbox[1, 1])
-  y <- c(bbox[2, 1], bbox[2, 2], bbox[2, 2], bbox[2, 1], bbox[2, 1])
-  p <- sp::Polygon(cbind(x, y))
-  ps <- sp::Polygons(list(p), "p1")
-  loc <- sp::SpatialPolygons(list(ps), 1L,
-                             proj4string = terra::crs(srtm_tiles))
+  # create SRTM tiles
+  rs <- terra::rast(nrows = 24, ncols = 72,
+                    xmin = -180, xmax = 180,
+                    ymin = -60, ymax = 60)
+  rs[] <- 1:1728
 
   # Intersect location and tiles
-  intersects <- terra::intersect(terra::vect(loc), terra::vect(srtm_tiles))
-  tiles <- srtm_tiles[srtm_tiles$FID %in% intersects$FID, ]
+  tiles <- unique(terra::extract(rs, terra::vect(location))$lyr.1)
+  srtm_points <- terra::xyFromCell(rs, tiles)
 
-  # Download and merge the SRTM tiles
+  # Make an empty list to fill
   srtm_list <- list()
 
-  for (i in seq_along(tiles)) {
+  # lats
+  lats <- srtm_points[, "y"]
 
-    srtm_temp <- tempfile()
+  # Downloads the tiles and stores into that list
+  for (pts in 1:seq_along(lats)) {
 
-    # for  lat >= -60 & lat <= 60
-
-    lon <- terra::ext(terra::vect(tiles[i, ]))[c(1)] +
-      (terra::ext(terra::vect(tiles[i, ]))[c(2)] -
-         terra::ext(terra::vect(tiles[i, ]))[c(1)]) / 2
-
-    lat <- terra::ext(terra::vect(tiles[i, ]))[c(3)] +
-      (terra::ext(terra::vect(tiles[i, ]))[c(4)] -
-         terra::ext(terra::vect(tiles[i, ]))[c(3)]) / 2
-
-    tile <- try(
-      geodata::elevation_3s(lon = lon,
-                            lat = lat,
-                            path = srtm_temp,
-                            cacheOK = FALSE)
+    tile <- geodata::elevation_3s(
+      lon = srtm_points[pts, "x"], lat = srtm_points[pts, "y"],
+      path = tempfile()
     )
 
-    srtm_list[[i]] <- tile
+    srtm_list[[pts]] <- tile
 
   }
 
-  # Mosaic tiles
-  srtm_mosaic <- NULL
-  if (length(tiles) > 1) {
+  # Mosaic the tiles in the list
+  if (length(lats) > 1) {
     srtm_list$fun <- mean
     srtm_mosaic <- do.call(terra::mosaic, srtm_list)
   } else {
@@ -62,7 +45,7 @@
 #' latitudes between -60 and 60 or Mapzen's synthesis digital elevation product.
 #'
 #' @template output_dir_param
-#' @template output_loc_param
+#' @template output_location_param
 #' @template output_e_source_param
 #'
 #' @return
@@ -97,7 +80,7 @@
 #' # Start by loading Italy's Mount Sibillini National Park boundary
 #' data("Sibillini_py", package = "climenv")
 #' # elevation will be saved in the output_dir (i.e. output directory)
-#'    elev(output_dir = "...Desktop/elev", loc = Sibillini_py)
+#'    elev(output_dir = "...Desktop/elev", location = Sibillini_py)
 #' }
 #' @importFrom elevatr get_elev_raster
 #' @importFrom geodata elevation_3s
@@ -105,42 +88,37 @@
 #' @importFrom sp Polygon Polygons SpatialPolygons
 #' @importFrom terra crs ext intersect mosaic rast vect project
 #' @export
-elev <- function(output_dir, loc, e_source = "mapzen") {
+elev <- function(output_dir, location, e_source = "mapzen") {
 
-  if (is.na(match(e_source, c("mapzen", "geodata"))))
-    stop("e_source must be one of mapzen or geodata")
+  stopifnot(e_source %in% c("mapzen", "geodata"))
 
   # Convert sf locations to SP
-  if (("sf" %in% class(loc)) || ("sfc" %in% class(loc))) {
-    loc <- sf::as_Spatial(loc)
+  if (("sf" %in% class(location)) || ("sfc" %in% class(location))) {
+    location <- sf::as_Spatial(location)
   }
 
   # Create elev folder
-  if (!dir.exists(paste0(output_dir))) {
-    dir.create(paste0(output_dir),
+  if (!dir.exists(paste0(output_dir, "/elev"))) {
+    dir.create(paste0(output_dir, "/elev"),
                recursive = TRUE, showWarnings = FALSE)
-  } else {
-    file.remove(list.files(paste0(output_dir),
-                           include.dirs = FALSE, full.names = TRUE,
-               recursive = TRUE))
   }
 
   # Saves elevation from geodata or mapzen sources
   switch(e_source,
          "geodata" = {
-           srtm_mosaic <- .elev_geodata(loc = loc)
-           file_path <- paste0(output_dir, "/srtm.tif")
+           srtm_mosaic <- .elev_geodata(location = location)
+           file_path <- paste0(output_dir, "/elev/srtm.tif")
            terra::writeRaster(srtm_mosaic, filename = file_path,
                               overwrite = TRUE)
          },
          "mapzen" = {
            srtm_mosaic <- terra::rast(
              elevatr::get_elev_raster(
-               loc, z = 7, override_size_check = TRUE,
+               location, z = 7, override_size_check = TRUE,
                progress = FALSE
              )
            )
-           file_path <- paste0(output_dir, "/srtm.tif")
+           file_path <- paste0(output_dir, "/elev/srtm.tif")
            terra::writeRaster(srtm_mosaic, filename = file_path,
                               overwrite = TRUE)
          }
