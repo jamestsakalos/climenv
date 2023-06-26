@@ -4,6 +4,9 @@
     <loc>/404.html</loc>
   </url>
   <url>
+    <loc>/articles/Italian_Biomes.html</loc>
+  </url>
+  <url>
     <loc>/articles/climenv.html</loc>
   </url>
   <url>
@@ -14,12 +17,6 @@
   </url>
   <url>
     <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Sibillini_pt.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Sibillini_py.html</loc>
   </url>
   <url>
     <loc>/reference/ce_download.html</loc>
@@ -50,12 +47,6 @@
   </url>
   <url>
     <loc>/reference/plot_wl.html</loc>
-  </url>
-  <url>
-    <loc>/reference/s_data.html</loc>
-  </url>
-  <url>
-    <loc>/reference/srtm_tiles.html</loc>
   </url>
   <url>
     <loc>/reference/worldclim.html</loc>
