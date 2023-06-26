@@ -1,3 +1,2 @@
-#' @param c_source Character. Climatic data source, must be either `"CHELSA"` or
-#' `"WorldClim"` (default). MS: We should support partial, case-insensitive
-#' matching.
+#' @param c_source Character (e.g., `"CHELSA or WorldClim"`). Indicating the
+#' climate data source.

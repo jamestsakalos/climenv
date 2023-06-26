@@ -4,30 +4,28 @@
 \alias{chelsa}
 \title{Download CHELSA climate data}
 \usage{
-chelsa(output_dir = NULL, mode = "wb", quiet = FALSE, var = NULL)
+chelsa(output_dir = NULL, var = "all", mode = "wb", quiet = FALSE, ...)
 }
 \arguments{
 \item{output_dir}{Character (e.g., \code{"../Desktop/chelsa"}). Pathway to where
 the data will be stored.}
 
-\item{mode}{Character. See documentation in \code{\link[=download.file]{download.file()}}.}
-
-\item{quiet}{Logical. If TRUE, suppress status messages (if any), and the
-progress bar.}
-
 \item{var}{Character. If supplied will download a subset of the climate data.
-Must be one of \code{"ALL"} (default), \code{"prec"}, \code{"tmax"}, \code{"tmin"} or \code{"tmean"}
+Must be one of \code{"all"} (default), \code{"prec"}, \code{"tmax"}, \code{"tmin"} or \code{"tmean"}
 to download the corresponding climate data.}
+
+\item{quiet, mode, \dots}{Arguments to control a download from the Internet
+\code{download.file()}.}
 }
 \value{
 Returns four subfolders named prec, tmax, tmin and tmean. Each folder
 contains 12 GeoTiff (.tif) files, one for each month of the year for the time
 period 1981–2010. Each of the files are downloaded at a spatial
-resolution of 30 arc seconds (~1 km sq.). The precipitation folder contains
-average monthly precipitation (mm). The tmax folder contains maximum monthly
-temperature. The tmin folder contains minimum monthly temperature. The tmean
-folder contains the average monthly temperature. The unit of measure for
-temperature is in °C.
+resolution of 30 arc seconds (∼1 km sq.). The precipitation folder
+contains average monthly precipitation (mm). The tmax folder contains maximum
+monthly temperature. The tmin folder contains minimum monthly temperature.
+The tmean folder contains the average monthly temperature. The unit of
+measure for temperature is in °C.
 }
 \description{
 \code{chelsa()} downloads the CHELSA (Climatologies at high resolution for the
@@ -36,7 +34,18 @@ resolution of 30 arc sections.
 }
 \examples{
 \dontrun{
-   chelsa(output_dir = "...Desktop/Chelsa", quiet = FALSE)
+
+# Download time will depend on the size of the area you wish to access
+# climate data for and your internet connection speed.
+
+# Download the WorldClim data
+chelsa(
+  output_dir = "...Desktop/chelsa"
+)
+
+# Note that unlike worldclim() we do not specify the location argument
+# because it is not yet possible to extract smaller tile sections
+
 }
 }
 \references{

@@ -84,12 +84,11 @@ temp_path <- tempfile()
 
 # Create the  sub-folders
 dir.create(file.path(temp_path, "elev"), recursive = TRUE)
-on.exit(unlink(file.path(temp_path, "elev")))
-dir.create(file.path(temp_path, "clim/prec"), recursive = TRUE)
-dir.create(file.path(temp_path, "clim/tmax"), recursive = TRUE)
-dir.create(file.path(temp_path, "clim/tmean"), recursive = TRUE)
-dir.create(file.path(temp_path, "clim/tmin"), recursive = TRUE)
-on.exit(unlink(file.path(temp_path, "clim")), add = TRUE)
+dir.create(file.path(temp_path, "prec"), recursive = TRUE)
+dir.create(file.path(temp_path, "tmax"), recursive = TRUE)
+dir.create(file.path(temp_path, "tavg"), recursive = TRUE)
+dir.create(file.path(temp_path, "tmin"), recursive = TRUE)
+on.exit(unlink(file.path(temp_path)), add = TRUE)
 
 # Create a empty raster serving as a base
 r <- terra::rast(ncol = 10, nrow = 10)
@@ -105,7 +104,7 @@ x<-c(5,10,15,20,25,34.40666,25,20,15,10,5,0)*8
 temp2<-paste0("prec_", sprintf("%02d", 1:12), ".tif")
 for (i in seq_along(temp2)) {
   terra::values(r) <- x[i]
-  terra::writeRaster(r, paste0(temp_path, "/clim/prec/", temp2[i]))
+  terra::writeRaster(r, paste0(temp_path, "/prec/", temp2[i]))
 }
 
 # tmax
@@ -113,7 +112,7 @@ x<-c(43,38,33,29,25,19.8,17.01,21,25,30,37,44)
 temp2<-paste0("tmax_", sprintf("%02d", 1:12), ".tif")
 for(i in 1:length(temp2)){
   values(r)<-x[i]
-  writeRaster(r, paste0(temp_path, "/clim/tmax/",temp2[i]))
+  writeRaster(r, paste0(temp_path, "/tmax/",temp2[i]))
 }
 
 # tmin
@@ -121,7 +120,7 @@ x<-c(43,38,33,29,25,19.8,17.01,21,25,30,37,44)/2
 temp2<-paste0("tmin_", sprintf("%02d", 1:12), ".tif")
 for(i in 1:length(temp2)){
   values(r)<-x[i]
-  writeRaster(r, paste0(temp_path, "/clim/tmin/",temp2[i]))
+  writeRaster(r, paste0(temp_path, "/tmin/",temp2[i]))
 }
 
 # tmean
@@ -129,7 +128,7 @@ x<-c(43,38,33,29,25,19.8,17.01,21,25,30,37,44)-c(c(43,38,33,29,25,19.8,17.01,21,
 temp2<-paste0("tavg_", sprintf("%02d", 1:12), ".tif")
 for(i in 1:length(temp2)){
   values(r)<-x[i]
-  writeRaster(r, paste0(temp_path, "/clim/tmean/",temp2[i]))
+  writeRaster(r, paste0(temp_path, "/tavg/",temp2[i]))
 }
 
 # Create a polygon file from the raster
@@ -164,13 +163,11 @@ transformation allows for a metric buffer to be added to the polygon.
 ```{r}
 # Extract the climate data
 
-data_py<-ce_extract(file.path(temp_path, "clim"),
-                    file.path(temp_path, "elev"),
+data_py<-ce_extract(file.path(temp_path),
                     location = pol_py, location_g = NULL,
                     c_source = "WorldClim")
 
-data_pt<-ce_extract(file.path(temp_path, "clim"),
-                    file.path(temp_path, "elev"),
+data_pt<-ce_extract(file.path(temp_path),
                     location = pol_pt, location_g = NULL,
                     c_source = "WorldClim")
 ```

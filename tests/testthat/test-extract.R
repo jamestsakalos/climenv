@@ -9,14 +9,12 @@ test_that("ce_extract() works", {
   temp_path <- tempfile()
 
   # Create the required subdirectories
-  dir.create(file.path(temp_path, "elev"), recursive = TRUE)
-  on.exit(unlink(file.path(temp_path, "elev")))
-
-  dir.create(file.path(temp_path, "clim/prec"), recursive = TRUE)
-  dir.create(file.path(temp_path, "clim/tmax"), recursive = TRUE)
-  dir.create(file.path(temp_path, "clim/tmean"), recursive = TRUE)
-  dir.create(file.path(temp_path, "clim/tmin"), recursive = TRUE)
-  on.exit(unlink(file.path(temp_path, "clim")), add = TRUE)
+  dir.create(file.path(temp_path, "/elev"), recursive = TRUE)
+  dir.create(file.path(temp_path, "/prec"), recursive = TRUE)
+  dir.create(file.path(temp_path, "/tmax"), recursive = TRUE)
+  dir.create(file.path(temp_path, "/tavg"), recursive = TRUE)
+  dir.create(file.path(temp_path, "/tmin"), recursive = TRUE)
+  on.exit(unlink(file.path(temp_path)), add = TRUE)
 
   # Create a empty raster serving as a base
   r <- terra::rast(ncol = 10, nrow = 10)
@@ -33,7 +31,7 @@ test_that("ce_extract() works", {
 
   for (i in seq_along(temp2)) {
     terra::values(r) <- c(rep(x[i], 50), rep(x[i] + 1, 50))
-    terra::writeRaster(r, paste0(temp_path, "/clim/prec/", temp2[i]))
+    terra::writeRaster(r, paste0(temp_path, "/prec/", temp2[i]))
   }
 
   #* tmax ####
@@ -41,7 +39,7 @@ test_that("ce_extract() works", {
   temp2 <- paste0("tmax_", sprintf("%02d", 1:12), ".tif")
   for (i in seq_along(temp2)) {
     terra::values(r) <- c(rep(x[i], 50), rep(x[i] + 1, 50))
-    terra::writeRaster(r, paste0(temp_path, "/clim/tmax/", temp2[i]))
+    terra::writeRaster(r, paste0(temp_path, "/tmax/", temp2[i]))
   }
 
   #* tmin ####
@@ -49,16 +47,16 @@ test_that("ce_extract() works", {
   temp2 <- paste0("tmin_", sprintf("%02d", 1:12), ".tif")
   for (i in seq_along(temp2)) {
     terra::values(r) <- c(rep(x[i], 50), rep(x[i] + 1, 50))
-    terra::writeRaster(r, paste0(temp_path, "/clim/tmin/", temp2[i]))
+    terra::writeRaster(r, paste0(temp_path, "/tmin/", temp2[i]))
   }
 
-  #* tmean ####
+  #* tavg ####
   x <- c(43, 38, 33, 29, 25, 19.8, 17.01, 21, 25, 30, 37, 44) -
     c(c(43, 38, 33, 29, 25, 19.8, 17.01, 21, 25, 30, 37, 44) / 2) / 2
   temp2 <- paste0("tavg_", sprintf("%02d", 1:12), ".tif")
   for (i in seq_along(temp2)) {
     terra::values(r) <- c(rep(x[i], 50), rep(x[i] + 1, 50))
-    terra::writeRaster(r, paste0(temp_path, "/clim/tmean/", temp2[i]))
+    terra::writeRaster(r, paste0(temp_path, "/tavg/", temp2[i]))
   }
 
   # Create a polygon file from the raster
@@ -76,18 +74,19 @@ test_that("ce_extract() works", {
 
   #* default messages when no id provided ####
   expect_message({
-    data_py <- ce_extract(dir_clim = file.path(temp_path, "clim"),
-                    dir_elev = file.path(temp_path, "elev"),
-                    location = pol_py, location_g = NULL,
-                    c_source = "WorldClim", var = "ALL")
+    data_py <- ce_extract(
+      path = file.path(temp_path),
+      location = pol_py, location_g = NULL,
+      c_source = "WorldClim", var = "all"
+    )
   })
 
   #* length / names of output data.frames ####
-  expect_named(data_py, c("tmean_m", "tmean_sd", "tmin_m", "abmt", "tmin_sd",
+  expect_named(data_py, c("tavg_m", "tavg_sd", "tmin_m", "abmt", "tmin_sd",
                           "tmax_m", "tmax_sd", "prec_m", "prec_sd",
                           "elev", "lat", "Readme"))
   #* nr. of observations ####
-  expect_length(data_py$tmean_m[, 1], 100) # One for each value, pt
+  expect_length(data_py$tavg_m[, 1], 100) # One for each value, pt
   #* Elev values are what I expect ####
   expect_equal(data_py$elev, data.frame(row.names = as.character(0:99),
                                         mean = c(1:100),
@@ -97,18 +96,19 @@ test_that("ce_extract() works", {
 
   #* !default messages when id provided ####
   expect_no_message({
-    data_py <- ce_extract(dir_clim = file.path(temp_path, "clim"),
-                               dir_elev = file.path(temp_path, "elev"),
-                               location = pol_py, location_g = "grp",
-                               c_source = "WorldClim", var = "ALL")
+    data_py <- ce_extract(
+      path = file.path(temp_path),
+      location = pol_py, location_g = "grp",
+      c_source = "WorldClim", var = "all"
+    )
   })
 
   #* length / names of output data.frames ####
-  expect_named(data_py, c("tmean_m", "tmean_sd", "tmin_m", "abmt", "tmin_sd",
+  expect_named(data_py, c("tavg_m", "tavg_sd", "tmin_m", "abmt", "tmin_sd",
                           "tmax_m", "tmax_sd", "prec_m", "prec_sd",
                           "elev", "lat", "Readme"))
   #* nr. of observations ####
-  expect_length(data_py$tmean_m[, 1], 2) # One for each group
+  expect_length(data_py$tavg_m[, 1], 2) # One for each group
   #* Elev values are what I expect ####
   expect_equal(data_py$elev,
                data.frame(row.names = as.factor(c("high", "low")),
@@ -119,34 +119,30 @@ test_that("ce_extract() works", {
 
   #* !default messages when id provided ####
   expect_no_message({
-    data_py <- ce_extract(dir_clim = file.path(temp_path, "clim"),
-                               dir_elev = NULL,
-                               location = pol_py, location_g = "grp",
-                               c_source = "WorldClim", var = "ALL")
+    data_py <- ce_extract(
+      path = file.path(temp_path),
+      location = pol_py, location_g = "grp",
+      c_source = "WorldClim", var = c("tavg", "tmin", "tmax", "prec")
+    )
   })
 
   #* length / names of output data.frames ####
-  expect_named(data_py, c("tmean_m", "tmean_sd", "tmin_m", "abmt", "tmin_sd",
+  expect_named(data_py, c("tavg_m", "tavg_sd", "tmin_m", "abmt", "tmin_sd",
                           "tmax_m", "tmax_sd", "prec_m", "prec_sd", "lat",
                           "Readme"))
+
   #* nr. of observations ####
-  expect_length(data_py$tmean_m[, 1], 2) # One for each group
+  expect_length(data_py$tavg_m[, 1], 2) # One for each group
   #* Tmin values are what I expect ####
   expect_named(data_py$tmin_m)
   expect_equal(data_py$tmin_m$Jan, c(22.16667 - 3.97e-06, 21.5))
 
-  #* var error ####
-  expect_error({
-    ce_extract(dir_clim = file.path(temp_path, "clim"),
-                    dir_elev = file.path(temp_path, "elev"),
-                    location = pol_py, location_g = NULL,
-                    c_source = "WorldClim", var = NULL)
-  })
+  data_py <- ce_extract(
+    path = file.path(temp_path),
+    location = pol_py, location_g = "grp",
+    c_source = "WorldClim", var = "prec"
+  )
 
-  data_py <- ce_extract(dir_clim = file.path(temp_path, "clim"),
-                             dir_elev = file.path(temp_path, "elev"),
-                             location = pol_py, location_g = "grp",
-                             c_source = "WorldClim", var = "prec")
   #* length / names of output data.frames ####
   expect_named(data_py, c("prec_m", "prec_sd", "lat", "Readme"))
 
@@ -156,18 +152,19 @@ test_that("ce_extract() works", {
 
   #* default messages when no id provided ####
   expect_message({
-    data_pt <- ce_extract(dir_clim = file.path(temp_path, "clim"),
-                               dir_elev = file.path(temp_path, "elev"),
-                               location = pol_pt, location_g = NULL,
-                               c_source = "WorldClim", var = "ALL")
+    data_pt <- ce_extract(
+      path = file.path(temp_path),
+      location = pol_pt, location_g = NULL,
+      c_source = "WorldClim", var = "all"
+    )
   })
 
   #* length / names of output data.frames ####
-  expect_named(data_pt, c("tmean", "tmin", "tmax",
+  expect_named(data_pt, c("tavg", "tmin", "tmax",
                           "prec", "elev", "lat", "Readme"))
 
   #* nr. of observations ####
-  expect_length(data_pt$tmean[, 1], 100) # One for each value, pt
+  expect_length(data_pt$tavg[, 1], 100) # One for each value, pt
   #* Elev values are what I expect ####
   expect_equal(data_pt$elev, data.frame(row.names = as.character(c(0:99)),
                                         mean = c(1:100)))
@@ -176,19 +173,20 @@ test_that("ce_extract() works", {
 
   #* !default messages when id provided ####
   expect_no_message({
-    data_pt <- ce_extract(dir_clim = file.path(temp_path, "clim"),
-                               dir_elev = file.path(temp_path, "elev"),
-                               location = pol_pt, location_g = "grp",
-                               c_source = "WorldClim", var = "ALL")
+    data_pt <- ce_extract(
+      path = file.path(temp_path),
+      location = pol_pt, location_g = "grp",
+      c_source = "WorldClim", var = "all"
+    )
   })
 
   #* length / names of output data.frames ####
-  expect_named(data_pt, c("tmean_m", "tmean_sd", "abmt", "tmin_m", "tmin_sd",
+  expect_named(data_pt, c("tavg_m", "tavg_sd", "abmt", "tmin_m", "tmin_sd",
                           "tmax_m", "tmax_sd", "prec_m", "prec_sd",
                           "elev", "lat", "Readme"))
 
   #* nr. of observations ####
-  expect_length(data_pt$tmean_m[, 1], 2) # One for each group
+  expect_length(data_pt$tavg_m[, 1], 2) # One for each group
   #* Elev values are what I expect ####
   expect_equal(data_pt$elev,
                data.frame(row.names = as.character(c("high", "low")),
@@ -199,34 +197,37 @@ test_that("ce_extract() works", {
 
   #* !default messages when id provided ####
   expect_no_message({
-    data_pt <- ce_extract(dir_clim = file.path(temp_path, "clim"),
-                               dir_elev = NULL,
-                               location = pol_pt, location_g = "grp",
-                               c_source = "WorldClim", var = "ALL")
+    data_pt <- ce_extract(
+      path = file.path(temp_path),
+      location = pol_pt, location_g = "grp",
+      c_source = "WorldClim", var = c("tavg", "tmin", "tmax", "prec")
+    )
   })
 
   #* length / names of output data.frames ####
-  expect_named(data_pt, c("tmean_m", "tmean_sd", "abmt", "tmin_m", "tmin_sd",
+  expect_named(data_pt, c("tavg_m", "tavg_sd", "abmt", "tmin_m", "tmin_sd",
                           "tmax_m", "tmax_sd", "prec_m", "prec_sd", "lat",
                           "Readme"))
   #* nr. of observations ####
-  expect_length(data_pt$tmean_m[, 1], 2) # One for each group
+  expect_length(data_pt$tavg_m[, 1], 2) # One for each group
   #* Tmin values are what I expect ####
   expect_named(data_pt$tmin_m)
   expect_equal(data_pt$tmin_m$Jan, c(22.16667, 21.5), tolerance = 1e-3)
 
   #* var error ####
   expect_error({
-    ce_extract(dir_clim = file.path(temp_path, "clim"),
-                    dir_elev = file.path(temp_path, "elev"),
-                    location = pol_pt, location_g = NULL,
-                    c_source = "WorldClim", var = NULL)
+    ce_extract(
+      path = file.path(temp_path),
+      location = pol_pt, location_g = NULL,
+      c_source = "WorldClim", var = "sdf"
+    )
   })
 
-  data_pt <- ce_extract(dir_clim = file.path(temp_path, "clim"),
-                             dir_elev = file.path(temp_path, "elev"),
-                             location = pol_pt, location_g = "grp",
-                             c_source = "WorldClim", var = "prec")
+  data_pt <- ce_extract(
+    path = file.path(temp_path),
+    location = pol_pt, location_g = "grp",
+    c_source = "WorldClim", var = "prec"
+  )
   #* length / names of output data.frames ####
   expect_named(data_pt, c("prec_m", "prec_sd", "lat", "Readme"))
 

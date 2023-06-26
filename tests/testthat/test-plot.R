@@ -11,12 +11,10 @@ test_that("ce_plot() works", {
 
   # Create the required subdirectories
   dir.create(file.path(temp_path, "elev"), recursive = TRUE)
-  on.exit(unlink(file.path(temp_path, "elev")))
-
-  dir.create(file.path(temp_path, "clim/prec"), recursive = TRUE)
-  dir.create(file.path(temp_path, "clim/tmax"), recursive = TRUE)
-  dir.create(file.path(temp_path, "clim/tmean"), recursive = TRUE)
-  dir.create(file.path(temp_path, "clim/tmin"), recursive = TRUE)
+  dir.create(file.path(temp_path, "prec"), recursive = TRUE)
+  dir.create(file.path(temp_path, "tmax"), recursive = TRUE)
+  dir.create(file.path(temp_path, "tavg"), recursive = TRUE)
+  dir.create(file.path(temp_path, "tmin"), recursive = TRUE)
   on.exit(unlink(file.path(temp_path, "clim")), add = TRUE)
 
   # Create a empty raster serving as a base
@@ -34,7 +32,7 @@ test_that("ce_plot() works", {
 
   for (i in seq_along(temp2)) {
     terra::values(r) <- c(rep(x[i], 50), rep(x[i] + 1, 50))
-    terra::writeRaster(r, paste0(temp_path, "/clim/prec/", temp2[i]))
+    terra::writeRaster(r, paste0(temp_path, "/prec/", temp2[i]))
   }
 
   #* tmax ####
@@ -42,7 +40,7 @@ test_that("ce_plot() works", {
   temp2 <- paste0("tmax_", sprintf("%02d", 1:12), ".tif")
   for (i in seq_along(temp2)) {
     terra::values(r) <- c(rep(x[i], 50), rep(x[i] + 1, 50))
-    terra::writeRaster(r, paste0(temp_path, "/clim/tmax/", temp2[i]))
+    terra::writeRaster(r, paste0(temp_path, "/tmax/", temp2[i]))
   }
 
   #* tmin ####
@@ -50,16 +48,16 @@ test_that("ce_plot() works", {
   temp2 <- paste0("tmin_", sprintf("%02d", 1:12), ".tif")
   for (i in seq_along(temp2)) {
     terra::values(r) <- c(rep(x[i], 50), rep(x[i] + 1, 50))
-    terra::writeRaster(r, paste0(temp_path, "/clim/tmin/", temp2[i]))
+    terra::writeRaster(r, paste0(temp_path, "/tmin/", temp2[i]))
   }
 
-  #* tmean ####
+  #* tavg ####
   x <- c(43, 38, 33, 29, 25, 19.8, 17.01, 21, 25, 30, 37, 44) -
     c(c(43, 38, 33, 29, 25, 19.8, 17.01, 21, 25, 30, 37, 44) / 2) / 2
   temp2 <- paste0("tavg_", sprintf("%02d", 1:12), ".tif")
   for (i in seq_along(temp2)) {
     terra::values(r) <- c(rep(x[i], 50), rep(x[i] + 1, 50))
-    terra::writeRaster(r, paste0(temp_path, "/clim/tmean/", temp2[i]))
+    terra::writeRaster(r, paste0(temp_path, "/tavg/", temp2[i]))
   }
 
   # Create a polygon file from the raster
@@ -73,10 +71,9 @@ test_that("ce_plot() works", {
 
   # py tests ####
 
-  data <- ce_extract(dir_clim = file.path(temp_path, "clim"),
-                     dir_elev = file.path(temp_path, "elev"),
+  data <- ce_extract(path = file.path(temp_path),
                      location = pol_py, location_g = "grp",
-                     c_source = "WorldClim", var = "ALL")
+                     c_source = "WorldClim", var = "all")
 
   p <- plot_wl(data = data, location_g = "high")
 
@@ -90,10 +87,9 @@ test_that("ce_plot() works", {
 
   # pt tests ####
 
-  data <- ce_extract(dir_clim = file.path(temp_path, "clim"),
-                     dir_elev = file.path(temp_path, "elev"),
+  data <- ce_extract(path = file.path(temp_path),
                      location = pol_pt, location_g = "grp",
-                     c_source = "WorldClim", var = "ALL")
+                     c_source = "WorldClim", var = "all")
 
   p <- plot_wl(data = data, location_g = "low")
 

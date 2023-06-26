@@ -4,16 +4,16 @@
 \alias{elev}
 \title{Download elevation data}
 \usage{
-elev(output_dir, loc, e_source = "mapzen")
+elev(output_dir, location, e_source = "mapzen")
 }
 \arguments{
 \item{output_dir}{Character (e.g., \code{"../Desktop/chelsa"}). Pathway to where
 the data will be stored.}
 
-\item{loc}{A \code{"sp"}, \code{"sf"} polygon or point object.}
+\item{location}{A \code{"sp"}, \code{"sf"} polygon or point object.}
 
-\item{e_source}{Character. Elevation sourced from \code{"mapzen"} (default) or
-\code{"geodata"}.}
+\item{e_source}{Character (e.g., \code{mapzen} or \code{WorldClim}). Indicating the
+elevation data source.}
 }
 \value{
 Creates one subfolder named elev storing a raster (.tiff). If elevation is
@@ -36,7 +36,7 @@ latitudes between -60 and 60 or Mapzen's synthesis digital elevation product.
 # Start by loading Italy's Mount Sibillini National Park boundary
 data("Sibillini_py", package = "climenv")
 # elevation will be saved in the output_dir (i.e. output directory)
-   elev(output_dir = "...Desktop/elev", loc = Sibillini_py)
+   elev(output_dir = "...Desktop/elev", location = Sibillini_py)
 }
 }
 \references{
