@@ -6,35 +6,31 @@
 \usage{
 ce_download(
   output_dir,
-  c_source = "CHELSA",
+  c_source = "WorldClim",
   e_source = "mapzen",
-  mode = "wb",
-  var = NULL,
-  elev = "mapzen",
-  loc
+  var,
+  location,
+  ...
 )
 }
 \arguments{
 \item{output_dir}{Character (e.g., \code{"../Desktop/chelsa"}). Pathway to where
 the data will be stored.}
 
-\item{c_source}{Character. Climatic data source, must be either \code{"CHELSA"} or
-\code{"WorldClim"} (default). MS: We should support partial, case-insensitive
-matching.}
+\item{c_source}{Character (e.g., \code{"CHELSA or WorldClim"}). Indicating the
+climate data source.}
 
-\item{e_source}{Character. Elevation sourced from \code{"mapzen"} (default) or
-\code{"geodata"}.}
-
-\item{mode}{Character. See documentation in \code{\link[=download.file]{download.file()}}.}
+\item{e_source}{Character (e.g., \code{mapzen} or \code{WorldClim}). Indicating the
+elevation data source.}
 
 \item{var}{Character. If supplied will download a subset of the climate data.
-Must be one of \code{"ALL"} (default), \code{"prec"}, \code{"tmax"}, \code{"tmin"} or \code{"tmean"}
+Must be one of \code{"all"} (default), \code{"prec"}, \code{"tmax"}, \code{"tmin"} or \code{"tmean"}
 to download the corresponding climate data.}
 
-\item{elev}{Character. Elevation source, must be either \code{"mapzen"} (default)
-or \code{"geodata"}.}
+\item{location}{A \code{"sp"}, \code{"sf"} polygon or point object.}
 
-\item{loc}{A \code{"sp"}, \code{"sf"} polygon or point object.}
+\item{\dots}{Arguments to control a download from the Internet
+\code{download.file()}.}
 }
 \value{
 See documentation from \code{\link[=chelsa]{chelsa()}}, \code{\link[=worldclim]{worldclim()}} and
@@ -46,20 +42,18 @@ See documentation from \code{\link[=chelsa]{chelsa()}}, \code{\link[=worldclim]{
 }
 \examples{
 \dontrun{
+# Download time will depend on the size of the area you wish to access
+# climate data for and your internet connection speed.
 
-# Note that the function requires ~13.5 GB of space.
-# Download time will depend on your internet connection speed.
-
-# Import the Sibillini National Park Boundary
-data("Sibillini_py", package = "climenv")
+# Import the Italian Biome data set
+data("it_py", package = "climenv")
 
 # Run the download function
 ce_download(
   output_dir = "../WorkingDirectory",
   c_source = "WorldClim",
-  mode = "wb",
-  elev = "mapzen",
-  loc = Sibillini_py
+  e_source = "mapzen",
+  location = it_py
 )
 
 }

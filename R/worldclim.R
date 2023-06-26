@@ -1,27 +1,82 @@
+.download_dir <- function(clim_points, var, output_dir, ...) {
+
+  # Helper function to download and mosaic the tiles
+
+  # Make an empty list to fill
+  clim_list <- list()
+
+  # lats
+  lats <- clim_points[, "y"]
+
+  # Downloads the tiles and stores into that list
+  for (pts in 1:seq_along(lats)) {
+
+    tile <- geodata::worldclim_tile(
+      var,
+      res = 0.5,
+      lon = clim_points[pts, "x"], lat = clim_points[pts, "y"],
+      path = tempfile(),
+      version = "2.1",
+      mode = mode,
+
+      ...
+    )
+
+    clim_list[[pts]] <- tile
+
+  }
+
+  # Mosaic the tiles in the list
+  if (length(seq_along(lats)) > 1) {
+    clim_list$fun <- mean
+    clim_mosaic <- do.call(terra::mosaic, clim_list)
+  } else {
+    clim_mosaic <- clim_list[[1]]
+  }
+
+  # Name the bands (at this stage, multiband raster)
+  names(clim_mosaic) <- paste(
+    "wc2.1_30s", var, sprintf("%02d", 1:12), sep = "_"
+  )
+
+  # Export the climate mosaic
+  lapply(c(1:12), FUN = function(x){
+    terra::writeRaster(
+      clim_mosaic[[x]],
+      paste0(output_dir, "/", var, "/", names(clim_mosaic)[x], ".tif"),
+      overwrite = TRUE
+    )
+  })
+
+  #terra::writeRaster(clim_mosaic,
+  #                   paste0(output_dir, "/", var, "/", var, ".tif"),
+  #                   overwrite = TRUE)
+
+}
 #' Download WorldClim climate data
 #'
 #' @description
 #' `worldclim()` downloads the WorldClim V2.1 climate data for 1970-2000. This
 #' includes monthly climate data for minimum, mean, and maximum temperature and
-#' precipitation at a resolution of 30 arc sections.
+#' precipitation at a resolution of 0.5 minutes of a degree.
 #'
 #' @template output_dir_param
-#' @template output_mode_param
-#' @template output_quiet_param
-#' @template output_var_param
+#' @template output_location_param
+#' @param var,mode,\dots Arguments to control a download from the Internet
+#' `download.file()`.
 #'
 #' @return
 #' Creates four subfolders named prec, tmax, tmin and tmean. Each folder
-#' contains 12 GeoTiff (.tif) files, one for each month of the year
-#' (January is 1; December is 12) for the time period 1970–2000. Each of the
-#' files are downloaded at a spatial resolution of 30 arc seconds (~1 km  sq.).
-#' The precipitation folder contains average monthly precipitation (mm). The
-#' tmax folder contains maximum monthly temperature. The tmin folder contains
-#' minimum monthly temperature. The tmean folder contains the average monthly
-#' temperature. The unit of measure for temperature is in °C.
+#' contains 12 GeoTiff (.tif) files, one for each month of the year for the time
+#' period 1970&ndash;2000. Each of the files are downloaded at a spatial
+#' resolution of 0.5 minutes of a degree. The precipitation folder contains
+#' average monthly precipitation (mm). The tmax folder contains maximum monthly
+#' temperature. The tmin folder contains minimum monthly temperature. The tmean
+#' folder contains the average monthly temperature. The unit of measure for
+#' temperature is in &deg;C.
 #'
 #' @author James L. Tsakalos
-#' @seealso Downloading from WorldClim V2.1 [`worldclim()`] or a more convenient
+#' @seealso Downloading from CHELSA [`chelsa()`] or a more convenient
 #' function for other climate and elevation data [`ce_download()`].
 #' @references{ Fick, S.E. and R.J. Hijmans. (2017). WorldClim 2: new 1km
 #' spatial resolution climate surfaces for global land areas. International
@@ -30,67 +85,54 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Note that the function requires ~13.5 GB of space.
-#' # Download time will depend on your internet connection speed.
+#' # Download time will depend on the size of the area you wish to access
+#' # climate data for and your internet connection speed.
 #'
-#'    worldclim(output_dir = "...Desktop/worldclim")
+#' # Import the Italian Biome data set
+#' data("it_py", package = "climenv")
+#'
+#' # Download the WorldClim data
+#' worldclim(
+#'   output_dir = "...Desktop/worldclim",
+#'   location = "it_py"
+#' )
+#'
 #' }
 #' @importFrom utils data download.file unzip
 #' @export
-worldclim <- function(output_dir, mode = "wb",
-                      quiet = FALSE, var = NULL) {
+worldclim <- function(output_dir, location, mode = "wb",
+                      var = "all", ...) {
 
-  # Checks the download mode, may need to change depending on operating system
-  if (is.na(match(mode, c("w", "wb", "a", "ab"))))
-    stop("mode must be one of w, wb, a, ab.")
+  # Check the var argument
+  stopifnot(var %in% c("all", "prec", "tmax", "tmin", "tavg"))
 
-  # Checks is user supplied correct climate var to download
-  if (!is.null(var)) {
-    if (is.na(match(var, c("prec", "tmax", "tmin", "tmean"))))
-      stop("var must be one of prec, tmax, tmin, tmean.")
-
-    vars <- c("prec", "tmax", "tmin", "tmean")
+  # If var is NULL, all climate variables can be downloaded.
+  if (var == "all") {
+    var <- c("prec", "tmax", "tmin", "tavg")
   }
 
-  # this is the secure access website path
-  site <- "https://biogeo.ucdavis.edu/data/worldclim/v2.1/base/"
+  # create WorldClim tiles
+  rs <- terra::rast(nrows = 5, ncols = 12,
+                    xmin = -180, xmax = 180,
+                    ymin = -60, ymax = 90)
+  rs[] <- 1:60
 
-  .download_dir <- function(what) {
+  # Intersect location and tiles
+  tiles <- unique(terra::extract(rs, terra::vect(location))$lyr.1)
+  clim_points <- terra::xyFromCell(rs, which(rs[] %in% tiles))
 
-    origOpt <- options(timeout = max(10000, getOption("timeout")))
-
-    dir.create(paste0(output_dir, "/", what),
-               recursive = TRUE, showWarnings = FALSE)
-
-    remote_path <- paste0(site, "wc2.1_30s_", what, ".zip")
-
-    # This part checks if the files have downloaded correctly
-    # Or if the file is already containing the desired files
-    if (file.size(paste0(output_dir, "/", what)) != 4096) {
-      # !file.size(...) is `FALSE` (!)
-      temp_path <- tempfile()
-      # MS: Can we fail informatively here?
-      tryCatch(
-        download.file(
-          remote_path,
-          destfile = temp_path, mode = mode,
-          cacheOK = FALSE, quiet = quiet
-        ),
-        error = function(e) message("Could not download from URL ", remote_path)
-      )
-      on.exit(unlink(temp_path))
-      on.exit(options(origOpt))
-      unzip(temp_path, exdir = paste0(output_dir, "/", what))
-    }
-
-    # Returning `TRUE` on success or `FALSE` on failure.
-    ifelse(file.size(paste0(output_dir, "/", what)) == 4096,
-           print(paste0(what, ": TRUE")),
-           print(paste0(what, ": FALSE")))
-
+  # Make the folders
+  for (path in var) {
+    if (!dir.exists(paste0(output_dir, "/", path)))
+      dir.create(paste0(output_dir, "/", path),
+                 recursive = TRUE, showWarnings = FALSE)
   }
 
   # This runs through every variable which is supplied
-  lapply(vars, .download_dir)
+  invisible(
+    lapply(var, FUN = function(x) {
+      .download_dir(clim_points, var = x, output_dir, ...)
+    })
+  ) # The invisible part stops lapply from printing to console
 
 }

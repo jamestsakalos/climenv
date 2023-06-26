@@ -7,10 +7,10 @@
 #' @template output_dir_param
 #' @template output_c_source_param
 #' @template output_e_source_param
-#' @template output_mode_param
 #' @template output_var_param
-#' @template output_elev_param
-#' @template output_loc_param
+#' @template output_location_param
+#' @param \dots Arguments to control a download from the Internet
+#' `download.file()`.
 #'
 #' @return
 #' See documentation from [`chelsa()`], [`worldclim()`] and
@@ -22,36 +22,33 @@
 #'
 #' @examples
 #' \dontrun{
+#' # Download time will depend on the size of the area you wish to access
+#' # climate data for and your internet connection speed.
 #'
-#' # Note that the function requires ~13.5 GB of space.
-#' # Download time will depend on your internet connection speed.
-#'
-#' # Import the Sibillini National Park Boundary
-#' data("Sibillini_py", package = "climenv")
+#' # Import the Italian Biome data set
+#' data("it_py", package = "climenv")
 #'
 #' # Run the download function
 #' ce_download(
-# MS: Indented for readability
 #'   output_dir = "../WorkingDirectory",
 #'   c_source = "WorldClim",
-#'   mode = "wb",
-#'   elev = "mapzen",
-#'   loc = Sibillini_py
+#'   e_source = "mapzen",
+#'   location = it_py
 #' )
 #'
 #' }
 #' @export
 ce_download <- function(
     output_dir,
-    c_source = "CHELSA",
+    c_source = "WorldClim",
     e_source = "mapzen",
-    mode = "wb", var = NULL,
-    elev = "mapzen", loc) {
+    var,
+    location, ...) {
 
   if (missing(output_dir))
     stop("Set output directory")
 
-  if (missing(loc))
+  if (missing(location))
     stop("Set spatial location for sourcing elevation data")
 
   # Partial, case-insensitive matching
@@ -60,16 +57,18 @@ ce_download <- function(
 
   # Download CHELSA
   if ("CHELSA" %in% toupper(c_source)) {
-    chelsa(output_dir = output_dir, mode = mode, quiet = TRUE, var = var)
+    chelsa(output_dir = output_dir, var = var, ...)
   }
 
-  # Download Worldclim
+  # Download WorldClim
   if ("WORLDCLIM" %in% toupper(c_source)) {
-    worldclim(output_dir = output_dir, quiet = TRUE, var = var)
+    worldclim(output_dir = output_dir, location = location, var = var, ...)
   }
 
   # Download elevation
-  elev(output_dir = output_dir, loc = loc,
-       source = e_source)
+  if (!is.null(e_source)) {
+    elev(output_dir = output_dir, location = location,
+         e_source = e_source)
+  }
 
 }

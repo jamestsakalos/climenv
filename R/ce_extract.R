@@ -1,35 +1,17 @@
 .clim_extract <- function(which_clim, location,
                           location_type, location_g,
-                          sd, result, c_source, dir_clim, dir_elev) {
+                          sd, result, c_source, path) {
 
-  file_path <- paste0(dir_clim, "/", which_clim)
+  # Pathway to the files
+  file_path <- paste0(path, "/", which_clim)
 
-  if (isTRUE(which_clim == "elev") && !is.null(dir_elev)) {
-    raster_files <- list.files(path = dir_elev, pattern = "\\.tif$",
-                               all.files = FALSE, full.names = TRUE)
-    # What happens in case `which_clim == "elev" && is.null(dir_elev)`?
-
-  } else {
-
-    switch( # Why switch when all outputs are the same?
-      c_source,
-      "CHELSA" = {
-        raster_files <- list.files(path = file_path, pattern = "\\.tif$",
-                                   all.files = FALSE, full.names = TRUE)
-      },
-      "WorldClim" = {
-        raster_files <- list.files(path = file_path, pattern = "\\.tif$",
-                                   all.files = FALSE, full.names = TRUE)
-      }
+  # raster stack
+  cstack <- terra::rast(
+    list.files(
+      path = file_path, pattern = "\\.tif$",
+      all.files = FALSE, full.names = TRUE
     )
-
-  }
-
-  ### raster stack
-  cstack <- terra::rast(raster_files)
-
-  # Only one band in elev, while the others are stacks and need naming
-  if (!isTRUE(which_clim == "elev")) names(cstack) <- month.abb
+  )
 
   # set the switch
   expr <- paste(location_type, sd)
@@ -39,7 +21,7 @@
     "SpatialPointsDataFrame FALSE" = {
 
       if (!which_clim == "elev") {
-
+        names(cstack) <- month.abb
         extract_m <- terra::extract(cstack, terra::vect(location))
         extract_m$ID <- as.factor(location[[location_g]])
         colnames(extract_m)[1] <- "id"
@@ -63,7 +45,7 @@
     "SpatialPointsDataFrame TRUE" = {
 
       if (!which_clim == "elev") {
-
+        names(cstack) <- month.abb
         extract_m <- terra::extract(cstack, terra::vect(location))
         extract_m$ID <- as.factor(location[[location_g]])
         names(extract_m)[names(extract_m) == "ID"] <- "location_g"
@@ -119,7 +101,7 @@
     "SpatialPolygonsDataFrame FALSE" = {
 
       if (!which_clim == "elev") {
-
+        names(cstack) <- month.abb
         extract_m <- exactextractr::exact_extract(
           cstack, location, "mean", progress = FALSE
         )
@@ -169,7 +151,7 @@
     "SpatialPolygonsDataFrame TRUE" = {
 
       if (!which_clim == "elev") {
-
+        names(cstack) <- month.abb
         extract_m <- exactextractr::exact_extract(
           cstack, location, "mean", progress = FALSE
         )
@@ -214,6 +196,7 @@
 }
 
 .spat_helper <- function(location) {
+
   # Convert sf locations to SP
   if (inherits(location, c("sf", "sfc"))) {
     location <- sf::as_Spatial(sf::st_zm(location))
@@ -225,43 +208,42 @@
 .c_source_helper <- function(c_source) {
   # Check if the c_source argument is correct.
   # Using partial, case-insensitive matching.
-  if (is.na(pmatch(toupper(c_source), c("CHELSA", "WORLDCLIM"))))
-    stop("c_source must be either CHELSA, WorldClim") else {
-      return(c_source)
-    }
-}
-
-.var_helper <- function(var) {
-  # Check if the var argument is correct.
-  if (is.na(match(var, c("ALL", "prec", "tmax", "tmean", "tmin")))) {
-    stop("var must be either ALL, prec, tmax, tmean, tmin")
+  if (is.na(pmatch(toupper(c_source), c("CHELSA", "WORLDCLIM")))) {
+    stop("c_source must be either CHELSA, WorldClim")
   } else {
-    return(var)
+    return(c_source)
   }
 }
 
-.dir_helper <- function(var, dir_clim, dir_elev) {
-  # Checks if the dir_clim and dir_elev arguments are correct.
+.dir_helper <- function(var, path) {
 
-  if(var == "ALL"){
+  # Checks if the dir contains the correct folders.
+
+  if (var == "ALL") {
 
     # Checks to make sure that all climate folders are there
-    if (!all(c("prec", "tmax", "tmean", "tmin") %in% list.files(dir_clim))) {
-      stop("dir_clim must contain prec, tmax, tmean, tmin subfolders")
+    if (!all(c("prec", "tmax", "tavg", "tmin", "elev") %in% list.files(path))) {
+      stop("path must contain prec, tmax, tavg, tmin and elev subfolders")
     }
 
-    if (!is.null(dir_elev) && !length(list.files(dir_elev)) >= 1 ) {
-      stop("dir_elev is empty, or contains too many files")
-    }
-
-    # Checks that there are 12 rasters in each subfolder
+    # Checks that there are 12 rasters in each climate subfolder
     invisible(lapply(
-      list.files(dir_clim),
-      FUN = function(x){
-        rast_nr <- length(list.files(paste0(dir_clim, "/", x)))
-        rast_nr <- 12
-        if(!rast_nr == 12) {
+      list.files(path)[list.files(path) %in% c("prec", "tavg", "tmax", "tmin")],
+      FUN = function(x) {
+        rast_nr <- length(list.files(paste(path, x, sep = "/")))
+        if (!rast_nr == 12) {
           stop(paste(x, "contains", rast_nr, "files out of 12"))
+        }
+      }
+    ))
+
+    # Checks that there is 1 raster in each the elev folder
+    invisible(lapply(
+      list.files(path)[list.files(path) == "elev"],
+      FUN = function(x) {
+        rast_nr <- length(list.files(paste(path, x, sep = "/")))
+        if (!rast_nr == 1) {
+          stop(paste(x, "contains", rast_nr, "files out of 1"))
         }
       }
     ))
@@ -269,17 +251,17 @@
   }
 
   # Check each climate folder (if only one is supplied)
-  if(sum(var %in% c("prec", "tmax", "tmean", "tmin")) > 0) {
+  if (sum(var %in% c("prec", "tmax", "tavg", "tmin")) > 0) {
 
-    for(subfolder in seq_along(var)) {
+    for (subfolder in seq_along(var)) {
 
-      rast_nr <- length(list.files(paste0(dir_clim, "/", var[subfolder])))
+      rast_nr <- length(list.files(paste0(path, "/", var[subfolder])))
 
-      if(!rast_nr > 0) {
+      if (!rast_nr > 0) {
         stop(paste("Subfolder does not exist for", var[subfolder]))
       }
 
-      if(!rast_nr == 12) {
+      if (!rast_nr == 12) {
         stop(paste(x, "contains", rast_nr, "files out of 12"))
       }
 
@@ -304,7 +286,6 @@
     )
     message("Defaulting to a unique id for each polygon or point object")
     location$Name <- location$id
-    #location_g <- "id"
 
     location_checks <- list("location" = location,
                             "location_g" = "id",
@@ -351,8 +332,7 @@
 #' Extracts climate and/or elevation data for generated over an area or at fixed
 #' point/s.
 #'
-#' @template output_dir_clim_param
-#' @template output_dir_elev_param
+#' @template output_path_param
 #' @template output_location_param
 #' @template output_location_g_param
 #' @template output_c_source_param
@@ -362,7 +342,7 @@
 #' Returns a list storing matrices containing the mean and standard deviation
 #' of the climate and/or elevation data. Each column represents a month, each
 #' row represents a feature of the \code{location} \code{sp}, \code{sf} polygon
-#' or point object. Values returned are either degrees Celsius for (tmax, tmean,
+#' or point object. Values returned are either degrees Celsius for (tmax, tavg,
 #' tmin) or mm (prec).
 #'
 #' @author James L. Tsakalos
@@ -377,8 +357,7 @@
 #' data("Sibillini_py")
 #' # Run the download function
 #' ce_extract(
-#'   dir_clim = "../WorkingDirectory/CHELSA",
-#'   dir_elev = "../WorkingDirectory/elev",
+#'   path = "../WorkingDirectory",
 #'   location = Sibillini_py,
 #'   location_g = "Position",
 #'   c_source = "CHELSA"
@@ -394,9 +373,9 @@
 #' @importFrom dplyr %>% group_by summarize
 #' @export
 ce_extract <- function(
-    dir_clim = NULL, dir_elev = NULL,
+    path = NULL,
     location = NULL, location_g = NULL,
-    c_source = "WorldClim", var = "ALL") {
+    c_source = "WorldClim", var = "all") {
 
   # Check if the properties of 'location' are correct.
   location <- .spat_helper(location)
@@ -404,10 +383,10 @@ ce_extract <- function(
   location_df <- data.frame(location)
 
   # Check if the properties of var are correct
-  var <- .var_helper(var)
+  stopifnot(var %in% c("all", "prec", "tmax", "tavg", "tmin"))
 
   # Check if the directory paths are correct
-  .dir_helper(dir_clim, dir_elev)
+  .dir_helper(path)
 
   # Check the location arguments
   # Note returns a list that needs to be extracted.
@@ -458,18 +437,10 @@ ce_extract <- function(
   )
 
   # extracting the data ####
-  if (var == "ALL") {
-    files <- c("tmean", "tmin", "tmax", "prec", "elev")
+  if ("all" %in% var) {
+    files <- c("tavg", "tmin", "tmax", "prec", "elev")
   } else {
     files <- var
-  }
-
-  # If no directory provided for elev, no data to be extracted
-  if (is.null(dir_elev)) {
-    # Elev treated separately because it is not always used / required.
-    # four options for var, here and elsewhere
-    var <- var[var %in% c("tmean", "tmin", "tmax", "prec")]
-    files <- files[files %in% c("tmean", "tmin", "tmax", "prec")]
   }
 
   result <- NULL
@@ -480,12 +451,11 @@ ce_extract <- function(
                   location_g = location_g,
                   sd = sd, result = result,
                   c_source = c_source,
-                  dir_clim = dir_clim,
-                  dir_elev = dir_elev)
+                  path = path)
   }), recursive = FALSE)
 
   # If we need to adjust the values
-  if (c_source == "CHELSA") {
+  if (toupper(c_source) == "CHELSA") {
     toconvert <- names(result)[grepl("t", names(result))]
     for (i in toconvert) {
       result[[i]][, 2:13] <- (result[[i]][, 2:13] / 1)
@@ -506,7 +476,12 @@ ce_extract <- function(
              {colnames(lat)[1] <- "id"},
              {colnames(lat)[1] <- "location_g"})
 
-      if (colnames(lat)[1] == "location_g") {
+      if (location_g == "id") {
+        colnames(lat)[1] <- "id"
+      }
+
+      if (!location_g == "id") {
+        colnames(lat)[1] <- "location_g"
         lat <- aggregate(lat ~ location_g, data = lat, mean)
       }
 
@@ -523,9 +498,14 @@ ce_extract <- function(
             terra::crds(terra::centroids(terra::vect(location)))[, 2], 3)
         )
 
-        ifelse(location_g == "id", # Strange use for ifelse; why not if()?
-               {colnames(lat)[1] <- "id"},
-               {colnames(lat)[1] <- "location_g"})
+        if (location_g == "id") {
+          colnames(lat)[1] <- "id"
+        }
+
+        if (!location_g == "id") {
+          colnames(lat)[1] <- "location_g"
+        }
+
         result[["lat"]] <- lat
 
       } else {
@@ -537,9 +517,14 @@ ce_extract <- function(
           )
         )
 
-        ifelse(location_g == "id",
-               {colnames(lat)[1] <- "id"},
-               {colnames(lat)[1] <- "location_g"})
+        if (location_g == "id") {
+          colnames(lat)[1] <- "id"
+        }
+
+        if (!location_g == "id") {
+          colnames(lat)[1] <- "location_g"
+        }
+
         result[["lat"]] <- lat
 
       }
