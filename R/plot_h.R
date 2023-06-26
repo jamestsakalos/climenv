@@ -7,7 +7,7 @@
 #' @param data List. A list storing matrices containing the mean and standard
 #' deviation of the climate and/or elevation data.
 #' @template output_location_g_param
-#' @param pt_col,pt_pch,\dots Arguments to control point styling in
+#' @param col,pch,\dots Arguments to control point styling in
 #' `HoldridgePoints()`.
 #'
 #' @return Returns a 'ggplot2' family of plot. This function uses the
@@ -34,17 +34,17 @@
 #' @encoding UTF-8
 #' @examples{
 #'
-#' # Step 1. Import the Sibillini National Park Boundary
+#' # Step 1. Import the Italian Biome polygon data
 #' # Step 2. Run the download function
 #' # Step 3. Run the extract function
 #' #* See ce_download & ce_extract documentation
 #'
-#' # Steps 1, 2 & 3 can be skipped by loading the extracted data
-#' data(s_data)
+#' # Steps 1, 2 & 3 can be skipped by loading the extracted data (it_data)
+#' data("it_data")
 #'
 #' # Step 4. Visualise the climatic envelope using a Holdridge diagram
 #'
-#' plot_h(data = s_data, location_g = "High")
+#' plot_h(data = it_data, location_g = "MED")
 #'
 #' }
 #'
@@ -53,7 +53,7 @@
 #' @importFrom Ternary HoldridgePlot HoldridgeBelts HoldridgePoints
 #' @importFrom macroBiome cliHoldridgePoints
 #' @export
-plot_h <- function(data, location_g, pt_col = "red", pt_pch = 19,
+plot_h <- function(data, location_g, col = "red", pch = 19,
                    ... # ... other ternary options
 ) {
 
@@ -85,7 +85,7 @@ plot_h <- function(data, location_g, pt_col = "red", pt_pch = 19,
       Ternary::HoldridgeBelts()
 
       hold <- macroBiome::cliHoldridgePoints(
-        data$tmean_m[location_g, 1:12],
+        data$tavg_m[location_g, 1:12],
         data$prec_m[location_g, 1:12],
         verbose = TRUE
       )
@@ -93,7 +93,7 @@ plot_h <- function(data, location_g, pt_col = "red", pt_pch = 19,
       # Plot the data
       # The user has some flexibility in how to specify the point options
       Ternary::HoldridgePoints(hold$per, hold$tap,
-                               col = pt_col, cex = 2, pch = pt_pch,
+                               col = col, cex = 2, pch = pch,
                                lwd = 2, ...)
 
     }

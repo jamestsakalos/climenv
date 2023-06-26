@@ -26,17 +26,17 @@
 #' @encoding UTF-8
 #' @examples{
 #'
-#' # Step 1. Import the Sibillini National Park Boundary
+#' # Step 1. Import the Italian Biome polygon data
 #' # Step 2. Run the download function
 #' # Step 3. Run the extract function
 #' #* See ce_download & ce_extract documentation
 #'
-#' # Steps 1, 2 & 3 can be skipped by loading the extracted data
-#' data(s_data)
+#' # Steps 1, 2 & 3 can be skipped by loading the extracted data (it_data)
+#' data("it_data")
 #'
 #' # Step 4. Visualise the climatic envelope using a Walter-Lieth diagram
 #'
-#' plot_wl(data = s_data, location_g = "High")
+#' plot_wl(data = it_data, location_g = "NEM")
 #'
 #' }
 #'
