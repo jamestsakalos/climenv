@@ -46,10 +46,9 @@ Imports:
     sf,
     sp,
     Ternary,
-    terra,
+    terra
 Suggests:
     fs,
-    glue,
     knitr,
     raster,
     rmarkdown,
