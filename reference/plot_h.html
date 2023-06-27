@@ -67,25 +67,24 @@ from the <code>ce_extract</code> function.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plot_h</span><span class="op">(</span><span class="va">data</span>, <span class="va">location_g</span>, col <span class="op">=</span> <span class="st">"red"</span>, pch <span class="op">=</span> <span class="fl">19</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plot_h</span><span class="op">(</span><span class="va">data</span>, <span class="va">geo_id</span>, col <span class="op">=</span> <span class="st">"red"</span>, pch <span class="op">=</span> <span class="fl">19</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>data</dt>
-<dd><p>List. A list storing matrices containing the mean and standard
-deviation of the climate and/or elevation data.</p></dd>
-
-
-<dt>location_g</dt>
-<dd><p>Character. Informs how the zonal statistics are exported.
-Must correspond to a column of the <code>"location"</code> argument. If NULL,
-the zonal statistics are calculated for all features of <code>"location"</code>.</p></dd>
+    <dl><dt>geo_id</dt>
+<dd><p>Character. Corresponding to a specific feature contained in the
+<code>"location"</code> argument (specifically in the <code>"location_g"</code> column).</p></dd>
 
 
 <dt>col, pch, ...</dt>
 <dd><p>Arguments to control point styling in
 <code>HoldridgePoints()</code>.</p></dd>
+
+
+<dt>output_data_param</dt>
+<dd><p>List. Containing climate, elevation and latitude
+data sets. Structured by <code><a href="ce_extract.html">ce_extract()</a></code>.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -129,7 +128,7 @@ Comprehensive R Archive Network. <a href="https://doi.org/10.5281/zenodo.1068996
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Step 4. Visualise the climatic envelope using a Holdridge diagram</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">plot_h</span><span class="op">(</span>data <span class="op">=</span> <span class="va">it_data</span>, location_g <span class="op">=</span> <span class="st">"MED"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">plot_h</span><span class="op">(</span>data <span class="op">=</span> <span class="va">it_data</span>, geo_id <span class="op">=</span> <span class="st">"MED"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-plt img"><img src="plot_h-1.png" alt="" width="700" height="433"></span>
