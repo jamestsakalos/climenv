@@ -48,10 +48,6 @@
     )
   })
 
-  #terra::writeRaster(clim_mosaic,
-  #                   paste0(output_dir, "/", var, "/", var, ".tif"),
-  #                   overwrite = TRUE)
-
 }
 #' Download WorldClim climate data
 #'
@@ -73,11 +69,12 @@
 #' average monthly precipitation (mm). The tmax folder contains maximum monthly
 #' temperature. The tmin folder contains minimum monthly temperature. The tmean
 #' folder contains the average monthly temperature. The unit of measure for
-#' temperature is in &deg;C.
+#' temperature is in &deg;C. This function uses the \pkg{geodata} to download
+#' the worldclim tiles.
 #'
 #' @author James L. Tsakalos
 #' @seealso Downloading from CHELSA [`chelsa()`] or a more convenient
-#' function for other climate and elevation data [`ce_download()`].
+#' function for downloading other climate and elevation data [`ce_download()`].
 #' @references{ Fick, S.E. and R.J. Hijmans. (2017). WorldClim 2: new 1km
 #' spatial resolution climate surfaces for global land areas. International
 #' Journal of Climatology. 37, 4302–4315.
@@ -99,6 +96,8 @@
 #'
 #' }
 #' @importFrom utils data download.file unzip
+#' @importFrom terra rast extract xyFromCell mosaic writeRaster vect
+#' @importFrom geodata worldclim_tile
 #' @export
 worldclim <- function(output_dir, location, mode = "wb",
                       var = "all", ...) {

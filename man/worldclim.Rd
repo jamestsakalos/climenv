@@ -23,7 +23,8 @@ resolution of 0.5 minutes of a degree. The precipitation folder contains
 average monthly precipitation (mm). The tmax folder contains maximum monthly
 temperature. The tmin folder contains minimum monthly temperature. The tmean
 folder contains the average monthly temperature. The unit of measure for
-temperature is in °C.
+temperature is in °C. This function uses the \pkg{geodata} to download
+the worldclim tiles.
 }
 \description{
 \code{worldclim()} downloads the WorldClim V2.1 climate data for 1970-2000. This
@@ -54,7 +55,7 @@ Journal of Climatology. 37, 4302–4315.
 }
 \seealso{
 Downloading from CHELSA \code{\link[=chelsa]{chelsa()}} or a more convenient
-function for other climate and elevation data \code{\link[=ce_download]{ce_download()}}.
+function for downloading other climate and elevation data \code{\link[=ce_download]{ce_download()}}.
 }
 \author{
 James L. Tsakalos
