@@ -60,7 +60,10 @@ plot(it_pt, pch = 19, cex = 0.5, key.pos = NULL, main = "Global Biomes points")
 # Lets have a look at the extracted data
 
 data("it_data")
-str(it_data)
+
+plot_h(it_data, "MED")
+plot_wl(it_data, "MED")
+plot_c(it_data, "MED")
 
 ```
 
