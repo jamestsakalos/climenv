@@ -85,8 +85,7 @@
 #' @importFrom elevatr get_elev_raster
 #' @importFrom geodata elevation_3s
 #' @importFrom sf as_Spatial
-#' @importFrom sp Polygon Polygons SpatialPolygons
-#' @importFrom terra crs ext intersect mosaic rast vect project
+#' @importFrom terra rast extract xyFromCell mosaic writeRaster rast
 #' @export
 elev <- function(output_dir, location, e_source = "mapzen") {
 
