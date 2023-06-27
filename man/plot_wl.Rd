@@ -5,18 +5,17 @@
 \alias{plot_wl}
 \title{plot_wl}
 \usage{
-plot_wl(data, location_g, ...)
+plot_wl(data, geo_id, ...)
 }
 \arguments{
-\item{data}{List. A list storing matrices containing the mean and standard
-deviation of the climate and/or elevation data.}
-
-\item{location_g}{Character. Informs how the zonal statistics are exported.
-Must correspond to a column of the \code{"location"} argument. If NULL,
-the zonal statistics are calculated for all features of \code{"location"}.}
+\item{geo_id}{Character. Corresponding to a specific feature contained in the
+\code{"location"} argument (specifically in the \code{"location_g"} column).}
 
 \item{\dots}{Arguments to control styling in
 \code{ggclimat_walter_lieth()}.}
+
+\item{output_data_param}{List. Containing climate, elevation and latitude
+data sets. Structured by \code{ce_extract()}.}
 }
 \value{
 Returns a 'ggplot2' family of plot. This function uses the
@@ -41,7 +40,7 @@ data("it_data")
 
 # Step 4. Visualise the climatic envelope using a Walter-Lieth diagram
 
-plot_wl(data = it_data, location_g = "NEM")
+plot_wl(data = it_data, geo_id = "NEM")
 
 }
 

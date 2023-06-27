@@ -4,9 +4,8 @@
 #' @description Creates a graph using the climate and elevation data which has
 #' been extracted for a given \code{location}. It accepts the data formatted
 #' from the \code{ce_extract} function.
-#' @param data List. A list storing matrices containing the mean and standard
-#' deviation of the climate and/or elevation data.
-#' @template output_location_g_param
+#' @template output_data_param
+#' @template output_geo_id_param
 #' @param \dots Arguments to control styling in
 #' `ggclimat_walter_lieth()`.
 #'
@@ -36,22 +35,22 @@
 #'
 #' # Step 4. Visualise the climatic envelope using a Walter-Lieth diagram
 #'
-#' plot_wl(data = it_data, location_g = "NEM")
+#' plot_wl(data = it_data, geo_id = "NEM")
 #'
 #' }
 #'
 #' @importFrom climaemet ggclimat_walter_lieth
 #' @export
-plot_wl <- function(data, location_g, ...) {
+plot_wl <- function(data, geo_id, ...) {
 
   # Needed to print the climate date range on the plot
   c_source <- strsplit(data$Readme, " ")[[1]][5]
 
   # Check if the c_source argument is correct
-  if (is.na(match(location_g, row.names(data[[1]])))) {
+  if (is.na(match(geo_id, row.names(data[[1]])))) {
     stop(
       paste(
-        c("location_g must be either:",
+        c("geo_id must be either:",
           paste(as.character(row.names(data[[1]]), collapse = ", ")),
           collapse = " "
         )
@@ -63,20 +62,20 @@ plot_wl <- function(data, location_g, ...) {
 
   climaemet::ggclimat_walter_lieth(
     dat = rbind(
-      Prec. = data$prec_m[location_g, 1:12],
-      Max.t. = data$tmax_m[location_g, 1:12],
-      Min.t = data$tmin_m[location_g, 1:12],
-      Ab.m.t = data$abmt[location_g, 1:12],
+      Prec. = data$prec_m[geo_id, 1:12],
+      Max.t. = data$tmax_m[geo_id, 1:12],
+      Min.t = data$tmin_m[geo_id, 1:12],
+      Ab.m.t = data$abmt[geo_id, 1:12],
       make.row.names = TRUE
     ),
-    alt = round(data$elev[location_g, "mean"]),
+    alt = round(data$elev[geo_id, "mean"]),
     per = switch(c_source,
                  "CHELSA" = "1981\u20132010",
                  "WorldClim" = "1970\u20132000"
     ),
-    est = location_g,
+    est = geo_id,
     mlab = "en",
-    shem = ifelse(data$lat[location_g, ] > 0, FALSE, TRUE),
+    shem = ifelse(data$lat[geo_id, ] > 0, FALSE, TRUE),
     ...
 
   )

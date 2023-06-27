@@ -4,9 +4,8 @@
 #' @description Creates a graph using the climate and elevation data which has
 #' been extracted for a given \code{location}. It accepts the data formatted
 #' from the \code{ce_extract} function.
-#' @param data List. A list storing matrices containing the mean and standard
-#' deviation of the climate and/or elevation data.
-#' @template output_location_g_param
+#' @template output_data_param
+#' @template output_geo_id_param
 #' @param col,pch,\dots Arguments to control point styling in
 #' `HoldridgePoints()`.
 #'
@@ -44,24 +43,23 @@
 #'
 #' # Step 4. Visualise the climatic envelope using a Holdridge diagram
 #'
-#' plot_h(data = it_data, location_g = "MED")
+#' plot_h(data = it_data, geo_id = "MED")
 #'
 #' }
 #'
-#' @importFrom ggplotify as.ggplot
 #' @importFrom graphics par
 #' @importFrom Ternary HoldridgePlot HoldridgeBelts HoldridgePoints
 #' @importFrom macroBiome cliHoldridgePoints
 #' @export
-plot_h <- function(data, location_g, col = "red", pch = 19,
+plot_h <- function(data, geo_id, col = "red", pch = 19,
                    ... # ... other ternary options
 ) {
 
   # Check if the c_source argument is correct
-  if (is.na(match(location_g, row.names(data[[1]])))) {
+  if (is.na(match(geo_id, row.names(data[[1]])))) {
     stop(
       paste(
-        c("location_g must be either:",
+        c("geo_id must be either:",
           paste(as.character(row.names(data[[1]]), collapse = ", ")),
           collapse = " "
         )
@@ -72,31 +70,24 @@ plot_h <- function(data, location_g, col = "red", pch = 19,
   # Holdridge climate diagram
 
   # I want to export as a ggplot object for consistent output classes.
-  ggplotify::as.ggplot(
+  # Suppress plot margins
+  opar1 <- graphics::par(mar = c(0, 0, 0, 0))
+  on.exit(graphics::par(opar1)) # Restore initial parameters
 
-    function() {
+  # Create blank Holdridge plot
+  Ternary::HoldridgePlot(hex.labels = Ternary::holdridgeLifeZonesUp)
+  Ternary::HoldridgeBelts()
 
-      # Suppress plot margins
-      opar1 <- par(mar = c(0, 0, 0, 0))
-      on.exit(par(opar1)) # Restore initial parameters
-
-      # Create blank Holdridge plot
-      Ternary::HoldridgePlot(hex.labels = Ternary::holdridgeLifeZonesUp)
-      Ternary::HoldridgeBelts()
-
-      hold <- macroBiome::cliHoldridgePoints(
-        data$tavg_m[location_g, 1:12],
-        data$prec_m[location_g, 1:12],
-        verbose = TRUE
-      )
-
-      # Plot the data
-      # The user has some flexibility in how to specify the point options
-      Ternary::HoldridgePoints(hold$per, hold$tap,
-                               col = col, cex = 2, pch = pch,
-                               lwd = 2, ...)
-
-    }
+  hold <- macroBiome::cliHoldridgePoints(
+    data$tavg_m[geo_id, 1:12],
+    data$prec_m[geo_id, 1:12],
+    verbose = TRUE
   )
+
+  # Plot the data
+  # The user has some flexibility in how to specify the point options
+  Ternary::HoldridgePoints(hold$per, hold$tap,
+                           col = col, cex = 2, pch = pch,
+                           lwd = 2, ...)
 
 }
