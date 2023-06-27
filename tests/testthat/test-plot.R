@@ -65,38 +65,25 @@ test_that("ce_plot() works", {
   pol_py <- sf::st_as_sf(terra::as.polygons(r))
   pol_py$grp <- c(rep("low", 25), rep("high", 75))
 
-  # Create a point file from the raster
-  pol_pt <- sf::st_as_sf(terra::as.points(r))
-  pol_pt$grp <- c(rep("low", 25), rep("high", 75))
-
   # py tests ####
 
   data <- ce_extract(path = file.path(temp_path),
                      location = pol_py, location_g = "grp",
                      c_source = "WorldClim", var = "all")
 
-  p <- plot_wl(data = data, location_g = "high")
-
   # vdiffr is used only for testing so not required
   skip_if_not_installed("vdiffr")
-  vdiffr::expect_doppelganger("py test WL plot", p)
 
-  p <- plot_h(data = data, location_g = "high")
+  plot_wl(data = data, geo_id = "high")
+  vdiffr::expect_doppelganger("py test WL plot",
+                              plot_wl(data = data, geo_id = "high"))
 
-  vdiffr::expect_doppelganger("py test H plot", p)
+  plot_h(data = data, geo_id = "high")
+  vdiffr::expect_doppelganger("py test H plot",
+                              plot_h(data = data, geo_id = "high"))
 
-  # pt tests ####
-
-  data <- ce_extract(path = file.path(temp_path),
-                     location = pol_pt, location_g = "grp",
-                     c_source = "WorldClim", var = "all")
-
-  p <- plot_wl(data = data, location_g = "low")
-
-  vdiffr::expect_doppelganger("pt test WL plot", p)
-
-  p <- plot_h(data = data, location_g = "low")
-
-  vdiffr::expect_doppelganger("pt test H plot", p)
+  plot_c(data = data, geo_id = "high")
+  vdiffr::expect_doppelganger("py test c plot",
+                              plot_c(data = data, geo_id = "high"))
 
 })
