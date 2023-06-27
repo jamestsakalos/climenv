@@ -2,41 +2,137 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "climenv",
-  "description": "This package facilitates easy dowloading, extration and plotting of climatological data. It provides access to three most globally recognizable modelled data sets, including WorldClim 2, CHELSA and NASA’s SRTM. climenv works with multi or single geospatial polygon and point data and the extracted outputs can be used, for example as covariates, for any number of ecological studies. Easy access and extraction of globally recognizable data sets greatly extend this packages usability and flexibility for a wide range of applications.",
-  "name": "climenv: climenv: an R package for downloading, exctracting and plotting climatic envelopes",
+  "description": "If you are a scientist seeking a convenient solution for downloading, extracting, and plotting climatological data, consider exploring the features of this package. It grants you access to three widely recognised modelled data sets, namely WorldClim 2, CHELSA, and NASA’s SRTM. It seamlessly handles both multi and single geospatial polygon and point data, allowing you to extract outputs that can serve as covariates in various ecological studies. It also allows you to visualise these extractions using two common graphic options – the Walter-Lieth climate diagram and the Holdridge life zone classification scheme. The last option is a scheme of our own design which incorporates aspects of both Walter-Leigh and Holdridge. The package's user-friendly access and extraction of globally recognisable data sets significantly enhance its versatility and usability across a broad spectrum of applications.",
+  "name": "climenv: Downloading, Extracting and Plotting Climatic Envelopes",
   "codeRepository": "https://github.com/jamestsakalos/climenv",
   "issueTracker": "https://github.com/jamestsakalos/climenv/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R Under development (unstable) (2023-03-28 r84109 ucrt)",
+  "runtimePlatform": "R version 4.3.1 (2023-06-16)",
   "author": [
     {
       "@type": "Person",
-      "givenName": ["James", "L."],
-      "familyName": "Tsakalos"
+      "givenName": "James L.",
+      "familyName": "Tsakalos",
+      "email": "jamestsakalos@gmail.com",
+      "@id": "https://orcid.org/0000-0001-5067-196X"
     },
     {
       "@type": "Person",
-      "givenName": "Frederico",
-      "familyName": "Luebert"
+      "givenName": "Federico",
+      "familyName": "Luebert",
+      "@id": "https://orcid.org/0000-0003-2251-4056"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Martin R.",
+      "familyName": "Smith",
+      "email": "martin.smith@durham.ac.uk",
+      "@id": "https://orcid.org/0000-0001-5660-1727"
     },
     {
       "@type": "Person",
       "givenName": "Ladislav",
-      "familyName": "Mucina"
+      "familyName": "Mucina",
+      "@id": "https://orcid.org/0000-0003-0317-8886"
+    }
+  ],
+  "copyrightHolder": [
+    {
+      "@type": "Person",
+      "givenName": "James L.",
+      "familyName": "Tsakalos",
+      "email": "jamestsakalos@gmail.com",
+      "@id": "https://orcid.org/0000-0001-5067-196X"
     }
   ],
   "maintainer": [
     {
       "@type": "Person",
-      "givenName": ["James", "L."],
+      "givenName": "James L.",
       "familyName": "Tsakalos",
-      "email": "jamestsakalos@gmail.com"
+      "email": "jamestsakalos@gmail.com",
+      "@id": "https://orcid.org/0000-0001-5067-196X"
+    }
+  ],
+  "softwareSuggestions": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "fs",
+      "name": "fs",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=fs"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "knitr",
+      "name": "knitr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=knitr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "raster",
+      "name": "raster",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=raster"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "rmarkdown",
+      "name": "rmarkdown",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "testthat",
+      "name": "testthat",
+      "version": ">= 3.0.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=testthat"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "vdiffr",
+      "name": "vdiffr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=vdiffr"
     }
   ],
   "softwareRequirements": {
@@ -44,19 +140,19 @@
       "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
-      "version": ">= 4.2.2"
+      "version": ">= 4.0"
     },
     "2": {
       "@type": "SoftwareApplication",
-      "identifier": "terra",
-      "name": "terra",
+      "identifier": "climaemet",
+      "name": "climaemet",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=terra"
+      "sameAs": "https://CRAN.R-project.org/package=climaemet"
     },
     "3": {
       "@type": "SoftwareApplication",
@@ -72,29 +168,17 @@
     },
     "4": {
       "@type": "SoftwareApplication",
-      "identifier": "sp",
-      "name": "sp",
+      "identifier": "elevatr",
+      "name": "elevatr",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=sp"
+      "sameAs": "https://CRAN.R-project.org/package=elevatr"
     },
     "5": {
-      "@type": "SoftwareApplication",
-      "identifier": "sf",
-      "name": "sf",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=sf"
-    },
-    "6": {
       "@type": "SoftwareApplication",
       "identifier": "exactextractr",
       "name": "exactextractr",
@@ -106,19 +190,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=exactextractr"
     },
-    "7": {
-      "@type": "SoftwareApplication",
-      "identifier": "elevatr",
-      "name": "elevatr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=elevatr"
-    },
-    "8": {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "geodata",
       "name": "geodata",
@@ -130,44 +202,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=geodata"
     },
-    "9": {
-      "@type": "SoftwareApplication",
-      "identifier": "testthat",
-      "name": "testthat",
-      "version": ">= 3.0.0",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=testthat"
-    },
-    "10": {
-      "@type": "SoftwareApplication",
-      "identifier": "knitr",
-      "name": "knitr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=knitr"
-    },
-    "11": {
-      "@type": "SoftwareApplication",
-      "identifier": "rmarkdown",
-      "name": "rmarkdown",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
-    },
-    "12": {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "glue",
       "name": "glue",
@@ -179,7 +214,79 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=glue"
     },
+    "8": {
+      "@type": "SoftwareApplication",
+      "identifier": "ggplotify",
+      "name": "ggplotify",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ggplotify"
+    },
+    "9": {
+      "@type": "SoftwareApplication",
+      "identifier": "macroBiome",
+      "name": "macroBiome",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=macroBiome"
+    },
+    "10": {
+      "@type": "SoftwareApplication",
+      "identifier": "sf",
+      "name": "sf",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=sf"
+    },
+    "11": {
+      "@type": "SoftwareApplication",
+      "identifier": "sp",
+      "name": "sp",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=sp"
+    },
+    "12": {
+      "@type": "SoftwareApplication",
+      "identifier": "Ternary",
+      "name": "Ternary",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=Ternary"
+    },
+    "13": {
+      "@type": "SoftwareApplication",
+      "identifier": "terra",
+      "name": "terra",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=terra"
+    },
     "SystemRequirements": null
   },
-  "fileSize": "461.699KB"
+  "fileSize": "1416.559KB"
 }
