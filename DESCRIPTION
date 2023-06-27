@@ -36,6 +36,7 @@ VignetteBuilder: knitr
 Depends: R (>= 4.0)
 Imports:
     climaemet,
+    dismo,
     dplyr,
     elevatr,
     exactextractr,
@@ -43,6 +44,7 @@ Imports:
     glue,
     ggplotify,
     macroBiome,
+    plyr,
     sf,
     sp,
     Ternary,
