@@ -3,7 +3,7 @@
   "@type": "SoftwareSourceCode",
   "identifier": "climenv",
   "description": "If you are a scientist seeking a convenient solution for downloading, extracting, and plotting climatological data, consider exploring the features of this package. It grants you access to three widely recognised modelled data sets, namely WorldClim 2, CHELSA, and NASA’s SRTM. It seamlessly handles both multi and single geospatial polygon and point data, allowing you to extract outputs that can serve as covariates in various ecological studies. It also allows you to visualise these extractions using two common graphic options – the Walter-Lieth climate diagram and the Holdridge life zone classification scheme. The last option is a scheme of our own design which incorporates aspects of both Walter-Leigh and Holdridge. The package's user-friendly access and extraction of globally recognisable data sets significantly enhance its versatility and usability across a broad spectrum of applications.",
-  "name": "climenv: Downloading, Extracting and Plotting Climatic Envelopes",
+  "name": "climenv: Download, Extract and Visualise Climate and Elevation Data",
   "codeRepository": "https://github.com/jamestsakalos/climenv",
   "issueTracker": "https://github.com/jamestsakalos/climenv/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
@@ -61,6 +61,18 @@
     }
   ],
   "softwareSuggestions": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "covr",
+      "name": "covr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=covr"
+    },
     {
       "@type": "SoftwareApplication",
       "identifier": "fs",
@@ -300,5 +312,5 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1307.316KB"
+  "fileSize": "1301.481KB"
 }
