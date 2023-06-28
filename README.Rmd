@@ -100,7 +100,6 @@ data("it_data")
 
 # Step 4. Visualise the climatic envelope using a Holdridge diagram
 p1 <- plot_h(data = it_data, "MED")
-
 ```
 
 
