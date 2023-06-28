@@ -82,6 +82,8 @@
 #' @importFrom macroBiome cliHoldridgePoints
 #' @importFrom dismo biovars
 #' @importFrom plyr round_any
+#' @importFrom graphics axis mtext points strwidth text
+#' @importFrom stats sd
 #' @export
 plot_c <- function(data,
                    geo_id,

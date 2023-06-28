@@ -8,17 +8,17 @@
 plot_h(data, geo_id, col = "red", pch = 19, ...)
 }
 \arguments{
+\item{data}{List. Containing climate, elevation and latitude
+data sets. Structured by \code{ce_extract()}.}
+
 \item{geo_id}{Character. Corresponding to a specific feature contained in the
 \code{"location"} argument (specifically in the \code{"location_g"} column).}
 
 \item{col, pch, \dots}{Arguments to control point styling in
 \code{HoldridgePoints()}.}
-
-\item{output_data_param}{List. Containing climate, elevation and latitude
-data sets. Structured by \code{ce_extract()}.}
 }
 \value{
-Returns a 'ggplot2' family of plot. This function uses the
+Returns a base R family of plot. This function uses the
 \pkg{macroBiome} and \pkg{Ternary} packages to create a Holdridge simplex
 plot.
 }

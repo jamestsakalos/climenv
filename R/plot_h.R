@@ -9,7 +9,7 @@
 #' @param col,pch,\dots Arguments to control point styling in
 #' `HoldridgePoints()`.
 #'
-#' @return Returns a 'ggplot2' family of plot. This function uses the
+#' @return Returns a base R family of plot. This function uses the
 #' \pkg{macroBiome} and \pkg{Ternary} packages to create a Holdridge simplex
 #' plot.
 #'

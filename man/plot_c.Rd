@@ -8,6 +8,9 @@
 plot_c(
   data,
   geo_id,
+  interval_prec = 20,
+  interval_temp = 5,
+  stretch_temp = 4,
   p_cex = 1,
   nchr_main = 32,
   l_main = 0.1,
@@ -20,8 +23,18 @@ plot_c(
 )
 }
 \arguments{
+\item{data}{List. Containing climate, elevation and latitude
+data sets. Structured by \code{ce_extract()}.}
+
 \item{geo_id}{Character. Corresponding to a specific feature contained in the
 \code{"location"} argument (specifically in the \code{"location_g"} column).}
+
+\item{interval_prec}{Numeric. Interval of the precipitation axis.}
+
+\item{interval_temp}{Numeric. Interval of the temperature axis.}
+
+\item{stretch_temp}{Numeric. Ratio for stretching temperature relative to
+precipitation.}
 
 \item{p_cex}{Numeric. Text size for entire plot.}
 
@@ -42,9 +55,6 @@ before wrapping to a new line.}
 
 \item{l_tcols}{List. Line position of the table columns. Must be length 5
 corresponding to the position (left to right) for each column.}
-
-\item{output_data_param}{List. Containing climate, elevation and latitude
-data sets. Structured by \code{ce_extract()}.}
 }
 \value{
 Returns a base R family of plot. This function uses the
@@ -71,8 +81,18 @@ data("it_data")
 
 # Step 4. Visualise the climatic envelope using our custom diagram
 
-plot_c(data = it_data, geo_id = "MED")
+# first lets store the default graphics parameters
+# we need to make some changes to ensure that the table fits in the plotting
+# region.
 
+opar <- par()
+par(mar = c(1.5, 2.2, 1.5, 14) + 0.01) # We need to change a few things here
+plot_c(
+  it_data, geo_id = "MED",
+  l_tcols = c(14.5, 17, 18.5, 19.5, 21)
+)
+par(opar)
+# This output works if you export to a three column width sized image.
 }
 
 }

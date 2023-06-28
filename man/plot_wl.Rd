@@ -8,17 +8,17 @@
 plot_wl(data, geo_id, ...)
 }
 \arguments{
+\item{data}{List. Containing climate, elevation and latitude
+data sets. Structured by \code{ce_extract()}.}
+
 \item{geo_id}{Character. Corresponding to a specific feature contained in the
 \code{"location"} argument (specifically in the \code{"location_g"} column).}
 
 \item{\dots}{Arguments to control styling in
 \code{ggclimat_walter_lieth()}.}
-
-\item{output_data_param}{List. Containing climate, elevation and latitude
-data sets. Structured by \code{ce_extract()}.}
 }
 \value{
-Returns a 'ggplot2' family of plot. This function uses the
+Returns a base R family of plot. This function uses the
 \pkg{climaemet} package to create the Walter and Lieth (1960) climatic
 diagram.
 }

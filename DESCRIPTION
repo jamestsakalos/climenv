@@ -42,7 +42,6 @@ Imports:
     exactextractr,
     geodata,
     glue,
-    ggplotify,
     macroBiome,
     plyr,
     sf,

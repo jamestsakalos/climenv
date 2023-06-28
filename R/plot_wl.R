@@ -9,7 +9,7 @@
 #' @param \dots Arguments to control styling in
 #' `ggclimat_walter_lieth()`.
 #'
-#' @return Returns a 'ggplot2' family of plot. This function uses the
+#' @return Returns a base R family of plot. This function uses the
 #' \pkg{climaemet} package to create the Walter and Lieth (1960) climatic
 #' diagram.
 #'
