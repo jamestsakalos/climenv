@@ -27,5 +27,7 @@ vignettes/.RData
 ^data-raw$
 ^pkgdown$
 ^revdep$
-^README.Rmd
+^README.md$
+^README.Rmd$
 ^\.github$
+^codecov\.yml$

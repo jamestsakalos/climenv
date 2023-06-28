@@ -2,9 +2,10 @@
 output: github_document
 ---
 <!-- badges: start -->
-[![test-coverage](https://github.com/jamestsakalos/climenv/workflows/test-coverage/badge.svg)](https://github.com/jamestsakalos/climenv/actions)
+[![test-coverage](https://github.com/jamestsakalos/climenv/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/jamestsakalos/climenv/actions/workflows/test-coverage.yaml)
+[![codemeta](https://github.com/jamestsakalos/climenv/actions/workflows/codemeta.yml/badge.svg)](https://github.com/jamestsakalos/climenv/actions/workflows/codemeta.yml)
 [![Codecov test coverage](https://codecov.io/gh/jamestsakalos/climenv/branch/master/graph/badge.svg)](https://app.codecov.io/gh/jamestsakalos/climenv?branch=master)
-[![R-CMD-check](https://github.com/jamestsakalos/climenv/workflows/R-CMD-check/badge.svg)](https://github.com/jamestsakalos/climenv/actions)
+[![R-CMD-check](https://github.com/jamestsakalos/climenv/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/jamestsakalos/climenv/actions/workflows/R-CMD-check.yml)
 <!-- badges: end -->
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -97,9 +98,7 @@ library(climenv)
 data("it_data")
 
 # Step 4. Visualise the climatic envelope using a Holdridge diagram
-p1 <- plot_h(data = it_data, "MED") + ggplot2::ggtitle("Mediterranean biome")
-p2 <- plot_h(data = it_data, "NEM") + ggplot2::ggtitle("Nemoral biome")
-gridExtra::grid.arrange(p1, p2, ncol = 2)
+p1 <- plot_h(data = it_data, "MED")
 
 ```
 
