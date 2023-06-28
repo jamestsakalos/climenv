@@ -72,7 +72,12 @@ from the <code>ce_extract</code> function.</p>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>geo_id</dt>
+    <dl><dt>data</dt>
+<dd><p>List. Containing climate, elevation and latitude
+data sets. Structured by <code><a href="ce_extract.html">ce_extract()</a></code>.</p></dd>
+
+
+<dt>geo_id</dt>
 <dd><p>Character. Corresponding to a specific feature contained in the
 <code>"location"</code> argument (specifically in the <code>"location_g"</code> column).</p></dd>
 
@@ -81,17 +86,12 @@ from the <code>ce_extract</code> function.</p>
 <dd><p>Arguments to control point styling in
 <code>HoldridgePoints()</code>.</p></dd>
 
-
-<dt>output_data_param</dt>
-<dd><p>List. Containing climate, elevation and latitude
-data sets. Structured by <code><a href="ce_extract.html">ce_extract()</a></code>.</p></dd>
-
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     
 
-<p>Returns a 'ggplot2' family of plot. This function uses the
+<p>Returns a base R family of plot. This function uses the
 <span class="pkg">macroBiome</span> and <span class="pkg">Ternary</span> packages to create a Holdridge simplex
 plot.</p>
     </div>
