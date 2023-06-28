@@ -96,9 +96,19 @@ Luebert, Ladislav Mucina</h4>
 body {
 text-align: justify}
 </style>
+<style>
+p.caption {
+  font-size: 0.9em;
+  font-style: normal;
+  color: grey;
+  margin-right: 10%;
+  margin-left: 10%;  
+  text-align: justify;
+}
+</style>
 <hr>
 <div class="section level2">
-<h2 id="general-description-of-the-italian-biome-data-sets">General description of the Italian Biome data sets<a class="anchor" aria-label="anchor" href="#general-description-of-the-italian-biome-data-sets"></a>
+<h2 id="spatial-distribution-of-the-italian-biome-data-sets">Spatial distribution of the Italian Biome data sets<a class="anchor" aria-label="anchor" href="#spatial-distribution-of-the-italian-biome-data-sets"></a>
 </h2>
 <p><code>climenv</code> includes three data sets that feature Biome
 information for Italy. The data sets include <code>it_py</code>,
@@ -112,39 +122,415 @@ WorldClim 2 climate and Mapzen digital elevation.</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jamestsakalos/climenv" class="external-link">climenv</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">#library(fs)</span></span>
-<span><span class="co">#library(raster)</span></span>
-<span><span class="co">#library(dplyr)</span></span>
-<span><span class="co">#library(sf)</span></span>
-<span></span>
-<span><span class="co"># Lets begin by visualising the data</span></span>
+<span><span class="co"># Lets begin by loading the data</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"it_py"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">it_py</span>, key.pos <span class="op">=</span> <span class="cn">NULL</span>, border<span class="op">=</span> <span class="cn">NA</span>, main <span class="op">=</span> <span class="st">"Global Biomes polygons"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Italian_Biomes_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"it_pt"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"it_pt"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">it_pt</span>, pch <span class="op">=</span> <span class="fl">19</span>, cex <span class="op">=</span> <span class="fl">0.5</span>, key.pos <span class="op">=</span> <span class="cn">NULL</span>, main <span class="op">=</span> <span class="st">"Global Biomes points"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Italian_Biomes_files/figure-html/unnamed-chunk-2-2.png" width="700"></p>
+<code class="sourceCode R"><span><span class="co"># Make a map of the Italian polygons data set</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">it_py</span>, key.pos <span class="op">=</span> <span class="cn">NULL</span>, border <span class="op">=</span> <span class="cn">NA</span>, main <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="Italian_Biomes_files/figure-html/unnamed-chunk-3-1.png" alt="**Fig 1**. Mediterranean and Nemoral Biomes of Italy (Mucina et al., 2023). The Mediterranean Biome is shaded orange, while the Nemoral Biome is shaded in green." width="480"><p class="caption">
+<strong>Fig 1</strong>. Mediterranean and Nemoral Biomes of Italy
+(Mucina et al., 2023). The Mediterranean Biome is shaded orange, while
+the Nemoral Biome is shaded in green.
+</p>
+</div>
+<p>From <strong>Fig 1</strong>, it is evident that the Italian polygons
+data set effectively represents the spatial distribution of the
+Mediterranean and Nemoral Biomes derived from the aggregation of
+vegetation typologies across the entire geography of Italy. This data
+set offers valuable insights into the extent and boundaries of different
+Biomes within the region. Nevertheless, it is essential for users to
+recognise that should they have smaller or larger scaled maps, which
+capture the spatial boundaries of different vegetation groups such as
+communities, habitats, disturbance classes, etc., they would serve as an
+ideal candidate for analyses with our package.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="co"># Due to downloading time we have provided the extracted data in the package</span></span>
-<span><span class="co">## ce_download("C/example_output..", c_source = "WorldClim", location = it_py)</span></span>
-<span><span class="co">## ?ce_extract("C/example_output", "C/example_output/elev", it_py, "GB")</span></span>
-<span></span>
-<span><span class="co"># Lets have a look at the extracted data</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"it_data"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="../reference/plot_h.html">plot_h</a></span><span class="op">(</span><span class="va">it_data</span>, <span class="st">"MED"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Italian_Biomes_files/figure-html/unnamed-chunk-2-3.png" width="700"></p>
+<code class="sourceCode R"><span><span class="co"># Make a map of the Italian points data set</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">it_pt</span>, pch <span class="op">=</span> <span class="fl">19</span>, cex <span class="op">=</span> <span class="fl">0.5</span>, key.pos <span class="op">=</span> <span class="cn">NULL</span>, main <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="Italian_Biomes_files/figure-html/unnamed-chunk-4-1.png" alt="**Fig 2**. Mediterranean and Nemoral Biomes of Italy (Mucina et al., 2023). The Mediterranean Biome is coded as orange points, while the Nemoral Biome is coded as green points." width="480"><p class="caption">
+<strong>Fig 2</strong>. Mediterranean and Nemoral Biomes of Italy
+(Mucina et al., 2023). The Mediterranean Biome is coded as orange
+points, while the Nemoral Biome is coded as green points.
+</p>
+</div>
+<p>By design <strong>Fig 2</strong>, spans almost the same spatial
+extent as in <strong>Fig 1</strong>. Each of the points (n = 9963)
+within the Italian point data set is spaced at ~ 5m in a grid
+configuration. Here users containing georeferenced features such as
+quadrat locations, mapping notes of vegetation typologies, disturbance
+regimes, etc., they would serve as an ideal candidate for analyses with
+our package. By utilising these polygon or point mapping structures as a
+foundation, our package enables users to leverage the inherent structure
+and spatial representation they require to conduct their own targeted
+investigations effectively. This flexibility accommodates a wide range
+of research needs and empowers users to explore the intricate
+relationships of vegetation groups, habitats, disturbance classes,
+structural classes, etc., on their terms.</p>
+<div class="section level3">
+<h3 id="downloading-climate-and-elevation-data">Downloading climate and elevation data<a class="anchor" aria-label="anchor" href="#downloading-climate-and-elevation-data"></a>
+</h3>
+<p>The function <code>ce_download</code> enables users to download both
+climate and elevation data. Users have the option to select climate data
+from either WorldClim 2 (Fick &amp; Hijmans, 2017) or CHELSA (Karger et
+al., 2016a; Karger et al., 2016b; Karger et al., 2018). Regarding
+elevation data, users can choose either the NASA Earth Explorer’s SRTM
+(Farr et al., 2007) or Mapzen terrain tiles (Hollister &amp; Shah,
+2018).</p>
+<p>In this specific example, we have utilised the default settings of
+<code>ce_download</code> to download WorldClim 2 climate data and Mapzen
+elevation data for the Italian polygon data set. However, please note
+that the following code chunk is intentionally set not to evaluate
+because its execution requires a time. Fortunately, to facilitate the
+presented examples, we have already stored the downloaded and extracted
+(using <code>ce_extract</code>) data within the package (see below for
+more details).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_wl.html">plot_wl</a></span><span class="op">(</span><span class="va">it_data</span>, <span class="st">"MED"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Italian_Biomes_files/figure-html/unnamed-chunk-2-4.png" width="700"></p>
+<code class="sourceCode R"><span><span class="co"># Do not execute this code if you are in a hurry as it will take time depending</span></span>
+<span><span class="co"># on the strength and speed of your internet connection.</span></span>
+<span></span>
+<span><span class="co"># This part downloads the data and takes time</span></span>
+<span><span class="fu"><a href="../reference/ce_download.html">ce_download</a></span><span class="op">(</span></span>
+<span>  <span class="st">"C/example_output.."</span>,</span>
+<span>  location <span class="op">=</span> <span class="va">it_py</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Once the data is downloaded, this function is quick.</span></span>
+<span><span class="va">it_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ce_extract.html">ce_extract</a></span><span class="op">(</span></span>
+<span>  <span class="st">"C/example_output.."</span>,</span>
+<span>  location <span class="op">=</span> <span class="va">it_py</span>,</span>
+<span>  location_g <span class="op">=</span> <span class="st">"GB"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_c.html">plot_c</a></span><span class="op">(</span><span class="va">it_data</span>, <span class="st">"MED"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Italian_Biomes_files/figure-html/unnamed-chunk-2-5.png" width="700"></p>
+<code class="sourceCode R"><span><span class="co"># Fortunately you can avoid the above steps by simply loading the data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"it_data"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="climatic-envelope-of-the-italian-biome-data-sets">Climatic envelope of the Italian Biome data sets<a class="anchor" aria-label="anchor" href="#climatic-envelope-of-the-italian-biome-data-sets"></a>
+</h3>
+<p>climenv provides three plotting functions, one for the traditional
+Holdridge life zone classification scheme (<code>plot_h</code>), one for
+the Walter-Lieth climate diagrams (<code>plot_wl</code>) and a new
+custom plot (<code>plot_c</code>) integrating features from both systems
+as well as the commonly used bioclim variables (Hijmans et al.,
+2005).</p>
+<p>One of our graphical outputs is the Holdridge (1967) life zone
+classification plot. Holdridge’s life zone classification plot, also
+known as the Holdridge Life Zone System or Holdridge Bioclimatic
+Classification System, is based on three main factors that influence the
+distribution of vegetation and ecosystems. By combining temperature,
+precipitation, and potential evapotranspiration Holdridge’s
+classification plot divides the Earth’s surface into distinct life zones
+or biomes (<em>sensu</em> Holdridge).</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Make Holdridge’s (1967) life zone classification diagram</span></span>
+<span><span class="fu"><a href="../reference/plot_h.html">plot_h</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">it_data</span>, <span class="st">"MED"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/plot_h.html">plot_h</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">it_data</span>, <span class="st">"NEM"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="Italian_Biomes_files/figure-html/unnamed-chunk-7-1.png" alt="**Fig 3**. Position of the Mediterranean (MED) and Nemoral (NEM) Biomes within Italy derived using WorldClim climate within Holdridge’s (1967) life zone classification. The surface shading in the background is new addition to the original life zone classification and helps interpretation by converting a point in evapotranspiration-precipitation space to an appropriate cross-blended hypsometric colour – in this intuitive instance colours tending towards the red spectrum feature higher temperatures blended with lower precipitation compared while colours tending towards the blue colour spectrum have lower temperatures and higher precipitation." width="480"><img src="Italian_Biomes_files/figure-html/unnamed-chunk-7-2.png" alt="**Fig 3**. Position of the Mediterranean (MED) and Nemoral (NEM) Biomes within Italy derived using WorldClim climate within Holdridge’s (1967) life zone classification. The surface shading in the background is new addition to the original life zone classification and helps interpretation by converting a point in evapotranspiration-precipitation space to an appropriate cross-blended hypsometric colour – in this intuitive instance colours tending towards the red spectrum feature higher temperatures blended with lower precipitation compared while colours tending towards the blue colour spectrum have lower temperatures and higher precipitation." width="480"><p class="caption">
+<strong>Fig 3</strong>. Position of the Mediterranean (MED) and Nemoral
+(NEM) Biomes within Italy derived using WorldClim climate within
+Holdridge’s (1967) life zone classification. The surface shading in the
+background is new addition to the original life zone classification and
+helps interpretation by converting a point in
+evapotranspiration-precipitation space to an appropriate cross-blended
+hypsometric colour – in this intuitive instance colours tending towards
+the red spectrum feature higher temperatures blended with lower
+precipitation compared while colours tending towards the blue colour
+spectrum have lower temperatures and higher precipitation.
+</p>
+</div>
+<p>Another common graphical output is the Walter-Lieth (1960) climatic
+diagram. Here our package is a wrapper for the existing diagwl function
+of the climatol R package (Guijarro, 2019). This diagram consists of two
+primary components: temperature and precipitation, which when combined
+in a single diagram is supposed to allow for a comprehensive
+visualisation of climate patterns.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Make Walter-Leigh's (1960) climate diagram</span></span>
+<span><span class="fu"><a href="../reference/plot_wl.html">plot_wl</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">it_data</span>, <span class="st">"MED"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/plot_wl.html">plot_wl</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">it_data</span>, <span class="st">"NEM"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="Italian_Biomes_files/figure-html/unnamed-chunk-8-1.png" alt="**Fig 4**. Walter-Lieth’s climatic diagram (1960) of the Mediterranean (MED) and Nemoral (NEM) Biome within Italy derived using WorldClim. When precipitation is &gt; 100 mm, the scale increases from 2mm C-1 to 20 mm  C-1 (as indicated by the black horizontal line) to avoid too high diagrams in very wet locations. This change is indicated by a black horizontal line, and the graph over is filled in solid blue. When the precipitation graph lies under the temperature graph (P &lt; 2T) we have an arid period (filled in dotted red vertical lines). Otherwise the period is considered humid (filled in light blue). Daily maximum average temperature of the hottest month and daily minimum average temperature of the coldest month are labeled in black on the left margin of the diagram." width="480"><img src="Italian_Biomes_files/figure-html/unnamed-chunk-8-2.png" alt="**Fig 4**. Walter-Lieth’s climatic diagram (1960) of the Mediterranean (MED) and Nemoral (NEM) Biome within Italy derived using WorldClim. When precipitation is &gt; 100 mm, the scale increases from 2mm C-1 to 20 mm  C-1 (as indicated by the black horizontal line) to avoid too high diagrams in very wet locations. This change is indicated by a black horizontal line, and the graph over is filled in solid blue. When the precipitation graph lies under the temperature graph (P &lt; 2T) we have an arid period (filled in dotted red vertical lines). Otherwise the period is considered humid (filled in light blue). Daily maximum average temperature of the hottest month and daily minimum average temperature of the coldest month are labeled in black on the left margin of the diagram." width="480"><p class="caption">
+<strong>Fig 4</strong>. Walter-Lieth’s climatic diagram (1960) of the
+Mediterranean (MED) and Nemoral (NEM) Biome within Italy derived using
+WorldClim. When precipitation is &gt; 100 mm, the scale increases from
+2mm C-1 to 20 mm C-1 (as indicated by the black horizontal line) to
+avoid too high diagrams in very wet locations. This change is indicated
+by a black horizontal line, and the graph over is filled in solid blue.
+When the precipitation graph lies under the temperature graph (P &lt;
+2T) we have an arid period (filled in dotted red vertical lines).
+Otherwise the period is considered humid (filled in light blue). Daily
+maximum average temperature of the hottest month and daily minimum
+average temperature of the coldest month are labeled in black on the
+left margin of the diagram.
+</p>
+</div>
+<p>Lastly, we present our custom diagrams which incorporate elements
+from Holdridge’s (1967) life zone classification, Walter-Lieth’s
+climatic diagram (1960), and the widely utilised bioclimatic variables
+(Hijmans et al., 2005) commonly employed in ecological and environmental
+research. These variables are crucial in describing environmental
+factors that shape the distribution and behavior of organisms, including
+plants, as evidenced by the high citation count of works by Holdridge,
+Walter-Lieth, and Hijmans.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Make the custom climate diagram</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.5</span>, <span class="fl">2.8</span>, <span class="fl">2</span>, <span class="fl">17</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/plot_c.html">plot_c</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">it_data</span>, <span class="st">"MED"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/plot_c.html">plot_c</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">it_data</span>, <span class="st">"NEM"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="Italian_Biomes_files/figure-html/unnamed-chunk-9-1.png" alt="**Fig 5**. Custom diagram showing the climatic envelope of the Italian Mediterranean (MED) and Nemoral (NEM) Biomes. The abbreviations used are as follow: biotemperture (BioT), isothermality (ISO), mean annual temperature (MAT), temperature seasonality (TS), number of dry months with &lt; 50 mm rainfall during the month (Dry mo), mean annual precipitation (MAP), potential evapotranspiration (PET), precipitation seasonality (PS), seasonal rainfall percentage in Summer (S), Autumn (A), Winter (W), Vernal (V), elevation (Elv) and latitude (Lat)." width="672"><img src="Italian_Biomes_files/figure-html/unnamed-chunk-9-2.png" alt="**Fig 5**. Custom diagram showing the climatic envelope of the Italian Mediterranean (MED) and Nemoral (NEM) Biomes. The abbreviations used are as follow: biotemperture (BioT), isothermality (ISO), mean annual temperature (MAT), temperature seasonality (TS), number of dry months with &lt; 50 mm rainfall during the month (Dry mo), mean annual precipitation (MAP), potential evapotranspiration (PET), precipitation seasonality (PS), seasonal rainfall percentage in Summer (S), Autumn (A), Winter (W), Vernal (V), elevation (Elv) and latitude (Lat)." width="672"><p class="caption">
+<strong>Fig 5</strong>. Custom diagram showing the climatic envelope of
+the Italian Mediterranean (MED) and Nemoral (NEM) Biomes. The
+abbreviations used are as follow: biotemperture (BioT), isothermality
+(ISO), mean annual temperature (MAT), temperature seasonality (TS),
+number of dry months with &lt; 50 mm rainfall during the month (Dry mo),
+mean annual precipitation (MAP), potential evapotranspiration (PET),
+precipitation seasonality (PS), seasonal rainfall percentage in Summer
+(S), Autumn (A), Winter (W), Vernal (V), elevation (Elv) and latitude
+(Lat).
+</p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="notes-on-selecting-appropriate-climatic-variables">Notes on selecting appropriate climatic variables<a class="anchor" aria-label="anchor" href="#notes-on-selecting-appropriate-climatic-variables"></a>
+</h3>
+<p>To ensure the selection of climatic variables for discriminatory
+analyses, numerous data-driven approaches can be employed. For instance,
+with lots of data, one could use CART, random forests, boosted
+regression trees, or any number of machine learning algorithms to
+determine which variables are the most appropriate (robust and
+ecologically meaningful) for delineating between classes , for the
+purposes of discriminatory analyses. In this extended vignette, we will
+delve into an exploration of which climatic variables are most
+appropriate for delineating our highly specific example data set of
+Italian Biomes (Italian point data set). By employing these rigorous
+methods, one can make a more informed decisions about the choice of
+climatic variables that play a major role in characterising and
+distinguishing the climatic envelopes of the various biomes in their own
+study areas.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Lets start by extracting the climate data for all points in the</span></span>
+<span><span class="co"># italy_pt data.</span></span>
+<span></span>
+<span><span class="va">it_data_extended</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ce_extract.html">ce_extract</a></span><span class="op">(</span></span>
+<span>  path <span class="op">=</span> <span class="st">"C:/Users/jamie/OneDrive/Desktop/temp"</span>,</span>
+<span>  location <span class="op">=</span> <span class="va">it_pt</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># If you haven't downloaded the climate and elevation data by following the code</span></span>
+<span><span class="co"># above you could simply load the data()</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"it_data_extended"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># But this data needs to be reformatted a bit</span></span>
+<span></span>
+<span><span class="co"># Lets start by calculating the bioclim variables</span></span>
+<span></span>
+<span><span class="va">bioclim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu">dismo</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dismo/man/biovars.html" class="external-link">biovars</a></span><span class="op">(</span></span>
+<span>  prec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">it_data_extended</span><span class="op">$</span><span class="va">prec</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  tmin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">it_data_extended</span><span class="op">$</span><span class="va">tmin</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  tmax <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">it_data_extended</span><span class="op">$</span><span class="va">tmax</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Lets make some more intuitive names for these variables</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">bioclim</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Mean_annual_temperature"</span>,</span>
+<span>  <span class="st">"Mean_diurnal_range"</span>,</span>
+<span>  <span class="st">"Isothermality"</span>,</span>
+<span>  <span class="st">"Temperature_seasonality"</span>,</span>
+<span>  <span class="st">"Max_temperature_of_warmest_month"</span>,</span>
+<span>  <span class="st">"Min_temperature_of_coldest_month"</span>,</span>
+<span>  <span class="st">"Temperature_annual_range"</span>,</span>
+<span>  <span class="st">"Mean_temperature_of_the_wettest_quarter"</span>,</span>
+<span>  <span class="st">"Mean_temperature_of_driest_quarter"</span>,</span>
+<span>  <span class="st">"Mean_temperature_of_warmest_quarter"</span>,</span>
+<span>  <span class="st">"Mean_temperature_of_coldest_quarter"</span>,</span>
+<span>  <span class="st">"Total_annual_precipitation"</span>,</span>
+<span>  <span class="st">"Precipitation_of_wettest_month"</span>,</span>
+<span>  <span class="st">"Precipitation_of_driest_month"</span>,</span>
+<span>  <span class="st">"Precipitation_seasonality"</span>,</span>
+<span>  <span class="st">"Precipitation_of_wettest_quarter"</span>,</span>
+<span>  <span class="st">"Precipitation_of_driest_quarter"</span>,</span>
+<span>  <span class="st">"Precipitation_of_warmest_quarter"</span>,</span>
+<span>  <span class="st">"Precipitation_of_coldest_quarter"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># And now lets get the Holdridge variables</span></span>
+<span></span>
+<span><span class="va">hold</span> <span class="op">&lt;-</span> <span class="fu">macroBiome</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/macroBiome/man/cliHoldridgePoints.html" class="external-link">cliHoldridgePoints</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">it_data_extended</span><span class="op">$</span><span class="va">tavg</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">it_data_extended</span><span class="op">$</span><span class="va">prec</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Lets make some more intuitive names for these variables</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">hold</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Mean_Annual_Biotemperature"</span>,</span>
+<span>  <span class="st">"Total_Annual_Precipitation"</span>,</span>
+<span>  <span class="st">"Potential_Evapotranspiration_Ratio"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Lets join them together along with elevation and altitude</span></span>
+<span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span></span>
+<span>  <span class="va">bioclim</span>, <span class="va">hold</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Mean_Annual_Biotemperature"</span>,</span>
+<span>                    <span class="st">"Potential_Evapotranspiration_Ratio"</span><span class="op">)</span><span class="op">]</span>,</span>
+<span>  elev <span class="op">=</span> <span class="va">it_data_extended</span><span class="op">$</span><span class="va">elev</span>,</span>
+<span>  lat <span class="op">=</span> <span class="va">it_data_extended</span><span class="op">$</span><span class="va">lat</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Lets just fix the last two column names</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">22</span>, <span class="fl">23</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Elevation"</span>, <span class="st">"Latitude"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Now lets add the Biome type as a column</span></span>
+<span></span>
+<span><span class="va">dat</span><span class="op">$</span><span class="va">class</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/is.bool.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">it_pt</span><span class="op">$</span><span class="va">GB</span><span class="op">)</span></span></code></pre></div>
+<p>Random Forest is an ensemble learning algorithm that combines
+multiple decision trees to make predictions. Decision trees are
+structures that make predictions by splitting data based on if-else
+conditions. They create a tree-like model of decisions. Random Forest
+adds randomness by using a technique called bootstrapping, which
+involves randomly sampling the data with replacement. It also introduces
+variability by randomly selecting a subset of predictor variables for
+each split in a decision tree. In Random Forest, a collection of
+decision trees is built. Each tree is trained on a different subset of
+the data and uses a random subset of predictor variables. Random Forest
+models are known for their robustness, accuracy, and resistance to
+overfitting. They handle high-dimensional data well, are less affected
+by outliers, and can capture complex relationships between variables.
+Additionally, Random Forest provides an estimate of variable importance,
+which helps with feature selection and interpretation. For more
+information please refer to Breiman (2001).</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Now we are about ready to start the random forests analyses</span></span>
+<span></span>
+<span><span class="co"># Load the required package</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.stat.berkeley.edu/~breiman/RandomForests/" class="external-link">randomForest</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Now we need to split the dataset into training and testing sets</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>  <span class="co"># For reproducibility</span></span>
+<span></span>
+<span><span class="va">train_indices</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">*</span> <span class="fl">0.8</span><span class="op">)</span>  <span class="co"># 80% for training</span></span>
+<span><span class="va">train_data</span> <span class="op">&lt;-</span> <span class="va">dat</span><span class="op">[</span><span class="va">train_indices</span>, <span class="op">]</span></span>
+<span><span class="va">test_data</span> <span class="op">&lt;-</span> <span class="va">dat</span><span class="op">[</span><span class="op">-</span><span class="va">train_indices</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="co"># Train the Random Forest model</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/randomForest.html" class="external-link">randomForest</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">class</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">train_data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Make predictions on the test set</span></span>
+<span><span class="va">predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">model</span>, newdata <span class="op">=</span> <span class="va">test_data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Evaluate the model's performance</span></span>
+<span><span class="va">confusion_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">predictions</span>, <span class="va">test_data</span><span class="op">$</span><span class="va">class</span><span class="op">)</span></span>
+<span><span class="va">accuracy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">confusion_matrix</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">confusion_matrix</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">confusion_matrix</span><span class="op">)</span></span>
+<span><span class="co">#&gt;            </span></span>
+<span><span class="co">#&gt; predictions  MED  NEM</span></span>
+<span><span class="co">#&gt;         MED  475   39</span></span>
+<span><span class="co">#&gt;         NEM   54 1425</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Accuracy:"</span>, <span class="va">accuracy</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "Accuracy: 0.95333667837431"</span></span></code></pre></div>
+<p>Based on the provided results, the model demonstrated a high accuracy
+of approximately 95% in predicting the Mediterranean and Nemoral Biomes
+in Italy. The individual error rates were observed to be around 8% for
+the Mediterranean Biome and 4% for the Nemoral Biome. While
+cross-validation and other methods could potentially enhance the model’s
+performance, exploring them falls beyond the scope of this brief
+vignette. However, it might be valuable to assess the importance of
+variables in this model and determine whether they correspond to the
+variables present in our climate diagrams.</p>
+<p>Considering this objective, the Gini coefficient is commonly employed
+to assess the performance of the predictive variables, specifically
+climate and elevation variables. The Gini coefficient, ranging from 0 to
+1, serves as a measure of the relative importance of these predictor
+variables within the model. Higher Gini coefficients signify greater
+significance of the corresponding variables in predicting the desired
+outcome. By visualising the variable importance rankings, the plot sheds
+light on the crucial predictors that contribute to the model’s
+performance. Variables with higher Gini coefficients hold more influence
+within the Random Forest model, emphasising their importance in the
+prediction process.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get variable importance measures</span></span>
+<span><span class="va">importance</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/importance.html" class="external-link">importance</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print the importance measures</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">importance</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                                         MeanDecreaseGini</span></span>
+<span><span class="co">#&gt; Mean_annual_temperature                        279.25592</span></span>
+<span><span class="co">#&gt; Mean_diurnal_range                              44.48494</span></span>
+<span><span class="co">#&gt; Isothermality                                   42.86125</span></span>
+<span><span class="co">#&gt; Temperature_seasonality                        114.87925</span></span>
+<span><span class="co">#&gt; Max_temperature_of_warmest_month                38.21648</span></span>
+<span><span class="co">#&gt; Min_temperature_of_coldest_month               487.73150</span></span>
+<span><span class="co">#&gt; Temperature_annual_range                        78.86297</span></span>
+<span><span class="co">#&gt; Mean_temperature_of_the_wettest_quarter         56.62279</span></span>
+<span><span class="co">#&gt; Mean_temperature_of_driest_quarter              98.47761</span></span>
+<span><span class="co">#&gt; Mean_temperature_of_warmest_quarter             70.30854</span></span>
+<span><span class="co">#&gt; Mean_temperature_of_coldest_quarter            487.77039</span></span>
+<span><span class="co">#&gt; Total_annual_precipitation                      51.77637</span></span>
+<span><span class="co">#&gt; Precipitation_of_wettest_month                  44.92184</span></span>
+<span><span class="co">#&gt; Precipitation_of_driest_month                  132.60699</span></span>
+<span><span class="co">#&gt; Precipitation_seasonality                      236.84034</span></span>
+<span><span class="co">#&gt; Precipitation_of_wettest_quarter                51.59033</span></span>
+<span><span class="co">#&gt; Precipitation_of_driest_quarter                144.96324</span></span>
+<span><span class="co">#&gt; Precipitation_of_warmest_quarter                91.28258</span></span>
+<span><span class="co">#&gt; Precipitation_of_coldest_quarter                48.69874</span></span>
+<span><span class="co">#&gt; Mean_Annual_Biotemperature                     335.61126</span></span>
+<span><span class="co">#&gt; Potential_Evapotranspiration_Ratio              64.91563</span></span>
+<span><span class="co">#&gt; Elevation                                       49.51127</span></span>
+<span><span class="co">#&gt; Latitude                                       185.55613</span></span>
+<span></span>
+<span><span class="co"># Plot variable importance</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="fl">0.1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/varImpPlot.html" class="external-link">varImpPlot</a></span><span class="op">(</span><span class="va">model</span>, main <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="Italian_Biomes_files/figure-html/unnamed-chunk-13-1.png" alt="**Fig 6**. Gini Coefficient Plot illustrating the variable importance measures derived from a Random Forest model." width="672"><p class="caption">
+<strong>Fig 6</strong>. Gini Coefficient Plot illustrating the variable
+importance measures derived from a Random Forest model.
+</p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h3>
+<p>Breiman, L. (2001). Random forests. <em>Machine learning</em>, 45,
+5-32.</p>
+<p>Farr, T. G., Rosen, P. A., Caro, E., Crippen, R., Duren, R., Hensley,
+S., … Alsdorf, D. (2007). The Shuttle Radar Topography Mission.
+<em>Reviews of Geophysics</em>, 45. DOI: 10.1029/2005RG000183</p>
+<p>Fick, S. E., &amp; Hijmans, R. J. (2017). WorldClim 2: new 1‐km
+spatial resolution climate surfaces for global land areas.
+<em>International Journal of Climatology</em>, 37, 4302–4315.</p>
+<p>Guijarro, J. A. (2019). climatol: Climate Tools (Series
+Homogenization and Derived Products). Retrieved from <a href="https://cran.r-project.org/package=climatol" class="external-link uri">https://cran.r-project.org/package=climatol</a></p>
+<p>Hijmans, R. J., Cameron, S. E., Parra, J. L., Jones, P. G., &amp;
+Jarvis, A. (2005). Very high resolution interpolated climate surfaces
+for global land areas. <em>International Journal of Climatology</em>,
+25, 1965–1978. DOI: 10.1002/joc.1276</p>
+<p>Holdridge, L. R. (1967). Life zone ecology. San José: Tropical
+Science Center.</p>
+<p>Hollister, J., &amp; Shah, T. (2018). elevatr: Access elevation data
+from various APIs (Version 0.2.0). Retrieved from <a href="https://CRAN.R-project.org/package=elevatr" class="external-link uri">https://CRAN.R-project.org/package=elevatr</a>. DOI:
+10.5281/zenodo.400259.</p>
+<p>Karger, D.N., et al. (2016a). CHELSA climatologies at high resolution
+for the earth’s land surface areas (Version 1.0). <em>World Data Center
+for Climate</em>. DOI: 10.1594/WDCC/CHELSA_v1</p>
+<p>Karger, D.N., et al. (2016b). CHELSA climatologies at high resolution
+for the earth’s land surface areas (Version 1.1). <em>World Data Center
+for Climate</em>. DOI: 10.1594/WDCC/CHELSA_v1_1</p>
+<p>Karger, D.N., et al. (2018). Data from: Climatologies at high
+resolution for the earth’s land surface areas. <em>EnviDat</em>. DOI:
+10.16904/envidat.228.v2.1</p>
+<p>Mucina et al., 2023</p>
+<p>Walter, H., &amp; Lieth, H. (1960). 1967. Klimadiagramm-Weltatlas.
+Gustav FisherFisccher, Jena.</p>
+</div>
 </div>
   </div>
 
@@ -160,7 +546,7 @@ WorldClim 2 climate and Mapzen digital elevation.</p>
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by James L. Tsakalos, Federico Luebert, Martin R. Smith, Ladislav Mucina.</p>
+<p>Developed by James L. Tsakalos, Martin R. Smith, Federico Luebert, Ladislav Mucina.</p>
 </div>
 
 <div class="pkgdown">
