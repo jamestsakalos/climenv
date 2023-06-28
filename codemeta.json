@@ -24,16 +24,16 @@
     },
     {
       "@type": "Person",
-      "givenName": "Federico",
-      "familyName": "Luebert",
-      "@id": "https://orcid.org/0000-0003-2251-4056"
-    },
-    {
-      "@type": "Person",
       "givenName": "Martin R.",
       "familyName": "Smith",
       "email": "martin.smith@durham.ac.uk",
       "@id": "https://orcid.org/0000-0001-5660-1727"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Federico",
+      "familyName": "Luebert",
+      "@id": "https://orcid.org/0000-0003-2251-4056"
     },
     {
       "@type": "Person",
@@ -264,6 +264,18 @@
     },
     "11": {
       "@type": "SoftwareApplication",
+      "identifier": "randomForest",
+      "name": "randomForest",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=randomForest"
+    },
+    "12": {
+      "@type": "SoftwareApplication",
       "identifier": "sf",
       "name": "sf",
       "provider": {
@@ -274,7 +286,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=sf"
     },
-    "12": {
+    "13": {
       "@type": "SoftwareApplication",
       "identifier": "sp",
       "name": "sp",
@@ -286,7 +298,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=sp"
     },
-    "13": {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "Ternary",
       "name": "Ternary",
@@ -298,7 +310,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=Ternary"
     },
-    "14": {
+    "15": {
       "@type": "SoftwareApplication",
       "identifier": "terra",
       "name": "terra",
@@ -312,5 +324,5 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1301.481KB"
+  "fileSize": "1765.17KB"
 }
