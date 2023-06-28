@@ -1,6 +1,6 @@
 Package: climenv
 Type: Package
-Title: Downloading, Extracting and Plotting Climatic Envelopes
+Title: Download, Extract and Visualise Climate and Elevation Data
 Version: 1.0.0
 Authors@R: c(
     person("James L.", "Tsakalos", role = c("aut", "cre", "cph"),
@@ -49,12 +49,13 @@ Imports:
     Ternary,
     terra
 Suggests:
+    covr,
     fs,
     knitr,
     raster,
     rmarkdown,
     testthat (>= 3.0.0),
-    vdiffr,
+    vdiffr
 Config/Needs/check: rcmdcheck
 Config/Needs/coverage: covr
 Config/Needs/website: pkgdown
