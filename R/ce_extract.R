@@ -371,6 +371,7 @@
 #' @importFrom stats aggregate
 #' @importFrom terra centroids crds extract rast vect
 #' @importFrom dplyr %>% group_by summarize
+#' @importFrom randomForest randomForest importance varImpPlot
 #' @export
 ce_extract <- function(
     path = NULL,
