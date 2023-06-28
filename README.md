@@ -1,11 +1,10 @@
 
 <!-- badges: start -->
 
-[![test-coverage](https://github.com/jamestsakalos/climenv/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/jamestsakalos/climenv/actions/workflows/test-coverage.yaml)
 [![codemeta](https://github.com/jamestsakalos/climenv/actions/workflows/codemeta.yml/badge.svg)](https://github.com/jamestsakalos/climenv/actions/workflows/codemeta.yml)
-[![Codecov test
-coverage](https://codecov.io/gh/jamestsakalos/climenv/branch/master/graph/badge.svg)](https://app.codecov.io/gh/jamestsakalos/climenv?branch=master)
+[![pkgdown](https://github.com/jamestsakalos/climenv/actions/workflows/pkgdown.yml/badge.svg)](https://github.com/jamestsakalos/climenv/actions/workflows/pkgdown.yml)
 [![R-CMD-check](https://github.com/jamestsakalos/climenv/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/jamestsakalos/climenv/actions/workflows/R-CMD-check.yml)
+[![test-coverage](https://github.com/jamestsakalos/climenv/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/jamestsakalos/climenv/actions/workflows/test-coverage.yaml)
 <!-- badges: end -->
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
