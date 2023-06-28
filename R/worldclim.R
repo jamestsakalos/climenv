@@ -40,7 +40,7 @@
   )
 
   # Export the climate mosaic
-  lapply(c(1:12), FUN = function(x){
+  lapply(c(1:12), FUN = function (x) {
     terra::writeRaster(
       clim_mosaic[[x]],
       paste0(output_dir, "/", var, "/", names(clim_mosaic)[x], ".tif"),

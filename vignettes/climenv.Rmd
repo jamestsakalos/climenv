@@ -100,35 +100,36 @@ terra::values(r) <- 1:100
 terra::writeRaster(r, paste0(temp_path, "/elev/srtm.tif"))
 
 # Prec
-x<-c(5,10,15,20,25,34.40666,25,20,15,10,5,0)*8
-temp2<-paste0("prec_", sprintf("%02d", 1:12), ".tif")
+x <- c(5, 10, 15, 20, 25, 34.40666, 25, 20, 15, 10, 5, 0) * 8
+temp2 <- paste0("prec_", sprintf("%02d", 1:12), ".tif")
 for (i in seq_along(temp2)) {
   terra::values(r) <- x[i]
   terra::writeRaster(r, paste0(temp_path, "/prec/", temp2[i]))
 }
 
 # tmax
-x<-c(43,38,33,29,25,19.8,17.01,21,25,30,37,44)
-temp2<-paste0("tmax_", sprintf("%02d", 1:12), ".tif")
-for(i in 1:length(temp2)){
-  values(r)<-x[i]
-  writeRaster(r, paste0(temp_path, "/tmax/",temp2[i]))
+x <- c(43, 38, 33, 29, 25, 19.8, 17.01, 21, 25, 30, 37, 44)
+temp2 <- paste0("tmax_", sprintf("%02d", 1:12), ".tif")
+for (i in seq_along(temp2)) {
+  values(r) <- x[i]
+  writeRaster(r, paste0(temp_path, "/tmax/", temp2[i]))
 }
 
 # tmin
-x<-c(43,38,33,29,25,19.8,17.01,21,25,30,37,44)/2
-temp2<-paste0("tmin_", sprintf("%02d", 1:12), ".tif")
-for(i in 1:length(temp2)){
-  values(r)<-x[i]
-  writeRaster(r, paste0(temp_path, "/tmin/",temp2[i]))
+x <- c(43, 38, 33, 29, 25, 19.8, 17.01, 21, 25, 30, 37, 44) / 2
+temp2 <- paste0("tmin_", sprintf("%02d", 1:12), ".tif")
+for (i in seq_along(temp2)) {
+  values(r) <- x[i]
+  writeRaster(r, paste0(temp_path, "/tmin/", temp2[i]))
 }
 
 # tmean
-x<-c(43,38,33,29,25,19.8,17.01,21,25,30,37,44)-c(c(43,38,33,29,25,19.8,17.01,21,25,30,37,44)/2)/2
-temp2<-paste0("tavg_", sprintf("%02d", 1:12), ".tif")
-for(i in 1:length(temp2)){
-  values(r)<-x[i]
-  writeRaster(r, paste0(temp_path, "/tavg/",temp2[i]))
+x <- c(43, 38, 33, 29, 25, 19.8, 17.01, 21, 25, 30, 37, 44) -
+  c(c(43, 38, 33, 29, 25, 19.8, 17.01, 21, 25, 30, 37, 44) / 2) / 2
+temp2 <- paste0("tavg_", sprintf("%02d", 1:12), ".tif")
+for (i in seq_along(temp2)) {
+  values(r) <- x[i]
+  writeRaster(r, paste0(temp_path, "/tavg/", temp2[i]))
 }
 
 # Create a polygon file from the raster
@@ -163,13 +164,17 @@ transformation allows for a metric buffer to be added to the polygon.
 ```{r}
 # Extract the climate data
 
-data_py<-ce_extract(file.path(temp_path),
-                    location = pol_py, location_g = NULL,
-                    c_source = "WorldClim")
+data_py <- ce_extract(
+  file.path(temp_path),
+  location = pol_py,
+  location_g = NULL
+)
 
-data_pt<-ce_extract(file.path(temp_path),
-                    location = pol_pt, location_g = NULL,
-                    c_source = "WorldClim")
+data_pt <- ce_extract(
+  file.path(temp_path),
+  location = pol_pt,
+  location_g = NULL
+)
 ```
 
 The returned data object is a list containing five data sets. Specifically, one 
@@ -215,14 +220,14 @@ function of the `climatol` R package (Guijarro, 2019).
 
 ```{r, fig.height = 5, fig.width = 5, fig.align = "center", fig.cap="Fig 1. Placeholder for Holdridge’s (1967) life zone classification"}
 # Make Holdridge’s (1967) life zone classification diagram
-plot_h(data=data_py, "0")
+plot_h(data = data_py, "0")
 ```
 ```{r, fig.height = 5, fig.width = 5, fig.align = "center", fig.cap="Fig 2. Walter-Leigh’s (1960) climate diagram"}
 # Make Walter-Leigh's (1960) climate diagram
-plot_wl(data=data_py, "0")
+plot_wl(data = data_py, "0")
 ```
 ```{r, fig.height = 4, fig.width = 7, fig.align = "center", fig.cap="Fig 3. Custom climate diagram."}
 # Make the custom climate diagram
-par(mar=c(1.5, 2.8, 2, 17))
-
+par(mar = c(1.5, 2.8, 2, 17))
+plot_c(data = data_py, "0")
 ```
