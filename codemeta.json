@@ -228,18 +228,6 @@
     },
     "9": {
       "@type": "SoftwareApplication",
-      "identifier": "ggplotify",
-      "name": "ggplotify",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=ggplotify"
-    },
-    "10": {
-      "@type": "SoftwareApplication",
       "identifier": "macroBiome",
       "name": "macroBiome",
       "provider": {
@@ -250,7 +238,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=macroBiome"
     },
-    "11": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "plyr",
       "name": "plyr",
@@ -262,7 +250,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=plyr"
     },
-    "12": {
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "sf",
       "name": "sf",
@@ -274,7 +262,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=sf"
     },
-    "13": {
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "sp",
       "name": "sp",
@@ -286,7 +274,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=sp"
     },
-    "14": {
+    "13": {
       "@type": "SoftwareApplication",
       "identifier": "Ternary",
       "name": "Ternary",
@@ -298,7 +286,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=Ternary"
     },
-    "15": {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "terra",
       "name": "terra",
@@ -312,5 +300,5 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1300.405KB"
+  "fileSize": "1307.316KB"
 }
