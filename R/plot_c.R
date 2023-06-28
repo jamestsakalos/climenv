@@ -21,6 +21,10 @@
 #' from the \code{ce_extract} function.
 #' @template output_data_param
 #' @template output_geo_id_param
+#' @param interval_prec Numeric. Interval of the precipitation axis.
+#' @param interval_temp Numeric. Interval of the temperature axis.
+#' @param stretch_temp Numeric. Ratio for stretching temperature relative to
+#' precipitation.
 #' @param p_cex Numeric. Text size for entire plot.
 #' @param nchr_main Numeric. Controls the number of characters of the main title
 #' before wrapping to a new line.
@@ -61,8 +65,18 @@
 #'
 #' # Step 4. Visualise the climatic envelope using our custom diagram
 #'
-#' plot_c(data = it_data, geo_id = "MED")
+#' # first lets store the default graphics parameters
+#' # we need to make some changes to ensure that the table fits in the plotting
+#' # region.
 #'
+#' opar <- par()
+#' par(mar = c(1.5, 2.2, 1.5, 14) + 0.01) # We need to change a few things here
+#' plot_c(
+#'   it_data, geo_id = "MED",
+#'   l_tcols = c(14.5, 17, 18.5, 19.5, 21)
+#' )
+#' par(opar)
+#' # This output works if you export to a three column width sized image.
 #' }
 #'
 #' @importFrom macroBiome cliHoldridgePoints
@@ -71,6 +85,9 @@
 #' @export
 plot_c <- function(data,
                    geo_id,
+                   interval_prec = 20,
+                   interval_temp = 5,
+                   stretch_temp = 4,
                    p_cex = 1,
                    nchr_main = 32,
                    l_main = 0.1,
@@ -102,9 +119,16 @@ plot_c <- function(data,
   row.names(bioclim) <- geo_id
 
   #* scaling precipitation ####
-  data$prec_m
-  y_min <- min(data$tmin_m) * 4
-  y_max <- max(data$prec_m)
+
+  y_min <- c(min(data$tmin_m) * stretch_temp) * 1.1
+  y_min <- plyr::round_any(abs(y_min), 10, f = ceiling) * -1
+  y_min <- y_min * stretch_temp
+  y_max <- max(
+    c(
+      max(data$prec_m * 1.1),
+      max(data$tmax_m[geo_id, ] * stretch_temp) * 1.1
+    )
+  )
 
   # Precipitation bars (plot) ####
   plot(c(1:12), data$prec_m[geo_id, ], type = "h", lwd = lwd_prec,
@@ -115,8 +139,8 @@ plot_c <- function(data,
   mtext(paste(strwrap(geo_id, width = nchr_main), collapse = "\n"),
         side = 3, line = l_main, font = 2, cex = p_cex * .7)
 
-  axis(side = 2, at = seq(0, max(data$prec_m), by = 50), col.axis = "blue",
-       las = 1, cex.axis = p_cex * .8, line = l_prec)
+  axis(side = 2, at = seq(0, max(data$prec_m), by = interval_prec),
+       col.axis = "blue", las = 1, cex.axis = p_cex * .8, line = l_prec)
 
   axis(side = 1, at = c(1:12),
        labels = c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"),
@@ -126,25 +150,28 @@ plot_c <- function(data,
   # Temperature lines (plot) ####
   par(new = TRUE, xpd = FALSE)
 
-  plot(c(1:12), data$tmax_m[geo_id, ] * 4, type = "l",
+  plot(c(1:12), data$tmax_m[geo_id, ] * stretch_temp, type = "l",
        axes = FALSE, col = "red", lwd = lwd_temp,
        ylim = c(y_min, y_max),
        xlab = "", ylab = "", yaxs = "i")
 
-  points(c(1:12), data$tmin_m[geo_id, ] * 4, type = "l",
+  points(c(1:12), data$tmin_m[geo_id, ] * stretch_temp, type = "l",
          col = "red", lwd = lwd_temp)
 
   #* scaling temperature ####
   t_min <- plyr::round_any(abs(y_min), 10, f = ceiling) * -1
   t_max <- max(data$tmax_m)
   t_max <- plyr::round_any(max(t_max), 10, f = ceiling)
-  t_min <- t_min * 4
-  t_max <- t_max * 4
+  t_min <- t_min * stretch_temp
+  t_max <- t_max * stretch_temp
 
-  axis(side = 4, at = seq(t_min, t_max, by = 20),
-       labels = seq(t_min, t_max, by = 20) / 4, las = 2, col.axis = "red",
+  axis(side = 4, at = seq(t_min, t_max, by = (interval_temp * stretch_temp)),
+       labels = seq(t_min, t_max,
+                    by = (interval_temp * stretch_temp)) / stretch_temp,
+       las = 2, col.axis = "red",
        cex.axis = p_cex * .8, line = -0.2, tick = FALSE)
-  axis(side = 4, at = seq(t_min, t_max, by = 20), las = 2, labels = FALSE)
+  axis(side = 4, at = seq(t_min, t_max, by = (interval_temp * stretch_temp)),
+       las = 2, labels = FALSE)
 
   mtext("mm", side = 3, line = l_units,
         at = -0.75, col = "blue", cex = p_cex * .6)
@@ -154,8 +181,10 @@ plot_c <- function(data,
   # This part works out how to distribute the tabular information evenly
   ht <- rev(
     .intervalm(
-      c(-max(c(-min(data$tmin_m[geo_id, ]), max(data$tmin_m[geo_id, ]))),
-        max(max(data$prec_m))), 10
+      c(
+        y_min,
+        y_max
+      ), 10
     )
   )
 
@@ -266,7 +295,8 @@ plot_c <- function(data,
           sum(as.numeric(data$prec_m[geo_id, ])
           ) * 100, 0)
     )
-    .concat_text(l_tcols["L2"] + 1.15, ht[9], paste(text, collapse = ""), col = "blue")
+    .concat_text(l_tcols["L2"] + 1.15, ht[9],
+                 paste(text, collapse = ""), col = "blue")
     text <- c("%")
     .concat_text(l_tcols["L5"], ht[9], text, col = "blue")
   }
@@ -293,7 +323,8 @@ plot_c <- function(data,
           ) * 100, 0)
     )
 
-    .concat_text(l_tcols["L2"] + 1.15, ht[9], paste(text, collapse = ""), col = "blue")
+    .concat_text(l_tcols["L2"] + 1.15, ht[9],
+                 paste(text, collapse = ""), col = "blue")
     text <- c("%")
     .concat_text(l_tcols["L5"], ht[9], text, col = "blue")
   }
@@ -316,7 +347,14 @@ plot_c <- function(data,
   text <- round(c(data$lat[geo_id, 1]), 2)
 
   .concat_text(l_tcols["L2"], ht[11], text, col = c(rep("black", 4)))
-  text <- c("\u00B0S")
+
+  # This part makes S or N depending on the latitude.
+  if (text < 0) {
+    text <- c("\u00B0S")
+  } else {
+    text <- c("\u00B0N")
+  }
+
   .concat_text(l_tcols["L5"], ht[11], text, col = "black")
 
 }
