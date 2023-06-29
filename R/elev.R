@@ -62,25 +62,27 @@
 #' @author James L. Tsakalos
 #' @seealso A more convenient function for other climate and elevation data
 #' [`ce_download()`].
-#' @references{ Hijmans, R.J., et al., (2023). geodata: Download Geographic
-#' Data. R package version 0.5-8. https://CRAN.R-project.org/package=geodata
+#' @references{ Hijmans, R.J., Barbosa, M., Ghosh, A., & Mandel, A. (2023).
+#' geodata: Download Geographic Data. R package version 0.5-8.
+#' https://CRAN.R-project.org/package=geodata
 #'
-#' Hollister, J. W., et al. (2021). elevatr: Access Elevation Data from Various
-#' APIs. R package version 0.4.2. https://CRAN.R-project.org/package=elevatr
+#' Hollister, J. (2022). elevatr: Access Elevation Data from Various
+#' APIs. R package version 0.4.2. \doi{10.5281/zenodo.5809645}
+#' https://CRAN.R-project.org/package=elevatr
 #'
-#' Mouratidis, A., and Ampatzidis, D. (2019). European Digital Elevation Model
+#' Mouratidis, A., & Ampatzidis, D. (2019). European Digital Elevation Model
 #' Validation against Extensive Global Navigation Satellite Systems Data and
 #' Comparison with SRTM DEM and ASTER GDEM in Central Macedonia (Greece).
 #' ISPRS International Journal of Geo-Information 8, 108.
-#' DOI: 10.3390/ijgi8030108
+#' \doi{10.3390/ijgi8030108}
 #' }
 #'
 #' @examples
 #' \dontrun{
-#' # Start by loading Italy's Mount Sibillini National Park boundary
-#' data("Sibillini_py", package = "climenv")
+#' # Start by loading Italy's Biom data
+#' data("italy_py", package = "climenv")
 #' # elevation will be saved in the output_dir (i.e. output directory)
-#'    elev(output_dir = "...Desktop/elev", location = Sibillini_py)
+#'    elev(output_dir = "...Desktop/elev", location = italy_py)
 #' }
 #' @importFrom elevatr get_elev_raster
 #' @importFrom geodata elevation_3s

@@ -20,16 +20,15 @@ The package contains geospatial polygon data showing the Biomes of Italy.
 The first column, \code{geometry}, refers to the X and Y coordinate
 of each polygon spaced over Italy. The second column, \code{GB}, refers to
 the Global Biome assigned to each coordinate. For more details on the
-assignment of Biomes please refer to Mucina et al. (2022).
+assignment of Biomes please refer to Mucina et al. (2023).
 }
 \examples{
-data("it_py")
+data("it_py", package = "climenv")
 plot(it_py)
 }
 \references{
-{ Mucina, L., Divíšek, J., Tsakalos, J.L. (2022).
+{ Mucina, L., Divíšek, J., Tsakalos, J.L. (2023).
 Europe, Ecosystems of. Reference Module in Life Sciences.
-\doi{10.1016/B978-0-12-822562-2.00059-1}
 }
 }
 \keyword{datasets}

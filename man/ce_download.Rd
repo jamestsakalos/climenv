@@ -51,11 +51,8 @@ data("it_py", package = "climenv")
 # Run the download function
 ce_download(
   output_dir = "../WorkingDirectory",
-  c_source = "WorldClim",
-  e_source = "mapzen",
   location = it_py
 )
-
 }
 }
 \seealso{

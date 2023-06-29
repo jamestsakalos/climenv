@@ -47,14 +47,13 @@ point/s.
 \dontrun{
 
 # Extraction time will depend on the size of the polygon or point file.
-# Import the Sibillini National Park Boundary
-data("Sibillini_py")
+# Import the Italian Biomes data
+data("italy_py", package = "climenv")
 # Run the download function
 ce_extract(
   path = "../WorkingDirectory",
-  location = Sibillini_py,
-  location_g = "Position",
-  c_source = "CHELSA"
+  location = italy_py,
+  location_g = "GB"
 )
 
 }

@@ -36,7 +36,7 @@ from the \code{ce_extract} function.
 #* See ce_download & ce_extract documentation
 
 # Steps 1, 2 & 3 can be skipped by loading the extracted data (it_data)
-data("it_data")
+data("it_data", package = "climenv")
 
 # Step 4. Visualise the climatic envelope using a Holdridge diagram
 

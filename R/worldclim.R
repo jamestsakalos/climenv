@@ -52,9 +52,9 @@
 #' Download WorldClim climate data
 #'
 #' @description
-#' `worldclim()` downloads the WorldClim V2.1 climate data for 1970-2000. This
-#' includes monthly climate data for minimum, mean, and maximum temperature and
-#' precipitation at a resolution of 0.5 minutes of a degree.
+#' `worldclim()` downloads the WorldClim V2.1 climate data for 1970&ndash;2000.
+#' This includes monthly climate data for minimum, mean, and maximum temperature
+#' and precipitation at a resolution of 0.5 minutes of a degree.
 #'
 #' @template output_dir_param
 #' @template output_location_param
@@ -75,11 +75,11 @@
 #' @author James L. Tsakalos
 #' @seealso Downloading from CHELSA [`chelsa()`] or a more convenient
 #' function for downloading other climate and elevation data [`ce_download()`].
-#' @references{ Fick, S.E. and R.J. Hijmans. (2017). WorldClim 2: new 1km
+#' @references{ Fick, S.E. & Hijmans, R.J. (2017). WorldClim 2: new 1km
 #' spatial resolution climate surfaces for global land areas. International
-#' Journal of Climatology. 37, 4302–4315.
-#' }
+#' Journal of Climatology. 37, 4302&ndash;4315. \doi{10.1002/joc.5086}
 #'
+#' }
 #' @examples
 #' \dontrun{
 #' # Download time will depend on the size of the area you wish to access

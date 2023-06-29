@@ -76,7 +76,7 @@ devtools::install_github("jamestsakalos/climenv", build_vignettes = TRUE)
 
 ## Example
 
-This is a basic example which shows you how to use the main climenv
+This is a basic example which shows you how to use the main `climenv`
 function:
 
 ``` r
@@ -101,24 +101,21 @@ the application of climenv.
 
 ## References
 
-Fick, S.E. and R.J. Hijmans. (2017). WorldClim 2: new 1km spatial
+Fick, S.E. & R.J. Hijmans. (2017). WorldClim 2: new 1km spatial
 resolution climate surfaces for global land areas. *International
 Journal of Climatology*. 37, 4302–4315.
 
-Hijmans, R.J., et al., (2023). geodata: Download Geographic Data. R
-package version 0.5-8. <https://CRAN.R-project.org/package=geodata>
+Hijmans, R.J., Barbosa, M., Ghosh, A., & Mandel, A. (2023). geodata:
+Download Geographic Data. R package version 0.5-8.
+<https://CRAN.R-project.org/package=geodata>
 
-Hollister, J. W., et al. (2021). elevatr: Access Elevation Data from
-Various APIs. R package version 0.4.2.
-<https://CRAN.R-project.org/package=elevatr>
+Hollister, J. (2022). elevatr: Access Elevation Data from Various APIs.
+R package version 0.4.2. <https://CRAN.R-project.org/package=elevatr>
 
-Karger, D.N., et al. (2016). CHELSA climatologies at high resolution for
-the earth’s land surface areas (Version 1.0). *World Data Center for
-Climate*.
+Karger, D.N., Conrad, O., Böhner, J., Kawohl, T., Kreft, H., Soria-Auza,
+R.W. et al (2017) Climatologies at high resolution for the earth’s land
+surface areas. *Scientific Data*, 4, 170122.
 
-Karger, D.N., et al. (2016). CHELSA climatologies at high resolution for
-the earth’s land surface areas (Version 1.1). *World Data Center for
-Climate*.
-
-Karger, D.N., et al. (2018). Data from: Climatologies at high resolution
-for the earth’s land surface areas. *EnviDat*.
+Karger, D.N., Conrad, O., Böhner, J., Kawohl, T., Kreft, H., Soria-Auza,
+R.W. et al. (2021) Climatologies at high resolution for the earth’s land
+surface areas. *EnviDat*.

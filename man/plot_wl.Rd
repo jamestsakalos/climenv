@@ -36,7 +36,7 @@ from the \code{ce_extract} function.
 #* See ce_download & ce_extract documentation
 
 # Steps 1, 2 & 3 can be skipped by loading the extracted data (it_data)
-data("it_data")
+data("it_data", package = "climenv")
 
 # Step 4. Visualise the climatic envelope using a Walter-Lieth diagram
 
@@ -50,7 +50,8 @@ plot_wl(data = it_data, geo_id = "NEM")
 Fernández-Avilés G. (2023). climaemet: Climate AEMET Tools.
 Comprehensive R Archive Network. \doi{10.5281/zenodo.5205573}
 
-Walter, H. & Lieth, H. (1960). Klimadiagramm Weltatlas. G. Fischer, Jena.
+von Walter, H.B., & Lieth, H. (1960). Klimadiagramm-Weltatlas. VEB Gustav
+Fischer Verlag, Jena.
 
 }
 }

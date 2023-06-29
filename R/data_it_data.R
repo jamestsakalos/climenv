@@ -15,13 +15,12 @@
 ##' of each feature. One, called "abmt" features the absolute minimum
 ##' temperature for each month. For more details on the assignment of Biomes
 ##' please refer to Mucina et al. (2022).
-##' @references{ Mucina, L., Div&iacute;&scaron;ek, J., Tsakalos, J.L. (2022).
+##' @references{ Mucina, L., Div&iacute;&scaron;ek, J., Tsakalos, J.L. (2023).
 ##' Europe, Ecosystems of. Reference Module in Life Sciences.
-##' \doi{10.1016/B978-0-12-822562-2.00059-1}
 ##' }
 ##' @keywords datasets
 ##' @rdname it_data
 ##' @examples
-##' data("it_data")
+##' data("it_data", package = "climenv")
 ##' head(it_data$abmt)
 "it_data"

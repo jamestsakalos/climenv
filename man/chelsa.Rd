@@ -49,17 +49,15 @@ chelsa(
 }
 }
 \references{
-{ Karger, D.N., et al. (2016). CHELSA climatologies at high
-resolution for the earth’s land surface areas (Version 1.0). World Data
-Center for Climate. DOI: 10.1594/WDCC/CHELSA_v1
+{ Karger,  D.N., Conrad, O., Böhner, J., Kawohl, T., Kreft, H.,
+Soria-Auza, R.W. et al (2017) Climatologies at high resolution for the
+earth’s land surface areas. Scientific Data, 4, 170122.
+\doi{10.1038/sdata.2017.122}
 
-Karger, D.N., et al. (2016). CHELSA climatologies at high resolution for the
-earth’s land surface areas (Version 1.1). World Data Center for Climate. DOI:
-10.1594/WDCC/CHELSA_v1_1
+Karger, D.N., Conrad, O., Böhner, J., Kawohl, T., Kreft, H., Soria-Auza,
+R.W. et al. (2021) Climatologies at high resolution for the earth’s land
+surface areas. EnviDat. \doi{10.16904/envidat.228.v2.1}
 
-Karger, D.N., et al. (2018). Data from: Climatologies at high
-resolution for the earth’s land surface areas. EnviDat.
-DOI: 10.16904/envidat.228.v2.1
 }
 }
 \seealso{
