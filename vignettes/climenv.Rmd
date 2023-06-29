@@ -20,7 +20,7 @@ text-align: justify}
 
 ------------------------------------------------------------------------
 
-```{r, include = FALSE}
+```{r knitr-setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -67,17 +67,17 @@ create artificial climate data of known properties. For a full demonstration on
 how to download data please see the package help documentation or Tsakalos
 et al. (2021). 
 
-```{r,echo=FALSE,message=FALSE}
-library(climenv)
-library(fs)
-library(raster)
-library(dplyr)
-library(sf)
-library(terra)
+```{r load-libraries, echo=FALSE, message=FALSE}
+library("climenv")
+library("fs")
+library("raster")
+library("dplyr")
+library("sf")
+library("terra")
 ```
 
-```{r}
-# Lets make some training data
+```{r training-data}
+# Let's make some training data
 
 # Create temporary file to supply to the ce_extract
 temp_path <- tempfile()
@@ -161,7 +161,7 @@ results. The polygon is transformed from a geographic coordinate system into
 a projected coordinate system using the 'spTransform' function. This
 transformation allows for a metric buffer to be added to the polygon.
 
-```{r}
+```{r extract-data}
 # Extract the climate data
 
 data_py <- ce_extract(
@@ -218,15 +218,15 @@ spatial polygon). Here our package is a wrapper for the existing `diagwl`
 function of the `climatol` R package (Guijarro, 2019).
 
 
-```{r, fig.height = 5, fig.width = 5, fig.align = "center", fig.cap="Fig 1. Placeholder for Holdridge’s (1967) life zone classification"}
+```{r holdridge-diagram, fig.height = 5, fig.width = 5, fig.align = "center", fig.cap="Fig 1. Placeholder for Holdridge’s (1967) life zone classification"}
 # Make Holdridge’s (1967) life zone classification diagram
 plot_h(data = data_py, "0")
 ```
-```{r, fig.height = 5, fig.width = 5, fig.align = "center", fig.cap="Fig 2. Walter-Leigh’s (1960) climate diagram"}
+```{r walter-leigh-diagram, fig.height = 5, fig.width = 5, fig.align = "center", fig.cap="Fig 2. Walter-Leigh’s (1960) climate diagram"}
 # Make Walter-Leigh's (1960) climate diagram
 plot_wl(data = data_py, "0")
 ```
-```{r, fig.height = 4, fig.width = 7, fig.align = "center", fig.cap="Fig 3. Custom climate diagram."}
+```{r custom-climate-diagram, fig.height = 4, fig.width = 7, fig.align = "center", fig.cap="Fig 3. Custom climate diagram."}
 # Make the custom climate diagram
 par(mar = c(1.5, 2.8, 2, 17))
 plot_c(data = data_py, "0")
