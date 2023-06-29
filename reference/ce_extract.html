@@ -132,14 +132,13 @@ tmin) or mm (prec).</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Extraction time will depend on the size of the polygon or point file.</span></span></span>
-<span class="r-in"><span><span class="co"># Import the Sibillini National Park Boundary</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"Sibillini_py"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Import the Italian Biomes data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"italy_py"</span>, package <span class="op">=</span> <span class="st">"climenv"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Run the download function</span></span></span>
 <span class="r-in"><span><span class="fu">ce_extract</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  path <span class="op">=</span> <span class="st">"../WorkingDirectory"</span>,</span></span>
-<span class="r-in"><span>  location <span class="op">=</span> <span class="va">Sibillini_py</span>,</span></span>
-<span class="r-in"><span>  location_g <span class="op">=</span> <span class="st">"Position"</span>,</span></span>
-<span class="r-in"><span>  c_source <span class="op">=</span> <span class="st">"CHELSA"</span></span></span>
+<span class="r-in"><span>  location <span class="op">=</span> <span class="va">italy_py</span>,</span></span>
+<span class="r-in"><span>  location_g <span class="op">=</span> <span class="st">"GB"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
