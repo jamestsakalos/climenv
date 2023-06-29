@@ -101,8 +101,8 @@ text-align: justify}
 <h2 id="an-example-application-of-climenv">An example application of climenv<a class="anchor" aria-label="anchor" href="#an-example-application-of-climenv"></a>
 </h2>
 <p>This vignette shows on example application of <code>climenv</code>
-(short for <strong><em>C</em></strong>limati c
-<strong><em>E</em></strong>nvelope) to illustrate the concepts and
+(short for <strong><em>Clim</em></strong>atic
+<strong><em>Env</em></strong>elope) to illustrate the concepts and
 functionality incorporated in the package. Specifically, the example
 facilitates easy downloading, extraction and visualization of three of
 the most globally recognizable modeled data sets (CHELSA, WorldClim 2
@@ -121,23 +121,23 @@ presented in R.</p>
 <p><code>ce_download</code> downloads WorldClim 2 (Fick &amp; Hijmans,
 2017), CHELSA (Karger et al., 2017) and NASA Earth Explorer’s SRTM (Farr
 et al., 2007). CHESLA and WorldClim are available at a spatial
-resolution of 30 arc-seconds (~1 km2). The data are freely available as
-a series of raster tiles (one for each month) with their spatial extent
-spanning the globe. Specifically, the function downloads the mean,
-minimum and maximum temperature and mean precipitation using the
-climatic predictions for periods 1979–2013 (CHELSA) and 1970–2000
+resolution of 30 arc-seconds (~1 km<sup>2</sup>). The data are freely
+available as a series of raster tiles (one for each month) with their
+spatial extent spanning the globe. Specifically, the function downloads
+the mean, minimum and maximum temperature and mean precipitation using
+the climatic predictions for periods 1979–2013 (CHELSA) and 1970–2000
 (WorldClim 2).</p>
 <p><code>ce_download</code> also downloads NASA’s SRTM data at the same
-30 arc-second (~1 km2) resolution. However, unlike CHELSA and WorldClim,
-the SRTM data can be downloaded as a series of individual tiles. While
-the spatial extent of CHELSA and WorldClim 2 spans the globe,
-<code>ce_download</code> derives and mosaics the SRTM tiles matching the
-extent provided by the user. Downloading a subset of tiles is
-advantageous because it will download quicker and occupy less
+30 arc-second (~1 km<sup>2</sup>) resolution. However, unlike CHELSA and
+WorldClim, the SRTM data can be downloaded as a series of individual
+tiles. While the spatial extent of CHELSA and WorldClim 2 spans the
+globe, <code>ce_download</code> derives and mosaics the SRTM tiles
+matching the extent provided by the user. Downloading a subset of tiles
+is advantageous because it will download quicker and occupy less
 storage.</p>
 <p>Because the vignette is required to run quickly and downloading
-climatic data (4.67 or 13.7 GBs for CHELSA and WorldClim 2, resp.) takes
-considerable time (ca. 6 or 19 minutes at 100Mbit/s). For simplicity we
+climatic data (4.67 or 13.7 GBs for CHELSA and WorldClim 2, resp.) takes
+considerable time (ca. 6 or 19 minutes at 100 Mbit/s). For simplicity we
 have provided code to create artificial climate data of known
 properties. For a full demonstration on how to download data please see
 the package help documentation or Tsakalos et al. (2021).</p>
