@@ -279,9 +279,8 @@
     message(
       paste(
         "location_g must be one of",
-        paste((colnames(location_df)[
-          !colnames(location_df) %in% c("coords.x1", "coords.x2")
-        ]), collapse = ", "), sep = ": "
+        paste(setdiff(colnames(location_df),  c("coords.x1", "coords.x2")),
+              collapse = ", "), sep = ": "
       )
     )
     message("Defaulting to a unique id for each polygon or point object")
