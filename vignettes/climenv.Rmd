@@ -29,9 +29,10 @@ knitr::opts_chunk$set(
 
 ## An example application of climenv
 
-This vignette shows on example application of `climenv` (short for ***C***limati
-c ***E***nvelope) to illustrate the concepts and functionality incorporated in
-the package. Specifically, the example facilitates easy downloading, extraction
+This vignette shows on example application of `climenv` (short for 
+***Clim***atic ***Env***elope) to illustrate the concepts and functionality
+incorporated in the package.
+Specifically, the example facilitates easy downloading, extraction
 and visualization of three of the most globally recognizable modeled data sets
 (CHELSA, WorldClim 2 and NASA’s SRTM elevation) using example multi and single
 geospatial polygon and point data.
@@ -47,22 +48,22 @@ diagram has been presented in R.
 
 `ce_download` downloads WorldClim 2 (Fick & Hijmans, 2017), CHELSA (Karger et 
 al., 2017) and NASA Earth Explorer's SRTM (Farr et al., 2007). CHESLA and 
-WorldClim are available at a spatial resolution of 30 arc-seconds (~1 km2). The 
+WorldClim are available at a spatial resolution of 30 arc-seconds (~1 km<sup>2</sup>). The 
 data are freely available as a series of raster tiles (one for each month) with 
 their spatial extent spanning the globe. Specifically, the function downloads 
 the mean, minimum and maximum temperature and mean precipitation using the 
 climatic predictions for periods 1979–2013 (CHELSA) and 1970–2000 (WorldClim 2). 
 
 `ce_download` also downloads NASA's SRTM data at the same 30 arc-second
-(~1 km2) resolution. However, unlike CHELSA and WorldClim, the SRTM data can be
+(~1 km<sup>2</sup>) resolution. However, unlike CHELSA and WorldClim, the SRTM data can be
 downloaded as a series of individual tiles. While the spatial extent of CHELSA
 and WorldClim 2 spans the globe, `ce_download` derives and mosaics the SRTM
 tiles matching the extent provided by the user. Downloading a subset of tiles
 is advantageous because it will download quicker and occupy less storage.
 
 Because the vignette is required to run quickly and downloading climatic data
-(4.67 or 13.7 GBs for CHELSA and WorldClim 2, resp.) takes considerable time
-(ca. 6 or 19 minutes at 100Mbit/s). For simplicity we have provided code to
+(4.67 or 13.7&nbsp;GBs for CHELSA and WorldClim 2, resp.) takes considerable time
+(ca. 6 or 19 minutes at 100&nbsp;Mbit/s). For simplicity we have provided code to
 create artificial climate data of known properties. For a full demonstration on
 how to download data please see the package help documentation or Tsakalos
 et al. (2021). 
