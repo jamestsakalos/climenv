@@ -66,14 +66,7 @@ always welcome.
 
 ## Installation from the source
 
-You can install the released version of climenv from
-[CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("climenv")
-```
-
-And the development version from
+You can install the development version from
 [GitHub](https://github.com/jamestsakalos/climenv) with:
 
 ``` r
