@@ -152,7 +152,7 @@
       "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
-      "version": ">= 4.0"
+      "version": ">= 4.1.0"
     },
     "2": {
       "@type": "SoftwareApplication",
@@ -324,5 +324,5 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1765.17KB"
+  "fileSize": "1765.171KB"
 }
