@@ -1,6 +1,6 @@
 ---
 title: "Exploring the Italian biome data sets"
-author: "James L. Tsakalos (james.tsakalos@gmail.com), Martin R. Smith, Frederico Luebert, Ladislav Mucina"
+author: "James L. Tsakalos (james.tsakalos@gmail.com), Martin R. Smith, Federico Luebert, Ladislav Mucina"
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:

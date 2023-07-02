@@ -1,12 +1,12 @@
 ---
-title: "Introduction to 'climenv'"
-author: "James L. Tsakalos (james.tsakalos@gmail.com), Martin R. Smith, Frederico Luebert, Ladislav Mucina"
+title: "Gettings started with 'climenv'"
+author: "James L. Tsakalos (james.tsakalos@gmail.com), Martin R. Smith, Federico Luebert, Ladislav Mucina"
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{Introduction to 'climenv'}
+  %\VignetteIndexEntry{Gettings started with 'climenv'}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,6 +15,16 @@ vignette: >
 <style>
 body {
 text-align: justify}
+</style>
+<style>
+p.caption {
+  font-size: 0.9em;
+  font-style: normal;
+  color: grey;
+  margin-right: 10%;
+  margin-left: 10%;  
+  text-align: justify;
+}
 </style>
 ```
 
@@ -219,15 +229,15 @@ spatial polygon). Here our package is a wrapper for the existing `diagwl`
 function of the `climatol` R package (Guijarro, 2019).
 
 
-```{r holdridge-diagram, fig.height = 5, fig.width = 5, fig.align = "center", fig.cap="Fig 1. Placeholder for Holdridge’s (1967) life zone classification"}
+```{r holdridge-diagram, fig.height = 5, fig.width = 5, fig.align = "center", fig.cap="Fig 1. Position of the training data within Holdridge’s (1967) life zone classification. The surface shading in the background is new addition to the original life zone classification and helps interpretation by converting a point in evapotranspiration-precipitation space to an appropriate cross-blended hypsometric colour – in this intuitive instance colours tending towards the red spectrum feature higher temperatures blended with lower precipitation compared while colours tending towards the blue colour spectrum have lower temperatures and higher precipitation."}
 # Make Holdridge’s (1967) life zone classification diagram
 plot_h(data = data_py, "0")
 ```
-```{r walter-leigh-diagram, fig.height = 5, fig.width = 5, fig.align = "center", fig.cap="Fig 2. Walter-Leigh’s (1960) climate diagram"}
+```{r walter-leigh-diagram, fig.height = 5, fig.width = 5, fig.align = "center", fig.cap="Fig 2. Walter-Lieth’s climatic diagram (1960) of the training data. When precipitation is > 100 mm, the scale increases from 2mm C-1 to 20 mm  C-1 (as indicated by the black horizontal line) to avoid too high diagrams in very wet locations. This change is indicated by a black horizontal line, and the graph over is filled in solid blue. When the precipitation graph lies under the temperature graph (P < 2T) we have an arid period (filled in dotted red vertical lines). Otherwise the period is considered humid (filled in light blue). Daily maximum average temperature of the hottest month and daily minimum average temperature of the coldest month are labeled in black on the left margin of the diagram."}
 # Make Walter-Leigh's (1960) climate diagram
 plot_wl(data = data_py, "0")
 ```
-```{r custom-climate-diagram, fig.height = 4, fig.width = 7, fig.align = "center", fig.cap="Fig 3. Custom climate diagram."}
+```{r custom-climate-diagram, fig.height = 4, fig.width = 7, fig.align = "center", fig.cap="Fig 3. Custom diagram showing the climatic envelope of the training data. The abbreviations used are as follow: biotemperture (BioT), isothermality (ISO), mean annual temperature (MAT), temperature seasonality (TS), number of dry months with < 50 mm rainfall during the month (Dry mo), mean annual precipitation (MAP), potential evapotranspiration (PET), precipitation seasonality (PS), seasonal rainfall percentage in Summer (S), Autumn (A), Winter (W), Vernal (V), elevation (Elv) and latitude (Lat)."}
 # Make the custom climate diagram
 par(mar = c(1.5, 2.8, 2, 17))
 plot_c(data = data_py, "0")
