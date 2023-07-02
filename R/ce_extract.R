@@ -197,11 +197,13 @@
 
 .spat_helper <- function(location) {
 
+  # Checks to make sure that location is the right class
+  stopifnot(inherits(location, c("sf", "sfc")))
+
   # Convert sf locations to SP
   if (inherits(location, c("sf", "sfc"))) {
     location <- sf::as_Spatial(sf::st_zm(location))
   }
-
   return(location)
 }
 
@@ -217,9 +219,18 @@
 
 .dir_helper <- function(var, path) {
 
+  # Check if the properties of var are correct
+  invisible(
+    lapply(
+      var, FUN = function(x){
+        stopifnot(x %in% c("all", "prec", "tmax", "tavg", "tmin"))
+      }
+    )
+  )
+
   # Checks if the dir contains the correct folders.
 
-  if (var == "ALL") {
+  if ("all" %in% var) {
 
     # Checks to make sure that all climate folders are there
     if (!all(c("prec", "tmax", "tavg", "tmin", "elev") %in% list.files(path))) {
@@ -381,11 +392,8 @@ ce_extract <- function(
   location@data$id <- seq_along(location) - 1
   location_df <- data.frame(location)
 
-  # Check if the properties of var are correct
-  stopifnot(var %in% c("all", "prec", "tmax", "tavg", "tmin"))
-
   # Check if the directory paths are correct
-  .dir_helper(path)
+  .dir_helper(var, path)
 
   # Check the location arguments
   # Note returns a list that needs to be extracted.

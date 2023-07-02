@@ -122,7 +122,8 @@ test_that("ce_extract() works", {
     data_py <- ce_extract(
       path = file.path(temp_path),
       location = pol_py, location_g = "grp",
-      c_source = "WorldClim", var = c("tavg", "tmin", "tmax", "prec")
+      c_source = "WorldClim",
+      var = c("tavg", "tmin", "tmax", "prec")
     )
   })
 
@@ -223,12 +224,66 @@ test_that("ce_extract() works", {
     )
   })
 
-  data_pt <- ce_extract(
-    path = file.path(temp_path),
-    location = pol_pt, location_g = "grp",
-    c_source = "WorldClim", var = "prec"
-  )
+  #* no var error ####
+  expect_no_error({
+    data_pt <- ce_extract(
+      path = file.path(temp_path),
+      location = pol_pt, location_g = "grp",
+      c_source = "WorldClim", var = "prec"
+    )
+  })
+
   #* length / names of output data.frames ####
   expect_named(data_pt, c("prec_m", "prec_sd", "lat", "Readme"))
+
+  # Testing helper functions
+
+  # .spat_helper
+  expect_error(.spat_helper(location = terra::vect(pol_pt)))
+  expect_no_error({
+    location <- .spat_helper(location = pol_pt)
+  })
+
+  # .dir_helper
+  expect_error(.dir_helper(path = temp_path))
+  expect_error(.dir_helper(var = "nonsense", path = temp_path))
+  expect_no_error({.dir_helper(var = "tavg", path = temp_path)})
+
+  # .location_helper
+  location@data$id <- seq_along(location) - 1
+  location_df <- data.frame(location)
+  expect_no_error(
+    .location_helper(location = pol_pt,
+                     location_g = "grp",
+                     location_df = location_df)
+  )
+
+  # .c_source_helper
+  expect_no_error(.c_source_helper(c_source = "CHELSA"))
+  expect_no_error(.c_source_helper(c_source = "ChELSA"))
+  expect_error(.c_source_helper(c_source = "wrong"))
+
+  # .clim_extract
+  expect_error(.clim_extract(
+    which_clim = "tmean",
+    location = pol_pt,
+    location_type = "SpatialPointsDataFrame",
+    location_g = "grp",
+    sd = TRUE,
+    result,
+    c_source = "WorldClim",
+    path = temp_path
+  ))
+
+  expect_no_error(.clim_extract(
+    which_clim = "tavg",
+    location = pol_pt,
+    location_type = "SpatialPointsDataFrame",
+    location_g = "grp",
+    sd = TRUE,
+    result = NULL,
+    c_source = "WorldClim",
+    path = temp_path
+  ))
 
 })
