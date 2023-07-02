@@ -222,7 +222,7 @@
   # Check if the properties of var are correct
   invisible(
     lapply(
-      var, FUN = function(x){
+      var, FUN = function(x) {
         stopifnot(x %in% c("all", "prec", "tmax", "tavg", "tmin"))
       }
     )
