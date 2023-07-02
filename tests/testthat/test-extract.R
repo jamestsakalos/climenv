@@ -247,7 +247,9 @@ test_that("ce_extract() works", {
   # .dir_helper
   expect_error(.dir_helper(path = temp_path))
   expect_error(.dir_helper(var = "nonsense", path = temp_path))
-  expect_no_error({.dir_helper(var = "tavg", path = temp_path)})
+  expect_no_error({
+    .dir_helper(var = "tavg", path = temp_path)
+  })
 
   # .location_helper
   location@data$id <- seq_along(location) - 1
