@@ -5,7 +5,7 @@
 [![lint](https://github.com/jamestsakalos/climenv/actions/workflows/lint.yaml/badge.svg)](https://github.com/jamestsakalos/climenv/actions/workflows/lint.yaml)
 [![pkgdown](https://github.com/jamestsakalos/climenv/actions/workflows/pkgdown.yml/badge.svg)](https://github.com/jamestsakalos/climenv/actions/workflows/pkgdown.yml)
 [![R-CMD-check](https://github.com/jamestsakalos/climenv/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/jamestsakalos/climenv/actions/workflows/R-CMD-check.yml)
-[![codecov](https://codecov.io/gh/jamestsakalos/climenv/branch/master/graph/badge.svg)](https://codecov.io/gh/jamestsakalos/climenv)
+[![test-coverage](https://github.com/jamestsakalos/climenv/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/jamestsakalos/climenv/actions/workflows/test-coverage.yaml)
 <!-- badges: end -->
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -98,24 +98,3 @@ p1 <- plot_h(data = it_data, "MED")
 
 The package vignette provides detailed explanation and demonstration on
 the application of climenv.
-
-## References
-
-Fick, S.E. & R.J. Hijmans. (2017). WorldClim 2: new 1km spatial
-resolution climate surfaces for global land areas. *International
-Journal of Climatology*. 37, 4302–4315.
-
-Hijmans, R.J., Barbosa, M., Ghosh, A., & Mandel, A. (2023). geodata:
-Download Geographic Data. R package version 0.5-8.
-<https://CRAN.R-project.org/package=geodata>
-
-Hollister, J. (2022). elevatr: Access Elevation Data from Various APIs.
-R package version 0.4.2. <https://CRAN.R-project.org/package=elevatr>
-
-Karger, D.N., Conrad, O., Böhner, J., Kawohl, T., Kreft, H., Soria-Auza,
-R.W. et al (2017) Climatologies at high resolution for the earth’s land
-surface areas. *Scientific Data*, 4, 170122.
-
-Karger, D.N., Conrad, O., Böhner, J., Kawohl, T., Kreft, H., Soria-Auza,
-R.W. et al. (2021) Climatologies at high resolution for the earth’s land
-surface areas. *EnviDat*.
