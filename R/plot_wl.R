@@ -44,20 +44,10 @@
 #' @export
 plot_wl <- function(data, geo_id, ...) {
 
+  .validate_geo_id(geo_id, data)
+
   # Needed to print the climate date range on the plot
   c_source <- strsplit(data$Readme, " ")[[1]][5]
-
-  # Check if the c_source argument is correct
-  if (is.na(match(geo_id, row.names(data[[1]])))) {
-    stop(
-      paste(
-        c("geo_id must be either:",
-          paste(as.character(row.names(data[[1]]), collapse = ", ")),
-          collapse = " "
-        )
-      )
-    )
-  }
 
   # Walter-Lieth climate diagram
 

@@ -4,6 +4,10 @@ test_that("plot_XX() fails gracefully", {
     plot_h(data = it_data, geo_id = "ERROR"),
     "Invalid geo_id; Choices: MED, NEM"
   )
+  expect_error(
+    plot_wl(data = it_data, geo_id = "ERROR"),
+    "Invalid geo_id; Choices: MED, NEM"
+  )
 })
 
 test_that("ce_plot() works", {
