@@ -42,21 +42,20 @@ ce_download <- function(
     var = "all",
     location, ...) {
 
-  if (missing(output_dir))
+  if (missing(output_dir)) {
     stop("Set output directory")
+  }
 
-  if (missing(location))
+  if (missing(location)) {
     stop("Set spatial location for sourcing elevation data")
+  }
 
   # Partial, case-insensitive matching
   c_source_id <- pmatch(toupper(c_source), c("CHELSA", "WORLDCLIM"))
   if (any(is.na(c_source_id))) {
-    if(all(is.na(c_source_id))) {
-      stop("c_source must be either CHELSA, WorldClim")
-    } else {
-      warning("Unrecognized value in c_source: ",
-            paste(c_source[is.na(c_source_id)], collapse = ", "))
-    }
+    warning("Unrecognized value in c_source: ",
+          paste(c_source[is.na(c_source_id)], collapse = ", "),
+          " (choose CHELSA or WorldClim)")
   }
 
   # Download CHELSA
