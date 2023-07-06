@@ -1,33 +1,27 @@
-.download_dir <- function(clim_points, var, output_dir, ...) {
-
-  # Helper function to download and mosaic the tiles
-
-  # Make an empty list to fill
-  clim_list <- list()
-
-  # lats
+# Helper function to download and mosaic the tiles
+.download_dir <- function(clim_points, var, output_dir, mode, ...) {
+  # latitudes
   lats <- clim_points[, "y"]
+  temp_files <- vapply(paste0("tile-", seq_along(lats)), tempfile, character(1),
+                       tmpdir = output_dir)
+  # Remove temporary downloads when function exits
+  on.exit(lapply(temp_files, unlink))
 
   # Downloads the tiles and stores into that list
-  for (pts in 1:seq_along(lats)) {
-
-    tile <- geodata::worldclim_tile(
+  clim_list <- lapply(seq_along(lats), function (pts) {
+    geodata::worldclim_tile(
       var,
       res = 0.5,
       lon = clim_points[pts, "x"], lat = clim_points[pts, "y"],
-      path = tempfile(),
+      path = temp_files[pts],
       version = "2.1",
       mode = mode,
-
       ...
     )
-
-    clim_list[[pts]] <- tile
-
-  }
+  })
 
   # Mosaic the tiles in the list
-  if (length(seq_along(lats)) > 1) {
+  if (length(lats) > 1) {
     clim_list$fun <- mean
     clim_mosaic <- do.call(terra::mosaic, clim_list)
   } else {
@@ -40,7 +34,7 @@
   )
 
   # Export the climate mosaic
-  lapply(c(1:12), FUN = function(x) {
+  lapply(1:12, FUN = function(x) {
     terra::writeRaster(
       clim_mosaic[[x]],
       paste0(output_dir, "/", var, "/", names(clim_mosaic)[x], ".tif"),
@@ -133,7 +127,7 @@ worldclim <- function(output_dir, location, mode = "wb",
   # This runs through every variable which is supplied
   invisible(
     lapply(var, FUN = function(x) {
-      .download_dir(clim_points, var = x, output_dir, ...)
+      .download_dir(clim_points, var = x, output_dir, mode = mode, ...)
     })
   ) # The invisible part stops lapply from printing to console
 
