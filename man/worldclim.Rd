@@ -16,20 +16,21 @@ the data will be stored.}
 \code{download.file()}.}
 }
 \value{
+\code{worldclim()} is called for its side effects and returns \code{NULL}.
 Creates four subfolders named prec, tmax, tmin and tmean. Each folder
 contains 12 GeoTiff (.tif) files, one for each month of the year for the time
 period 1970–2000. Each of the files are downloaded at a spatial
 resolution of 0.5 minutes of a degree. The precipitation folder contains
 average monthly precipitation (mm). The tmax folder contains maximum monthly
-temperature. The tmin folder contains minimum monthly temperature. The tmean
-folder contains the average monthly temperature. The unit of measure for
-temperature is in °C. This function uses the \pkg{geodata} to download
-the worldclim tiles.
+temperature. The tmin folder contains minimum monthly
+temperature. The tmean folder contains the average monthly temperature.
+Temperature values are reported in °C.
 }
 \description{
 \code{worldclim()} downloads the WorldClim V2.1 climate data for 1970–2000.
 This includes monthly climate data for minimum, mean, and maximum temperature
 and precipitation at a resolution of 0.5 minutes of a degree.
+This function uses the \pkg{geodata} to download the worldclim tiles.
 }
 \examples{
 \dontrun{
