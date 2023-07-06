@@ -21,7 +21,8 @@
 #'
 #' Holdridge (1967), _[Life zone ecology]_. Tropical Science Center,
 #' San Jos&eacute;: Tropical Science Center.
-#' [Life zone ecology]: https://reddcr.go.cr/sites/default/files/centro-de-documentacion/holdridge_1966_-_life_zone_ecology.pdf
+#' [Life zone ecology]:
+#' https://reddcr.go.cr/sites/default/files/centro-de-documentacion/holdridge_1966_-_life_zone_ecology.pdf
 #'
 #' Szelepcs&eacute;nyi, Z. (2023) macroBiome: A Tool for Mapping the
 #' Distribution of the Biomes and Bioclimate. Comprehensive R Archive Network.

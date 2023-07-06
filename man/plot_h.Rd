@@ -52,7 +52,8 @@ simple climatic data. \emph{Science}, 105:367–368.
 
 Holdridge (1967), \emph{\link{Life zone ecology}}. Tropical Science Center,
 San José: Tropical Science Center.
-\link{Life zone ecology}: https://reddcr.go.cr/sites/default/files/centro-de-documentacion/holdridge_1966_-_life_zone_ecology.pdf
+\link{Life zone ecology}:
+https://reddcr.go.cr/sites/default/files/centro-de-documentacion/holdridge_1966_-_life_zone_ecology.pdf
 
 Szelepcsényi, Z. (2023) macroBiome: A Tool for Mapping the
 Distribution of the Biomes and Bioclimate. Comprehensive R Archive Network.
