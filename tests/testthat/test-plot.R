@@ -1,7 +1,7 @@
 test_that("ce_plot() works", {
 
-  library(terra)
-  library(sf)
+  library("terra")
+  library("sf")
 
   # Set testing data ####
 
@@ -73,16 +73,16 @@ test_that("ce_plot() works", {
   # vdiffr is used only for testing so not required
   skip_if_not_installed("vdiffr")
 
-  plot_wl(data = data, geo_id = "high")
   vdiffr::expect_doppelganger("py test WL plot",
                               plot_wl(data = data, geo_id = "high"))
 
-  plot_h(data = data, geo_id = "high")
   vdiffr::expect_doppelganger("py test H plot",
                               plot_h(data = data, geo_id = "high"))
 
-  plot_c(data = data, geo_id = "high")
   vdiffr::expect_doppelganger("py test c plot",
                               plot_c(data = data, geo_id = "high"))
+
+  vdiffr::expect_doppelganger("py test c plot north",
+                              plot_c(data = data, geo_id = "low"))
 
 })
