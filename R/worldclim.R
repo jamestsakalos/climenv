@@ -22,17 +22,22 @@
   if (length(lats) > 1) {
     clim_list$fun <- mean
     clim_mosaic <- do.call(terra::mosaic, clim_list)
+  } else if (is.null(lats)) {
+    stop("Failed to download data.") # nocov
   } else {
     clim_mosaic <- clim_list[[1]]
   }
 
   # Name the bands (at this stage, multiband raster)
   names(clim_mosaic) <- paste(
-    "wc2.1_30s", var, sprintf("%02d", 1:12), sep = "_"
+    "wc2.1_30s", var,
+    # climate data length 12; elev, 1
+    sprintf("%02d", seq_along(clim_mosaic)),
+    sep = "_"
   )
 
   # Export the climate mosaic
-  lapply(1:12, FUN = function(x) {
+  lapply(seq_along(clim_mosaic), FUN = function(x) {
     terra::writeRaster(
       clim_mosaic[[x]],
       paste0(output_dir, "/", var, "/", names(clim_mosaic)[x], ".tif"),
@@ -95,11 +100,11 @@
 worldclim <- function(output_dir, location, var = "all",
                       ...) {
 
-  var_options <- c("prec", "tmax", "tmin", "tavg")
+  var_options <- c("prec", "tmax", "tmin", "tavg", "elev")
 
   # If var is NULL, all climate variables can be downloaded.
   if (is.null(var) || "all" %in% var) {
-    var <- var_options
+    var <- c("prec", "tmax", "tmin", "tavg")
   }
 
   if (any(!var %in% var_options)) {
@@ -107,14 +112,20 @@ worldclim <- function(output_dir, location, var = "all",
   }
 
   # create WorldClim tiles
-  rs <- terra::rast(nrows = 5, ncols = 12,
+  rs <- terra::rast(nrows = 6, ncols = 12,
                     xmin = -180, xmax = 180,
-                    ymin = -60, ymax = 90)
-  rs[] <- 1:60
+                    ymin = -90, ymax = 90)
+  rs[] <- 1:72
 
   # Intersect location and tiles
   tiles <- unique(terra::extract(rs, terra::vect(location))$lyr.1)
+  if (any(is.na(tiles))) {
+    warning("Could not map all coordinates to tiles; check validity")
+  }
   clim_points <- terra::xyFromCell(rs, which(rs[] %in% tiles))
+  if (length(clim_points) == 0) {
+    return(NULL)
+  }
 
   # Make the folders
   for (path in var) {

@@ -1,5 +1,17 @@
 test_that("worldclim() fails gracefully", {
-  expect_error(worldclim(var = "stop"), "invalid `var`")
+  expect_error(
+    expect_warning(worldclim(var = "stop", res = 1),
+                   "Invalid value of `resolution`")
+    , "invalid `var`")
+
+  flipLatLong <- sf::st_as_sf(
+    data.frame(lat = c(-72, -73, -73, -72),
+               lng = c(-156, -156, -157, -156)), coords = 1:2)
+  tmp_dir <- tempdir()
+  on.exit(unlink(tmp_dir))
+  expect_null(expect_warning(
+    worldclim(out = tmp_dir, loc = flipLatLong, var = "prec"),
+    "Could not map all coordinates to tiles"))
 })
 
 test_that("worldclim() downloads data", {
@@ -11,26 +23,22 @@ test_that("worldclim() downloads data", {
   tmp_dir <- tempdir()
   on.exit(unlink(tmp_dir))
 
-  # Single tile
-  regentsPark <- matrix(byrow = TRUE, ncol = 2,
-                        c(51.537, -0.150,
-                          51.525, -0.145,
-                          51.523, -0.156,
-                          51.530, -0.167,
-                          51.534, -0.163,
-                          51.537, -0.150))
-  regents <- sf::st_as_sf(as.data.frame(regentsPark), coords = 1:2)
+  # Smallest download available is tile_50_wc2.1_30s_elev.tif: 134K
+  # Smallest climate download is tile_50_wc2.1_30s_prec.tif: 407K
+  tile50 <- sf::st_as_sf(
+    data.frame(lat = c(-59, -59, -58, -59),
+               lng = c(-123, -124, -123, -123)), coords = 2:1)
 
   # Obtain raster files
-  worldclim(out = tmp_dir, loc = regents, var = "tavg")
-  parkFiles <- paste0(tmp_dir, "\\tavg\\wc2.1_30s_tavg_",
+  worldclim(out = tmp_dir, loc = tile50, var = "prec")
+  tileFiles <- paste0(tmp_dir, "\\prec\\wc2.1_30s_prec_",
                       formatC(1:12, width = 2, flag = "0"), ".tif")
-  expect_equal(file.exists(parkFiles), rep(TRUE, 12))
+  expect_equal(file.exists(tileFiles), rep(TRUE, 12))
 
   # Check data matches expectation
-  park1 <- terra::rast(parkFiles[1])
-  thumb <- terra::aggregate(park1, fact = 64)
-  expected <- terra::rast(system.file("tests/testthat/expected/park1.tif",
+  jan50 <- terra::rast(tileFiles[1])
+  thumb <- terra::aggregate(jan50, fact = 64)
+  expected <- terra::rast(system.file("tests/testthat/expected/jan50.tif",
                                       package = "climenv"))
   expect_true(all.equal(rast(thumb), rast(expected)))
 
@@ -40,39 +48,25 @@ test_that("worldclim() downloads data", {
     terra::writeRaster(
       thumb, overwrite = TRUE,
       paste0(system.file("tests/testthat/expected", package = "climenv"),
-             "/park1.tif")
+             "/jan50.tif")
       )
   }
 
 
-  # Multiple tiles
-  skip_on_ci() # Perhaps too slow?
-  ni <- matrix(byrow = TRUE, ncol = 2,
-               c(54.09, -6.26,
-                 54.04, -6.68,
-                 54.41, -6.97,
-                 54.13, -7.39,
-                 54.44, -8.17,
-                 55.06, -7.24,
-                 55.20, -6.05,
-                 54.42, -5.44,
-                 54.02, -6.06,
-                 54.09, -6.26))
-  niSF <- sf::st_as_sf(as.data.frame(ni), coords = 1:2)
+  # Multiple tiles: spanning 49 & 50 will give smallest download size (~280KB)
+  south <- sf::st_as_sf(
+    data.frame(lat = c(-59, -59, -58, -59),
+               lng = c(-123, -174, -123, -123)), coords = 2:1)
 
   # Obtain raster data
-  worldclim(out = tmp_dir, loc = niSF, var = "prec")
-  niFiles <- paste0(
-    tmp_dir,
-    "\\prec\\wc2.1_30s_prec_",
-    formatC(1:12, width = 2, flag = "0"),
-    ".tif")
-  expect_equal(file.exists(niFiles), rep(TRUE, 12))
+  worldclim(out = tmp_dir, loc = south, var = "elev")
+  southFile <- paste0(tmp_dir, "\\elev\\wc2.1_30s_elev_01.tif")
+  expect_true(file.exists(southFile))
 
   # Check data matches expectation
-  ni5 <- terra::rast(niFiles[5])
-  thumb <- terra::aggregate(ni5, fact = 64)
-  expected <- terra::rast(system.file("tests/testthat/expected/ni5.tif",
+  southElev <- terra::rast(southFile)
+  thumb <- terra::aggregate(southElev, fact = 64)
+  expected <- terra::rast(system.file("tests/testthat/expected/southElev.tif",
                                       package = "climenv"))
   expect_true(all.equal(rast(thumb), rast(expected)))
 
@@ -82,7 +76,7 @@ test_that("worldclim() downloads data", {
     terra::writeRaster(
       thumb, overwrite = TRUE,
       paste0(system.file("tests/testthat/expected", package = "climenv"),
-             "/ni5.tif")
+             "/southElev.tif")
     )
   }
 })
