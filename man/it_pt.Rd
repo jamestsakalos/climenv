@@ -27,8 +27,9 @@ data("it_pt", package = "climenv")
 plot(it_pt)
 }
 \references{
-{ Mucina, L., Divíšek, J., Tsakalos, J.L. (2023).
-Europe, Ecosystems of. Reference Module in Life Sciences.
+{ Mucina, L., Divíšek, J., & Tsakalos, J.L. (2023)
+Europe, Ecosystems of. In: Encyclopedia of biodiversity, vol X (in print).
+\doi{10.1016/B978-0-12-822562-2.00059-1}
 }
 }
 \keyword{datasets}

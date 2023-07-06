@@ -378,7 +378,9 @@ Karger, D.N., Conrad, O., B&odblac;hner, J., Kawohl, T., Kreft, H., Soria-Auza,
 R.W. et al. (2021) Climatologies at high resolution for the earth’s land surface 
 areas. *EnviDat*. \doi{10.16904/envidat.228.v2.1}
 
-Mucina et al., 2023
+Mucina, L., Div&iacute;&scaron;ek, J., & Tsakalos, J.L. (2023) Europe, 
+Ecosystems of. In: Encyclopedia of biodiversity, vol X (in print). 
+\doi{10.1016/B978-0-12-822562-2.00059-1}
 
 von Walter, H.B., & Lieth, H. (1960). Klimadiagramm-Weltatlas. VEB Gustav 
 Fischer Verlag, Jena.
