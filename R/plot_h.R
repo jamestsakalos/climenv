@@ -59,14 +59,8 @@ plot_h <- function(data, geo_id, col = "red", pch = 19,
 
   # Check if the c_source argument is correct
   if (is.na(match(geo_id, row.names(data[[1]])))) {
-    stop(
-      paste(
-        c("geo_id must be either:",
-          paste(as.character(row.names(data[[1]]), collapse = ", ")),
-          collapse = " "
-        )
-      )
-    )
+    stop("Invalid geo_id; Choices: ",
+         paste(as.character(row.names(data[[1]])), collapse = ", "))
   }
 
   # Holdridge climate diagram

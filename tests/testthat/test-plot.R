@@ -1,3 +1,11 @@
+test_that("plot_XX() fails gracefully", {
+  data("it_data", package = "climenv")
+  expect_error(
+    plot_h(data = it_data, geo_id = "ERROR"),
+    "Invalid geo_id; Choices: MED, NEM"
+  )
+})
+
 test_that("ce_plot() works", {
 
   library(terra)
