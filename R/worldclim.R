@@ -9,7 +9,7 @@
   lats <- clim_points[, "y"]
 
   # Downloads the tiles and stores into that list
-  for (pts in 1:seq_along(lats)) {
+  for (pts in seq_along(lats)) {
 
     tile <- geodata::worldclim_tile(
       var,
@@ -27,7 +27,7 @@
   }
 
   # Mosaic the tiles in the list
-  if (length(seq_along(lats)) > 1) {
+  if (length(lats) > 1) {
     clim_list$fun <- mean
     clim_mosaic <- do.call(terra::mosaic, clim_list)
   } else {
@@ -40,21 +40,22 @@
   )
 
   # Export the climate mosaic
-  lapply(c(1:12), FUN = function(x) {
+  lapply(1:12, FUN = function(x) {
     terra::writeRaster(
       clim_mosaic[[x]],
       paste0(output_dir, "/", var, "/", names(clim_mosaic)[x], ".tif"),
       overwrite = TRUE
     )
   })
-
 }
+
 #' Download WorldClim climate data
 #'
 #' @description
 #' `worldclim()` downloads the WorldClim V2.1 climate data for 1970&ndash;2000.
 #' This includes monthly climate data for minimum, mean, and maximum temperature
 #' and precipitation at a resolution of 0.5 minutes of a degree.
+#' This function uses the \pkg{geodata} to download the worldclim tiles.
 #'
 #' @template output_dir_param
 #' @template output_location_param
@@ -62,15 +63,15 @@
 #' `download.file()`.
 #'
 #' @return
+#' `worldclim()` is called for its side effects and returns `NULL`.
 #' Creates four subfolders named prec, tmax, tmin and tmean. Each folder
 #' contains 12 GeoTiff (.tif) files, one for each month of the year for the time
 #' period 1970&ndash;2000. Each of the files are downloaded at a spatial
 #' resolution of 0.5 minutes of a degree. The precipitation folder contains
 #' average monthly precipitation (mm). The tmax folder contains maximum monthly
-#' temperature. The tmin folder contains minimum monthly temperature. The tmean
-#' folder contains the average monthly temperature. The unit of measure for
-#' temperature is in &deg;C. This function uses the \pkg{geodata} to download
-#' the worldclim tiles.
+#' temperature. The tmin folder contains minimum monthly
+#' temperature. The tmean folder contains the average monthly temperature.
+#' Temperature values are reported in &deg;C.
 #'
 #' @author James L. Tsakalos
 #' @seealso Downloading from CHELSA [`chelsa()`] or a more convenient
@@ -131,10 +132,10 @@ worldclim <- function(output_dir, location, mode = "wb",
   }
 
   # This runs through every variable which is supplied
-  invisible(
-    lapply(var, FUN = function(x) {
-      .download_dir(clim_points, var = x, output_dir, ...)
-    })
-  ) # The invisible part stops lapply from printing to console
+  lapply(var, FUN = function(x) {
+    .download_dir(clim_points, var = x, output_dir, ...)
+  })
 
+  # Return:
+  invisible()
 }
