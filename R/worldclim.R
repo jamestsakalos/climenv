@@ -1,5 +1,5 @@
 # Helper function to download and mosaic the tiles
-.download_dir <- function(clim_points, var, output_dir, mode, ...) {
+.download_dir <- function(clim_points, var, output_dir, ...) {
   # latitudes
   lats <- clim_points[, "y"]
   temp_files <- vapply(paste0("tile-", seq_along(lats)), tempfile, character(1),
@@ -11,11 +11,9 @@
   clim_list <- lapply(seq_along(lats), function (pts) {
     geodata::worldclim_tile(
       var,
-      res = 0.5,
       lon = clim_points[pts, "x"], lat = clim_points[pts, "y"],
       path = temp_files[pts],
       version = "2.1",
-      mode = mode,
       ...
     )
   })
@@ -53,7 +51,7 @@
 #'
 #' @template output_dir_param
 #' @template output_location_param
-#' @param var,mode,\dots Arguments to control a download from the Internet
+#' @param var,\dots Arguments to control a download from the Internet
 #' `download.file()`.
 #'
 #' @return
@@ -94,8 +92,8 @@
 #' @importFrom terra rast extract xyFromCell mosaic writeRaster vect
 #' @importFrom geodata worldclim_tile
 #' @export
-worldclim <- function(output_dir, location, mode = "wb",
-                      var = "all", ...) {
+worldclim <- function(output_dir, location, var = "all",
+                      ...) {
 
   var_options <- c("prec", "tmax", "tmin", "tavg")
 
