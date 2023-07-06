@@ -16,11 +16,12 @@
 #' @author James L. Tsakalos
 #' @seealso Download climate data: [`ce_download()`]
 #' @references{ Holdridge (1947), Determination of world plant formations from
-#' simple climatic data. Science, 105:367&ndash;368.
+#' simple climatic data. *Science*, 105:367&ndash;368.
 #' \doi{10.1126/science.105.2727.367}
 #'
-#' Holdridge (1967). Life Zone Ecology. Tropical Science Center,
-#' San Jos&eacute;.
+#' Holdridge (1967), _[Life zone ecology]_. Tropical Science Center,
+#' San Jos&eacute;: Tropical Science Center.
+#' [Life zone ecology]: https://reddcr.go.cr/sites/default/files/centro-de-documentacion/holdridge_1966_-_life_zone_ecology.pdf
 #'
 #' Szelepcs&eacute;nyi, Z. (2023) macroBiome: A Tool for Mapping the
 #' Distribution of the Biomes and Bioclimate. Comprehensive R Archive Network.

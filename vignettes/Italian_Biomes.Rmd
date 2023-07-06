@@ -91,10 +91,9 @@ classes, structural classes, etc., on their terms.
 
 The function `ce_download` enables users to download both climate and elevation 
 data. Users have the option to select climate data from either WorldClim 2 
-(Fick & Hijmans, 2017) or CHELSA (Karger et al., 2016a; Karger et al., 2016b; 
-Karger et al., 2018). Regarding elevation data, users can choose either the NASA
-Earth Explorer's SRTM (Farr et al., 2007) or Mapzen terrain tiles 
-(Hollister & Shah, 2018).
+(Fick & Hijmans, 2017) or CHELSA (Karger et al., 2017; Karger et al., 2021). 
+Regarding elevation data, users can choose either the NASA Earth Explorer's SRTM
+(Farr et al., 2007) or Mapzen terrain tiles (Hollister & Shah, 2018).
 
 In this specific example, we have utilised the default settings  of 
 `ce_download` to download WorldClim 2 climate data and Mapzen elevation data for 
@@ -347,42 +346,41 @@ varImpPlot(model, main = "")
 
 ### References
 
-Breiman, L. (2001). Random forests. *Machine learning*, 45, 5-32.
+Breiman, L. (2001). Random forests. *Machine learning*, 45, 5&ndash;32.
 
-Farr, T. G., Rosen, P. A., Caro, E., Crippen, R., Duren, R., Hensley, S., … 
-Alsdorf, D. (2007). The Shuttle Radar Topography Mission. 
-*Reviews of Geophysics*, 45. DOI: 10.1029/2005RG000183
+Farr, T. G., Rosen, P. A., Caro, E., Crippen, R., Duren, R., Hensley, S. et al. 
+(2007). The Shuttle Radar Topography Mission. *Reviews of Geophysics*, 45. \doi{10.1029/2005RG000183}
 
 Fick, S. E., & Hijmans, R. J. (2017). WorldClim 2: new 1‐km spatial resolution
 climate surfaces for global land areas. *International Journal of Climatology*,
-37, 4302–4315.
+37, 4302&ndash;4315.
 
 Guijarro, J. A. (2019). climatol: Climate Tools (Series Homogenization and 
 Derived Products). Retrieved from https://cran.r-project.org/package=climatol
 
 Hijmans, R. J., Cameron, S. E., Parra, J. L., Jones, P. G., & Jarvis, A. (2005).
 Very high resolution interpolated climate surfaces for global land areas. 
-*International Journal of Climatology*, 25, 1965–1978. DOI: 10.1002/joc.1276
+*International Journal of Climatology*, 25, 1965–1978. \doi{10.1002/joc.1276}
 
-Holdridge, L. R. (1967). Life zone ecology. San Jos&eacute;: Tropical Science 
-Center.
+Holdridge (1967), _[Life zone ecology]_. Tropical Science Center, San 
+Jos&eacute;: Tropical Science Center.
+[Life zone ecology]: https://reddcr.go.cr/sites/default/files/centro-de-documentacion/holdridge_1966_-_life_zone_ecology.pdf
 
 Hollister, J., & Shah, T. (2018). elevatr: Access elevation data from various 
 APIs (Version 0.2.0). Retrieved from https://CRAN.R-project.org/package=elevatr.
-DOI: 10.5281/zenodo.400259.
+\doi{10.5281/zenodo.400259}
 
-Karger, D.N., et al. (2016a). CHELSA climatologies at high resolution for the 
-earth’s land surface areas (Version 1.0). *World Data Center for Climate*. 
-DOI: 10.1594/WDCC/CHELSA_v1
+Karger,  D.N., Conrad, O., B&odblac;hner, J., Kawohl, T., Kreft, H., Soria-Auza,
+R.W. et al. (2017) Climatologies at high resolution for the earth’s land surface 
+areas. *Scientific Data*, 4, 170122. \doi{10.1038/sdata.2017.122}
 
-Karger, D.N., et al. (2016b). CHELSA climatologies at high resolution for the
-earth’s land surface areas (Version 1.1). *World Data Center for Climate*. DOI:
-10.1594/WDCC/CHELSA_v1_1
+Karger, D.N., Conrad, O., B&odblac;hner, J., Kawohl, T., Kreft, H., Soria-Auza, 
+R.W. et al. (2021) Climatologies at high resolution for the earth’s land surface 
+areas. *EnviDat*. \doi{10.16904/envidat.228.v2.1}
 
-Karger, D.N., et al. (2018). Data from: Climatologies at high resolution for the
-earth’s land surface areas. *EnviDat*. DOI: 10.16904/envidat.228.v2.1
+Mucina, L., Div&iacute;&scaron;ek, J., & Tsakalos, J.L. (2023) Europe, 
+Ecosystems of. In: Encyclopedia of biodiversity, vol X (in print). 
+\doi{10.1016/B978-0-12-822562-2.00059-1}
 
-Mucina et al., 2023
-
-Walter, H., & Lieth, H. (1960). 1967. Klimadiagramm-Weltatlas.
-Gustav FisherFisccher, Jena.
+von Walter, H.B., & Lieth, H. (1960). Klimadiagramm-Weltatlas. VEB Gustav 
+Fischer Verlag, Jena.
