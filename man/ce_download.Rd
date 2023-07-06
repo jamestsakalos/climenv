@@ -8,7 +8,7 @@ ce_download(
   output_dir,
   c_source = "WorldClim",
   e_source = "mapzen",
-  var,
+  var = "all",
   location,
   ...
 )

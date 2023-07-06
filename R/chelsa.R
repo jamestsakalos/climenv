@@ -60,16 +60,19 @@ chelsa <- function(output_dir = NULL, var = "all",
   options(timeout = 1000)
 
   # I want to use these as a template, to apply correct names later.
-  var_t <- c("prec", "tmax", "tmin", "tavg")
+  var_options <- c("prec", "tmax", "tmin", "tavg")
+  var_t <- var_options
   names(var_t) <- c("pr", "tasmin", "tasmax", "tas")
 
   # Checks var, if an argument is provided it makes sure its correct.
   # If var is null then it assigns all the values.
   if (is.null(var) || var == "all") {
-    var <- c("prec", "tmax", "tmin", "tavg")
+    var <- var_options
     names(var) <- c("pr", "tasmin", "tasmax", "tas")
   } else {
-    stopifnot(var %in% c("prec", "tmax", "tmin", "tavg"))
+    if (!all(var %in% var_options)) {
+      stop("invalid `var`; select from ", paste(var_options, collapse = ", "))
+    }
 
     # create clean names
     var_c <- c("prec", "tmax", "tmin", "tavg")

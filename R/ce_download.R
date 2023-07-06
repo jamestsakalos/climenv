@@ -39,7 +39,7 @@ ce_download <- function(
     output_dir,
     c_source = "WorldClim",
     e_source = "mapzen",
-    var,
+    var = "all",
     location, ...) {
 
   if (missing(output_dir))
@@ -49,16 +49,23 @@ ce_download <- function(
     stop("Set spatial location for sourcing elevation data")
 
   # Partial, case-insensitive matching
-  if (is.na(pmatch(toupper(c_source), c("CHELSA", "WORLDCLIM"))))
-    stop("c_source must be either CHELSA, WorldClim")
+  c_source_id <- pmatch(toupper(c_source), c("CHELSA", "WORLDCLIM"))
+  if (any(is.na(c_source_id))) {
+    if(all(is.na(c_source_id))) {
+      stop("c_source must be either CHELSA, WorldClim")
+    } else {
+      warning("Unrecognized value in c_source: ",
+            paste(c_source[is.na(c_source_id)], collapse = ", "))
+    }
+  }
 
   # Download CHELSA
-  if ("CHELSA" %in% toupper(c_source)) {
+  if (1 %in% c_source_id) {
     chelsa(output_dir = output_dir, var = var, ...)
   }
 
   # Download WorldClim
-  if ("WORLDCLIM" %in% toupper(c_source)) {
+  if (2 %in% c_source_id) {
     worldclim(output_dir = output_dir, location = location, var = var, ...)
   }
 
