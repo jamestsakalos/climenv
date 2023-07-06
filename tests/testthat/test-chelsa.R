@@ -1,3 +1,3 @@
 test_that("chelsa() fails gracefully", {
-  expect_error(chelsa(var = "stop"), "invalid `var`")
+  expect_error(chelsa(out = "", loc = "", var = "stop"), "invalid `var`")
 })
