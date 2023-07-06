@@ -91,7 +91,10 @@
 #' @export
 elev <- function(output_dir, location, e_source = "mapzen") {
 
-  stopifnot(e_source %in% c("mapzen", "geodata"))
+  e_source_id <- pmatch(tolower(e_source[1]), c("mapzen", "geodata"))
+  if (is.na(e_source_id)) {
+    stop("e_source must be \"mapzen\" or \"geodata\"")
+  }
 
   # Convert sf locations to SP
   if (("sf" %in% class(location)) || ("sfc" %in% class(location))) {
@@ -105,14 +108,8 @@ elev <- function(output_dir, location, e_source = "mapzen") {
   }
 
   # Saves elevation from geodata or mapzen sources
-  switch(e_source,
-         "geodata" = {
-           srtm_mosaic <- .elev_geodata(location = location)
-           file_path <- paste0(output_dir, "/elev/srtm.tif")
-           terra::writeRaster(srtm_mosaic, filename = file_path,
-                              overwrite = TRUE)
-         },
-         "mapzen" = {
+  switch(e_source_id,
+         { # mapzen
            srtm_mosaic <- terra::rast(
              elevatr::get_elev_raster(
                location, z = 7, override_size_check = TRUE,
@@ -122,7 +119,12 @@ elev <- function(output_dir, location, e_source = "mapzen") {
            file_path <- paste0(output_dir, "/elev/srtm.tif")
            terra::writeRaster(srtm_mosaic, filename = file_path,
                               overwrite = TRUE)
+         },
+         { # geodata
+           srtm_mosaic <- .elev_geodata(location = location)
+           file_path <- paste0(output_dir, "/elev/srtm.tif")
+           terra::writeRaster(srtm_mosaic, filename = file_path,
+                              overwrite = TRUE)
          }
   )
-
 }

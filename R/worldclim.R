@@ -103,12 +103,15 @@
 worldclim <- function(output_dir, location, mode = "wb",
                       var = "all", ...) {
 
-  # Check the var argument
-  stopifnot(var %in% c("all", "prec", "tmax", "tmin", "tavg"))
+  var_options <- c("prec", "tmax", "tmin", "tavg")
 
   # If var is NULL, all climate variables can be downloaded.
-  if (var == "all") {
-    var <- c("prec", "tmax", "tmin", "tavg")
+  if (is.null(var) || "all" %in% var) {
+    var <- var_options
+  }
+
+  if (any(!var %in% var_options)) {
+    stop("invalid `var`; select from ", paste(var_options, collapse = ", "))
   }
 
   # create WorldClim tiles
