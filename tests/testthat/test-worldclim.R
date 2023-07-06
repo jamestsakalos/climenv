@@ -21,15 +21,25 @@ test_that("worldclim() downloads data", {
                           51.537, -0.150))
   regents <- sf::st_as_sf(as.data.frame(regentsPark), coords = 1:2)
   worldclim(out = tmp_dir, loc = regents, var = "tavg")
-  expect_equal(
-    file.exists(paste0(
-      tmp_dir,
-      "\\tavg\\wc2.1_30s_tavg_",
-      formatC(1:12, width = 2, flag = "0"),
-      ".tif")
-    ),
-    rep(TRUE, 12)
-  )
+  parkFiles <- paste0(tmp_dir, "\\tavg\\wc2.1_30s_tavg_",
+                      formatC(1:12, width = 2, flag = "0"), ".tif")
+  expect_equal(file.exists(parkFiles), rep(TRUE, 12))
+
+  park1 <- terra::rast(parkFiles[1])
+  thumb <- terra::aggregate(park1, fact = 64)
+  expected <- terra::rast(system.file("tests/testthat/expected/park1.tif",
+                                      package = "climenv"))
+  expect_true(all.equal(rast(thumb), rast(expected)))
+  if (FALSE) {
+    # Run this code to update the "Expected" value
+    terra::writeRaster(
+      thumb, overwrite = TRUE,
+      paste0(system.file("tests/testthat/expected", package = "climenv"),
+             "/park1.tif")
+      )
+  }
+
+  raster(parkFiles[1])
 
   skip_on_ci() # Perhaps too slow?
   # Multiple tiles
@@ -46,13 +56,24 @@ test_that("worldclim() downloads data", {
                  54.09, -6.26))
   niSF <- sf::st_as_sf(as.data.frame(ni), coords = 1:2)
   worldclim(out = tmp_dir, loc = niSF, var = "prec")
-  expect_equal(
-    file.exists(paste0(
-      tmp_dir,
-      "\\prec\\wc2.1_30s_prec_",
-      formatC(1:12, width = 2, flag = "0"),
-      ".tif")
-    ),
-    rep(TRUE, 12)
-  )
+  niFiles <- paste0(
+    tmp_dir,
+    "\\prec\\wc2.1_30s_prec_",
+    formatC(1:12, width = 2, flag = "0"),
+    ".tif")
+
+  expect_equal(file.exists(niFiles), rep(TRUE, 12))
+  ni5 <- terra::rast(niFiles[5])
+  thumb <- terra::aggregate(ni5, fact = 64)
+  expected <- terra::rast(system.file("tests/testthat/expected/ni5.tif",
+                                      package = "climenv"))
+  expect_true(all.equal(rast(thumb), rast(expected)))
+  if (FALSE) {
+    # Run this code to update the "Expected" value
+    terra::writeRaster(
+      thumb, overwrite = TRUE,
+      paste0(system.file("tests/testthat/expected", package = "climenv"),
+             "/ni5.tif")
+    )
+  }
 })
