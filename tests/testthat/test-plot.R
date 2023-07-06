@@ -2,7 +2,6 @@ test_that("ce_plot() works", {
 
   library(terra)
   library(sf)
-  library(vdiffr)
 
   # Set testing data ####
 
