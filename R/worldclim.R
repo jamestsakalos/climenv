@@ -84,13 +84,20 @@
 #' # Download time will depend on the size of the area you wish to access
 #' # climate data for and your internet connection speed.
 #'
-#' # Import the Italian Biome data set
-#' data("it_py", package = "climenv")
+#' # Lets make a polygon file
+#' regents <- sf::st_polygon(
+#'   list(
+#'     cbind(
+#'       "lon" = c(51.537, 51.525, 51.523, 51.530, 51.534, 51.537),
+#'       "lat" = c(-0.150, -0.145, -0.156, -0.167, -0.163, -0.150)
+#'     )
+#'   )
+#' )
 #'
 #' # Download the WorldClim data
 #' worldclim(
 #'   output_dir = "...Desktop/worldclim",
-#'   location = "it_py"
+#'   location = "regents"
 #' )
 #'
 #' }

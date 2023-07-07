@@ -10,7 +10,9 @@ elev(output_dir, location, e_source = "mapzen")
 \item{output_dir}{Character (e.g., \code{"../Desktop/chelsa"}). Pathway to where
 the data will be stored.}
 
-\item{location}{A \code{"sp"}, \code{"sf"} polygon or point object.}
+\item{location}{A \code{"sp"}, \code{"sf"} polygon or point object. See
+\link[sf:st]{sf::st_polygon} to make polygons and \link[sf:st_as_sf]{sf::st_as_sf} to make point
+objects.}
 
 \item{e_source}{Character (e.g., \code{mapzen} or \code{WorldClim}). Indicating the
 elevation data source.}
