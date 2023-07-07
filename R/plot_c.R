@@ -14,7 +14,7 @@
 }
 
 .lat_check <- function(data, geo_id) {
-  if(data$lat[geo_id, ] == 0) {
+  if (data$lat[geo_id, ] == 0) {
     stop(
       "invalid latitude for `geo_id` ",
       "must be positive or negative"
