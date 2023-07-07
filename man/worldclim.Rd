@@ -4,7 +4,7 @@
 \alias{worldclim}
 \title{Download WorldClim climate data}
 \usage{
-worldclim(output_dir, location, mode = "wb", var = "all", ...)
+worldclim(output_dir, location, var = "all", ...)
 }
 \arguments{
 \item{output_dir}{Character (e.g., \code{"../Desktop/chelsa"}). Pathway to where
@@ -12,7 +12,7 @@ the data will be stored.}
 
 \item{location}{A \code{"sp"}, \code{"sf"} polygon or point object.}
 
-\item{var, mode, \dots}{Arguments to control a download from the Internet
+\item{var, \dots}{Arguments to control a download from the Internet
 \code{download.file()}.}
 }
 \value{

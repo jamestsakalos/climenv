@@ -1,8 +1,19 @@
+test_that("plot_XX() fails gracefully", {
+  data("it_data", package = "climenv")
+  expect_error(
+    plot_h(data = it_data, geo_id = "ERROR"),
+    "Invalid geo_id; Choices: MED, NEM"
+  )
+  expect_error(
+    plot_wl(data = it_data, geo_id = "ERROR"),
+    "Invalid geo_id; Choices: MED, NEM"
+  )
+})
+
 test_that("ce_plot() works", {
 
-  library(terra)
-  library(sf)
-  library(vdiffr)
+  library("terra")
+  library("sf")
 
   # Set testing data ####
 
@@ -71,19 +82,24 @@ test_that("ce_plot() works", {
                      location = pol_py, location_g = "grp",
                      c_source = "WorldClim", var = "all")
 
+  lat0 <- data
+  lat0$lat[1, 1] <- 0
+  expect_error(plot_c(data = lat0, geo_id = "high"),
+               "invalid latitude for `geo_id` must be positive or negative")
+
   # vdiffr is used only for testing so not required
   skip_if_not_installed("vdiffr")
 
-  plot_wl(data = data, geo_id = "high")
   vdiffr::expect_doppelganger("py test WL plot",
                               plot_wl(data = data, geo_id = "high"))
 
-  plot_h(data = data, geo_id = "high")
   vdiffr::expect_doppelganger("py test H plot",
                               plot_h(data = data, geo_id = "high"))
 
-  plot_c(data = data, geo_id = "high")
   vdiffr::expect_doppelganger("py test c plot",
                               plot_c(data = data, geo_id = "high"))
+
+  vdiffr::expect_doppelganger("py test c plot low",
+                              plot_c(data = data, geo_id = "low"))
 
 })

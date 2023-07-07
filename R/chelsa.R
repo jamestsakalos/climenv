@@ -7,7 +7,7 @@
 #'
 #' @template output_dir_param
 #' @template output_var_param
-#' @param quiet,mode,\dots Arguments to control a download from the Internet
+#' @param quiet,\dots Arguments to control a download from the Internet
 #' `download.file()`.
 #'
 #' @return
@@ -50,7 +50,7 @@
 #' }
 #' @export
 chelsa <- function(output_dir = NULL, var = "all",
-                   mode = "wb", quiet = FALSE, ...) {
+                   quiet = FALSE, ...) {
 
   if (is.null(output_dir))
     stop("Set output directory")
@@ -114,7 +114,7 @@ chelsa <- function(output_dir = NULL, var = "all",
       try(
         download.file(
           layer_url, file_path,
-          mode = mode, quiet = quiet, ...
+          mode = "wb", quiet = quiet, ...
         )
       )
     }

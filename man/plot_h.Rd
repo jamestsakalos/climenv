@@ -50,9 +50,9 @@ plot_h(data = it_data, geo_id = "MED")
 simple climatic data. \emph{Science}, 105:367–368.
 \doi{10.1126/science.105.2727.367}
 
-Holdridge (1967), \emph{\link{Life zone ecology}}. Tropical Science Center,
-San José: Tropical Science Center.
-\href{https://reddcr.go.cr/sites/default/files/centro-de-documentacion/holdridge_1966_-_life_zone_ecology.pdf}{Life zone ecology}
+Holdridge (1967),
+\emph{\href{https://reddcr.go.cr/sites/default/files/centro-de-documentacion/holdridge_1966_-_life_zone_ecology.pdf}{Life zone ecology}}.
+Tropical Science Center, San José.
 
 Szelepcsényi, Z. (2023) macroBiome: A Tool for Mapping the
 Distribution of the Biomes and Bioclimate. Comprehensive R Archive Network.
