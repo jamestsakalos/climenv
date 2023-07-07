@@ -4,7 +4,7 @@
 \alias{chelsa}
 \title{Download CHELSA climate data}
 \usage{
-chelsa(output_dir = NULL, var = "all", mode = "wb", quiet = FALSE, ...)
+chelsa(output_dir = NULL, var = "all", quiet = FALSE, ...)
 }
 \arguments{
 \item{output_dir}{Character (e.g., \code{"../Desktop/chelsa"}). Pathway to where
@@ -14,7 +14,7 @@ the data will be stored.}
 Must be one of \code{"all"} (default), \code{"prec"}, \code{"tmax"}, \code{"tmin"} or \code{"tmean"}
 to download the corresponding climate data.}
 
-\item{quiet, mode, \dots}{Arguments to control a download from the Internet
+\item{quiet, \dots}{Arguments to control a download from the Internet
 \code{download.file()}.}
 }
 \value{
