@@ -1,34 +1,65 @@
-.elev_geodata <- function(location, output_dir) {
+#' @importFrom terra colFromCell crs<- rowFromCell
+.elev_geodata <- function(location, output_dir, ...) {
 
-  y_max <- 80
-  y_min <- -70
-  tile_degrees <- 5
+  y_max <- 60
+  y_min <- -60
   # create SRTM tiles
-  rs <- terra::rast(nrows = (y_max - y_min) / tile_degrees,
-                    ncols = 360 / tile_degrees,
-                    xmin = -180, xmax = 180,
-                    ymin = y_min, ymax = y_max)
+  rs <- terra::rast(res = 5, ymin = y_min, ymax = y_max)
   rs[] <- seq_len(prod(dim(rs)))
 
   # Intersect location and tiles
   tiles <- unique(terra::extract(rs, terra::vect(location))$lyr.1)
-  srtm_points <- terra::xyFromCell(rs, tiles)
-  lats <- srtm_points[, "y"]
+  cols <- formatC(colFromCell(rs, tiles), width = 2, flag = 0)
+  rows <- formatC(rowFromCell(rs, tiles), width = 2, flag = 0)
+  na <- cols == "NA" | rows == "NA"
+  srtm_id <- paste0("srtm_", cols[!na], "_", rows[!na])
 
-  # Make an empty list to fill
-  srtm_list <- apply(srtm_points, 1, function (point) {
-    geodata::elevation_3s(
-      lon = point["x"], lat = point["y"],
-      path = tempfile()
-    )
+  temp_file <- tempfile("srtm_", output_dir)
+  on.exit(unlink(temp_file))
+
+  srtm_list <- lapply(srtm_id, function(id) {
+    tif <- paste0(output_dir, "/", id, ".tif")
+    error <- if (file.exists(tif)) {
+      0
+    } else {
+      zip <- paste0(
+        "https://srtm.csi.cgiar.org/wp-content/uploads/files/srtm_5x5/TIFF/",
+        id, ".zip"
+      )
+      urlStatus <- attr(curlGetHeaders(zip), "status")
+      error <- if (urlStatus == 200) {
+        tryCatch(
+          utils::download.file(url = zip, destfile = temp_file, mode = "wb",
+                               ...), # Returns 0 on success
+          error = function(e) {
+            warning("Failed to download ", id, ": ", e)
+            -1 # Error code
+          }
+        )
+      } else {
+        warning("Could not download ", id, ": HTTP status ", urlStatus)
+        -1
+      }
+    }
+    if (!error) {
+      tryCatch(utils::unzip(temp_file, paste0(id, ".tif"), exdir = output_dir),
+               error = function(e) warning("Failed to unzip: ", id))
+      rs <- rast(tif)
+      crs(rs) <- "+proj=longlat +datum=WGS84"
+      rs
+    } else {
+      NULL
+    }
   })
 
+  srtm_list <- srtm_list[!vapply(srtm_list, is.null, logical(1))]
+
   # Mosaic the tiles in the list
-  if (length(lats) > 1) {
+  if (length(srtm_list) > 1) {
     srtm_list$fun <- mean
     srtm_mosaic <- do.call(terra::mosaic, srtm_list)
-  } else if (length(strm_list) == 0) {
-    stop("No data downloaded.") # nocov
+  } else if (length(srtm_list) == 0) {
+    stop("No data downloaded.")
   } else {
     srtm_mosaic <- srtm_list[[1]]
   }
@@ -120,7 +151,7 @@ elev <- function(output_dir, location, e_source = "mapzen") {
                               overwrite = TRUE)
          },
          { # geodata
-           srtm_mosaic <- .elev_geodata(location = location)
+           srtm_mosaic <- .elev_geodata(location, output_dir)
            file_path <- paste0(output_dir, "/elev/srtm.tif")
            terra::writeRaster(srtm_mosaic, filename = file_path,
                               overwrite = TRUE)
