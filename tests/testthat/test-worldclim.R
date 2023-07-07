@@ -40,7 +40,7 @@ test_that("worldclim() downloads data", {
   jan50 <- terra::rast(tile_files[1])
   thumb <- terra::aggregate(jan50, fact = 64)
   expect_silent(
-    expectedFile <- system.file("tests/testthat/expected/jan50.tif",
+    expectedFile <- system.file("tests", "testthat", "expected", "jan50.tif",
                                 package = "climenv", mustWork = TRUE)
   )
   expect_true(all.equal(rast(thumb), rast(rast(expectedFile))))
@@ -70,7 +70,7 @@ test_that("worldclim() downloads data", {
   south_elev <- terra::rast(south_file)
   thumb <- terra::aggregate(south_elev, fact = 64)
   expect_silent(
-    expected <- system.file("tests/testthat/expected/south_elev.tif",
+    expected <- system.file("tests", "testthat", "expected", "south_elev.tif",
                             package = "climenv", mustWork = TRUE)
   )
   expect_true(all.equal(rast(thumb), rast(rast(expected))))
