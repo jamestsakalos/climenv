@@ -62,6 +62,7 @@ jobs:
       R_REALLY_FORCE_SYMBOLS: true
       _R_CHECK_CRAN_INCOMING_USE_ASPELL_: false # Set to true when can figure how to install aspell on Windows
       RSPM: ${{ matrix.config.rspm }}
+      _SP_EVOLUTION_STATUS_: 2 # Whilst sp is evolving; remove in Oct 2023
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
