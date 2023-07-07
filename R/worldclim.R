@@ -2,8 +2,8 @@
 .download_dir <- function(clim_points, var, output_dir, ...) {
   # latitudes
   lats <- clim_points[, "y"]
-  temp_files <- vapply(paste0("tile-", seq_along(lats)), tempfile, character(1),
-                       tmpdir = output_dir)
+  temp_files <- vapply(paste0("temp-tile-", seq_along(lats)),
+                       tempfile, character(1), tmpdir = output_dir)
   # Remove temporary downloads when function exits
   on.exit(lapply(temp_files, unlink))
 
@@ -37,8 +37,11 @@
     sep = "_"
   )
 
+  message("Writing to: ", output_dir)
   # Export the climate mosaic
   lapply(seq_along(names(clim_mosaic)), FUN = function(x) {
+    message("  File: ",
+            paste0(output_dir, "/", var, "/", names(clim_mosaic)[x], ".tif"))
     terra::writeRaster(
       clim_mosaic[[x]],
       paste0(output_dir, "/", var, "/", names(clim_mosaic)[x], ".tif"),
