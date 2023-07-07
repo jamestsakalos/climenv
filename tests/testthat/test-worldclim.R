@@ -59,7 +59,7 @@ test_that("worldclim() downloads data", {
 
   # Obtain raster data
   worldclim(out = tmp_dir, loc = south, var = "elev")
-  south_file <- paste0(tmp_dir, "\\elev\\wc2.1_30s_elev_01.tif")
+  south_file <- paste0(tmp_dir, "/elev/wc2.1_30s_elev_01.tif")
   expect_true(file.exists(south_file))
 
   # Check data matches expectation
