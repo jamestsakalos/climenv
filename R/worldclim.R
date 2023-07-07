@@ -37,11 +37,11 @@
     sep = "_"
   )
 
-  message("Writing to: ", output_dir)
+  dput(paste0("Writing to: ", output_dir))
   # Export the climate mosaic
   lapply(seq_along(names(clim_mosaic)), FUN = function(x) {
-    message("  File: ",
-            paste0(output_dir, "/", var, "/", names(clim_mosaic)[x], ".tif"))
+    dput(paste0("  File: ", output_dir, "/", var,
+                "/", names(clim_mosaic)[x], ".tif"))
     terra::writeRaster(
       clim_mosaic[[x]],
       paste0(output_dir, "/", var, "/", names(clim_mosaic)[x], ".tif"),

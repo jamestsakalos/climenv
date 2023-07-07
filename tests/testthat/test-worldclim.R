@@ -31,8 +31,8 @@ test_that("worldclim() downloads data", {
 
   # Obtain raster files
   worldclim(out = tmp_dir, loc = tile50, var = "prec")
-  tile_files <- paste0(tmp_dir, "\\prec\\wc2.1_30s_prec_",
-                      formatC(1:12, width = 2, flag = "0"), ".tif")
+  tile_files <- paste0(tmp_dir, "/prec/wc2.1_30s_prec_",
+                       formatC(1:12, width = 2, flag = "0"), ".tif")
   expect_equal(file.exists(tile_files), rep(TRUE, 12))
 
   # Check data matches expectation
