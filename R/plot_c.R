@@ -17,7 +17,7 @@
   if(data$lat[geo_id, ] == 0) {
     stop(
       "invalid latitude for `geo_id` ",
-      "must be positive (N) or negative"
+      "must be positive or negative"
     )
   }
 }
