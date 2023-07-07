@@ -13,34 +13,29 @@
   # Intersect location and tiles
   tiles <- unique(terra::extract(rs, terra::vect(location))$lyr.1)
   srtm_points <- terra::xyFromCell(rs, tiles)
-
-  # Make an empty list to fill
-  srtm_list <- list()
-
-  # lats
   lats <- srtm_points[, "y"]
 
-  # Downloads the tiles and stores into that list
-  for (pts in 1:seq_along(lats)) {
-
-    tile <- geodata::elevation_3s(
-      lon = srtm_points[pts, "x"], lat = srtm_points[pts, "y"],
+  # Make an empty list to fill
+  srtm_list <- apply(srtm_points, 1, function (point) {
+    geodata::elevation_3s(
+      lon = point["x"], lat = point["y"],
       path = tempfile()
     )
-
-    srtm_list[[pts]] <- tile
-
-  }
+  })
 
   # Mosaic the tiles in the list
   if (length(lats) > 1) {
     srtm_list$fun <- mean
     srtm_mosaic <- do.call(terra::mosaic, srtm_list)
+  } else if (length(strm_list) == 0) {
+    stop("No data downloaded.") # nocov
   } else {
     srtm_mosaic <- srtm_list[[1]]
   }
+
   return(srtm_mosaic)
 }
+
 #' Download elevation data
 #'
 #' @description
