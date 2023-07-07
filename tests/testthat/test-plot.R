@@ -91,15 +91,15 @@ test_that("ce_plot() works", {
   skip_if_not_installed("vdiffr")
 
   vdiffr::expect_doppelganger("py test WL plot",
-                              plot_wl(data = data, geo_id = "high"))
+                              function() plot_wl(data = data, geo_id = "high"))
 
   vdiffr::expect_doppelganger("py test H plot",
-                              plot_h(data = data, geo_id = "high"))
+                              function() plot_h(data = data, geo_id = "high"))
 
   vdiffr::expect_doppelganger("py test c plot",
-                              plot_c(data = data, geo_id = "high"))
+                              function() plot_c(data = data, geo_id = "high"))
 
   vdiffr::expect_doppelganger("py test c plot low",
-                              plot_c(data = data, geo_id = "low"))
+                              function() plot_c(data = data, geo_id = "low"))
 
 })
