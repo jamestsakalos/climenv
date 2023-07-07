@@ -22,8 +22,8 @@
   if (length(lats) > 1) {
     clim_list$fun <- mean
     clim_mosaic <- do.call(terra::mosaic, clim_list)
-  } else if (is.null(lats)) {
-    stop("Failed to download data.") # nocov
+  } else if (length(clim_list) == 0) {
+    stop("No data downloaded") # nocov
   } else {
     clim_mosaic <- clim_list[[1]]
   }
