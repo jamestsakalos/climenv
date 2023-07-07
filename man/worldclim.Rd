@@ -10,7 +10,9 @@ worldclim(output_dir, location, var = "all", ...)
 \item{output_dir}{Character (e.g., \code{"../Desktop/chelsa"}). Pathway to where
 the data will be stored.}
 
-\item{location}{A \code{"sp"}, \code{"sf"} polygon or point object.}
+\item{location}{A \code{"sp"}, \code{"sf"} polygon or point object. See
+\link[sf:st]{sf::st_polygon} to make polygons and \link[sf:st_as_sf]{sf::st_as_sf} to make point
+objects.}
 
 \item{var, \dots}{Arguments to control a download from the Internet
 \code{download.file()}.}
@@ -37,13 +39,20 @@ This function uses the \pkg{geodata} to download the worldclim tiles.
 # Download time will depend on the size of the area you wish to access
 # climate data for and your internet connection speed.
 
-# Import the Italian Biome data set
-data("it_py", package = "climenv")
+# Lets make a polygon file
+regents <- sf::st_polygon(
+  list(
+    cbind(
+      "lon" = c(51.537, 51.525, 51.523, 51.530, 51.534, 51.537),
+      "lat" = c(-0.150, -0.145, -0.156, -0.167, -0.163, -0.150)
+    )
+  )
+)
 
 # Download the WorldClim data
 worldclim(
   output_dir = "...Desktop/worldclim",
-  location = "it_py"
+  location = "regents"
 )
 
 }

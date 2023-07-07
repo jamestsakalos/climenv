@@ -4,13 +4,13 @@ test_that("worldclim() fails gracefully", {
                    "Invalid value of `resolution`")
     , "invalid `var`")
 
-  flipLatLong <- sf::st_as_sf(
+  flip_lat_long <- sf::st_as_sf(
     data.frame(lat = c(-72, -73, -73, -72),
                lng = c(-156, -156, -157, -156)), coords = 1:2)
   tmp_dir <- tempdir()
   on.exit(unlink(tmp_dir))
   expect_null(expect_warning(
-    worldclim(out = tmp_dir, loc = flipLatLong, var = "prec"),
+    worldclim(out = tmp_dir, loc = flip_lat_long, var = "prec"),
     "Could not map all coordinates to tiles"))
 })
 
@@ -31,12 +31,13 @@ test_that("worldclim() downloads data", {
 
   # Obtain raster files
   worldclim(out = tmp_dir, loc = tile50, var = "prec")
-  tileFiles <- paste0(tmp_dir, "\\prec\\wc2.1_30s_prec_",
+  tile_files <- paste0(tmp_dir, "\\prec\\wc2.1_30s_prec_",
                       formatC(1:12, width = 2, flag = "0"), ".tif")
-  expect_equal(file.exists(tileFiles), rep(TRUE, 12))
+  expect_equal(file.exists(tile_files), rep(TRUE, 12))
 
   # Check data matches expectation
-  jan50 <- terra::rast(tileFiles[1])
+  skip_if(!file.exists(tile_files[1]))
+  jan50 <- terra::rast(tile_files[1])
   thumb <- terra::aggregate(jan50, fact = 64)
   expected <- terra::rast(system.file("tests/testthat/expected/jan50.tif",
                                       package = "climenv"))
@@ -60,13 +61,13 @@ test_that("worldclim() downloads data", {
 
   # Obtain raster data
   worldclim(out = tmp_dir, loc = south, var = "elev")
-  southFile <- paste0(tmp_dir, "\\elev\\wc2.1_30s_elev_01.tif")
-  expect_true(file.exists(southFile))
+  south_file <- paste0(tmp_dir, "\\elev\\wc2.1_30s_elev_01.tif")
+  expect_true(file.exists(south_file))
 
   # Check data matches expectation
-  southElev <- terra::rast(southFile)
-  thumb <- terra::aggregate(southElev, fact = 64)
-  expected <- terra::rast(system.file("tests/testthat/expected/southElev.tif",
+  south_elev <- terra::rast(south_file)
+  thumb <- terra::aggregate(south_elev, fact = 64)
+  expected <- terra::rast(system.file("tests/testthat/expected/south_elev.tif",
                                       package = "climenv"))
   expect_true(all.equal(rast(thumb), rast(expected)))
 
@@ -76,7 +77,7 @@ test_that("worldclim() downloads data", {
     terra::writeRaster(
       thumb, overwrite = TRUE,
       paste0(system.file("tests/testthat/expected", package = "climenv"),
-             "/southElev.tif")
+             "/south_elev.tif")
     )
   }
 })

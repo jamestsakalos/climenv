@@ -19,7 +19,9 @@ Within each climate folder there should be 12 raster files
 (e.g. \code{"prec01.tif"}) corresponding to the monthly climate data. There should
 be only one raster file within the elev subfolder named \code{"srtm.tif"}.}
 
-\item{location}{A \code{"sp"}, \code{"sf"} polygon or point object.}
+\item{location}{A \code{"sp"}, \code{"sf"} polygon or point object. See
+\link[sf:st]{sf::st_polygon} to make polygons and \link[sf:st_as_sf]{sf::st_as_sf} to make point
+objects.}
 
 \item{location_g}{Character. Informs how the zonal statistics are exported.
 Must correspond to a column of the \code{"location"} argument. If NULL,

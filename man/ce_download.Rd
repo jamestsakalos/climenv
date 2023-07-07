@@ -27,7 +27,9 @@ elevation data source.}
 Must be one of \code{"all"} (default), \code{"prec"}, \code{"tmax"}, \code{"tmin"} or \code{"tmean"}
 to download the corresponding climate data.}
 
-\item{location}{A \code{"sp"}, \code{"sf"} polygon or point object.}
+\item{location}{A \code{"sp"}, \code{"sf"} polygon or point object. See
+\link[sf:st]{sf::st_polygon} to make polygons and \link[sf:st_as_sf]{sf::st_as_sf} to make point
+objects.}
 
 \item{\dots}{Arguments to control a download from the Internet
 \code{download.file()}.}
