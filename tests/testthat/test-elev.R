@@ -29,6 +29,12 @@ test_that("elev()", {
     data.frame(lat = c(-61, -59, -51, -49, -61, -61),
                lng = c(161, 159, 159, 161, 154, 161)), coords = 2:1)
 
+  # In progress: the below will replace the above.
+  island <- sf::st_polygon(
+    list(cbind(lat = c(-61, -49, -61, -61), lng = c(161, 161, 154, 161))))
+  # This polygon covers a tile that does not contain a vertex.
+  # Should this tile be downloaded too?
+
   # elev(tmp_dir, island)
   expect_warning(
     geoElev <- elev(tmp_dir, island, "GEOdata"),
