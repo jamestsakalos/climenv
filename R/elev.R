@@ -7,7 +7,9 @@
   rs[] <- 1:1728
 
   # Intersect location and tiles
-  tiles <- unique(terra::extract(rs, terra::vect(location))$lyr.1)
+  tiles <- unique(
+    terra::extract(rs, terra::vect(location), touches = TRUE)$lyr.1
+  )
   srtm_points <- terra::xyFromCell(rs, tiles)
 
   # Make an empty list to fill
