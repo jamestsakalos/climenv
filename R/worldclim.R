@@ -8,7 +8,7 @@
   on.exit(lapply(temp_files, unlink))
 
   # Downloads the tiles and stores into that list
-  clim_list <- lapply(seq_along(lats), function (pts) {
+  clim_list <- lapply(seq_along(lats), function(pts) {
     geodata::worldclim_tile(
       var,
       res = 0.5,
