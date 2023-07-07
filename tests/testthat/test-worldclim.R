@@ -60,13 +60,13 @@ test_that("worldclim() downloads data", {
 
   # Obtain raster data
   worldclim(out = tmp_dir, loc = south, var = "elev")
-  southFile <- paste0(tmp_dir, "\\elev\\wc2.1_30s_elev_01.tif")
-  expect_true(file.exists(southFile))
+  south_file <- paste0(tmp_dir, "\\elev\\wc2.1_30s_elev_01.tif")
+  expect_true(file.exists(south_file))
 
   # Check data matches expectation
-  southElev <- terra::rast(southFile)
-  thumb <- terra::aggregate(southElev, fact = 64)
-  expected <- terra::rast(system.file("tests/testthat/expected/southElev.tif",
+  south_elev <- terra::rast(south_file)
+  thumb <- terra::aggregate(south_elev, fact = 64)
+  expected <- terra::rast(system.file("tests/testthat/expected/south_elev.tif",
                                       package = "climenv"))
   expect_true(all.equal(rast(thumb), rast(expected)))
 
@@ -76,7 +76,7 @@ test_that("worldclim() downloads data", {
     terra::writeRaster(
       thumb, overwrite = TRUE,
       paste0(system.file("tests/testthat/expected", package = "climenv"),
-             "/southElev.tif")
+             "/south_elev.tif")
     )
   }
 })
