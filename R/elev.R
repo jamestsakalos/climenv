@@ -1,10 +1,14 @@
 .elev_geodata <- function(location, output_dir) {
 
+  y_max <- 80
+  y_min <- -70
+  tile_degrees <- 5
   # create SRTM tiles
-  rs <- terra::rast(nrows = 24, ncols = 72,
+  rs <- terra::rast(nrows = (y_max - y_min) / tile_degrees,
+                    ncols = 360 / tile_degrees,
                     xmin = -180, xmax = 180,
-                    ymin = -60, ymax = 60)
-  rs[] <- 1:1728
+                    ymin = y_min, ymax = y_max)
+  rs[] <- seq_len(prod(dim(rs)))
 
   # Intersect location and tiles
   tiles <- unique(terra::extract(rs, terra::vect(location))$lyr.1)
