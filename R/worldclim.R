@@ -32,12 +32,12 @@
   names(clim_mosaic) <- paste(
     "wc2.1_30s", var,
     # climate data length 12; elev, 1
-    sprintf("%02d", seq_along(clim_mosaic)),
+    sprintf("%02d", seq_along(names(clim_mosaic))),
     sep = "_"
   )
 
   # Export the climate mosaic
-  lapply(seq_along(clim_mosaic), FUN = function(x) {
+  lapply(seq_along(names(clim_mosaic)), FUN = function(x) {
     terra::writeRaster(
       clim_mosaic[[x]],
       paste0(output_dir, "/", var, "/", names(clim_mosaic)[x], ".tif"),
