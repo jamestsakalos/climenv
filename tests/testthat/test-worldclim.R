@@ -40,19 +40,15 @@ test_that("worldclim() downloads data", {
   jan50 <- terra::rast(tile_files[1])
   thumb <- terra::aggregate(jan50, fact = 64)
   expect_silent(
-    expectedFile <- system.file("tests", "testthat", "expected", "jan50.tif",
-                                package = "climenv", mustWork = TRUE)
+    expectedFile <- test_path("expected", "jan50.tif")
   )
   expect_true(all.equal(rast(thumb), rast(rast(expectedFile))))
 
 
   # Run this code manually to update the "Expected" value
   if (FALSE) {
-    terra::writeRaster(
-      thumb, overwrite = TRUE,
-      paste0(system.file("tests/testthat/expected", package = "climenv"),
-             "/jan50.tif")
-      )
+    terra::writeRaster(thumb, overwrite = TRUE,
+                       test_path("expected", "jan50.tif"))
   }
 
 
@@ -70,8 +66,7 @@ test_that("worldclim() downloads data", {
   south_elev <- terra::rast(south_file)
   thumb <- terra::aggregate(south_elev, fact = 64)
   expect_silent(
-    expected <- system.file("tests", "testthat", "expected", "south_elev.tif",
-                            package = "climenv", mustWork = TRUE)
+    expected <- test_path("expected", "south_elev.tif")
   )
   expect_true(all.equal(rast(thumb), rast(rast(expected))))
 
