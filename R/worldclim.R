@@ -11,6 +11,7 @@
   clim_list <- lapply(seq_along(lats), function (pts) {
     geodata::worldclim_tile(
       var,
+      res = 0.5,
       lon = clim_points[pts, "x"], lat = clim_points[pts, "y"],
       path = temp_files[pts],
       version = "2.1",
