@@ -99,7 +99,7 @@ test_that("ce_plot() works", {
   vdiffr::expect_doppelganger("py test c plot",
                               plot_c(data = data, geo_id = "high"))
 
-  vdiffr::expect_doppelganger("py test c plot north",
+  vdiffr::expect_doppelganger("py test c plot low",
                               plot_c(data = data, geo_id = "low"))
 
 })
