@@ -36,6 +36,7 @@ test_that("worldclim() downloads data", {
   expect_equal(file.exists(tile_files), rep(TRUE, 12))
 
   # Check data matches expectation
+  skip_if(!file.exists(tile_files[1]))
   jan50 <- terra::rast(tile_files[1])
   thumb <- terra::aggregate(jan50, fact = 64)
   expected <- terra::rast(system.file("tests/testthat/expected/jan50.tif",
