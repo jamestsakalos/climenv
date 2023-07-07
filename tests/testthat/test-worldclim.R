@@ -31,7 +31,7 @@ test_that("worldclim() downloads data", {
 
   # Obtain raster files
   worldclim(out = tmp_dir, loc = tile50, var = "prec")
-  tile_files <- paste0(tmp_dir, "\\prec\\wc2.1_30s_prec_",
+  tile_files <- paste0(tmp_dir, "/prec/wc2.1_30s_prec_",
                       formatC(1:12, width = 2, flag = "0"), ".tif")
   expect_equal(file.exists(tile_files), rep(TRUE, 12))
 
@@ -39,8 +39,7 @@ test_that("worldclim() downloads data", {
   skip_if(!file.exists(tile_files[1]))
   jan50 <- terra::rast(tile_files[1])
   thumb <- terra::aggregate(jan50, fact = 64)
-  expected <- terra::rast(system.file("tests/testthat/expected/jan50.tif",
-                                      package = "climenv"))
+  expected <- terra::rast(test_path("expected", "jan50.tif"))
   expect_true(all.equal(rast(thumb), rast(expected)))
 
 
@@ -48,9 +47,8 @@ test_that("worldclim() downloads data", {
   if (FALSE) {
     terra::writeRaster(
       thumb, overwrite = TRUE,
-      paste0(system.file("tests/testthat/expected", package = "climenv"),
-             "/jan50.tif")
-      )
+      test_path("expected", "jan50.tif")
+    )
   }
 
 
@@ -61,14 +59,13 @@ test_that("worldclim() downloads data", {
 
   # Obtain raster data
   worldclim(out = tmp_dir, loc = south, var = "elev")
-  south_file <- paste0(tmp_dir, "\\elev\\wc2.1_30s_elev_01.tif")
+  south_file <- paste0(tmp_dir, "/elev/wc2.1_30s_elev_01.tif")
   expect_true(file.exists(south_file))
 
   # Check data matches expectation
   south_elev <- terra::rast(south_file)
   thumb <- terra::aggregate(south_elev, fact = 64)
-  expected <- terra::rast(system.file("tests/testthat/expected/south_elev.tif",
-                                      package = "climenv"))
+  expected <- terra::rast(test_path("expected", "south_elev.tif"))
   expect_true(all.equal(rast(thumb), rast(expected)))
 
 
@@ -76,8 +73,7 @@ test_that("worldclim() downloads data", {
   if (FALSE) {
     terra::writeRaster(
       thumb, overwrite = TRUE,
-      paste0(system.file("tests/testthat/expected", package = "climenv"),
-             "/south_elev.tif")
+      test_path("expected", "south_elev.tif")
     )
   }
 })
