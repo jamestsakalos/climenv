@@ -13,6 +13,15 @@
   }
 }
 
+.lat_check <- function(data, geo_id) {
+  if(data$lat[geo_id, ] == 0) {
+    stop(
+      "invalid latitude for `geo_id` ",
+      "must be positive (N) or negative"
+    )
+  }
+}
+
 #' plot_c
 #'
 #'
@@ -100,6 +109,10 @@ plot_c <- function(data,
                    lwd_prec = 9,
                    l_units = 0.1,
                    l_tcols = c(14.5, 16.5, 18.5, 19.5, 22.5)) {
+
+  # Check that the latitude falls in the northern or southern hemisphere.
+  # geo_id can not fall on the equator
+  .lat_check(data, geo_id)
 
   # Set the names of t_col
   names(l_tcols) <- c(paste0("L", 1:5))
