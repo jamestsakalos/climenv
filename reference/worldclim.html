@@ -80,7 +80,9 @@ the data will be stored.</p></dd>
 
 
 <dt>location</dt>
-<dd><p>A <code>"sp"</code>, <code>"sf"</code> polygon or point object.</p></dd>
+<dd><p>A <code>"sp"</code>, <code>"sf"</code> polygon or point object. See
+<a href="https://r-spatial.github.io/sf/reference/st.html" class="external-link">sf::st_polygon</a> to make polygons and <a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">sf::st_as_sf</a> to make point
+objects.</p></dd>
 
 
 <dt>var, ...</dt>
@@ -124,13 +126,20 @@ function for downloading other climate and elevation data <code><a href="ce_down
 <span class="r-in"><span><span class="co"># Download time will depend on the size of the area you wish to access</span></span></span>
 <span class="r-in"><span><span class="co"># climate data for and your internet connection speed.</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Import the Italian Biome data set</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"it_py"</span>, package <span class="op">=</span> <span class="st">"climenv"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Lets make a polygon file</span></span></span>
+<span class="r-in"><span><span class="va">regents</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st.html" class="external-link">st_polygon</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="st">"lon"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">51.537</span>, <span class="fl">51.525</span>, <span class="fl">51.523</span>, <span class="fl">51.530</span>, <span class="fl">51.534</span>, <span class="fl">51.537</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"lat"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.150</span>, <span class="op">-</span><span class="fl">0.145</span>, <span class="op">-</span><span class="fl">0.156</span>, <span class="op">-</span><span class="fl">0.167</span>, <span class="op">-</span><span class="fl">0.163</span>, <span class="op">-</span><span class="fl">0.150</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Download the WorldClim data</span></span></span>
 <span class="r-in"><span><span class="fu">worldclim</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  output_dir <span class="op">=</span> <span class="st">"...Desktop/worldclim"</span>,</span></span>
-<span class="r-in"><span>  location <span class="op">=</span> <span class="st">"it_py"</span></span></span>
+<span class="r-in"><span>  location <span class="op">=</span> <span class="st">"regents"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
