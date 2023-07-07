@@ -82,8 +82,9 @@ test_that("ce_plot() works", {
                      location = pol_py, location_g = "grp",
                      c_source = "WorldClim", var = "all")
 
-  data$lat[1, 1] <- 0
-  expect_error(plot_c(data = data, geo_id = "high"),
+  lat0 <- data
+  lat0$lat[1, 1] <- 0
+  expect_error(plot_c(data = lat0, geo_id = "high"),
                "invalid latitude for `geo_id` must be positive or negative")
 
   # vdiffr is used only for testing so not required
