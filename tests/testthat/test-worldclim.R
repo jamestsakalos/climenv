@@ -9,9 +9,10 @@ test_that("worldclim() fails gracefully", {
                lng = c(-156, -156, -157, -156)), coords = 1:2)
   tmp_dir <- tempdir()
   on.exit(unlink(tmp_dir))
-  expect_null(expect_warning(
-    worldclim(out = tmp_dir, loc = flip_lat_long, var = "prec"),
-    "Could not map all coordinates to tiles"))
+  expect_warning(
+    expect_null(worldclim(out = tmp_dir, loc = flip_lat_long, var = "prec")),
+    "Could not map all coordinates to tiles"
+  )
 })
 
 test_that("worldclim() downloads data", {
