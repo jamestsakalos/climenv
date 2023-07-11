@@ -53,5 +53,5 @@ test_that("elev()", {
   # "Could not download srtm_6._2."
 
   skip_if_not_installed("vdiffr")
-  vdiffr::expect_doppelganger("geo-elev", function() plot(geo_elev))
+  vdiffr::expect_doppelganger("geo-elev", function() terra::plot(geo_elev))
 })
