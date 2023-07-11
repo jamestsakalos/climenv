@@ -79,6 +79,7 @@
 #' @template output_dir_param
 #' @template output_location_param
 #' @template output_e_source_param
+#' @param \dots Additional arguments to [`download.file()`].
 #'
 #' @return
 #' Creates one subfolder named elev storing a raster (.tiff). If elevation is
@@ -122,7 +123,7 @@
 #' @importFrom sf as_Spatial st_geometry st_bbox st_is_longlat st_crs<-
 #' @importFrom terra rast extract xyFromCell mosaic writeRaster rast
 #' @export
-elev <- function(output_dir, location, e_source = "mapzen") {
+elev <- function(output_dir, location, e_source = "mapzen", ...) {
 
   e_source_id <- pmatch(tolower(e_source[1]), c("mapzen", "geodata"))
   if (is.na(e_source_id)) {
@@ -171,7 +172,7 @@ elev <- function(output_dir, location, e_source = "mapzen") {
                               overwrite = TRUE)
          },
          { # geodata
-           srtm_mosaic <- .elev_geodata(location_sf, output_dir)
+           srtm_mosaic <- .elev_geodata(location_sf, output_dir, ...)
            file_path <- paste0(output_dir, "/elev/srtm.tif")
            terra::writeRaster(srtm_mosaic, filename = file_path,
                               overwrite = TRUE)

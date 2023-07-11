@@ -4,7 +4,7 @@
 \alias{elev}
 \title{Download elevation data}
 \usage{
-elev(output_dir, location, e_source = "mapzen")
+elev(output_dir, location, e_source = "mapzen", ...)
 }
 \arguments{
 \item{output_dir}{Character (e.g., \code{"../Desktop/chelsa"}). Pathway to where
@@ -16,6 +16,8 @@ objects.}
 
 \item{e_source}{Character (e.g., \code{mapzen} or \code{WorldClim}). Indicating the
 elevation data source.}
+
+\item{\dots}{Additional arguments to \code{\link[=download.file]{download.file()}}.}
 }
 \value{
 Creates one subfolder named elev storing a raster (.tiff). If elevation is

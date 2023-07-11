@@ -11,7 +11,7 @@
 # elev()
 
     Code
-      geo_elev <- elev(tmp_dir, island, "GEOdata")
+      geo_elev <- elev(tmp_dir, island, "GEOdata", quiet = TRUE)
     Warning <simpleWarning>
       Coordinate reference system not specified; assuming EPSG:4326
       Could not download srtm_69_22: HTTP status 404
