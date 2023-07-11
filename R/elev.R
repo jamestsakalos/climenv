@@ -43,7 +43,7 @@
         -1
       }
     }
-    if (!error) {
+    if (error == 0) {
       tryCatch(utils::unzip(temp_file, paste0(id, ".tif"), exdir = output_dir),
                error = function(e) warning("Failed to unzip: ", id))
       rs <- rast(tif)
@@ -146,6 +146,7 @@ elev <- function(output_dir, location, e_source = "mapzen") {
 
   if (!isTRUE(sf::st_is_longlat(location_sf))) {
     warning("Coordinate reference system not specified; assuming EPSG:4326")
+    # TODO JS to check: Should we prefer WGS84 to match output?
     st_crs(location_sf) <- "EPSG:4326"
   }
 

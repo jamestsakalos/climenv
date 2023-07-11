@@ -10,10 +10,7 @@ test_that("elev() fails gracefully", {
   sea <- sf::st_as_sf(
     data.frame(lat = c(-59, -59, -58, -59),
                lng = c(-123, -124, -123, -123)), coords = 2:1)
-  expect_warning(
-    expect_error(elev(tmp_dir, sea, "GEOdata"), "No data downloaded"),
-    "Could not download srtm_12_24"
-  )
+  expect_snapshot(elev(tmp_dir, sea, "GEOdata"), cran = TRUE, error = TRUE)
 
   # This is testing R's functionality, rather than our packages, so does
   # not need to be included in this package's test suite;
@@ -31,15 +28,6 @@ test_that("elev() fails gracefully", {
   expect_error(
     elev(location = flip_lat_long),
     "bounding box falls outside supported latitudes"
-  )
-
-  unprojected <- sf::st_polygon(
-    list(cbind(long = c(161, 161, 154, 161),
-               lat = c(-61, -49, -61, -61)))
-  )
-  expect_warning(
-    elev(tmp_dir, location = unprojected),
-    "Coordinate reference system not specified"
   )
 
 })
@@ -60,14 +48,15 @@ test_that("elev()", {
 
   # In progress: the below will replace the above.
   island <- sf::st_polygon(
-    list(cbind(lat = c(-61, -49, -61, -61), lng = c(161, 161, 154, 161))))
+    list(cbind(lng = c(161, 161, 154, 161), lat = c(-61, -49, -61, -61))))
   # This polygon covers a tile that does not contain a vertex.
-  # Should this tile be downloaded too?
+  # This tile should be downloaded too
 
-  # elev(tmp_dir, island)
-  expect_warning(
-    geoElev <- elev(tmp_dir, island, "GEOdata"),
-    "Could not download srtm_69_22")
+  expect_snapshot(geoElev <- elev(tmp_dir, island, "GEOdata"),
+                  cran = TRUE)
+  # Expect the warnings:
+  # "Coordinate reference system not specified",
+  # "Could not download srtm_6._2."
 
   skip_if_not_installed("vdiffr")
   library("terra")
