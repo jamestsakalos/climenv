@@ -32,7 +32,7 @@ to 611.5 m ground resolution at 60° latitude 864.8 m at 45° and 1223 m at 0°.
 }
 \description{
 \code{elev()} downloads elevation data the Shuttle Radar Topography Mission
-(SRTM) , specifically the hole-filled CGIAR-SRTM (90 m resolution) for
+(SRTM), specifically the hole-filled CGIAR-SRTM (90 m resolution) for
 latitudes between -60 and 60 or Mapzen's synthesis digital elevation product.
 }
 \examples{

@@ -73,7 +73,7 @@
 #'
 #' @description
 #' `elev()` downloads elevation data the Shuttle Radar Topography Mission
-#' (SRTM) , specifically the hole-filled CGIAR-SRTM (90 m resolution) for
+#' (SRTM), specifically the hole-filled CGIAR-SRTM (90 m resolution) for
 #' latitudes between -60 and 60 or Mapzen's synthesis digital elevation product.
 #'
 #' @template output_dir_param
@@ -118,7 +118,6 @@
 #'    elev(output_dir = "...Desktop/elev", location = italy_py)
 #' }
 #' @importFrom elevatr get_elev_raster
-#' @importFrom geodata elevation_3s
 #' @importFrom methods as
 #' @importFrom sf as_Spatial st_geometry st_bbox st_is_longlat st_crs<-
 #' @importFrom terra rast extract xyFromCell mosaic writeRaster rast
