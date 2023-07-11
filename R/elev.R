@@ -28,8 +28,8 @@
         "https://srtm.csi.cgiar.org/wp-content/uploads/files/srtm_5x5/TIFF/",
         id, ".zip"
       )
-      urlStatus <- attr(curlGetHeaders(zip), "status")
-      error <- if (urlStatus == 200) {
+      url_status <- attr(curlGetHeaders(zip), "status")
+      error <- if (url_status == 200) {
         tryCatch(
           utils::download.file(url = zip, destfile = temp_file, mode = "wb",
                                ...), # Returns 0 on success
@@ -39,7 +39,7 @@
           }
         )
       } else {
-        warning("Could not download ", id, ": HTTP status ", urlStatus)
+        warning("Could not download ", id, ": HTTP status ", url_status)
         -1
       }
     }
@@ -136,11 +136,11 @@ elev <- function(output_dir, location, e_source = "mapzen") {
 
   # Check that the bounding box coordinates
   bbox <- sf::st_bbox(location_sf)
-  if (bbox[["xmin"]] < -180 | bbox[["xmax"]] > 180) {
+  if (bbox[["xmin"]] < -180 || bbox[["xmax"]] > 180) {
     stop("`location` bounding box falls outside supported longitudes ",
          "-180 to 180")
   }
-  if (bbox[["ymin"]] < -90 | bbox[["ymax"]] > 90) {
+  if (bbox[["ymin"]] < -90 || bbox[["ymax"]] > 90) {
     stop("`location` bounding box falls outside supported latitudes ",
          "-90 to 90")
   }

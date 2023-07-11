@@ -52,7 +52,7 @@ test_that("elev()", {
   # This polygon covers a tile that does not contain a vertex.
   # This tile should be downloaded too
 
-  expect_snapshot(geoElev <- elev(tmp_dir, island, "GEOdata"),
+  expect_snapshot(geo_elev <- elev(tmp_dir, island, "GEOdata"),
                   cran = TRUE)
   # Expect the warnings:
   # "Coordinate reference system not specified",
@@ -60,5 +60,5 @@ test_that("elev()", {
 
   skip_if_not_installed("vdiffr")
   library("terra")
-  vdiffr::expect_doppelganger("geo-elev", function() plot(geoElev))
+  vdiffr::expect_doppelganger("geo-elev", function() plot(geo_elev))
 })
