@@ -31,7 +31,7 @@ test_that("worldclim() downloads data", {
                lng = c(-123, -124, -123, -123)), coords = 2:1)
 
   # Obtain raster files
-  worldclim(out = tmp_dir, loc = tile50, var = "prec")
+  worldclim(out = tmp_dir, loc = tile50, var = "prec", quiet = TRUE)
   tile_files <- paste0(tmp_dir, "/prec/wc2.1_30s_prec_",
                       formatC(1:12, width = 2, flag = "0"), ".tif")
   expect_equal(file.exists(tile_files), rep(TRUE, 12))
@@ -59,7 +59,7 @@ test_that("worldclim() downloads data", {
                lng = c(-123, -174, -123, -123)), coords = 2:1)
 
   # Obtain raster data
-  worldclim(out = tmp_dir, loc = south, var = "elev")
+  worldclim(out = tmp_dir, loc = south, var = "elev", quiet = TRUE)
   south_file <- paste0(tmp_dir, "/elev/wc2.1_30s_elev_01.tif")
   expect_true(file.exists(south_file))
 
