@@ -10,7 +10,8 @@ test_that("elev() fails gracefully", {
   sea <- sf::st_as_sf(
     data.frame(lat = c(-59, -59, -58, -59),
                lng = c(-123, -124, -123, -123)), coords = 2:1)
-  expect_snapshot(elev(tmp_dir, sea, "GEOdata"), cran = TRUE, error = TRUE)
+  expect_snapshot(elev(tmp_dir, sea, "GEOdata", quiet = TRUE),
+                  cran = TRUE, error = TRUE)
 
   # This is testing R's functionality, rather than our packages, so does
   # not need to be included in this package's test suite;
