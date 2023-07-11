@@ -1,3 +1,12 @@
+scrub_progress_bars <- function(x) {
+  progress_bars <- grep("^[\\|\\-=\\s]+$", x, perl = TRUE)
+  if (length(progress_bars)) {
+    x[-progress_bars]
+  } else {
+    x
+  }
+}
+
 test_that("elev() fails gracefully", {
 
   expect_error(elev(out = "", location = "", e_source = ""),
@@ -11,7 +20,7 @@ test_that("elev() fails gracefully", {
     data.frame(lat = c(-59, -59, -58, -59),
                lng = c(-123, -124, -123, -123)), coords = 2:1)
   expect_snapshot(elev(tmp_dir, sea, "GEOdata", quiet = TRUE),
-                  cran = TRUE, error = TRUE)
+                  cran = TRUE, error = TRUE, scrub_progress_bars)
 
   # This is testing R's functionality, rather than our packages, so does
   # not need to be included in this package's test suite;
@@ -48,7 +57,7 @@ test_that("elev()", {
   # This tile should be downloaded too
 
   expect_snapshot(geo_elev <- elev(tmp_dir, island, "GEOdata", quiet = TRUE),
-                  cran = TRUE)
+                  cran = TRUE, error = FALSE, scrub_progress_bars)
   # Expect the warnings:
   # "Coordinate reference system not specified",
   # "Could not download srtm_6._2."
