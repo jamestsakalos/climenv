@@ -41,12 +41,6 @@ test_that("elev()", {
   #   Longitude east: 155-160
   # We should be able to download these squares even if our target area
   # overlaps non-existent neighbouring squares
-
-  island <- sf::st_as_sf(
-    data.frame(lat = c(-61, -59, -51, -49, -61, -61),
-               lng = c(161, 159, 159, 161, 154, 161)), coords = 2:1)
-
-  # In progress: the below will replace the above.
   island <- sf::st_polygon(
     list(cbind(lng = c(161, 161, 154, 161), lat = c(-61, -49, -61, -61))))
   # This polygon covers a tile that does not contain a vertex.
