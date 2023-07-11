@@ -43,6 +43,7 @@ Imports:
     geodata,
     glue,
     macroBiome,
+    methods,
     plyr,
     randomForest,
     sf,
