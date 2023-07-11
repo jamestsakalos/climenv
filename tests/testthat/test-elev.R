@@ -5,42 +5,42 @@ test_that("elev() fails gracefully", {
 
   tmp_dir <- tempdir()
   on.exit(unlink(tmp_dir))
+
   # No data available in the oceans
   sea <- sf::st_as_sf(
     data.frame(lat = c(-59, -59, -58, -59),
                lng = c(-123, -124, -123, -123)), coords = 2:1)
-  # elev(tmp_dir, tile50)
   expect_warning(
     expect_error(elev(tmp_dir, sea, "GEOdata"), "No data downloaded"),
     "Could not download srtm_12_24"
   )
 
+  # This is testing R's functionality, rather than our packages, so does
+  # not need to be included in this package's test suite;
+  # we do not handle the case where no parameters are specified.
   expect_error(
     expect_warning(
       elev(),
       "Error in elev() : argument location is missing, with no default"
     ))
 
-  flip_lat_long <- sf::st_polygon(
-    list(cbind(lat = c(-61, -49, -61, -61), lng = c(161, 161, 154, 161))))
-
+  flip_lat_long <- sf::st_polygon(list(cbind(
+    lat = c(-61, -49, -61, -61),
+    lng = c(161, 161, 154, 161)
+  )))
   expect_error(
-    expect_warning(
-      elev(location = flip_lat_long),
-      "Error in elev(location = flip_lat_long) :
-  bounding box of location has potentially an invalid value range"
-    ))
+    elev(location = flip_lat_long),
+    "bounding box falls outside supported latitudes"
+  )
 
-  flip_lat_long <- sf::st_polygon(
+  unprojected <- sf::st_polygon(
     list(cbind(long = c(161, 161, 154, 161),
                lat = c(-61, -49, -61, -61)))
   )
-
-  expect_error(
-    expect_warning(
-      elev(location = flip_lat_long),
-      "Error: check that the location has been projected (epsg: 4326)"
-    ))
+  expect_warning(
+    elev(tmp_dir, location = unprojected),
+    "Coordinate reference system not specified"
+  )
 
 })
 

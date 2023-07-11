@@ -118,7 +118,7 @@
 #' }
 #' @importFrom elevatr get_elev_raster
 #' @importFrom geodata elevation_3s
-#' @importFrom sf as_Spatial st_geometry st_bbox st_is_longlat
+#' @importFrom sf as_Spatial st_geometry st_bbox st_is_longlat st_crs
 #' @importFrom terra rast extract xyFromCell mosaic writeRaster rast
 #' @export
 elev <- function(output_dir, location, e_source = "mapzen") {
@@ -128,30 +128,26 @@ elev <- function(output_dir, location, e_source = "mapzen") {
     stop("e_source must be \"mapzen\" or \"geodata\"")
   }
 
-  # Convert to "sfc_POLYGON" "sfc"
   if ("sfg" %in% class(location)) {
-    location <- sf::st_geometry(location)
+    location <- as(location, "Spatial")
   }
-
-  # Convert sf locations to SP
-  if (("sf" %in% class(location)) || ("sfc" %in% class(location))) {
-    location <- sf::as_Spatial(location)
-  }
+  location_sf <- as(location, "sf")
 
   # Check that the bounding box coordinates
-  if (!sum(
-    sf::st_bbox(location)[c(1)] >= -180,
-    sf::st_bbox(location)[c(2)] >= -90,
-    sf::st_bbox(location)[c(3)] <= 180,
-    sf::st_bbox(location)[c(4)] <= 90
-  ) == 4) stop(
-    "bounding box of location has potentially an invalid value range"
-  )
+  bbox <- sf::st_bbox(location_sf)
+  if (bbox[["xmin"]] < -180 | bbox[["xmax"]] > 180) {
+    stop("`location` bounding box falls outside supported longitudes ",
+         "-180 to 180")
+  }
+  if (bbox[["ymin"]] < -90 | bbox[["ymax"]] > 90) {
+    stop("`location` bounding box falls outside supported latitudes ",
+         "-90 to 90")
+  }
 
-  if (is.na(sf::st_is_longlat(location)) ||
-      !sf::st_is_longlat(location) == TRUE) stop(
-    "check that the location has been projected (epsg: 4326)"
-  )
+  if (!isTRUE(sf::st_is_longlat(location_sf))) {
+    warning("Coordinate reference system not specified; assuming EPSG:4326")
+    st_crs(location_sf) <- "EPSG:4326"
+  }
 
   # Create elev folder
   if (!dir.exists(paste0(output_dir, "/elev"))) {
@@ -164,7 +160,7 @@ elev <- function(output_dir, location, e_source = "mapzen") {
          { # mapzen
            srtm_mosaic <- terra::rast(
              elevatr::get_elev_raster(
-               location, z = 7, override_size_check = TRUE,
+               location_sf, z = 7, override_size_check = TRUE,
                progress = FALSE
              )
            )
@@ -173,7 +169,7 @@ elev <- function(output_dir, location, e_source = "mapzen") {
                               overwrite = TRUE)
          },
          { # geodata
-           srtm_mosaic <- .elev_geodata(location, output_dir)
+           srtm_mosaic <- .elev_geodata(location_sf, output_dir)
            file_path <- paste0(output_dir, "/elev/srtm.tif")
            terra::writeRaster(srtm_mosaic, filename = file_path,
                               overwrite = TRUE)
