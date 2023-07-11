@@ -118,6 +118,7 @@
 #' }
 #' @importFrom elevatr get_elev_raster
 #' @importFrom geodata elevation_3s
+#' @importFrom methods as
 #' @importFrom sf as_Spatial st_geometry st_bbox st_is_longlat st_crs<-
 #' @importFrom terra rast extract xyFromCell mosaic writeRaster rast
 #' @export
