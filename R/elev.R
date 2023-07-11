@@ -24,14 +24,14 @@
     error <- if (file.exists(tif)) {
       0
     } else {
-      zip <- paste0(
+      zip_url <- paste0(
         "https://srtm.csi.cgiar.org/wp-content/uploads/files/srtm_5x5/TIFF/",
         id, ".zip"
       )
-      url_status <- attr(curlGetHeaders(zip), "status")
+      url_status <- attr(curlGetHeaders(zip_url), "status")
       error <- if (url_status == 200) {
         tryCatch(
-          utils::download.file(url = zip, destfile = temp_file, mode = "wb",
+          utils::download.file(url = zip_url, destfile = temp_file, mode = "wb",
                                ...), # Returns 0 on success
           error = function(e) {
             warning("Failed to download ", id, ": ", e)
