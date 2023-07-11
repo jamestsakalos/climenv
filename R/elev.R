@@ -28,7 +28,7 @@
         "https://srtm.csi.cgiar.org/wp-content/uploads/files/srtm_5x5/TIFF/",
         id, ".zip"
       )
-      url_status <- attr(curlGetHeaders(zip_url), "status")
+      url_status <- attr(curlGetHeaders(zip_url, verify = FALSE), "status")
       error <- if (url_status == 200) {
         tryCatch(
           utils::download.file(url = zip_url, destfile = temp_file, mode = "wb",
