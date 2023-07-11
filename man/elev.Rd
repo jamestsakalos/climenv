@@ -14,7 +14,7 @@ the data will be stored.}
 \link[sf:st]{sf::st_polygon} to make polygons and \link[sf:st_as_sf]{sf::st_as_sf} to make point
 objects.}
 
-\item{e_source}{Character (e.g., \code{mapzen} or \code{WorldClim}). Indicating the
+\item{e_source}{Character (e.g., \code{mapzen} or \code{geodata}). Indicating the
 elevation data source.}
 }
 \value{
@@ -35,11 +35,33 @@ latitudes between -60 and 60 or Mapzen's synthesis digital elevation product.
 }
 \examples{
 \dontrun{
-# Start by loading Italy's Biom data
+# We could do this using Italy's Biome data
 data("italy_py", package = "climenv")
 # elevation will be saved in the output_dir (i.e. output directory)
    elev(output_dir = "...Desktop/elev", location = italy_py)
 }
+
+Or a smaller example we can make a polygon covering an island in the ocean.
+
+location <- sf::st_polygon(
+   list(
+     cbind(
+       long = c(161, 161, 154, 161),
+       lat = c(-61, -49, -61, -61)
+     )
+   )
+)
+
+# We need to make sure that the polygon the correct class
+location <- sf::st_geometry(location)
+class(location) # "sfc_POLYGON" "sfc"
+
+# Lets make sure to set the coordinate reference system
+sf::st_crs(location) = "epsg:4326"
+
+# Lastly we can use elev()
+elev_data <- elev(location = location)
+
 }
 \references{
 { Hijmans, R.J., Barbosa, M., Ghosh, A., & Mandel, A. (2023).
@@ -59,7 +81,8 @@ ISPRS International Journal of Geo-Information 8, 108.
 }
 \seealso{
 A more convenient function for other climate and elevation data
-\code{\link[=ce_download]{ce_download()}}.
+\code{\link[=ce_download]{ce_download()}}. See \link[sf:st]{sf::st_polygon} to make polygons and \link[sf:st_as_sf]{sf::st_as_sf}
+to make point objects.
 }
 \author{
 James L. Tsakalos
