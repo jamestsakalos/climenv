@@ -292,9 +292,8 @@
         "location_g must be one of",
         paste(setdiff(colnames(location_df),  c("coords.x1", "coords.x2")),
               collapse = ", "), sep = ": "
-      )
+      ), "\nDefaulting to a unique id for each polygon or point object"
     )
-    message("Defaulting to a unique id for each polygon or point object")
     location$Name <- location$id
 
     location_checks <- list("location" = location,
