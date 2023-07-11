@@ -1,5 +1,5 @@
 scrub_progress_bars <- function(x) {
-  progress_bars <- grep("^[\\|\\-=\\s]+$", x, perl = TRUE)
+  progress_bars <- grep("^[\\|\\-=\\s]*$", x, perl = TRUE)
   if (length(progress_bars)) {
     x[-progress_bars]
   } else {
