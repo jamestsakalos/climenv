@@ -8,7 +8,9 @@
   rs[] <- seq_len(prod(dim(rs)))
 
   # Intersect location and tiles
-  tiles <- unique(terra::extract(rs, terra::vect(location))$lyr.1)
+  tiles <- unique(
+    terra::extract(rs, terra::vect(location), touches = TRUE)$lyr.1
+  )
   cols <- formatC(colFromCell(rs, tiles), width = 2, flag = 0)
   rows <- formatC(rowFromCell(rs, tiles), width = 2, flag = 0)
   na <- cols == "NA" | rows == "NA"
@@ -116,7 +118,7 @@
 #' }
 #' @importFrom elevatr get_elev_raster
 #' @importFrom geodata elevation_3s
-#' @importFrom sf as_Spatial
+#' @importFrom sf as_Spatial st_geometry st_bbox st_is_longlat
 #' @importFrom terra rast extract xyFromCell mosaic writeRaster rast
 #' @export
 elev <- function(output_dir, location, e_source = "mapzen") {
@@ -126,10 +128,30 @@ elev <- function(output_dir, location, e_source = "mapzen") {
     stop("e_source must be \"mapzen\" or \"geodata\"")
   }
 
+  # Convert to "sfc_POLYGON" "sfc"
+  if ("sfg" %in% class(location)) {
+    location <- sf::st_geometry(location)
+  }
+
   # Convert sf locations to SP
   if (("sf" %in% class(location)) || ("sfc" %in% class(location))) {
     location <- sf::as_Spatial(location)
   }
+
+  # Check that the bounding box coordinates
+  if (!sum(
+    sf::st_bbox(location)[c(1)] >= -180,
+    sf::st_bbox(location)[c(2)] >= -90,
+    sf::st_bbox(location)[c(3)] <= 180,
+    sf::st_bbox(location)[c(4)] <= 90
+  ) == 4) stop(
+    "bounding box of location has potentially an invalid value range"
+  )
+
+  if (is.na(sf::st_is_longlat(location)) ||
+      !sf::st_is_longlat(location) == TRUE) stop(
+    "check that the location has been projected (epsg: 4326)"
+  )
 
   # Create elev folder
   if (!dir.exists(paste0(output_dir, "/elev"))) {
