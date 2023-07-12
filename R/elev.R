@@ -5,11 +5,17 @@
   y_min <- -60
   # create SRTM tiles
   rs <- terra::rast(res = 5, ymin = y_min, ymax = y_max)
-  rs[] <- seq_len(prod(dim(rs)))
+  rs <- terra::rasterize(terra::vect(climenv::srtm_tiles), rs, "FID")
+
+  # we need to set the crs of the SRTM tiles
+  terra::crs(rs) <- "epsg:4326"
+
+  # the location crs needs to match the tiles
+  location <- terra::project(terra::vect(location), rs)
 
   # Intersect location and tiles
   tiles <- unique(
-    terra::extract(rs, terra::vect(location), touches = TRUE)$lyr.1
+    terra::extract(rs, location, touches = TRUE)$FID
   )
   cols <- formatC(colFromCell(rs, tiles), width = 2, flag = 0)
   rows <- formatC(rowFromCell(rs, tiles), width = 2, flag = 0)
@@ -94,7 +100,8 @@
 #'
 #' @author James L. Tsakalos
 #' @seealso A more convenient function for other climate and elevation data
-#' [`ce_download()`].
+#' [`ce_download()`]. See [sf::st_polygon] to make polygons and [sf::st_as_sf]
+#' to make point objects.
 #' @references{ Hijmans, R.J., Barbosa, M., Ghosh, A., & Mandel, A. (2023).
 #' geodata: Download Geographic Data. R package version 0.5-8.
 #' https://CRAN.R-project.org/package=geodata
@@ -112,15 +119,37 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Start by loading Italy's Biom data
+#' # We could do this using Italy's Biome data
 #' data("italy_py", package = "climenv")
 #' # elevation will be saved in the output_dir (i.e. output directory)
 #'    elev(output_dir = "...Desktop/elev", location = italy_py)
 #' }
+#'
+#' Or a smaller example we can make a polygon covering an island in the ocean.
+#'
+#' location <- sf::st_polygon(
+#'    list(
+#'      cbind(
+#'        long = c(161, 161, 154, 161),
+#'        lat = c(-61, -49, -61, -61)
+#'      )
+#'    )
+#' )
+#'
+#' # We need to make sure that the polygon the correct class
+#' location <- sf::st_geometry(location)
+#' class(location) # "sfc_POLYGON" "sfc"
+#'
+#' # Lets make sure to set the coordinate reference system
+#' sf::st_crs(location) = "epsg:4326"
+#'
+#' # Lastly we can use elev()
+#' elev_data <- elev(location = location)
+#'
 #' @importFrom elevatr get_elev_raster
 #' @importFrom methods as
 #' @importFrom sf as_Spatial st_geometry st_bbox st_is_longlat st_crs<-
-#' @importFrom terra rast extract xyFromCell mosaic writeRaster rast
+#' @importFrom terra extract mosaic rast rasterize vect writeRaster xyFromCell
 #' @export
 elev <- function(output_dir, location, e_source = "mapzen", ...) {
 
