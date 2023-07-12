@@ -8,6 +8,8 @@ scrub_progress_bars <- function(x) {
 }
 
 skip_if_server_offline <- function(server) {
+  # Preferred to testthat::skip_if_offline as this runs on CRAN
+  # Thus we can expect notice of any breaking changes to imported packages
   tryCatch(
     curlGetHeaders(server, timeout = 1),
     error = function(e) {
