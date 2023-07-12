@@ -97,8 +97,7 @@ test_that("elev()", {
 
 test_that("elev() downloads data", {
 
-  skip_if_offline() # Requires connectivity
-  skip_on_cran() # download is slow
+  skip_if_offline() # Requires connectivity. Automatically skips on CRAN.
 
   # CRAN policy: Packages should not write [anywhere] apart from the
   # R session’s temporary directory [...] and such usage should be cleaned up
