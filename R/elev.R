@@ -85,6 +85,8 @@
 #' @template output_dir_param
 #' @template output_location_param
 #' @template output_e_source_param
+#' @param verbose Logical specifying whether to display verbose output when
+#' downloading from Mapzen.
 #' @param \dots Additional arguments to [`download.file()`].
 #'
 #' @return
@@ -107,7 +109,7 @@
 #' https://CRAN.R-project.org/package=geodata
 #'
 #' Hollister, J. (2022). elevatr: Access Elevation Data from Various
-#' APIs. R package version 0.4.2. \doi{10.5281/zenodo.5809645}
+#' APIs. R package version 1.0.0. \doi{10.5281/zenodo.5809645}
 #' https://CRAN.R-project.org/package=elevatr
 #'
 #' Mouratidis, A., & Ampatzidis, D. (2019). European Digital Elevation Model
@@ -151,7 +153,8 @@
 #' @importFrom sf as_Spatial st_as_sf st_bbox st_geometry st_is_longlat st_crs<-
 #' @importFrom terra extract mosaic rast rasterize vect writeRaster xyFromCell
 #' @export
-elev <- function(output_dir, location, e_source = "mapzen", ...) {
+elev <- function(output_dir, location, e_source = "mapzen",
+                 verbose = FALSE, ...) {
 
   e_source_id <- pmatch(tolower(e_source[1]), c("mapzen", "geodata"))
   if (is.na(e_source_id)) {
@@ -189,24 +192,19 @@ elev <- function(output_dir, location, e_source = "mapzen", ...) {
                recursive = TRUE, showWarnings = FALSE)
   }
 
+  file_path <- paste0(output_dir, "/elev/srtm.tif")
   # Saves elevation from geodata or mapzen sources
-  switch(e_source_id,
-         { # mapzen
-           srtm_mosaic <- terra::rast(
-             elevatr::get_elev_raster(
-               location_sf, z = 7, override_size_check = TRUE,
-               progress = FALSE
-             )
-           )
-           file_path <- paste0(output_dir, "/elev/srtm.tif")
-           terra::writeRaster(srtm_mosaic, filename = file_path,
-                              overwrite = TRUE)
-         },
-         { # geodata
-           srtm_mosaic <- .elev_geodata(location_sf, output_dir, ...)
-           file_path <- paste0(output_dir, "/elev/srtm.tif")
-           terra::writeRaster(srtm_mosaic, filename = file_path,
-                              overwrite = TRUE)
-         }
+  switch(e_source_id, { # mapzen
+    elev_raster <- elevatr::get_elev_raster(
+      location_sf, z = 7, override_size_check = TRUE,
+      progress = verbose, verbose = verbose
+    )
+    srtm_mosaic <- terra::rast(elev_raster)
+    terra::writeRaster(srtm_mosaic, filename = file_path,
+                       overwrite = TRUE)
+    }, { # geodata
+      srtm_mosaic <- .elev_geodata(location_sf, output_dir, ...)
+      terra::writeRaster(srtm_mosaic, filename = file_path, overwrite = TRUE)
+    }
   )
 }

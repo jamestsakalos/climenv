@@ -95,10 +95,11 @@ test_that("elev()", {
       "Could not download srtm_6._2."),
     "Coordinate reference system not specified")
 
-                  #cran = TRUE, error = FALSE, scrub_progress_bars)
-  # Expect the warnings:
-  # "Coordinate reference system not specified",
-  # "Could not download srtm_6._2."
+  # TODO JS to investigate:
+  # elev.R:172   terra::writeRaster(srtm_mosaic, filename = file_path, [...]
+  # throws
+  #  Error: [writeRaster] there are no cell values
+  expect_snapshot(mz_elev <- elev(tmp_dir, island), cran = TRUE)
 
   skip_if_not_installed("vdiffr")
   vdiffr::expect_doppelganger("geo-elev", function() terra::plot(geo_elev))
