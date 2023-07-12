@@ -7,6 +7,17 @@ scrub_progress_bars <- function(x) {
   }
 }
 
+skip_if_server_offline <- function(server) {
+  tryCatch(
+    curlGetHeaders(server, timeout = 1),
+    error = function(e) {
+      if (length(grep("Connection timed out", e$message, fixed = TRUE))) {
+        skip(paste("Could not connect to", server))
+      }
+    }
+  )
+}
+
 test_that("elev() fails gracefully", {
 
   expect_error(elev(out = "", location = "", e_source = ""),
@@ -14,13 +25,6 @@ test_that("elev() fails gracefully", {
 
   tmp_dir <- tempdir()
   on.exit(unlink(tmp_dir))
-
-  # No data available in the oceans
-  sea <- sf::st_as_sf(
-    data.frame(lat = c(-59, -59, -58, -59),
-               lng = c(-123, -124, -123, -123)), coords = 2:1)
-  expect_snapshot(elev(tmp_dir, sea, "GEOdata", quiet = TRUE),
-                  cran = TRUE, error = TRUE, scrub_progress_bars)
 
   # This is testing R's functionality, rather than our packages, so does
   # not need to be included in this package's test suite;
@@ -40,17 +44,18 @@ test_that("elev() fails gracefully", {
     "bounding box falls outside supported latitudes"
   )
 
+  skip_if_server_offline("srtm.csi.cgiar.org")
+  # No data available in the oceans
+  sea <- sf::st_as_sf(
+    data.frame(lat = c(-59, -59, -58, -59),
+               lng = c(-123, -124, -123, -123)), coords = 2:1)
+  expect_snapshot(elev(tmp_dir, sea, "GEOdata", quiet = TRUE),
+                  cran = TRUE, error = TRUE, scrub_progress_bars)
+
 })
 
 test_that("elev()", {
-  tryCatch(
-    curlGetHeaders("srtm.csi.cgiar.org", timeout = 1),
-    error = function(e) {
-      if (length(grep("Connection timed out", e$message, fixed = TRUE))) {
-        skip("Could not connect to srtm.csi.cgiar.org?")
-      }
-    }
-  )
+  skip_if_server_offline("srtm.csi.cgiar.org")
 
   tmp_dir <- tempdir()
   on.exit(unlink(tmp_dir))
