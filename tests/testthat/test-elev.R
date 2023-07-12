@@ -1,3 +1,12 @@
+polygon <- sf::st_polygon(
+    list(cbind(long = c(161, 161, 154, 161),
+               lat = c(-61, -49, -61, -61)))
+  )
+polygon <- sf::st_geometry(polygon)
+sf::st_crs(polygon) <- "epsg:4326"
+points <- terra::centroids(terra::vect(polygon))
+
+
 scrub_progress_bars <- function(x) {
   progress_bars <- grep("^[\\|\\-=\\s]*$", x, perl = TRUE)
   if (length(progress_bars)) {
@@ -95,8 +104,7 @@ test_that("elev()", {
   vdiffr::expect_doppelganger("geo-elev", function() terra::plot(geo_elev))
 })
 
-test_that("elev() downloads data", {
-
+test_that("elev() downloads polygon from Mapzen", {
   skip_if_offline() # Requires connectivity. Automatically skips on CRAN.
 
   # CRAN policy: Packages should not write [anywhere] apart from the
@@ -104,20 +112,12 @@ test_that("elev() downloads data", {
   tmp_dir <- tempdir()
   on.exit(unlink(tmp_dir))
 
-  # Make a polygon
-  location <- sf::st_polygon(
-    list(cbind(long = c(161, 161, 154, 161),
-               lat = c(-61, -49, -61, -61)))
-  )
-  location <- sf::st_geometry(location)
-  sf::st_crs(location) <- "epsg:4326"
-
   # polygon and mapzen tiles ####
   elev(
-    output_dir = tmp_dir, location = location, e_source = "mapzen"
+    output_dir = tmp_dir, location = polygon, e_source = "mapzen"
   )
   mapzen_tile <- paste0(tmp_dir, "/elev/srtm.tif")
-  expect_equal(file.exists(mapzen_tile), TRUE)
+  expect_true(file.exists(mapzen_tile))
 
   # Check data matches expectation
   skip_if(!file.exists(mapzen_tile[1]))
@@ -133,47 +133,16 @@ test_that("elev() downloads data", {
       test_path("expected", "mapzen_py.tif")
     )
   }
-
-  unlink(tmp_dir)
+})
+test_that("elev() downloads points from Mapzen", {
   tmp_dir <- tempdir()
   on.exit(unlink(tmp_dir))
 
-  # polygon and geodata ####
   elev(
-    output_dir = tmp_dir, location = location, e_source = "geodata"
-  )
-  srtm_tile <- paste0(tmp_dir, "/elev/srtm.tif")
-  expect_equal(file.exists(srtm_tile), TRUE)
-
-  # Check data matches expectation
-  skip_if(!file.exists(srtm_tile[1]))
-  elev_srtm <- terra::rast(srtm_tile[1])
-  thumb_2 <- terra::aggregate(elev_srtm, fact = 64)
-  expected <- terra::rast(test_path("expected", "srtm_py.tif"))
-  expect_true(all.equal(rast(thumb_2), terra::rast(expected)))
-
-  # Run this code manually to update the "Expected" value
-  if (FALSE) {
-    terra::writeRaster(
-      thumb_2, overwrite = TRUE,
-      test_path("expected", "srtm_py.tif")
-    )
-  }
-
-  # Now for points
-  location <- terra::centroids(terra::vect(location))
-
-  unlink(tmp_dir)
-  tmp_dir <- tempdir()
-  on.exit(unlink(tmp_dir))
-
-
-  # point and mapzen tiles ####
-  elev(
-    output_dir = tmp_dir, location = location, e_source = "mapzen"
+    output_dir = tmp_dir, location = points, e_source = "mapzen"
   )
   mapzen_tile <- paste0(tmp_dir, "/elev/srtm.tif")
-  expect_equal(file.exists(mapzen_tile), TRUE)
+  expect_true(file.exists(mapzen_tile))
 
   # Check data matches expectation
   skip_if(!file.exists(mapzen_tile[1]))
@@ -189,17 +158,50 @@ test_that("elev() downloads data", {
       test_path("expected", "mapzen_pt.tif")
     )
   }
+})
 
-  unlink(tmp_dir)
+
+test_that("elev() downloads polygon from GeoData", {
+  skip_if_server_offline("srtm.csi.cgiar.org")
+
   tmp_dir <- tempdir()
   on.exit(unlink(tmp_dir))
 
-  # polygon and geodata
+  # polygon and geodata ####
   elev(
-    output_dir = tmp_dir, location = location, e_source = "geodata"
+    output_dir = tmp_dir, location = polygon, e_source = "geodata", quiet = TRUE
   )
   srtm_tile <- paste0(tmp_dir, "/elev/srtm.tif")
-  expect_equal(file.exists(srtm_tile), TRUE)
+  expect_true(file.exists(srtm_tile))
+
+  # Check data matches expectation
+  skip_if(!file.exists(srtm_tile[1]))
+  elev_srtm <- terra::rast(srtm_tile[1])
+  thumb_2 <- terra::aggregate(elev_srtm, fact = 64)
+  expected <- terra::rast(test_path("expected", "srtm_py.tif"))
+  expect_true(all.equal(rast(thumb_2), terra::rast(expected)))
+
+  # Run this code manually to update the "Expected" value
+  if (FALSE) {
+    terra::writeRaster(
+      thumb_2, overwrite = TRUE,
+      test_path("expected", "srtm_py.tif")
+    )
+  }
+})
+
+
+test_that("elev() downloads points from GeoData", {
+  skip_if_server_offline("srtm.csi.cgiar.org")
+
+  tmp_dir <- tempdir()
+  on.exit(unlink(tmp_dir))
+
+  elev(
+    output_dir = tmp_dir, location = points, e_source = "geodata", quiet = TRUE
+  )
+  srtm_tile <- paste0(tmp_dir, "/elev/srtm.tif")
+  expect_true(file.exists(srtm_tile))
 
   # Check data matches expectation
   skip_if(!file.exists(srtm_tile[1]))
@@ -215,5 +217,4 @@ test_that("elev() downloads data", {
       test_path("expected", "srtm_pt.tif")
     )
   }
-
 })
