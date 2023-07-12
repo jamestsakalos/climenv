@@ -14,7 +14,7 @@ skip_if_server_offline <- function(server) {
     curlGetHeaders(server, timeout = 1),
     error = function(e) {
       if (length(grep("Connection timed out", e$message, fixed = TRUE))) {
-        skip(paste("Could not connect to", server))
+        testthat::skip(paste("Could not connect to", server))
       }
     }
   )
