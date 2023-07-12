@@ -43,6 +43,15 @@ test_that("elev() fails gracefully", {
 })
 
 test_that("elev()", {
+  tryCatch(
+    curlGetHeaders("srtm.csi.cgiar.org", timeout = 1),
+    error = function(e) {
+      if (length(grep("Connection timed out", e$message, fixed = TRUE))) {
+        skip("Could not connect to srtm.csi.cgiar.org?")
+      }
+    }
+  )
+
   tmp_dir <- tempdir()
   on.exit(unlink(tmp_dir))
 
