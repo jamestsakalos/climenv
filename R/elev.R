@@ -158,7 +158,7 @@ elev <- function(output_dir, location, e_source = "mapzen", ...) {
     stop("e_source must be \"mapzen\" or \"geodata\"")
   }
 
-  if ("sfg" %in% class(location)) {
+  if (any(c("sfc", "sfg") %in% class(location))) {
     location <- as(location, "Spatial")
   }
   location_sf <- as(location, "sf")
