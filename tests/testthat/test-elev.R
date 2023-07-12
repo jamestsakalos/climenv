@@ -56,8 +56,19 @@ test_that("elev()", {
   # This polygon covers a tile that does not contain a vertex.
   # This tile should be downloaded too
 
-  expect_snapshot(geo_elev <- elev(tmp_dir, island, "GEOdata", quiet = TRUE),
-                  cran = TRUE, error = FALSE, scrub_progress_bars)
+  expect_warning(
+    expect_warning(
+      expect_warning(
+        expect_warning(
+          expect_warning(
+            geo_elev <- elev(tmp_dir, island, "GEOdata", quiet = TRUE),
+            "Could not download srtm_6._2."),
+          "Could not download srtm_6._2."),
+        "Could not download srtm_6._2."),
+      "Could not download srtm_6._2."),
+    "Coordinate reference system not specified")
+
+                  #cran = TRUE, error = FALSE, scrub_progress_bars)
   # Expect the warnings:
   # "Coordinate reference system not specified",
   # "Could not download srtm_6._2."
