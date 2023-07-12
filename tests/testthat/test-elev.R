@@ -167,12 +167,6 @@ test_that("elev() downloads data", {
   tmp_dir <- tempdir()
   on.exit(unlink(tmp_dir))
 
-  # I expect error because the package does not accept spatvectors
-  expect_error(elev(output_dir = tmp_dir,
-                    location = location))
-
-  # sf class is okay.
-  location <- sf::st_as_sf(location)
 
   # point and mapzen tiles ####
   elev(

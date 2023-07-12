@@ -148,7 +148,7 @@
 #'
 #' @importFrom elevatr get_elev_raster
 #' @importFrom methods as
-#' @importFrom sf as_Spatial st_geometry st_bbox st_is_longlat st_crs<-
+#' @importFrom sf as_Spatial st_as_sf st_bbox st_geometry st_is_longlat st_crs<-
 #' @importFrom terra extract mosaic rast rasterize vect writeRaster xyFromCell
 #' @export
 elev <- function(output_dir, location, e_source = "mapzen", ...) {
@@ -158,6 +158,9 @@ elev <- function(output_dir, location, e_source = "mapzen", ...) {
     stop("e_source must be \"mapzen\" or \"geodata\"")
   }
 
+  if (is.function(location)) {
+    location <- st_as_sf(location)
+  }
   if (any(c("sfc", "sfg") %in% class(location))) {
     location <- as(location, "Spatial")
   }
