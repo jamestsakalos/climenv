@@ -46,8 +46,7 @@ data("italy_py", package = "climenv")
    elev(output_dir = "...Desktop/elev", location = italy_py)
 }
 
-Or a smaller example we can make a polygon covering an island in the ocean.
-
+# As a smaller example, we can make a polygon covering an ocean island.
 location <- sf::st_polygon(
    list(
      cbind(
@@ -61,10 +60,10 @@ location <- sf::st_polygon(
 location <- sf::st_geometry(location)
 class(location) # "sfc_POLYGON" "sfc"
 
-# Lets make sure to set the coordinate reference system
+# Set the coordinate reference system
 sf::st_crs(location) = "epsg:4326"
 
-# Lastly we can use elev()
+# We are now ready to call elev()
 elev_data <- elev(location = location)
 
 }
