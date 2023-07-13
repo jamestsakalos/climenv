@@ -64,7 +64,7 @@ class(location) # "sfc_POLYGON" "sfc"
 sf::st_crs(location) = "epsg:4326"
 
 # We are now ready to call elev()
-elev_data <- elev(location = location)
+# elev(location = location, output_dir = <CHOSEN DIRECTORY>)
 
 }
 \references{
