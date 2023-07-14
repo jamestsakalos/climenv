@@ -163,7 +163,7 @@ elev <- function(output_dir, location, e_source = "mapzen",
   if (is.function(location)) {
     location <- st_as_sf(location)
   }
-  if (any(c("sfc", "sfg", "SpatVector") %in% class(location))) {
+  if (inherits(location, c("sfc", "sfg", "SpatVector"))) {
     location <- as(location, "Spatial")
   }
   location_sf <- as(location, "sf")
