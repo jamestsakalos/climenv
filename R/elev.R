@@ -1,4 +1,4 @@
-#' @importFrom terra colFromCell crs<- rowFromCell
+#' @importFrom terra colFromCell crs rowFromCell mask
 .elev_geodata <- function(location, output_dir, ...) {
 
   # create SRTM tiles
@@ -22,6 +22,7 @@
   on.exit(unlink(temp_file))
 
   srtm_list <- lapply(srtm_id, function(id) {
+    print(id)
     tif <- paste0(output_dir, "/", id, ".tif")
     error <- if (file.exists(tif)) {
       0
