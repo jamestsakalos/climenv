@@ -255,6 +255,11 @@ test_that("ce_extract() works", {
                      location_g = "grp",
                      location_df = location_df)
   )
+  expect_warning(
+    .location_helper(location = pol_pt,
+                     location_g = NULL,
+                     location_df = location_df)
+  )
 
   # .c_source_helper
   expect_no_error(.c_source_helper(c_source = "CHELSA"))

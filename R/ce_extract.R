@@ -287,7 +287,7 @@
 
   # Assigns an 'id' if location_g is empty
   if (is.null(location_g)) {
-    message(
+    warning(
       paste(
         "location_g must be one of",
         paste(setdiff(colnames(location_df),  c("coords.x1", "coords.x2")),
