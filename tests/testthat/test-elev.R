@@ -7,11 +7,15 @@ sf::st_crs(polygon_py) <- "epsg:4326"
 points <- terra::centroids(terra::vect(polygon_py))
 
 polygon_py_sm <- sf::st_polygon(
-  list(cbind(long = c(156, 156, 154, 156),
-             lat = c(-61, -60, -61, -61)))
+  list(cbind(long = c(156, 156, 155, 156),
+             lat = c(-60, -59, -60, -60)))
 )
 polygon_py_sm <- sf::st_geometry(polygon_py_sm)
 sf::st_crs(polygon_py_sm) <- "epsg:4326"
+points_sm <- terra::centroids(terra::vect(polygon_py_sm))
+
+#terra::plot(climenv::srtm_tiles[srtm_tiles$FID %in% c(827, 828),], col = 'red')
+#terra::plot(polygon_py_sm, add = TRUE)
 
 scrub_progress_bars <- function(x) {
   progress_bars <- grep("^[\\|\\-=\\s]*$", x, perl = TRUE)
@@ -164,11 +168,19 @@ test_that("elev() downloads polygon from GeoData", {
   tmp_dir <- tempdir()
   on.exit(unlink(tmp_dir))
 
-  # download mapzen using a polygon ###
+  # download srtm using a polygon ###
   elev(
-    output_dir = tmp_dir, location = polygon_py_sm, e_source = "geodata",
+    output_dir = tmp_dir, location = polygon_py_sm,
+    e_source = "geodata",
     quiet = TRUE
   )
+
+
+  output_dir = tmp_dir; location = polygon_py_sm;
+  e_source = "geodata";
+  quiet = TRUE
+  location = location_sf
+
   srtm_tile <- paste0(tmp_dir, "/elev/srtm.tif")
   expect_true(file.exists(srtm_tile))
 
@@ -197,7 +209,8 @@ test_that("elev() downloads points from GeoData", {
   on.exit(unlink(tmp_dir))
 
   elev(
-    output_dir = tmp_dir, location = points, e_source = "geodata", quiet = TRUE
+    output_dir = tmp_dir, location = points_sm, e_source = "geodata",
+    quiet = TRUE
   )
 
   srtm_tile <- paste0(tmp_dir, "/elev/srtm.tif")
