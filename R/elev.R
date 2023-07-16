@@ -1,24 +1,20 @@
 #' @importFrom terra colFromCell crs<- rowFromCell
 .elev_geodata <- function(location, output_dir, ...) {
 
+  # create SRTM tiles
   y_max <- 60
   y_min <- -60
-  # create SRTM tiles
-  rs <- terra::rast(res = 5, ymin = y_min, ymax = y_max)
-  rs <- terra::rasterize(terra::vect(climenv::srtm_tiles), rs, "FID")
+  rs <- terra::rast(res = 5, ymin = y_min, ymax = y_max,
+                    vals = 1:1728, crs = "+proj=longlat +datum=WGS84")
+  # mask out the tiles with no data
+  rs <- terra::mask(rs, terra::vect(climenv::srtm_tiles), touches = TRUE)
 
-  # we need to set the crs of the SRTM tiles
-  terra::crs(rs) <- "epsg:4326"
-
-  # the location crs needs to match the tiles
-  location <- terra::project(terra::vect(location), rs)
-
-  # Intersect location and tiles
+  # intersect location and tiles
   tiles <- unique(
-    terra::extract(rs, location, touches = TRUE)$FID
+    terra::extract(rs, location, touches = TRUE)$lyr.1
   )
-  cols <- formatC(colFromCell(rs, tiles), width = 2, flag = 0)
-  rows <- formatC(rowFromCell(rs, tiles), width = 2, flag = 0)
+  cols <- formatC(terra::colFromCell(rs, tiles), width = 2, flag = 0)
+  rows <- formatC(terra::rowFromCell(rs, tiles), width = 2, flag = 0)
   na <- cols == "NA" | rows == "NA"
   srtm_id <- paste0("srtm_", cols[!na], "_", rows[!na])
 
@@ -52,8 +48,8 @@
     if (error == 0) {
       tryCatch(utils::unzip(temp_file, paste0(id, ".tif"), exdir = output_dir),
                error = function(e) warning("Failed to unzip: ", id))
-      rs <- rast(tif)
-      crs(rs) <- "+proj=longlat +datum=WGS84"
+      rs <- terra::rast(tif)
+      terra::crs(rs) <- "+proj=longlat +datum=WGS84"
       rs
     } else {
       NULL
@@ -180,9 +176,8 @@ elev <- function(output_dir, location, e_source = "mapzen",
   }
 
   if (!isTRUE(sf::st_is_longlat(location_sf))) {
-    warning("Coordinate reference system not specified; assuming EPSG:4326")
-    # TODO JS to check: Should we prefer WGS84 to match output?
-    st_crs(location_sf) <- "EPSG:4326"
+    warning("Coordinate reference system not specified; assuming WGS84")
+    sf::st_crs(location_sf) <- "+proj=longlat +datum=WGS84"
   }
 
   # Create elev folder
@@ -198,7 +193,7 @@ elev <- function(output_dir, location, e_source = "mapzen",
       location_sf, z = 7, override_size_check = TRUE,
       progress = verbose, verbose = verbose
     )
-    srtm_mosaic <- terra::rast(elev_raster)
+    srtm_mosaic <- as(elev_raster, "SpatRaster")
     terra::writeRaster(srtm_mosaic, filename = file_path,
                        overwrite = TRUE)
     }, { # geodata
