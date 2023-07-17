@@ -118,7 +118,10 @@ test_that("elev() downloads polygon from Mapzen", {
   }
 
   expected <- terra::rast(test_path("expected", "mapzen_py.tif"))
-  expect_true(all.equal(terra::rast(thumb_1), terra::rast(expected)))
+  expect_true(all.equal(
+    unname(terra::rast(thumb_1)),
+    unname(terra::rast(expected))
+  ))
 
 })
 
@@ -149,7 +152,10 @@ test_that("elev() downloads points from Mapzen", {
   }
 
   expected <- terra::rast(test_path("expected", "mapzen_pt.tif"))
-  expect_true(all.equal(terra::rast(thumb_2), terra::rast(expected)))
+  expect_true(all.equal(
+    unname(terra::rast(thumb_2)),
+    unname(terra::rast(expected))
+  ))
 
 })
 
@@ -183,7 +189,10 @@ test_that("elev() downloads polygon from GeoData", {
   }
 
   expected <- terra::rast(test_path("expected", "srtm_py.tif"))
-  expect_true(all.equal(terra::rast(thumb_3), terra::rast(expected)))
+  expect_true(all.equal(
+    unname(terra::rast(thumb_3)),
+    unname(terra::rast(expected))
+  ))
 
 })
 
@@ -215,6 +224,9 @@ test_that("elev() downloads points from GeoData", {
   }
 
   expected <- terra::rast(test_path("expected", "srtm_pt.tif"))
-  expect_true(all.equal(terra::rast(thumb_4), terra::rast(expected)))
+  expect_true(all.equal(
+    unname(terra::rast(thumb_4)),
+    unname(terra::rast(expected))
+  ))
 
 })
