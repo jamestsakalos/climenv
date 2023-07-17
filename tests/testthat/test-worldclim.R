@@ -9,9 +9,10 @@ test_that("worldclim() fails gracefully", {
                lng = c(-156, -156, -157, -156)), coords = 1:2)
   tmp_dir <- tempdir()
   on.exit(unlink(tmp_dir))
-  expect_null(expect_warning(
-    worldclim(out = tmp_dir, loc = flip_lat_long, var = "prec"),
-    "Could not map all coordinates to tiles"))
+  expect_warning(
+    expect_null(worldclim(out = tmp_dir, loc = flip_lat_long, var = "prec")),
+    "Could not map all coordinates to tiles"
+  )
 })
 
 test_that("worldclim() downloads data", {
@@ -30,7 +31,7 @@ test_that("worldclim() downloads data", {
                lng = c(-123, -124, -123, -123)), coords = 2:1)
 
   # Obtain raster files
-  worldclim(out = tmp_dir, loc = tile50, var = "prec")
+  worldclim(out = tmp_dir, loc = tile50, var = "prec", quiet = TRUE)
   tile_files <- paste0(tmp_dir, "/prec/wc2.1_30s_prec_",
                       formatC(1:12, width = 2, flag = "0"), ".tif")
   expect_equal(file.exists(tile_files), rep(TRUE, 12))
@@ -58,7 +59,7 @@ test_that("worldclim() downloads data", {
                lng = c(-123, -174, -123, -123)), coords = 2:1)
 
   # Obtain raster data
-  worldclim(out = tmp_dir, loc = south, var = "elev")
+  worldclim(out = tmp_dir, loc = south, var = "elev", quiet = TRUE)
   south_file <- paste0(tmp_dir, "/elev/wc2.1_30s_elev_01.tif")
   expect_true(file.exists(south_file))
 
