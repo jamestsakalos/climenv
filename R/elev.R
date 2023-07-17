@@ -100,7 +100,8 @@
 #'
 #' @return
 #' `elev()` is called for its side-effects.
-#' It returns `TRUE` if files were downloaded successfully, `FALSE` otherwise.
+#' It invisibly returns `TRUE` if files were downloaded successfully,
+#' and returns `FALSE` otherwise.
 #' Creates one subfolder named elev storing a raster (.tiff). If elevation is
 #' sourced from geodata the elevation is downloaded at a spatial resolution of
 #' 30 arc seconds (~1 km  sq.). If elevation data is from mapzen then the
@@ -210,14 +211,14 @@ elev <- function(output_dir, location, e_source = "mapzen",
       )
       srtm_mosaic <- as(elev_raster, "SpatRaster")
       terra::writeRaster(srtm_mosaic, filename = file_path, overwrite = TRUE)
-      TRUE
+      invisible(TRUE)
     }, { # geodata
       srtm_mosaic <- .elev_geodata(location_sf, output_dir, ...)
       if (is.null(srtm_mosaic)) {
         FALSE
       } else {
         terra::writeRaster(srtm_mosaic, filename = file_path, overwrite = TRUE)
-        TRUE
+        invisible(TRUE)
       }
     }
   )

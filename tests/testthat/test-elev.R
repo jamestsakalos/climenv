@@ -159,17 +159,17 @@ test_that("elev() downloads polygon from GeoData", {
   on.exit(unlink(tmp_dir))
 
   # download srtm using a polygon ###
-  elev(
+  expect_true(elev(
     output_dir = tmp_dir, location = polygon_py_sm,
     e_source = "geodata",
     quiet = TRUE
-  )
 
 
   output_dir = tmp_dir; location = polygon_py_sm;
   e_source = "geodata";
   quiet = TRUE
   location = location_sf
+  ))
 
   srtm_tile <- paste0(tmp_dir, "/elev/srtm.tif")
   expect_true(file.exists(srtm_tile))
