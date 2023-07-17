@@ -36,22 +36,31 @@
       )
       url_status <- attr(curlGetHeaders(zip_url, verify = FALSE), "status")
       error <- if (url_status == 200) {
-        tryCatch(
+        if (tryCatch(
           utils::download.file(url = zip_url, destfile = temp_file, mode = "wb",
                                ...), # Returns 0 on success
           error = function(e) {
             warning("Failed to download ", id, ": ", e)
             -1 # Error code
           }
-        )
+        ) == 0) {
+          if (isFALSE(tryCatch(
+            utils::unzip(temp_file, paste0(id, ".tif"), exdir = output_dir),
+            error = function(e) {
+              warning("Temporary file not found: ", temp_file)
+              FALSE
+            }))) {
+            -2 # Error code
+          } else {
+            0 # Success code
+          }
+        }
       } else {
         warning("Could not download ", id, ": HTTP status ", url_status)
         -1
       }
     }
     if (error == 0) {
-      tryCatch(utils::unzip(temp_file, paste0(id, ".tif"), exdir = output_dir),
-               error = function(e) warning("Failed to unzip: ", id))
       rs <- terra::rast(tif)
       terra::crs(rs) <- "+proj=longlat +datum=WGS84"
       rs
