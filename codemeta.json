@@ -99,6 +99,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "progress",
+      "name": "progress",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=progress"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "raster",
       "name": "raster",
       "provider": {
@@ -194,13 +206,14 @@
       "@type": "SoftwareApplication",
       "identifier": "elevatr",
       "name": "elevatr",
+      "version": ">= 1.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=elevatr"
+      "sameAs": "https://github.com/jhollist/elevatr"
     },
     "6": {
       "@type": "SoftwareApplication",
@@ -252,6 +265,11 @@
     },
     "10": {
       "@type": "SoftwareApplication",
+      "identifier": "methods",
+      "name": "methods"
+    },
+    "11": {
+      "@type": "SoftwareApplication",
       "identifier": "plyr",
       "name": "plyr",
       "provider": {
@@ -262,7 +280,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=plyr"
     },
-    "11": {
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "randomForest",
       "name": "randomForest",
@@ -274,7 +292,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=randomForest"
     },
-    "12": {
+    "13": {
       "@type": "SoftwareApplication",
       "identifier": "sf",
       "name": "sf",
@@ -286,7 +304,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=sf"
     },
-    "13": {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "sp",
       "name": "sp",
@@ -298,7 +316,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=sp"
     },
-    "14": {
+    "15": {
       "@type": "SoftwareApplication",
       "identifier": "Ternary",
       "name": "Ternary",
@@ -310,7 +328,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=Ternary"
     },
-    "15": {
+    "16": {
       "@type": "SoftwareApplication",
       "identifier": "terra",
       "name": "terra",
@@ -324,5 +342,5 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1765.171KB"
+  "fileSize": "1792.821KB"
 }
