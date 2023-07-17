@@ -14,8 +14,8 @@ the data will be stored.}
 \link[sf:st]{sf::st_polygon} to make polygons and \link[sf:st_as_sf]{sf::st_as_sf} to make point
 objects.}
 
-\item{var, \dots}{Arguments to control a download from the Internet
-\code{download.file()}.}
+\item{var, \dots}{Arguments to \code{\link[=download.file]{download.file()}} to control file download.
+.}
 }
 \value{
 \code{worldclim()} is called for its side effects and returns \code{NULL}.

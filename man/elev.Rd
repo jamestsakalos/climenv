@@ -4,7 +4,7 @@
 \alias{elev}
 \title{Download elevation data}
 \usage{
-elev(output_dir, location, e_source = "mapzen")
+elev(output_dir, location, e_source = "mapzen", verbose = FALSE, ...)
 }
 \arguments{
 \item{output_dir}{Character (e.g., \code{"../Desktop/chelsa"}). Pathway to where
@@ -14,41 +14,70 @@ the data will be stored.}
 \link[sf:st]{sf::st_polygon} to make polygons and \link[sf:st_as_sf]{sf::st_as_sf} to make point
 objects.}
 
-\item{e_source}{Character (e.g., \code{mapzen} or \code{WorldClim}). Indicating the
+\item{e_source}{Character (e.g., \code{mapzen} or \code{geodata}). Indicating the
 elevation data source.}
+
+\item{verbose}{Logical specifying whether to display verbose output when
+downloading from Mapzen.}
+
+\item{\dots}{Additional arguments to \code{\link[=download.file]{download.file()}}.}
 }
 \value{
-Creates one subfolder named elev storing a raster (.tiff). If elevation is
-sourced from geodata the elevation is downloaded at a spatial resolution of
-30 arc seconds (~1 km  sq.). If elevation data is from mapzen then the
-product will be a mosaic. Specifically, Mapzen’s product is unique as it
-combines several sources of digital elevation models, including SRTM, the
-ArcticDEM (covering all areas north of 60°), EUDEM (digital elevation model
-over Europe; for review, see Mouratidis & Ampatzidis, 2019), and others into
-a single product. The resolution of this product was set to 7, corresponding
-to 611.5 m ground resolution at 60° latitude 864.8 m at 45° and 1223 m at 0°.
+\code{elev()} is called for its side-effects.
+It invisibly returns a "SpatRaster" object if files were downloaded
+successfully, and returns \code{NULL} otherwise. If the elevation data is sourced
+from geodata the SpatRaster is downloaded at a spatial resolution of 30 arc
+seconds (~1 km  sq.). If elevation data is from mapzen then the
+SpatRaster will be a mosaic. Specifically, Mapzen’s SpatRaster is unique as
+it combines several sources of digital elevation models, including SRTM, the
+ArcticDEM (covering all areas north of 60°), EUDEM (digital elevation
+model over Europe; for review, see Mouratidis & Ampatzidis, 2019), and others
+into a single product. The resolution of this SpatRaster was set to 7,
+corresponding to 611.5 m ground resolution at 60° latitude 864.8 m at
+45° and 1223 m at 0°.
 }
 \description{
 \code{elev()} downloads elevation data the Shuttle Radar Topography Mission
-(SRTM) , specifically the hole-filled CGIAR-SRTM (90 m resolution) for
+(SRTM), specifically the hole-filled CGIAR-SRTM (90 m resolution) for
 latitudes between -60 and 60 or Mapzen's synthesis digital elevation product.
 }
 \examples{
 \dontrun{
-# Start by loading Italy's Biom data
+# We could do this using Italy's Biome data
 data("italy_py", package = "climenv")
 # elevation will be saved in the output_dir (i.e. output directory)
    elev(output_dir = "...Desktop/elev", location = italy_py)
 }
+
+# As a smaller example, we can make a polygon covering an ocean island.
+location <- sf::st_polygon(
+   list(
+     cbind(
+       long = c(161, 161, 154, 161),
+       lat = c(-61, -49, -61, -61)
+     )
+   )
+)
+
+# We need to make sure that the polygon the correct class
+location <- sf::st_geometry(location)
+class(location) # "sfc_POLYGON" "sfc"
+
+# Set the coordinate reference system
+sf::st_crs(location) = "epsg:4326"
+
+# We are now ready to call elev()
+# elev(location = location, output_dir = <CHOSEN DIRECTORY>)
+
 }
 \references{
 { Hijmans, R.J., Barbosa, M., Ghosh, A., & Mandel, A. (2023).
 geodata: Download Geographic Data. R package version 0.5-8.
-https://CRAN.R-project.org/package=geodata
+\url{https://CRAN.R-project.org/package=geodata}
 
 Hollister, J. (2022). elevatr: Access Elevation Data from Various
-APIs. R package version 0.4.2. \doi{10.5281/zenodo.5809645}
-https://CRAN.R-project.org/package=elevatr
+APIs. R package version 1.0.0. \doi{10.5281/zenodo.5809645}
+\url{https://CRAN.R-project.org/package=elevatr}
 
 Mouratidis, A., & Ampatzidis, D. (2019). European Digital Elevation Model
 Validation against Extensive Global Navigation Satellite Systems Data and
@@ -59,7 +88,8 @@ ISPRS International Journal of Geo-Information 8, 108.
 }
 \seealso{
 A more convenient function for other climate and elevation data
-\code{\link[=ce_download]{ce_download()}}.
+\code{\link[=ce_download]{ce_download()}}. See \link[sf:st]{sf::st_polygon} to make polygons and \link[sf:st_as_sf]{sf::st_as_sf}
+to make point objects.
 }
 \author{
 James L. Tsakalos

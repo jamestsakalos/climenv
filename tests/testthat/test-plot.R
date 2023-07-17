@@ -11,10 +11,6 @@ test_that("plot_XX() fails gracefully", {
 })
 
 test_that("ce_plot() works", {
-
-  library("terra")
-  library("sf")
-
   # Set testing data ####
 
   # Create temporary file to supply to the ce_extract

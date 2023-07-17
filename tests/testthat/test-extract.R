@@ -3,6 +3,7 @@ test_that("ce_extract() works", {
 
   # Create temporary file to supply to the ce_extract
   temp_path <- tempfile()
+  on.exit(unlink(file.path(temp_path)), add = TRUE)
 
   # Create the required subdirectories
   dir.create(file.path(temp_path, "/elev"), recursive = TRUE)
@@ -10,7 +11,6 @@ test_that("ce_extract() works", {
   dir.create(file.path(temp_path, "/tmax"), recursive = TRUE)
   dir.create(file.path(temp_path, "/tavg"), recursive = TRUE)
   dir.create(file.path(temp_path, "/tmin"), recursive = TRUE)
-  on.exit(unlink(file.path(temp_path)), add = TRUE)
 
   # Create a empty raster serving as a base
   r <- terra::rast(ncol = 10, nrow = 10)
@@ -68,14 +68,15 @@ test_that("ce_extract() works", {
 
   #** No location group ####
 
-  #* default messages when no id provided ####
-  expect_silent(expect_message({
+  #* default warning when no location_g provided ####
+  expect_silent(expect_warning(
     data_py <- ce_extract(
       path = file.path(temp_path),
       location = pol_py, location_g = NULL,
       c_source = "WorldClim", var = "all"
-    )
-  }))
+    ),
+    "location_g must be one of: "
+  ))
 
   #* length / names of output data.frames ####
   expect_named(data_py, c("tavg_m", "tavg_sd", "tmin_m", "abmt", "tmin_sd",
@@ -148,13 +149,14 @@ test_that("ce_extract() works", {
   #** No location group ####
 
   #* default messages when no id provided ####
-  expect_message({
+  expect_warning(
     data_pt <- ce_extract(
       path = file.path(temp_path),
       location = pol_pt, location_g = NULL,
       c_source = "WorldClim", var = "all"
-    )
-  })
+    ),
+    "location_g must be one of: "
+  )
 
   #* length / names of output data.frames ####
   expect_named(data_pt, c("tavg", "tmin", "tmax",
@@ -253,6 +255,11 @@ test_that("ce_extract() works", {
   expect_no_error(
     .location_helper(location = pol_pt,
                      location_g = "grp",
+                     location_df = location_df)
+  )
+  expect_warning(
+    .location_helper(location = pol_pt,
+                     location_g = NULL,
                      location_df = location_df)
   )
 

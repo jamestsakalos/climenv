@@ -38,11 +38,12 @@ Imports:
     climaemet,
     dismo,
     dplyr,
-    elevatr,
+    elevatr (>= 1.0),
     exactextractr,
     geodata,
     glue,
     macroBiome,
+    methods,
     plyr,
     randomForest,
     sf,
@@ -53,12 +54,16 @@ Suggests:
     covr,
     fs,
     knitr,
+    progress,
     raster,
     rmarkdown,
     testthat (>= 3.0.0),
     vdiffr
+Remotes:
+    jhollist/elevatr
 Config/Needs/check: rcmdcheck
 Config/Needs/coverage: covr
 Config/Needs/website: pkgdown
+Config/testthat/edition: 3
 RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)

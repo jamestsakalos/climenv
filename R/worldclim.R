@@ -60,8 +60,8 @@
 #'
 #' @template output_dir_param
 #' @template output_location_param
-#' @param var,\dots Arguments to control a download from the Internet
-#' `download.file()`.
+#' @param var,\dots Arguments to [`download.file()`] to control file download.
+#' .
 #'
 #' @return
 #' `worldclim()` is called for its side effects and returns `NULL`.

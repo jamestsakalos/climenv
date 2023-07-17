@@ -18,9 +18,8 @@ data sets. Structured by \code{ce_extract()}.}
 \code{ggclimat_walter_lieth()}.}
 }
 \value{
-Returns a base R family of plot. This function uses the
-\pkg{climaemet} package to create the Walter and Lieth (1960) climatic
-diagram.
+Returns a base R family of plot. This function uses the \pkg{climaemet}
+package to create the Walter and Lieth (1960) climatic diagram.
 }
 \description{
 Creates a graph using the climate and elevation data which has
@@ -50,7 +49,7 @@ plot_wl(data = it_data, geo_id = "NEM")
 Fernández-Avilés G. (2023). climaemet: Climate AEMET Tools.
 Comprehensive R Archive Network. \doi{10.5281/zenodo.5205573}
 
-von Walter, H.B., & Lieth, H. (1960). Klimadiagramm-Weltatlas. VEB Gustav
+Walter, H.B., & Lieth, H. (1960). Klimadiagramm-Weltatlas. VEB Gustav
 Fischer Verlag, Jena.
 
 }

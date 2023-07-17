@@ -20,7 +20,7 @@ the data will be stored.}
 \item{c_source}{Character (e.g., \code{"CHELSA or WorldClim"}). Indicating the
 climate data source.}
 
-\item{e_source}{Character (e.g., \code{mapzen} or \code{WorldClim}). Indicating the
+\item{e_source}{Character (e.g., \code{mapzen} or \code{geodata}). Indicating the
 elevation data source.}
 
 \item{var}{Character. If supplied will download a subset of the climate data.

@@ -1,4 +1,4 @@
-suppressPackageStartupMessages(library("sp")) # Until 2023-10
+suppressPackageStartupMessages(library("sp", quietly = TRUE)) # Until Oct 2023
 library("testthat")
 library("climenv")
 

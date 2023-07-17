@@ -12,7 +12,7 @@
 #' @param \dots Arguments to control a download from the Internet
 #' `download.file()`.
 #'
-#' @return
+#' @returns
 #' See documentation from [`chelsa()`], [`worldclim()`] and
 #' [`elev()`].
 #'

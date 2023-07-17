@@ -25,7 +25,8 @@ objects.}
 
 \item{location_g}{Character. Informs how the zonal statistics are exported.
 Must correspond to a column of the \code{"location"} argument. If NULL,
-the zonal statistics are calculated for all features of \code{"location"}.}
+the zonal statistics are calculated for all features of \code{"location"} and a
+warning issued.}
 
 \item{c_source}{Character (e.g., \code{"CHELSA or WorldClim"}). Indicating the
 climate data source.}
