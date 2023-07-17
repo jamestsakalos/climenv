@@ -70,7 +70,7 @@ test_that("elev() downloads tiles not containing a vertex srtm", {
 
   # downloading the data for srtm
   expect_warning(
-            geo_elev <- elev(tmp_dir, island, "GEOdata", quiet = TRUE),
+    geo_elev <- elev(tmp_dir, island, "GEOdata", quiet = TRUE),
     "Coordinate reference system not specified")
 
   thumb_0 <- terra::aggregate(geo_elev, fact = 20)
