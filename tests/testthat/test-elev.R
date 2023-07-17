@@ -20,14 +20,14 @@ points_sm <- terra::centroids(terra::vect(polygon_py_sm))
 skip_if_server_offline <- function(server) {
   # Preferred to testthat::skip_if_offline as this runs on CRAN
   # Thus we can expect notice of any breaking changes to imported packages
-  tryCatch(
+  invisible(tryCatch(
     curlGetHeaders(server, timeout = 2),
     error = function(e) {
       if (length(grep("Connection timed out", e$message, fixed = TRUE))) {
         testthat::skip(paste("Could not connect to", server))
       }
     }
-  )
+  ))
 }
 
 test_that("elev() fails gracefully", {
