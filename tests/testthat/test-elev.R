@@ -14,9 +14,6 @@ polygon_py_sm <- sf::st_geometry(polygon_py_sm)
 sf::st_crs(polygon_py_sm) <- "epsg:4326"
 points_sm <- terra::centroids(terra::vect(polygon_py_sm))
 
-#terra::plot(climenv::srtm_tiles[srtm_tiles$FID %in% c(827, 828),], col = 'red')
-#terra::plot(polygon_py_sm, add = TRUE)
-
 skip_if_server_offline <- function(server) {
   # Preferred to testthat::skip_if_offline as this runs on CRAN
   # Thus we can expect notice of any breaking changes to imported packages
