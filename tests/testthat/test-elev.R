@@ -17,15 +17,6 @@ points_sm <- terra::centroids(terra::vect(polygon_py_sm))
 #terra::plot(climenv::srtm_tiles[srtm_tiles$FID %in% c(827, 828),], col = 'red')
 #terra::plot(polygon_py_sm, add = TRUE)
 
-scrub_progress_bars <- function(x) {
-  progress_bars <- grep("^[\\|\\-=\\s]*$", x, perl = TRUE)
-  if (length(progress_bars)) {
-    x[-progress_bars]
-  } else {
-    x
-  }
-}
-
 skip_if_server_offline <- function(server) {
   # Preferred to testthat::skip_if_offline as this runs on CRAN
   # Thus we can expect notice of any breaking changes to imported packages
