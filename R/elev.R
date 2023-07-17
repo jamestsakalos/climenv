@@ -21,11 +21,11 @@
   na <- cols == "NA" | rows == "NA"
   srtm_id <- paste0("srtm_", cols[!na], "_", rows[!na])
 
-  temp_file <- tempfile("srtm_", output_dir)
-  on.exit(unlink(temp_file))
-
   srtm_list <- lapply(srtm_id, function(id) {
-    print(id)
+
+    temp_file <- tempfile("srtm_", output_dir)
+    on.exit(unlink(temp_file))
+
     tif <- paste0(output_dir, "/", id, ".tif")
     error <- if (file.exists(tif)) {
       0
