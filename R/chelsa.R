@@ -10,7 +10,7 @@
 #' @param quiet,\dots Arguments to control a download from the Internet
 #' `download.file()`.
 #'
-#' @return
+#' @returns
 #' Returns four subfolders named prec, tmax, tmin and tmean. Each folder
 #' contains 12 GeoTiff (.tif) files, one for each month of the year for the time
 #' period 1981&ndash;2010. Each of the files are downloaded at a spatial

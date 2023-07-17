@@ -57,11 +57,11 @@ before wrapping to a new line.}
 corresponding to the position (left to right) for each column.}
 }
 \value{
-Returns a base R family of plot. This function uses the
-\pkg{dismo} package to calculate isothermality (ISO),
-temperature seasonality (TS) and precipitation seasonality (PS). It also uses
-the \pkg{macroBiome} package to calculate mean annual biotemperature (BioT)
-and the potential evapotranspiration ratio (PET).
+Returns a base R family of plot. This function uses the \pkg{dismo} package
+to calculate isothermality (ISO), temperature seasonality (TS) and
+precipitation seasonality (PS). It also uses the \pkg{macroBiome} package to
+calculate mean annual biotemperature (BioT) and the potential
+evapotranspiration ratio (PET).
 }
 \description{
 Creates a graph using the climate and elevation data which has
@@ -101,7 +101,7 @@ par(opar)
 Fernández-Avilés G. (2023). climaemet: Climate AEMET Tools.
 Comprehensive R Archive Network. \doi{10.5281/zenodo.5205573}
 
-von Walter, H.B., & Lieth, H. (1960). Klimadiagramm-Weltatlas. VEB Gustav
+Walter, H.B., & Lieth, H. (1960). Klimadiagramm-Weltatlas. VEB Gustav
 Fischer Verlag, Jena.
 
 }

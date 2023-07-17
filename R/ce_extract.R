@@ -347,7 +347,7 @@
 #' @template output_c_source_param
 #' @template output_var_param
 #'
-#' @return
+#' @returns
 #' Returns a list storing matrices containing the mean and standard deviation
 #' of the climate and/or elevation data. Each column represents a month, each
 #' row represents a feature of the \code{location} \code{sp}, \code{sf} polygon

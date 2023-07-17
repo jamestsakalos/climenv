@@ -46,11 +46,12 @@
 #' @param l_tcols List. Line position of the table columns. Must be length 5
 #' corresponding to the position (left to right) for each column.
 #'
-#' @return Returns a base R family of plot. This function uses the
-#' \pkg{dismo} package to calculate isothermality (ISO),
-#' temperature seasonality (TS) and precipitation seasonality (PS). It also uses
-#' the \pkg{macroBiome} package to calculate mean annual biotemperature (BioT)
-#' and the potential evapotranspiration ratio (PET).
+#' @returns
+#' Returns a base R family of plot. This function uses the \pkg{dismo} package
+#' to calculate isothermality (ISO), temperature seasonality (TS) and
+#' precipitation seasonality (PS). It also uses the \pkg{macroBiome} package to
+#' calculate mean annual biotemperature (BioT) and the potential
+#' evapotranspiration ratio (PET).
 #'
 #' @author James L. Tsakalos
 #' @seealso Download climate data: [`ce_download()`]
@@ -58,7 +59,7 @@
 #' Fern&aacute;ndez-Avil&eacute;s G. (2023). climaemet: Climate AEMET Tools.
 #' Comprehensive R Archive Network. \doi{10.5281/zenodo.5205573}
 #'
-#' von Walter, H.B., & Lieth, H. (1960). Klimadiagramm-Weltatlas. VEB Gustav
+#' Walter, H.B., & Lieth, H. (1960). Klimadiagramm-Weltatlas. VEB Gustav
 #' Fischer Verlag, Jena.
 #'
 #' }

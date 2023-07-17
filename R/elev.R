@@ -101,18 +101,16 @@
 #' @returns
 #' `elev()` is called for its side-effects.
 #' It invisibly returns a "SpatRaster" object if files were downloaded
-#' successfully, and returns `NULL` otherwise.
-# TODO James please describe the contents of the SpatRaster object that is
-#  returned
-#' Creates one subfolder named elev storing a raster (.tiff). If elevation is
-#' sourced from geodata the elevation is downloaded at a spatial resolution of
-#' 30 arc seconds (~1 km  sq.). If elevation data is from mapzen then the
-#' product will be a mosaic. Specifically, Mapzen’s product is unique as it
-#' combines several sources of digital elevation models, including SRTM, the
-#' ArcticDEM (covering all areas north of 60°), EUDEM (digital elevation model
-#' over Europe; for review, see Mouratidis & Ampatzidis, 2019), and others into
-#' a single product. The resolution of this product was set to 7, corresponding
-#' to 611.5 m ground resolution at 60° latitude 864.8 m at 45° and 1223 m at 0°.
+#' successfully, and returns `NULL` otherwise. If the elevation data is sourced
+#' from geodata the SpatRaster is downloaded at a spatial resolution of 30 arc
+#' seconds (&#126;1 km  sq.). If elevation data is from mapzen then the
+#' SpatRaster will be a mosaic. Specifically, Mapzen’s SpatRaster is unique as
+#' it combines several sources of digital elevation models, including SRTM, the
+#' ArcticDEM (covering all areas north of 60&#176;), EUDEM (digital elevation
+#' model over Europe; for review, see Mouratidis & Ampatzidis, 2019), and others
+#' into a single product. The resolution of this SpatRaster was set to 7,
+#' corresponding to 611.5 m ground resolution at 60&#176; latitude 864.8 m at
+#' 45&#176; and 1223 m at 0&#176;.
 #'
 #' @author James L. Tsakalos
 #' @seealso A more convenient function for other climate and elevation data
@@ -120,11 +118,12 @@
 #' to make point objects.
 #' @references{ Hijmans, R.J., Barbosa, M., Ghosh, A., & Mandel, A. (2023).
 #' geodata: Download Geographic Data. R package version 0.5-8.
-#' https://CRAN.R-project.org/package=geodata
+#' \url{https://CRAN.R-project.org/package=geodata}
 #'
 #' Hollister, J. (2022). elevatr: Access Elevation Data from Various
 #' APIs. R package version 1.0.0. \doi{10.5281/zenodo.5809645}
-#' https://CRAN.R-project.org/package=elevatr
+#' \url{https://CRAN.R-project.org/package=elevatr}
+#'
 #'
 #' Mouratidis, A., & Ampatzidis, D. (2019). European Digital Elevation Model
 #' Validation against Extensive Global Navigation Satellite Systems Data and
