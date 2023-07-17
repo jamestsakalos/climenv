@@ -32,7 +32,7 @@ skip_if_server_offline <- function(server) {
 
 test_that("elev() fails gracefully", {
 
-  skip_if_server_offline("srtm.csi.cgiar.org")
+  skip_if_server_offline("https://srtm.csi.cgiar.org")
   tmp_dir <- tempdir()
   on.exit(unlink(tmp_dir))
 
@@ -59,7 +59,7 @@ test_that("elev() fails gracefully", {
 
 test_that("elev() downloads tiles not containing a vertex srtm", {
 
-  skip_if_server_offline("srtm.csi.cgiar.org")
+  skip_if_server_offline("https://srtm.csi.cgiar.org")
   tmp_dir <- tempdir()
   on.exit(unlink(tmp_dir))
 
@@ -154,7 +154,7 @@ test_that("elev() downloads points from Mapzen", {
 
 test_that("elev() downloads polygon from GeoData", {
 
-  skip_if_server_offline("srtm.csi.cgiar.org")
+  skip_if_server_offline("https://srtm.csi.cgiar.org")
   tmp_dir <- tempdir()
   on.exit(unlink(tmp_dir))
 
@@ -194,7 +194,7 @@ test_that("elev() downloads polygon from GeoData", {
 
 test_that("elev() downloads points from GeoData", {
 
-  skip_if_server_offline("srtm.csi.cgiar.org")
+  skip_if_server_offline("https://srtm.csi.cgiar.org")
   tmp_dir <- tempdir()
   on.exit(unlink(tmp_dir))
 
