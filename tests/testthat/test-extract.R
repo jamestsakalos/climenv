@@ -1,8 +1,4 @@
 test_that("ce_extract() works", {
-
-  library(sf)
-  library(terra)
-
   # Set testing data ####
 
   # Create temporary file to supply to the ce_extract
@@ -73,13 +69,13 @@ test_that("ce_extract() works", {
   #** No location group ####
 
   #* default messages when no id provided ####
-  expect_message({
+  expect_silent(expect_message({
     data_py <- ce_extract(
       path = file.path(temp_path),
       location = pol_py, location_g = NULL,
       c_source = "WorldClim", var = "all"
     )
-  })
+  }))
 
   #* length / names of output data.frames ####
   expect_named(data_py, c("tavg_m", "tavg_sd", "tmin_m", "abmt", "tmin_sd",

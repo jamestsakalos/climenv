@@ -129,7 +129,9 @@ worldclim <- function(output_dir, location, var = "all",
   rs[] <- 1:72
 
   # Intersect location and tiles
-  tiles <- unique(terra::extract(rs, terra::vect(location))$lyr.1)
+  tiles <- unique(
+    terra::extract(rs, terra::vect(location), touches = TRUE)$lyr.1
+  )
   if (any(is.na(tiles))) {
     warning("Could not map all coordinates to tiles; check validity")
   }

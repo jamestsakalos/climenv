@@ -9,9 +9,10 @@ test_that("worldclim() fails gracefully", {
                lng = c(-156, -156, -157, -156)), coords = 1:2)
   tmp_dir <- tempdir()
   on.exit(unlink(tmp_dir))
-  expect_null(expect_warning(
-    worldclim(out = tmp_dir, loc = flip_lat_long, var = "prec"),
-    "Could not map all coordinates to tiles"))
+  expect_warning(
+    expect_null(worldclim(out = tmp_dir, loc = flip_lat_long, var = "prec")),
+    "Could not map all coordinates to tiles"
+  )
 })
 
 test_that("worldclim() downloads data", {
@@ -30,25 +31,25 @@ test_that("worldclim() downloads data", {
                lng = c(-123, -124, -123, -123)), coords = 2:1)
 
   # Obtain raster files
-  worldclim(out = tmp_dir, loc = tile50, var = "prec")
+  worldclim(out = tmp_dir, loc = tile50, var = "prec", quiet = TRUE)
   tile_files <- paste0(tmp_dir, "/prec/wc2.1_30s_prec_",
-                       formatC(1:12, width = 2, flag = "0"), ".tif")
+                      formatC(1:12, width = 2, flag = "0"), ".tif")
   expect_equal(file.exists(tile_files), rep(TRUE, 12))
 
   # Check data matches expectation
   skip_if(!file.exists(tile_files[1]))
   jan50 <- terra::rast(tile_files[1])
   thumb <- terra::aggregate(jan50, fact = 64)
-  expect_silent(
-    expectedFile <- test_path("expected", "jan50.tif")
-  )
-  expect_true(all.equal(rast(thumb), rast(rast(expectedFile))))
+  expected <- terra::rast(test_path("expected", "jan50.tif"))
+  expect_true(all.equal(rast(thumb), rast(expected)))
 
 
   # Run this code manually to update the "Expected" value
   if (FALSE) {
-    terra::writeRaster(thumb, overwrite = TRUE,
-                       test_path("expected", "jan50.tif"))
+    terra::writeRaster(
+      thumb, overwrite = TRUE,
+      test_path("expected", "jan50.tif")
+    )
   }
 
 
@@ -58,25 +59,22 @@ test_that("worldclim() downloads data", {
                lng = c(-123, -174, -123, -123)), coords = 2:1)
 
   # Obtain raster data
-  worldclim(out = tmp_dir, loc = south, var = "elev")
+  worldclim(out = tmp_dir, loc = south, var = "elev", quiet = TRUE)
   south_file <- paste0(tmp_dir, "/elev/wc2.1_30s_elev_01.tif")
   expect_true(file.exists(south_file))
 
   # Check data matches expectation
   south_elev <- terra::rast(south_file)
   thumb <- terra::aggregate(south_elev, fact = 64)
-  expect_silent(
-    expected <- test_path("expected", "south_elev.tif")
-  )
-  expect_true(all.equal(rast(thumb), rast(rast(expected))))
+  expected <- terra::rast(test_path("expected", "south_elev.tif"))
+  expect_true(all.equal(rast(thumb), rast(expected)))
 
 
   # Run this code manually to update the "Expected" value
   if (FALSE) {
     terra::writeRaster(
       thumb, overwrite = TRUE,
-      paste0(system.file("tests/testthat/expected", package = "climenv"),
-             "/south_elev.tif")
+      test_path("expected", "south_elev.tif")
     )
   }
 })
