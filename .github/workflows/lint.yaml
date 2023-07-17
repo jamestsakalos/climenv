@@ -29,6 +29,7 @@ on:
       - "!**lint.yaml"
       - "**.R[dD]ata"
       - "**.Rpro*"
+      - "**/test-worldclim.R"
 
 name: lint
 

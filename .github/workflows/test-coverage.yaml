@@ -29,6 +29,7 @@ on:
       - "!**test-coverage.yaml"
       - "**.R[dD]ata"
       - "**.Rpro*"
+      - "**/test-worldclim.R"
 
 name: test-coverage
 
