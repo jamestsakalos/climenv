@@ -23,6 +23,8 @@ downloading from Mapzen.}
 \item{\dots}{Additional arguments to \code{\link[=download.file]{download.file()}}.}
 }
 \value{
+\code{elev()} is called for its side-effects.
+It returns \code{TRUE} if files were downloaded successfully, \code{FALSE} otherwise.
 Creates one subfolder named elev storing a raster (.tiff). If elevation is
 sourced from geodata the elevation is downloaded at a spatial resolution of
 30 arc seconds (~1 km  sq.). If elevation data is from mapzen then the

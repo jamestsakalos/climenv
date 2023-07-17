@@ -62,9 +62,8 @@ test_that("elev() fails gracefully", {
   sea <- sf::st_as_sf(
     data.frame(lat = c(-59, -59, -58, -59),
                lng = c(-123, -124, -123, -123)), coords = 2:1)
-  expect_snapshot(elev(tmp_dir, sea, "GEOdata", quiet = TRUE),
-                  cran = TRUE, error = TRUE, scrub_progress_bars)
-
+  sf::st_crs(sea) <- "wgs84"
+  expect_false(elev(tmp_dir, sea, "GEOdata", quiet = TRUE))
 })
 
 test_that("elev() downloads tiles not containing a vertex srtm", {

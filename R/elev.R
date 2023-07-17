@@ -13,6 +13,9 @@
   tiles <- unique(
     terra::extract(rs, location, touches = TRUE)$lyr.1
   )
+  if (all(is.na(tiles))) {
+    return(NULL)
+  }
   cols <- formatC(terra::colFromCell(rs, tiles), width = 2, flag = 0)
   rows <- formatC(terra::rowFromCell(rs, tiles), width = 2, flag = 0)
   na <- cols == "NA" | rows == "NA"
@@ -87,6 +90,8 @@
 #' @param \dots Additional arguments to [`download.file()`].
 #'
 #' @return
+#' `elev()` is called for its side-effects.
+#' It returns `TRUE` if files were downloaded successfully, `FALSE` otherwise.
 #' Creates one subfolder named elev storing a raster (.tiff). If elevation is
 #' sourced from geodata the elevation is downloaded at a spatial resolution of
 #' 30 arc seconds (~1 km  sq.). If elevation data is from mapzen then the
@@ -190,16 +195,21 @@ elev <- function(output_dir, location, e_source = "mapzen",
   file_path <- paste0(output_dir, "/elev/srtm.tif")
   # Saves elevation from geodata or mapzen sources
   switch(e_source_id, { # mapzen
-    elev_raster <- elevatr::get_elev_raster(
-      location_sf, z = 7, override_size_check = TRUE,
-      progress = verbose, verbose = verbose
-    )
-    srtm_mosaic <- as(elev_raster, "SpatRaster")
-    terra::writeRaster(srtm_mosaic, filename = file_path,
-                       overwrite = TRUE)
+      elev_raster <- elevatr::get_elev_raster(
+        location_sf, z = 7, override_size_check = TRUE,
+        progress = verbose, verbose = verbose
+      )
+      srtm_mosaic <- as(elev_raster, "SpatRaster")
+      terra::writeRaster(srtm_mosaic, filename = file_path, overwrite = TRUE)
+      TRUE
     }, { # geodata
       srtm_mosaic <- .elev_geodata(location_sf, output_dir, ...)
-      terra::writeRaster(srtm_mosaic, filename = file_path, overwrite = TRUE)
+      if (is.null(srtm_mosaic)) {
+        FALSE
+      } else {
+        terra::writeRaster(srtm_mosaic, filename = file_path, overwrite = TRUE)
+        TRUE
+      }
     }
   )
 }
