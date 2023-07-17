@@ -83,7 +83,7 @@
 Tsakalos (<a href="mailto:james.tsakalos@gmail.com" class="email">james.tsakalos@gmail.com</a>), Martin R. Smith, Federico
 Luebert, Ladislav Mucina</h4>
             
-            <h4 data-toc-skip class="date">2023-07-07</h4>
+            <h4 data-toc-skip class="date">2023-07-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jamestsakalos/climenv/blob/HEAD/vignettes/climenv.Rmd" class="external-link"><code>vignettes/climenv.Rmd</code></a></small>
       <div class="hidden name"><code>climenv.Rmd</code></div>
@@ -245,7 +245,7 @@ to be added to the polygon.</p>
 <span>  location <span class="op">=</span> <span class="va">pol_py</span>,</span>
 <span>  location_g <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; location_g must be one of: lyr.1, grp, id</span></span>
+<span><span class="co">#&gt; Warning in .location_helper(location, location_g, location_df): location_g must be one of: lyr.1, grp, id</span></span>
 <span><span class="co">#&gt; Defaulting to a unique id for each polygon or point object</span></span>
 <span></span>
 <span><span class="va">data_pt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ce_extract.html">ce_extract</a></span><span class="op">(</span></span>
@@ -253,7 +253,7 @@ to be added to the polygon.</p>
 <span>  location <span class="op">=</span> <span class="va">pol_pt</span>,</span>
 <span>  location_g <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; location_g must be one of: lyr.1, grp, id, optional</span></span>
+<span><span class="co">#&gt; Warning in .location_helper(location, location_g, location_df): location_g must be one of: lyr.1, grp, id, optional</span></span>
 <span><span class="co">#&gt; Defaulting to a unique id for each polygon or point object</span></span></code></pre></div>
 <p>The returned data object is a list containing five data sets.
 Specifically, one data set each is returned for precipitation and mean-,
