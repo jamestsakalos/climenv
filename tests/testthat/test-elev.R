@@ -54,7 +54,7 @@ test_that("elev() fails gracefully", {
     data.frame(lat = c(-59, -59, -58, -59),
                lng = c(-123, -124, -123, -123)), coords = 2:1)
   sf::st_crs(sea) <- "wgs84"
-  expect_false(elev(tmp_dir, sea, "GEOdata", quiet = TRUE))
+  expect_null(elev(tmp_dir, sea, "GEOdata", quiet = TRUE))
 })
 
 test_that("elev() downloads tiles not containing a vertex srtm", {
@@ -71,7 +71,8 @@ test_that("elev() downloads tiles not containing a vertex srtm", {
   # downloading the data for srtm
   expect_warning(
     geo_elev <- elev(tmp_dir, island, "GEOdata", quiet = TRUE),
-    "Coordinate reference system not specified")
+    "Coordinate reference system not specified"
+  )
 
   thumb_0 <- terra::aggregate(geo_elev, fact = 20)
 
@@ -128,9 +129,9 @@ test_that("elev() downloads points from Mapzen", {
   on.exit(unlink(tmp_dir))
 
   # download mapzen using points
-  elev(
+  expect_true(inherits(elev(
     output_dir = tmp_dir, location = points, e_source = "mapzen"
-  )
+  ), "SpatRaster"))
   mapzen_tile <- paste0(tmp_dir, "/elev/srtm.tif")
   expect_true(file.exists(mapzen_tile))
 
@@ -159,17 +160,11 @@ test_that("elev() downloads polygon from GeoData", {
   on.exit(unlink(tmp_dir))
 
   # download srtm using a polygon ###
-  expect_true(elev(
+  expect_true(inherits(elev(
     output_dir = tmp_dir, location = polygon_py_sm,
     e_source = "geodata",
     quiet = TRUE
-
-
-  output_dir = tmp_dir; location = polygon_py_sm;
-  e_source = "geodata";
-  quiet = TRUE
-  location = location_sf
-  ))
+  ), "SpatRaster"))
 
   srtm_tile <- paste0(tmp_dir, "/elev/srtm.tif")
   expect_true(file.exists(srtm_tile))
