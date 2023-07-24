@@ -56,8 +56,8 @@
 #' @importFrom Ternary HoldridgePlot HoldridgeBelts HoldridgePoints
 #' @importFrom macroBiome cliHoldridgePoints
 #' @export
-plot_h <- function(data, geo_id, col = "red", pch = 19,
-                   ... # ... other ternary options
+plot_h <- function(
+  data, geo_id, col = "red", pch = 19, ... # ... other ternary options
 ) {
   .validate_geo_id(geo_id, data)
 

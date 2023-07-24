@@ -60,9 +60,10 @@ plot_wl <- function(data, geo_id, ...) {
       make.row.names = TRUE
     ),
     alt = round(data$elev[geo_id, "mean"]),
-    per = switch(c_source,
-                 "CHELSA" = "1981\u20132010",
-                 "WorldClim" = "1970\u20132000"
+    per = switch(
+      c_source,
+      "CHELSA" = "1981\u20132010",
+      "WorldClim" = "1970\u20132000"
     ),
     est = geo_id,
     mlab = "en",

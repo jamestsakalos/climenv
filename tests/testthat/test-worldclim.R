@@ -2,11 +2,13 @@ test_that("worldclim() fails gracefully", {
   expect_error(
     expect_warning(worldclim(var = "stop", res = 1),
                    "Invalid value of `resolution`")
-    , "invalid `var`")
+    , "invalid `var`"
+  )
 
   flip_lat_long <- sf::st_as_sf(
     data.frame(lat = c(-72, -73, -73, -72),
-               lng = c(-156, -156, -157, -156)), coords = 1:2)
+               lng = c(-156, -156, -157, -156)), coords = 1:2
+  )
   tmp_dir <- tempdir()
   on.exit(unlink(tmp_dir))
   expect_warning(
@@ -28,12 +30,15 @@ test_that("worldclim() downloads data", {
   # Smallest climate download is tile_50_wc2.1_30s_prec.tif: 407K
   tile50 <- sf::st_as_sf(
     data.frame(lat = c(-59, -59, -58, -59),
-               lng = c(-123, -124, -123, -123)), coords = 2:1)
+               lng = c(-123, -124, -123, -123)), coords = 2:1
+  )
 
   # Obtain raster files
   worldclim(out = tmp_dir, loc = tile50, var = "prec", quiet = TRUE)
-  tile_files <- paste0(tmp_dir, "/prec/wc2.1_30s_prec_",
-                      formatC(1:12, width = 2, flag = "0"), ".tif")
+  tile_files <- paste0(
+    tmp_dir, "/prec/wc2.1_30s_prec_",
+    formatC(1:12, width = 2, flag = "0"), ".tif"
+  )
   expect_equal(file.exists(tile_files), rep(TRUE, 12))
 
   # Check data matches expectation
@@ -56,7 +61,8 @@ test_that("worldclim() downloads data", {
   # Multiple tiles: spanning 49 & 50 will give smallest download size (~280KB)
   south <- sf::st_as_sf(
     data.frame(lat = c(-59, -59, -58, -59),
-               lng = c(-123, -174, -123, -123)), coords = 2:1)
+               lng = c(-123, -174, -123, -123)), coords = 2:1
+  )
 
   # Obtain raster data
   worldclim(out = tmp_dir, loc = south, var = "elev", quiet = TRUE)

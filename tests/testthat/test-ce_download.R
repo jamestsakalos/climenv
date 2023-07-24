@@ -17,7 +17,7 @@ test_that("ce_download fails gracefully", {
       ce_download(output_dir = "", location = "", var = "stop",
                   c_source = c("BAD_VALUE", "W", "ALSO_BAD")),
       "Unrecognized value in c_source: BAD_VALUE, ALSO_BAD"
-      ),
+    ),
     "invalid `var`"
   )
   expect_error(
@@ -46,7 +46,7 @@ test_that("ce_download() calls required functions", {
     expect_warning(
       ce_download(out = "", loc = "", c_source = "none", e_source = ""),
       "Unrecognized value in c_source"
-      ),
+    ),
     "e_source must be"
   )
 })

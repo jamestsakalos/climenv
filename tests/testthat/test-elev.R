@@ -1,7 +1,7 @@
 polygon_py <- sf::st_polygon(
-    list(cbind(long = c(161, 161, 154, 161),
-               lat = c(-61, -49, -61, -61)))
-  )
+  list(cbind(long = c(161, 161, 154, 161),
+             lat = c(-61, -49, -61, -61)))
+)
 polygon_py <- sf::st_geometry(polygon_py)
 sf::st_crs(polygon_py) <- "epsg:4326"
 points <- terra::centroids(terra::vect(polygon_py))
@@ -49,7 +49,8 @@ test_that("elev() fails gracefully", {
   # No data available in the oceans
   sea <- sf::st_as_sf(
     data.frame(lat = c(-59, -59, -58, -59),
-               lng = c(-123, -124, -123, -123)), coords = 2:1)
+               lng = c(-123, -124, -123, -123)), coords = 2:1
+  )
   sf::st_crs(sea) <- "wgs84"
   expect_null(elev(tmp_dir, sea, "GEOdata", quiet = TRUE))
 })
@@ -63,7 +64,8 @@ test_that("elev() downloads tiles not containing a vertex srtm", {
   # Island example. Covers two srtm tiles (68_24 and 68_23), but the polygon
   # does not cover one tile not containing a vertex.
   island <- sf::st_polygon(
-    list(cbind(lng = c(161, 161, 154, 161), lat = c(-61, -49, -61, -61))))
+    list(cbind(lng = c(161, 161, 154, 161), lat = c(-61, -49, -61, -61)))
+  )
 
   # downloading the data for srtm
   expect_warning(

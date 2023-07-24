@@ -295,7 +295,8 @@ library("randomForest")
 set.seed(123)  # For reproducibility
 
 train_indices <- sample(
-  seq_len(dim(dat)[1]), dim(dat)[1] * 0.8)  # 80% for training
+  seq_len(dim(dat)[1]), dim(dat)[1] * 0.8
+)  # 80% for training
 train_data <- dat[train_indices, ]
 test_data <- dat[-train_indices, ]
 
