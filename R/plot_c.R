@@ -310,7 +310,8 @@ plot_c <- function(data,
       round(
         sum(as.numeric(data$prec_m[geo_id, c(3, 4, 5)])) /
           sum(as.numeric(data$prec_m[geo_id, ])
-          ) * 100, 0)
+          ) * 100, 0
+      )
     )
     .concat_text(l_tcols["L2"] + 1.15, ht[9],
                  paste(text, collapse = ""), col = "blue")
@@ -325,19 +326,23 @@ plot_c <- function(data,
       round(
         sum(as.numeric(data$prec_m[geo_id, c(12, 1, 2)])) /
           sum(as.numeric(data$prec_m[geo_id, ])
-          ) * 100, 0), ":",
+          ) * 100, 0
+      ), ":",
       round(
         sum(as.numeric(data$prec_m[geo_id, c(3, 4, 5)])) /
           sum(as.numeric(data$prec_m[geo_id, ])
-          ) * 100, 0), ":",
+          ) * 100, 0
+      ), ":",
       round(
         sum(as.numeric(data$prec_m[geo_id, c(6, 7, 8)])) /
           sum(as.numeric(data$prec_m[geo_id, ])
-          ) * 100, 0), ":",
+          ) * 100, 0
+      ), ":",
       round(
         sum(as.numeric(data$prec_m[geo_id, c(9, 10, 11)])) /
           sum(as.numeric(data$prec_m[geo_id, ])
-          ) * 100, 0)
+          ) * 100, 0
+      )
     )
 
     .concat_text(l_tcols["L2"] + 1.15, ht[9],

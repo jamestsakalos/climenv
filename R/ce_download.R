@@ -54,8 +54,8 @@ ce_download <- function(
   c_source_id <- pmatch(toupper(c_source), c("CHELSA", "WORLDCLIM"))
   if (any(is.na(c_source_id))) {
     warning("Unrecognized value in c_source: ",
-          paste(c_source[is.na(c_source_id)], collapse = ", "),
-          " (choose CHELSA or WorldClim)")
+            paste(c_source[is.na(c_source_id)], collapse = ", "),
+            " (choose CHELSA or WorldClim)")
   }
 
   # Download CHELSA

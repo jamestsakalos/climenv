@@ -49,7 +49,8 @@
             error = function(e) {
               warning("Temporary file not found: ", temp_file)
               FALSE
-            }))) {
+            }
+          ))) {
             -2 # Error code
           } else {
             0 # Success code
@@ -206,19 +207,20 @@ elev <- function(output_dir, location, e_source = "mapzen",
   file_path <- paste0(output_dir, "/elev/srtm.tif")
   # Saves elevation from geodata or mapzen sources
   switch(e_source_id, { # mapzen
-      elev_raster <- elevatr::get_elev_raster(
-        location_sf, z = 7, override_size_check = TRUE,
-        progress = verbose, verbose = verbose
-      )
-      srtm_mosaic <- as(elev_raster, "SpatRaster")
+    elev_raster <- elevatr::get_elev_raster(
+      location_sf, z = 7, override_size_check = TRUE,
+      progress = verbose, verbose = verbose
+    )
+    srtm_mosaic <- as(elev_raster, "SpatRaster")
+    terra::writeRaster(srtm_mosaic, filename = file_path, overwrite = TRUE)
+  }, { # geodata
+
+    srtm_mosaic <- .elev_geodata(location_sf, output_dir, ...)
+    if (is.null(srtm_mosaic)) {
+      NULL
+    } else {
       terra::writeRaster(srtm_mosaic, filename = file_path, overwrite = TRUE)
-    }, { # geodata
-      srtm_mosaic <- .elev_geodata(location_sf, output_dir, ...)
-      if (is.null(srtm_mosaic)) {
-        NULL
-      } else {
-        terra::writeRaster(srtm_mosaic, filename = file_path, overwrite = TRUE)
-      }
     }
+  }
   )
 }

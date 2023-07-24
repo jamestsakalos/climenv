@@ -58,9 +58,9 @@
         if (which_clim == "tmin") {
 
           extract_abmt <- aggregate(. ~ location_g, extract_m,
-                                 FUN = function(x) {
-                                   min(x, na.rm = TRUE)
-                                 })
+                                    FUN = function(x) {
+                                      min(x, na.rm = TRUE)
+                                    })
 
           result[["abmt"]] <- extract_abmt
 
@@ -501,7 +501,8 @@ ce_extract <- function(
         lat <- data.frame(
           "location_g" = location$Name,
           "lat" = round(
-            terra::crds(terra::centroids(terra::vect(location)))[, 2], 3)
+            terra::crds(terra::centroids(terra::vect(location)))[, 2], 3
+          )
         )
 
         if (location_g == "id") {
