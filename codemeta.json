@@ -213,7 +213,7 @@
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://github.com/jhollist/elevatr"
+      "sameAs": "https://CRAN.R-project.org/package=elevatr"
     },
     "6": {
       "@type": "SoftwareApplication",
@@ -255,13 +255,7 @@
       "@type": "SoftwareApplication",
       "identifier": "macroBiome",
       "name": "macroBiome",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=macroBiome"
+      "sameAs": "https://github.com/jhollist/elevatr\n    szelepcsenyi/macroBiome"
     },
     "10": {
       "@type": "SoftwareApplication",
@@ -342,5 +336,5 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1792.821KB"
+  "fileSize": "1792.849KB"
 }
