@@ -57,10 +57,10 @@ Suggests:
     progress,
     raster,
     rmarkdown,
-    testthat (>= 3.0.0),
+    testthat (>= 0.2.0),
     vdiffr
 Remotes:
-    jhollist/elevatr
+    jhollist/elevatr,
     szelepcsenyi/macroBiome
 Config/Needs/check: rcmdcheck
 Config/Needs/coverage: covr
