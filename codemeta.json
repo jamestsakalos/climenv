@@ -255,6 +255,7 @@
       "@type": "SoftwareApplication",
       "identifier": "macroBiome",
       "name": "macroBiome",
+      "version": ">= 0.3.0",
       "sameAs": "https://github.com/jhollist/elevatr\n    szelepcsenyi/macroBiome"
     },
     "10": {
@@ -336,5 +337,5 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1792.849KB"
+  "fileSize": "1792.86KB"
 }
