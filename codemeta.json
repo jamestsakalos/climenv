@@ -256,7 +256,7 @@
       "identifier": "macroBiome",
       "name": "macroBiome",
       "version": ">= 0.3.0",
-      "sameAs": "https://github.com/jhollist/elevatr\n    szelepcsenyi/macroBiome"
+      "sameAs": "https://github.com/szelepcsenyi/macroBiome"
     },
     "10": {
       "@type": "SoftwareApplication",
