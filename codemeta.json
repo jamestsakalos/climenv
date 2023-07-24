@@ -137,7 +137,7 @@
       "@type": "SoftwareApplication",
       "identifier": "testthat",
       "name": "testthat",
-      "version": ">= 3.0.0",
+      "version": ">= 0.2.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -213,7 +213,7 @@
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=elevatr"
+      "sameAs": "https://github.com/jhollist/elevatr"
     },
     "6": {
       "@type": "SoftwareApplication",
@@ -337,5 +337,5 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1792.86KB"
+  "fileSize": "1792.861KB"
 }
