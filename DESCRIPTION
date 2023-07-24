@@ -42,7 +42,7 @@ Imports:
     exactextractr,
     geodata,
     glue,
-    macroBiome,
+    macroBiome (>= 0.3.0),
     methods,
     plyr,
     randomForest,
