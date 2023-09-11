@@ -206,7 +206,7 @@
       "@type": "SoftwareApplication",
       "identifier": "elevatr",
       "name": "elevatr",
-      "version": ">= 1.0",
+      "version": ">= 0.99",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -337,5 +337,5 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1792.861KB"
+  "fileSize": "1750.743KB"
 }
