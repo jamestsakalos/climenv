@@ -38,7 +38,7 @@ Imports:
     climaemet,
     dismo,
     dplyr,
-    elevatr (>= 1.0),
+    elevatr (>= 0.99),
     exactextractr,
     geodata,
     glue,
