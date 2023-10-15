@@ -70,7 +70,7 @@ which capture the spatial boundaries of different vegetation groups such as
 communities, habitats, disturbance classes, etc., they would serve as an ideal 
 candidate for analyses with our package.
 
-```{r italian-points-map, fig.height = 5, fig.width = 5, fig.align = "center", fig.cap = "**Fig 2**. Mediterranean and Nemoral Biomes of Italy (Mucina et al., 2023). The Mediterranean Biome is coded as orange points, while the Nemoral Biome is coded as green points."}
+```{r italian-points-map, fig.height = 5, fig.width = 5, fig.align = "center", fig.cap = "**Fig 2**. Mediterranean and Nemoral Biomes of Italy (Mucina et al., 2023). The Mediterranean Biome is coded as green points, while the Nemoral Biome is coded as orange points."}
 # Make a map of the Italian points data set
 plot(it_pt, pch = 19, cex = 0.5, key.pos = NULL, main = "")
 ```
