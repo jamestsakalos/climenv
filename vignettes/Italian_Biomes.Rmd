@@ -98,7 +98,7 @@ Regarding elevation data, users can choose either the NASA Earth Explorer's SRTM
 In this specific example, we have utilised the default settings  of 
 `ce_download` to download WorldClim 2 climate data and Mapzen elevation data for 
 the Italian polygon data set. However, please note that the following code chunk 
-is intentionally set not to evaluate because its execution requires a time. 
+is intentionally set not to evaluate because its execution requires time. 
 Fortunately, to facilitate the presented examples, we have already stored the 
 downloaded and extracted (using `ce_extract`) data within the package 
 (see below for more details).
