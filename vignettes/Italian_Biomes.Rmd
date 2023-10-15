@@ -55,7 +55,7 @@ library("terra")
 data("it_py")
 data("it_pt")
 ```
-```{r italian-polygons-map, fig.height = 5, fig.width = 5, fig.align = "center", fig.cap = "**Fig 1**. Mediterranean and Nemoral Biomes of Italy (Mucina et al., 2023). The Mediterranean Biome is shaded orange, while the Nemoral Biome is shaded in green."}
+```{r italian-polygons-map, fig.height = 5, fig.width = 5, fig.align = "center", fig.cap = "**Fig 1**. Mediterranean and Nemoral Biomes of Italy (Mucina et al., 2023). The Mediterranean Biome is shaded green, while the Nemoral Biome is shaded in orange."}
 # Make a map of the Italian polygons data set
 plot(it_py, key.pos = NULL, border = NA, main = "")
 ```
