@@ -91,7 +91,7 @@ chelsa <- function(output_dir = NULL, var = "all",
   # this is the main website path
   site <- "https://os.zhdk.cloud.switch.ch/envicloud/chelsa/chelsa_V2/GLOBAL/"
   site_date <- "climatologies/1981-2010/"
-  # adds the 0 before then number
+  # adds the 0 before the number
   layerf <- sprintf("%02d", 1:12)
   # ending path
   site_end <- "_1981-2010_V.2.1.tif"

@@ -55,7 +55,7 @@ library("terra")
 data("it_py")
 data("it_pt")
 ```
-```{r italian-polygons-map, fig.height = 5, fig.width = 5, fig.align = "center", fig.cap = "**Fig 1**. Mediterranean and Nemoral Biomes of Italy (Mucina et al., 2023). The Mediterranean Biome is shaded orange, while the Nemoral Biome is shaded in green."}
+```{r italian-polygons-map, fig.height = 5, fig.width = 5, fig.align = "center", fig.cap = "**Fig 1**. Mediterranean and Nemoral Biomes of Italy (Mucina et al., 2023). The Mediterranean Biome is shaded green, while the Nemoral Biome is shaded in orange."}
 # Make a map of the Italian polygons data set
 plot(it_py, key.pos = NULL, border = NA, main = "")
 ```
@@ -70,7 +70,7 @@ which capture the spatial boundaries of different vegetation groups such as
 communities, habitats, disturbance classes, etc., they would serve as an ideal 
 candidate for analyses with our package.
 
-```{r italian-points-map, fig.height = 5, fig.width = 5, fig.align = "center", fig.cap = "**Fig 2**. Mediterranean and Nemoral Biomes of Italy (Mucina et al., 2023). The Mediterranean Biome is coded as orange points, while the Nemoral Biome is coded as green points."}
+```{r italian-points-map, fig.height = 5, fig.width = 5, fig.align = "center", fig.cap = "**Fig 2**. Mediterranean and Nemoral Biomes of Italy (Mucina et al., 2023). The Mediterranean Biome is coded as green points, while the Nemoral Biome is coded as orange points."}
 # Make a map of the Italian points data set
 plot(it_pt, pch = 19, cex = 0.5, key.pos = NULL, main = "")
 ```
@@ -98,7 +98,7 @@ Regarding elevation data, users can choose either the NASA Earth Explorer's SRTM
 In this specific example, we have utilised the default settings  of 
 `ce_download` to download WorldClim 2 climate data and Mapzen elevation data for 
 the Italian polygon data set. However, please note that the following code chunk 
-is intentionally set not to evaluate because its execution requires a time. 
+is intentionally set not to evaluate because its execution requires time. 
 Fortunately, to facilitate the presented examples, we have already stored the 
 downloaded and extracted (using `ce_extract`) data within the package 
 (see below for more details).
