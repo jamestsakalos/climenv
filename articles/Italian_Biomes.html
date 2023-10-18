@@ -83,7 +83,7 @@
 Tsakalos (<a href="mailto:james.tsakalos@gmail.com" class="email">james.tsakalos@gmail.com</a>), Martin R. Smith, Federico
 Luebert, Ladislav Mucina</h4>
             
-            <h4 data-toc-skip class="date">2023-09-11</h4>
+            <h4 data-toc-skip class="date">2023-10-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jamestsakalos/climenv/blob/HEAD/vignettes/Italian_Biomes.Rmd" class="external-link"><code>vignettes/Italian_Biomes.Rmd</code></a></small>
       <div class="hidden name"><code>Italian_Biomes.Rmd</code></div>
@@ -130,10 +130,10 @@ WorldClim 2 climate and Mapzen digital elevation.</p>
 <code class="sourceCode R"><span><span class="co"># Make a map of the Italian polygons data set</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">it_py</span>, key.pos <span class="op">=</span> <span class="cn">NULL</span>, border <span class="op">=</span> <span class="cn">NA</span>, main <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="Italian_Biomes_files/figure-html/italian-polygons-map-1.png" alt="**Fig 1**. Mediterranean and Nemoral Biomes of Italy (Mucina et al., 2023). The Mediterranean Biome is shaded orange, while the Nemoral Biome is shaded in green." width="480"><p class="caption">
+<img src="Italian_Biomes_files/figure-html/italian-polygons-map-1.png" alt="**Fig 1**. Mediterranean and Nemoral Biomes of Italy (Mucina et al., 2023). The Mediterranean Biome is shaded green, while the Nemoral Biome is shaded in orange." width="480"><p class="caption">
 <strong>Fig 1</strong>. Mediterranean and Nemoral Biomes of Italy
-(Mucina et al., 2023). The Mediterranean Biome is shaded orange, while
-the Nemoral Biome is shaded in green.
+(Mucina et al., 2023). The Mediterranean Biome is shaded green, while
+the Nemoral Biome is shaded in orange.
 </p>
 </div>
 <p>From <strong>Fig 1</strong>, it is evident that the Italian polygons
@@ -150,10 +150,10 @@ ideal candidate for analyses with our package.</p>
 <code class="sourceCode R"><span><span class="co"># Make a map of the Italian points data set</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">it_pt</span>, pch <span class="op">=</span> <span class="fl">19</span>, cex <span class="op">=</span> <span class="fl">0.5</span>, key.pos <span class="op">=</span> <span class="cn">NULL</span>, main <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="Italian_Biomes_files/figure-html/italian-points-map-1.png" alt="**Fig 2**. Mediterranean and Nemoral Biomes of Italy (Mucina et al., 2023). The Mediterranean Biome is coded as orange points, while the Nemoral Biome is coded as green points." width="480"><p class="caption">
+<img src="Italian_Biomes_files/figure-html/italian-points-map-1.png" alt="**Fig 2**. Mediterranean and Nemoral Biomes of Italy (Mucina et al., 2023). The Mediterranean Biome is coded as green points, while the Nemoral Biome is coded as orange points." width="480"><p class="caption">
 <strong>Fig 2</strong>. Mediterranean and Nemoral Biomes of Italy
-(Mucina et al., 2023). The Mediterranean Biome is coded as orange
-points, while the Nemoral Biome is coded as green points.
+(Mucina et al., 2023). The Mediterranean Biome is coded as green points,
+while the Nemoral Biome is coded as orange points.
 </p>
 </div>
 <p>By design <strong>Fig 2</strong>, spans almost the same spatial
@@ -182,7 +182,7 @@ Mapzen terrain tiles (Hollister &amp; Shah, 2018).</p>
 <code>ce_download</code> to download WorldClim 2 climate data and Mapzen
 elevation data for the Italian polygon data set. However, please note
 that the following code chunk is intentionally set not to evaluate
-because its execution requires a time. Fortunately, to facilitate the
+because its execution requires time. Fortunately, to facilitate the
 presented examples, we have already stored the downloaded and extracted
 (using <code>ce_extract</code>) data within the package (see below for
 more details).</p>
@@ -252,8 +252,17 @@ visualisation of climate patterns.</p>
 <span><span class="fu"><a href="../reference/plot_wl.html">plot_wl</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">it_data</span>, <span class="st">"MED"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plot_wl.html">plot_wl</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">it_data</span>, <span class="st">"NEM"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="Italian_Biomes_files/figure-html/walter-leigh-diagram-1.png" alt="**Fig 4**. Walter-Lieth’s climatic diagram (1960) of the Mediterranean (MED) and Nemoral (NEM) Biome within Italy derived using WorldClim. When precipitation is &gt; 100 mm, the scale increases from 2mm C-1 to 20 mm  C-1 (as indicated by the black horizontal line) to avoid too high diagrams in very wet locations. This change is indicated by a black horizontal line, and the graph over is filled in solid blue. When the precipitation graph lies under the temperature graph (P &lt; 2T) we have an arid period (filled in dotted red vertical lines). Otherwise the period is considered humid (filled in light blue). Daily maximum average temperature of the hottest month and daily minimum average temperature of the coldest month are labeled in black on the left margin of the diagram." width="480"><img src="Italian_Biomes_files/figure-html/walter-leigh-diagram-2.png" alt="**Fig 4**. Walter-Lieth’s climatic diagram (1960) of the Mediterranean (MED) and Nemoral (NEM) Biome within Italy derived using WorldClim. When precipitation is &gt; 100 mm, the scale increases from 2mm C-1 to 20 mm  C-1 (as indicated by the black horizontal line) to avoid too high diagrams in very wet locations. This change is indicated by a black horizontal line, and the graph over is filled in solid blue. When the precipitation graph lies under the temperature graph (P &lt; 2T) we have an arid period (filled in dotted red vertical lines). Otherwise the period is considered humid (filled in light blue). Daily maximum average temperature of the hottest month and daily minimum average temperature of the coldest month are labeled in black on the left margin of the diagram." width="480"><p class="caption">
-<strong>Fig 4</strong>. Walter-Lieth’s climatic diagram (1960) of the
+<img src="Italian_Biomes_files/figure-html/walter-leigh-diagram-1.png" alt="**Fig 4**. Walter-Lieth’s climatic diagram (1960) of the Mediterranean (MED) and Nemoral (NEM) Biome within Italy derived using WorldClim. When precipitation is &gt;
+100 mm, the scale increases from 2mm C-1 to 20 mm C-1 (as indicated by
+the black horizontal line) to avoid too high diagrams in very wet
+locations. This change is indicated by a black horizontal line, and the
+graph over is filled in solid blue. When the precipitation graph lies
+under the temperature graph (P &lt; 2T) we have an arid period (filled
+in dotted red vertical lines). Otherwise the period is considered humid
+(filled in light blue). Daily maximum average temperature of the hottest
+month and daily minimum average temperature of the coldest month are
+labeled in black on the left margin of the diagram.” width=“480”
+/&gt;&lt;img src=" italian_biomes_files caption><strong>Fig 4</strong>. Walter-Lieth’s climatic diagram (1960) of the
 Mediterranean (MED) and Nemoral (NEM) Biome within Italy derived using
 WorldClim. When precipitation is &gt; 100 mm, the scale increases from
 2mm C-1 to 20 mm C-1 (as indicated by the black horizontal line) to
@@ -265,7 +274,7 @@ Otherwise the period is considered humid (filled in light blue). Daily
 maximum average temperature of the hottest month and daily minimum
 average temperature of the coldest month are labeled in black on the
 left margin of the diagram.
-</p>
+
 </div>
 <p>Lastly, we present our custom diagrams which incorporate elements
 from Holdridge’s (1967) life zone classification, Walter-Lieth’s
