@@ -76,7 +76,7 @@ plot(it_pt, pch = 19, cex = 0.5, key.pos = NULL, main = "")
 ```
 
 By design **Fig 2**, spans almost the same spatial extent as in **Fig 1**. Each 
-of the points (n = 9963) within the Italian point data set is spaced at ~ 5m in 
+of the points (n = 9963) within the Italian point data set is spaced at ~ 5km in 
 a grid configuration. Here users containing georeferenced features such as 
 quadrat locations, mapping notes of vegetation typologies, disturbance regimes, 
 etc., they would serve as an ideal candidate for analyses with our package. By 

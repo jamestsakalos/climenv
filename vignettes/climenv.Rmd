@@ -73,7 +73,7 @@ is advantageous because it will download quicker and occupy less storage.
 
 Because the vignette is required to run quickly and downloading climatic data
 (4.67 or 13.7&nbsp;GBs for CHELSA and WorldClim 2, resp.) takes considerable time
-(ca. 6 or 19 minutes at 100&nbsp;Mbit/s). For simplicity we have provided code to
+(ca. 6 or 19 minutes at 100&nbsp;Mbit/s). For simplicity, we have provided code to
 create artificial climate data of known properties. For a full demonstration on
 how to download data please see the package help documentation or Tsakalos
 et al. (2021). 
