@@ -13,6 +13,7 @@
   
 * R-hub, with `rhub::check_for_cran()` and `devtools::check_win_devel()`
 
+
 ## R CMD check results
 
 There were no ERRORs or WARNINGs.
@@ -33,6 +34,7 @@ This is a new submission.
 >  geospatial (21:49)
 
 We confirm the spelling of these words, which we have listed in inst/WORDLIST.
+
 
 ## Downstream dependencies
 
