@@ -96,5 +96,5 @@ p1 <- plot_h(data = it_data, "MED")
 
 <img src="man/figures/README-fig1-1.png" width="100%" style="display: block; margin: auto;" />
 
-The package vignette provides detailed explanation and demonstration on
-the application of climenv.
+The [package vignette](https://jamestsakalos.github.io/climenv/articles/climenv.html)
+provides detailed explanation and demonstration on the use of climenv.
