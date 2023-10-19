@@ -58,14 +58,14 @@ diagram has been presented in R.
 
 `ce_download` downloads WorldClim 2 (Fick & Hijmans, 2017), CHELSA (Karger et 
 al., 2017) and NASA Earth Explorer's SRTM (Farr et al., 2007). CHESLA and 
-WorldClim are available at a spatial resolution of 30 arc-seconds (~1 km<sup>2</sup>). The 
+WorldClim are available at a spatial resolution of 30 arc-seconds (c. 1 km<sup>2</sup>). The 
 data are freely available as a series of raster tiles (one for each month) with 
 their spatial extent spanning the globe. Specifically, the function downloads 
 the mean, minimum and maximum temperature and mean precipitation using the 
 climatic predictions for periods 1979–2013 (CHELSA) and 1970–2000 (WorldClim 2). 
 
 `ce_download` also downloads NASA's SRTM data at the same 30 arc-second
-(~1 km<sup>2</sup>) resolution. However, unlike CHELSA and WorldClim, the SRTM data can be
+(c. 1 km<sup>2</sup>) resolution. However, unlike CHELSA and WorldClim, the SRTM data can be
 downloaded as a series of individual tiles. While the spatial extent of CHELSA
 and WorldClim 2 spans the globe, `ce_download` derives and mosaics the SRTM
 tiles matching the extent provided by the user. Downloading a subset of tiles
