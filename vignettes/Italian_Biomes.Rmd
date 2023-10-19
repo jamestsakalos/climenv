@@ -239,10 +239,9 @@ colnames(bioclim) <- c(
 
 # Now get the Holdridge variables
 
-hold <- macroBiome::cliHoldridgePoints(
+hold <- bioclimate(
   as.matrix(it_data_extended$tavg[, 1:12]),
-  as.matrix(it_data_extended$prec[, 1:12]),
-  verbose = TRUE
+  as.matrix(it_data_extended$prec[, 1:12])
 )
 
 # Make some more intuitive names for these variables

@@ -18,9 +18,8 @@ data sets. Structured by \code{ce_extract()}.}
 \code{HoldridgePoints()}.}
 }
 \value{
-Returns a base R family of plot. This function uses the
-\pkg{macroBiome} and \pkg{Ternary} packages to create a Holdridge simplex
-plot.
+Returns a base R family of plot. This function uses the \pkg{Ternary}
+package to create a Holdridge simplex plot.
 }
 \description{
 Creates a graph using the climate and elevation data which has
@@ -53,10 +52,6 @@ simple climatic data. \emph{Science}, 105:367–368.
 Holdridge (1967),
 \emph{\href{https://reddcr.go.cr/sites/default/files/centro-de-documentacion/holdridge_1966_-_life_zone_ecology.pdf}{Life zone ecology}}.
 Tropical Science Center, San José.
-
-Szelepcsényi, Z. (2023) macroBiome: A Tool for Mapping the
-Distribution of the Biomes and Bioclimate. Comprehensive R Archive Network.
-\doi{10.5281/zenodo.7633367}
 
 Smith, M.R (2017). Ternary: An R Package for Creating Ternary Plots.
 Comprehensive R Archive Network. \doi{10.5281/zenodo.1068996}
