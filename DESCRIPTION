@@ -60,7 +60,6 @@ Suggests:
     testthat (>= 0.2.0),
     vdiffr
 Remotes:
-    jhollist/elevatr,
     szelepcsenyi/macroBiome
 Config/Needs/check: rcmdcheck
 Config/Needs/coverage: covr
