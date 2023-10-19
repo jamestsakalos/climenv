@@ -213,7 +213,7 @@
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://github.com/jhollist/elevatr"
+      "sameAs": "https://CRAN.R-project.org/package=elevatr"
     },
     "6": {
       "@type": "SoftwareApplication",
@@ -337,5 +337,5 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1750.743KB"
+  "fileSize": "1750.718KB"
 }
