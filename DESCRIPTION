@@ -31,6 +31,7 @@ License: GPL-3
 BugReports: https://github.com/jamestsakalos/climenv/issues
 URL: https://github.com/jamestsakalos/climenv
 Encoding: UTF-8
+Language: en-GB
 LazyData: true
 VignetteBuilder: knitr
 Depends: R (>= 4.1.0)
