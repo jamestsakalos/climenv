@@ -55,17 +55,16 @@
 #'
 #' @author James L. Tsakalos
 #' @seealso Download climate data: [`ce_download()`]
-#' @references{ Pizarro, M, Hernang&oacute;mez, D. &
+#' @references
+#' Pizarro, M, Hernang&oacute;mez, D. &amp;
 #' Fern&aacute;ndez-Avil&eacute;s G. (2023). climaemet: Climate AEMET Tools.
 #' Comprehensive R Archive Network. \doi{10.5281/zenodo.5205573}
 #'
 #' Walter, H.B., & Lieth, H. (1960). Klimadiagramm-Weltatlas. VEB Gustav
 #' Fischer Verlag, Jena.
 #'
-#' }
 #' @encoding UTF-8
-#' @examples{
-#'
+#' @examples
 #' # Step 1. Import the Italian Biome polygon data
 #' # Step 2. Run the download function
 #' # Step 3. Run the extract function
@@ -80,15 +79,15 @@
 #' # we need to make some changes to ensure that the table fits in the plotting
 #' # region.
 #'
-#' opar <- par()
-#' par(mar = c(1.5, 2.2, 1.5, 14) + 0.01) # We need to change a few things here
+#' # Set up plotting parameters
+#' opar <- par(mar = c(1.5, 2.2, 1.5, 14) + 0.01)
+#'
 #' plot_c(
 #'   it_data, geo_id = "MED",
 #'   l_tcols = c(14.5, 17, 18.5, 19.5, 21)
 #' )
 #' par(opar)
 #' # This output works if you export to a three column width sized image.
-#' }
 #'
 #' @importFrom macroBiome cliHoldridgePoints
 #' @importFrom dismo biovars
