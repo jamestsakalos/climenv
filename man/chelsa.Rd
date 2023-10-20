@@ -21,7 +21,7 @@ to download the corresponding climate data.}
 Returns four subfolders named prec, tmax, tmin and tmean. Each folder
 contains 12 GeoTiff (.tif) files, one for each month of the year for the time
 period 1981–2010. Each of the files are downloaded at a spatial
-resolution of 30 arc seconds (∼1 km sq.). The precipitation folder
+resolution of 30 arc seconds (~1 km sq.). The precipitation folder
 contains average monthly precipitation (mm). The tmax folder contains maximum
 monthly temperature. The tmin folder contains minimum monthly temperature.
 The tmean folder contains the average monthly temperature. The unit of
