@@ -23,7 +23,8 @@
 #' @author James L. Tsakalos
 #' @seealso Downloading from WorldClim V2.1 [`worldclim()`] or a more convenient
 #' function for other climate and elevation data [`ce_download()`].
-#' @references{ Karger,  D.N., Conrad, O., B&odblac;hner, J., Kawohl, T.,
+#' @references
+#' Karger,  D.N., Conrad, O., B&odblac;hner, J., Kawohl, T.,
 #' Kreft, H., Soria-Auza, R.W. et al (2017) Climatologies at high resolution for
 #' the earth’s land surface areas. *Scientific Data*, 4, 170122.
 #' \doi{10.1038/sdata.2017.122}
@@ -32,7 +33,6 @@
 #' Soria-Auza, R.W. et al. (2021) Climatologies at high resolution for the
 #' earth’s land surface areas. *EnviDat*. \doi{10.16904/envidat.228.v2.1}
 #'
-#' }
 #' @examples
 #' \dontrun{
 #'

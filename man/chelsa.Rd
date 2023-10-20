@@ -49,7 +49,7 @@ chelsa(
 }
 }
 \references{
-{ Karger,  D.N., Conrad, O., Bőhner, J., Kawohl, T.,
+Karger,  D.N., Conrad, O., Bőhner, J., Kawohl, T.,
 Kreft, H., Soria-Auza, R.W. et al (2017) Climatologies at high resolution for
 the earth’s land surface areas. \emph{Scientific Data}, 4, 170122.
 \doi{10.1038/sdata.2017.122}
@@ -57,8 +57,6 @@ the earth’s land surface areas. \emph{Scientific Data}, 4, 170122.
 Karger, D.N., Conrad, O., Bőhner, J., Kawohl, T., Kreft, H.,
 Soria-Auza, R.W. et al. (2021) Climatologies at high resolution for the
 earth’s land surface areas. \emph{EnviDat}. \doi{10.16904/envidat.228.v2.1}
-
-}
 }
 \seealso{
 Downloading from WorldClim V2.1 \code{\link[=worldclim]{worldclim()}} or a more convenient

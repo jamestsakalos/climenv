@@ -31,11 +31,11 @@ precipitation measurements, following Szelepcsényi et al. 2014.
 Szelepcsényi Z, Breuer H, Sümegi P (2014)
 The climate of Carpathian Region in the 20th century based on the original
 and modified Holdridge life zone system.
-Cent Eur J Geosci 6(3):293–307. \url{doi:10.2478/s13533-012-0189-5}
+\emph{Cent Eur J Geosci} 6, 293–307. \doi{10.2478/s13533-012-0189-5}
 
-Holdridge L. R., Simple method for determining potential evapotranspiration
-from temperature data, Science, 130, 1959, 572,
-\url{doi:10.1126/science.130.3375.572}
+Holdridge L. R. (1959) Simple method for determining potential evapotranspiration
+from temperature data. \emph{Science}, 130, 572.
+\doi{10.1126/science.130.3375.572}
 }
 \author{
 Martin R. Smith
