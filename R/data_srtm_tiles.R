@@ -1,4 +1,4 @@
-##' STRM tiles data
+##' SRTM tiles data
 ##'
 ##' SRTM tiles data.
 ##'

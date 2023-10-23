@@ -4,7 +4,7 @@
 \encoding{UTF-8}
 \name{srtm_tiles}
 \alias{srtm_tiles}
-\title{STRM tiles data}
+\title{SRTM tiles data}
 \format{
 { An object of class \code{SpatialPolygonsDataFrame} with 872 rows
 and 1 columns.}

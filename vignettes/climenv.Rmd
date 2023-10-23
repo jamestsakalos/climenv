@@ -1,5 +1,5 @@
 ---
-title: "Gettings started with 'climenv'"
+title: "Getting started with 'climenv'"
 author: "James L. Tsakalos (james.tsakalos@gmail.com), Martin R. Smith, Federico Luebert, Ladislav Mucina"
 date: "`r Sys.Date()`"
 output:
@@ -50,7 +50,7 @@ geospatial polygon and point data.
 Specifically, supplied with geospatial polygon and point data the package can
 easily download, extract and visualize climatic data. The visualization options
 include a custom plot coupled with helpful tabulated climatic properties,
-Holdridge's (1967) life zone classification and Walter-Leight's (1960)
+Holdridge's (1967) life zone classification and Walter-Lieth's (1960)
 climate diagrams. To our knowledge this is the first time that the Holdridge 
 diagram has been presented in R.
 
@@ -206,7 +206,7 @@ our own design (see Macintyre & Mucina, 2021).
 Holdridge Life Zone System or Holdridge Bioclimatic Classification System, is 
 based on three main factors that influence the distribution of vegetation and 
 ecosystems. By combining temperature, precipitation, and potential 
-evapotranspiration Holdridge’s classification plot divides the Earth’s surface
+evapotranspiration Holdridge's classification plot divides the Earth’s surface
 into distinct life zones or biomes (sensu Holdridge). It allows for the 
 identification and characterization of different biomes, such as tropical 
 rainforests, deserts, grasslands, and tundra, based on their distinct climatic 
@@ -229,8 +229,8 @@ spatial polygon). Here our package is a wrapper for the existing `diagwl`
 function of the `climatol` R package (Guijarro, 2019).
 
 
-```{r holdridge-diagram, fig.height = 5, fig.width = 5, fig.align = "center", fig.cap="Fig 1. Position of the training data within Holdridge’s (1967) life zone classification. The surface shading in the background is new addition to the original life zone classification and helps interpretation by converting a point in evapotranspiration-precipitation space to an appropriate cross-blended hypsometric colour – in this intuitive instance colours tending towards the red spectrum feature higher temperatures blended with lower precipitation compared while colours tending towards the blue colour spectrum have lower temperatures and higher precipitation."}
-# Make Holdridge’s (1967) life zone classification diagram
+```{r holdridge-diagram, fig.height = 5, fig.width = 5, fig.align = "center", fig.cap="Fig 1. Position of the training data within Holdridge's (1967) life zone classification. The surface shading in the background is new addition to the original life zone classification and helps interpretation by converting a point in evapotranspiration-precipitation space to an appropriate cross-blended hypsometric colour – in this intuitive instance colours tending towards the red spectrum feature higher temperatures blended with lower precipitation compared while colours tending towards the blue colour spectrum have lower temperatures and higher precipitation."}
+# Make Holdridge's (1967) life zone classification diagram
 plot_h(data = data_py, "0")
 ```
 ```{r walter-leigh-diagram, fig.height = 5, fig.width = 5, fig.align = "center", fig.cap="Fig 2. Walter-Lieth’s climatic diagram (1960) of the training data. When precipitation is > 100 mm, the scale increases from 2mm C-1 to 20 mm  C-1 (as indicated by the black horizontal line) to avoid too high diagrams in very wet locations. This change is indicated by a black horizontal line, and the graph over is filled in solid blue. When the precipitation graph lies under the temperature graph (P < 2T) we have an arid period (filled in dotted red vertical lines). Otherwise the period is considered humid (filled in light blue). Daily maximum average temperature of the hottest month and daily minimum average temperature of the coldest month are labeled in black on the left margin of the diagram."}
