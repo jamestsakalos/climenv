@@ -6,14 +6,15 @@
 \alias{srtm_tiles}
 \title{SRTM tiles data}
 \format{
-{ An object of class \code{SpatialPolygonsDataFrame} with 872 rows
-and 1 columns.}
+An object of class \code{SpatialPolygonsDataFrame} with 872 rows
+and 1 column.
 }
 \usage{
 srtm_tiles
 }
 \description{
-SRTM tiles data.
+Polygons defining coordinates of Shuttle Radar Topography Mission data
+tiles.
 }
 \details{
 Contains tiles to assist downloading from 'geodata'.
