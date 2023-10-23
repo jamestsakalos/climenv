@@ -10,9 +10,8 @@
 #' `HoldridgePoints()`.
 #'
 #' @returns
-#' Returns a base R family of plot. This function uses the
-#' \pkg{macroBiome} and \pkg{Ternary} packages to create a Holdridge simplex
-#' plot.
+#' Returns a base R family of plot. This function uses the \pkg{Ternary}
+#' package to create a Holdridge simplex plot.
 #'
 #' @author James L. Tsakalos
 #' @seealso Download climate data: [`ce_download()`]
@@ -26,10 +25,6 @@
 #' https://reddcr.go.cr/sites/default/files/centro-de-documentacion/holdridge_1966_-_life_zone_ecology.pdf)_.
 # nolint end
 #' Tropical Science Center, San Jos&eacute;.
-#'
-#' Szelepcs&eacute;nyi, Z. (2023) macroBiome: A Tool for Mapping the
-#' Distribution of the Biomes and Bioclimate. Comprehensive R Archive Network.
-#' \doi{10.5281/zenodo.7633367}
 #'
 #' Smith, M.R (2017). Ternary: An R Package for Creating Ternary Plots.
 #' Comprehensive R Archive Network. \doi{10.5281/zenodo.1068996}
@@ -54,7 +49,6 @@
 #'
 #' @importFrom graphics par
 #' @importFrom Ternary HoldridgePlot HoldridgeBelts HoldridgePoints
-#' @importFrom macroBiome cliHoldridgePoints
 #' @export
 plot_h <- function(
   data, geo_id, col = "red", pch = 19, ... # ... other ternary options
@@ -72,15 +66,11 @@ plot_h <- function(
   Ternary::HoldridgePlot(hex.labels = Ternary::holdridgeLifeZonesUp)
   Ternary::HoldridgeBelts()
 
-  hold <- macroBiome::cliHoldridgePoints(
-    data$tavg_m[geo_id, 1:12],
-    data$prec_m[geo_id, 1:12],
-    verbose = TRUE
-  )
+  hold <- bioclimate(data$tavg_m[geo_id, 1:12], data$prec_m[geo_id, 1:12])
 
   # Plot the data
   # The user has some flexibility in how to specify the point options
-  Ternary::HoldridgePoints(hold$per, hold$tap,
+  Ternary::HoldridgePoints(hold[, "per"], hold[, "tap"],
                            col = col, cex = 2, pch = pch,
                            lwd = 2, ...)
 

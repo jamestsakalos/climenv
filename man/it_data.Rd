@@ -24,7 +24,7 @@ elevation data. Within this data frame, one column shows the mean and the
 second the standard deviation. One data frame contains the central latitude
 of each feature. One, called "abmt" features the absolute minimum
 temperature for each month. For more details on the assignment of Biomes
-please refer to Mucina et al. (2022).
+please refer to Mucina et al. (2023).
 }
 \examples{
 data("it_data", package = "climenv")

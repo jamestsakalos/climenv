@@ -27,8 +27,8 @@ downloading from Mapzen.}
 It invisibly returns a "SpatRaster" object if files were downloaded
 successfully, and returns \code{NULL} otherwise. If the elevation data is sourced
 from geodata the SpatRaster is downloaded at a spatial resolution of 30 arc
-seconds (~1 km  sq.). If elevation data is from mapzen then the
-SpatRaster will be a mosaic. Specifically, Mapzen’s SpatRaster is unique as
+seconds (~1 km  sq.). If elevation data is from Mapzen then the
+SpatRaster will be a mosaic. Specifically, Mapzen's SpatRaster is unique as
 it combines several sources of digital elevation models, including SRTM, the
 ArcticDEM (covering all areas north of 60°), EUDEM (digital elevation
 model over Europe; for review, see Mouratidis & Ampatzidis, 2019), and others

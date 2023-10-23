@@ -55,7 +55,7 @@ always welcome.
     specifically to the hole-filled CGIAR-SRTM dataset, providing
     90-meter resolution elevation data for the Earth’s surface within
     latitudes ranging from -60 to 60 degrees
-  - Mapzen’s synthesis digital elevation product which combines several
+  - Mapzen's synthesis digital elevation product which combines several
     sources of digital elevation models, including SRTM, the ArcticDEM
     (covering all areas north of 60°), EUDEM (digital elevation model
     over Europe)

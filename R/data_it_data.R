@@ -14,7 +14,7 @@
 ##' second the standard deviation. One data frame contains the central latitude
 ##' of each feature. One, called "abmt" features the absolute minimum
 ##' temperature for each month. For more details on the assignment of Biomes
-##' please refer to Mucina et al. (2022).
+##' please refer to Mucina et al. (2023).
 ##' @references{ Mucina, L., Div&iacute;&scaron;ek, J., & Tsakalos, J.L. (2023)
 ##' Europe, Ecosystems of. In: Encyclopedia of biodiversity, vol X (in print).
 ##' \doi{10.1016/B978-0-12-822562-2.00059-1}

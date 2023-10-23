@@ -1,0 +1,25 @@
+vers <- paste("R package version", meta$Version)
+
+bibentry(
+  bibtype = "Article",
+  key = "Tsakalos2023",
+  title = "climenv: download, extract and visualise climatic and elevation data",
+  author = c(
+    person("James Lee", "Tsakalos"),
+    person("Martin Ross", "Smith"),
+    person("Federico", "Luebert"),
+    person("Ladislav", "Mucina")
+  ),
+  year = 2023,
+  journal = "Journal of Vegetation Science",
+  note = vers,
+  #doi = "10.1111/jvs.13XXX",
+  textVersion = paste0(
+    "Tsakalos, J.L., Smith, M.R., Luebert, F. & Mucina, L. ",
+    "(2023). ",
+    "climenv: download, extract and visualise climatic and ",
+    "elevation data. ",
+    "Journal of Vegetation Science. ",
+    "Forthcoming."#"doi: 10.1111/jvs.13XXX"
+  )
+)

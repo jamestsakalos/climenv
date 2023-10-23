@@ -24,7 +24,6 @@
 
 #' plot_c
 #'
-#'
 #' @description Creates a graph using the climate and elevation data which has
 #' been extracted for a given \code{location}. It accepts the data formatted
 #' from the \code{ce_extract} function.
@@ -49,9 +48,7 @@
 #' @returns
 #' Returns a base R family of plot. This function uses the \pkg{dismo} package
 #' to calculate isothermality (ISO), temperature seasonality (TS) and
-#' precipitation seasonality (PS). It also uses the \pkg{macroBiome} package to
-#' calculate mean annual biotemperature (BioT) and the potential
-#' evapotranspiration ratio (PET).
+#' precipitation seasonality (PS).
 #'
 #' @author James L. Tsakalos
 #' @seealso Download climate data: [`ce_download()`]
@@ -89,7 +86,6 @@
 #' par(opar)
 #' # This output works if you export to a three column width sized image.
 #'
-#' @importFrom macroBiome cliHoldridgePoints
 #' @importFrom dismo biovars
 #' @importFrom plyr round_any
 #' @importFrom graphics axis mtext points strwidth text
@@ -120,11 +116,7 @@ plot_c <- function(data,
   # Start by getting the Holdridge information. Specifically: abt, Mean Annual
   # Biotemperature; tap, Total Annual Precipitation (in mm); per, Potential
   # Evapotranspiration Ratio
-  hold <- macroBiome::cliHoldridgePoints(
-    data$tavg_m[geo_id, 1:12],
-    data$prec_m[geo_id, 1:12],
-    verbose = TRUE
-  )
+  hold <- bioclimate(data$tavg_m[geo_id, 1:12], data$prec_m[geo_id, 1:12])
 
   # I also need to calculate the bioclimatic variables
   bioclim <- dismo::biovars(
@@ -211,7 +203,7 @@ plot_c <- function(data,
 
   text <- c("BioT")
   .concat_text(l_tcols["L1"], ht[1], text, col = "black", font = 2)
-  text <- round(hold$abt, 2)
+  text <- round(hold[, "abt"], 2)
   .concat_text(l_tcols["L2"], ht[1], text, col = c(rep("red", 4)))
   text <- c("\u00B0C")
   .concat_text(l_tcols["L5"], ht[1], text, col = "red")
@@ -265,7 +257,7 @@ plot_c <- function(data,
 
   text <- c("PET")
   .concat_text(l_tcols["L1"], ht[7], text, col = "black", font = 2)
-  text <- round(hold$per, 2)
+  text <- round(hold[, "per"], 2)
   .concat_text(l_tcols["L2"], ht[7], text, col = c(rep("blue", 4)))
   text <- cut(
     text, c(
