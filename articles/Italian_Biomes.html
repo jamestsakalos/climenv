@@ -57,6 +57,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -83,7 +86,7 @@
 Tsakalos (<a href="mailto:james.tsakalos@gmail.com" class="email">james.tsakalos@gmail.com</a>), Martin R. Smith, Federico
 Luebert, Ladislav Mucina</h4>
             
-            <h4 data-toc-skip class="date">2023-10-19</h4>
+            <h4 data-toc-skip class="date">2023-10-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jamestsakalos/climenv/blob/HEAD/vignettes/Italian_Biomes.Rmd" class="external-link"><code>vignettes/Italian_Biomes.Rmd</code></a></small>
       <div class="hidden name"><code>Italian_Biomes.Rmd</code></div>
@@ -115,7 +118,7 @@ information for Italy. The data sets include <code>it_py</code>,
 <code>it_pt</code> and <code>it_data</code>. The prefix it stands for
 “Italy”. Within <code>it_py</code> the Biomes are represented by
 polygons (py), within <code>it_pt</code> the Biomes have been sampled by
-a gridded (~5km) point (pt) data set. Lastly, <code>it_data</code> is
+a gridded (c. 5km) point (pt) data set. Lastly, <code>it_data</code> is
 the output of the <code><a href="../reference/ce_extract.html">ce_extract()</a></code> function generated using
 WorldClim 2 climate and Mapzen digital elevation.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -158,7 +161,7 @@ while the Nemoral Biome is coded as orange points.
 </div>
 <p>By design <strong>Fig 2</strong>, spans almost the same spatial
 extent as in <strong>Fig 1</strong>. Each of the points (n = 9963)
-within the Italian point data set is spaced at ~ 5m in a grid
+within the Italian point data set is spaced at c. 5m in a grid
 configuration. Here users containing georeferenced features such as
 quadrat locations, mapping notes of vegetation typologies, disturbance
 regimes, etc., they would serve as an ideal candidate for analyses with
@@ -224,11 +227,11 @@ precipitation, and potential evapotranspiration Holdridge’s
 classification plot divides the Earth’s surface into distinct life zones
 or biomes (<em>sensu</em> Holdridge).</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Make Holdridge’s (1967) life zone classification diagram</span></span>
+<code class="sourceCode R"><span><span class="co"># Make Holdridge's (1967) life zone classification diagram</span></span>
 <span><span class="fu"><a href="../reference/plot_h.html">plot_h</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">it_data</span>, <span class="st">"MED"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plot_h.html">plot_h</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">it_data</span>, <span class="st">"NEM"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="Italian_Biomes_files/figure-html/holdridge-diagram-1.png" alt="**Fig 3**. Position of the Mediterranean (MED) and Nemoral (NEM) Biomes within Italy derived using WorldClim climate within Holdridge’s (1967) life zone classification. The surface shading in the background is new addition to the original life zone classification and helps interpretation by converting a point in evapotranspiration-precipitation space to an appropriate cross-blended hypsometric colour – in this intuitive instance colours tending towards the red spectrum feature higher temperatures blended with lower precipitation compared while colours tending towards the blue colour spectrum have lower temperatures and higher precipitation." width="480"><img src="Italian_Biomes_files/figure-html/holdridge-diagram-2.png" alt="**Fig 3**. Position of the Mediterranean (MED) and Nemoral (NEM) Biomes within Italy derived using WorldClim climate within Holdridge’s (1967) life zone classification. The surface shading in the background is new addition to the original life zone classification and helps interpretation by converting a point in evapotranspiration-precipitation space to an appropriate cross-blended hypsometric colour – in this intuitive instance colours tending towards the red spectrum feature higher temperatures blended with lower precipitation compared while colours tending towards the blue colour spectrum have lower temperatures and higher precipitation." width="480"><p class="caption">
+<img src="Italian_Biomes_files/figure-html/holdridge-diagram-1.png" alt="**Fig 3**. Position of the Mediterranean (MED) and Nemoral (NEM) Biomes within Italy derived using WorldClim climate within Holdridge's (1967) life zone classification. The surface shading in the background is new addition to the original life zone classification and helps interpretation by converting a point in evapotranspiration-precipitation space to an appropriate cross-blended hypsometric colour – in this intuitive instance colours tending towards the red spectrum feature higher temperatures blended with lower precipitation compared while colours tending towards the blue colour spectrum have lower temperatures and higher precipitation." width="480"><img src="Italian_Biomes_files/figure-html/holdridge-diagram-2.png" alt="**Fig 3**. Position of the Mediterranean (MED) and Nemoral (NEM) Biomes within Italy derived using WorldClim climate within Holdridge's (1967) life zone classification. The surface shading in the background is new addition to the original life zone classification and helps interpretation by converting a point in evapotranspiration-precipitation space to an appropriate cross-blended hypsometric colour – in this intuitive instance colours tending towards the red spectrum feature higher temperatures blended with lower precipitation compared while colours tending towards the blue colour spectrum have lower temperatures and higher precipitation." width="480"><p class="caption">
 <strong>Fig 3</strong>. Position of the Mediterranean (MED) and Nemoral
 (NEM) Biomes within Italy derived using WorldClim climate within
 Holdridge’s (1967) life zone classification. The surface shading in the
@@ -281,9 +284,9 @@ from Holdridge’s (1967) life zone classification, Walter-Lieth’s
 climatic diagram (1960), and the widely utilised bioclimatic variables
 (Hijmans et al., 2005) commonly employed in ecological and environmental
 research. These variables are crucial in describing environmental
-factors that shape the distribution and behavior of organisms, including
-plants, as evidenced by the high citation count of works by Holdridge,
-Walter-Lieth, and Hijmans.</p>
+factors that shape the distribution and behaviour of organisms,
+including plants, as evidenced by the high citation count of works by
+Holdridge, Walter-Lieth, and Hijmans.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Make the custom climate diagram</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.5</span>, <span class="fl">2.8</span>, <span class="fl">2</span>, <span class="fl">17</span><span class="op">)</span><span class="op">)</span></span>
@@ -367,22 +370,21 @@ study areas.</p>
 <span>  <span class="st">"Precipitation_of_coldest_quarter"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># And now lets get the Holdridge variables</span></span>
+<span><span class="co"># Now get the Holdridge variables</span></span>
 <span></span>
-<span><span class="va">hold</span> <span class="op">&lt;-</span> <span class="fu">macroBiome</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/macroBiome/man/cliHoldridgePoints.html" class="external-link">cliHoldridgePoints</a></span><span class="op">(</span></span>
+<span><span class="va">hold</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bioclimate.html">bioclimate</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">it_data_extended</span><span class="op">$</span><span class="va">tavg</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">it_data_extended</span><span class="op">$</span><span class="va">prec</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">it_data_extended</span><span class="op">$</span><span class="va">prec</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Lets make some more intuitive names for these variables</span></span>
+<span><span class="co"># Make some more intuitive names for these variables</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">hold</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Mean_Annual_Biotemperature"</span>,</span>
 <span>  <span class="st">"Total_Annual_Precipitation"</span>,</span>
 <span>  <span class="st">"Potential_Evapotranspiration_Ratio"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Lets join them together along with elevation and altitude</span></span>
+<span><span class="co"># Join them together along with elevation and altitude</span></span>
 <span></span>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span></span>
 <span>  <span class="va">bioclim</span>, <span class="va">hold</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Mean_Annual_Biotemperature"</span>,</span>

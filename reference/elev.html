@@ -40,6 +40,9 @@ latitudes between -60 and 60 or Mapzen's synthesis digital elevation product."><
       <a href="../articles/Italian_Biomes.html">Exploring the Italian biome data sets</a>
     </li>
   </ul></li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/jamestsakalos/climenv/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
@@ -105,8 +108,8 @@ downloading from Mapzen.</p></dd>
 It invisibly returns a "SpatRaster" object if files were downloaded
 successfully, and returns <code>NULL</code> otherwise. If the elevation data is sourced
 from geodata the SpatRaster is downloaded at a spatial resolution of 30 arc
-seconds (~1 km  sq.). If elevation data is from mapzen then the
-SpatRaster will be a mosaic. Specifically, Mapzen’s SpatRaster is unique as
+seconds (~1 km  sq.). If elevation data is from Mapzen then the
+SpatRaster will be a mosaic. Specifically, Mapzen's SpatRaster is unique as
 it combines several sources of digital elevation models, including SRTM, the
 ArcticDEM (covering all areas north of 60°), EUDEM (digital elevation
 model over Europe; for review, see Mouratidis &amp; Ampatzidis, 2019), and others
