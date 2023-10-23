@@ -31,6 +31,7 @@ License: GPL-3
 BugReports: https://github.com/jamestsakalos/climenv/issues
 URL: https://github.com/jamestsakalos/climenv
 Encoding: UTF-8
+Language: en-GB
 LazyData: true
 VignetteBuilder: knitr
 Depends: R (>= 4.1.0)
@@ -42,7 +43,6 @@ Imports:
     exactextractr,
     geodata,
     glue,
-    macroBiome (>= 0.3.0),
     methods,
     plyr,
     randomForest,
@@ -59,8 +59,6 @@ Suggests:
     rmarkdown,
     testthat (>= 0.2.0),
     vdiffr
-Remotes:
-    szelepcsenyi/macroBiome
 Config/Needs/check: rcmdcheck
 Config/Needs/coverage: covr
 Config/Needs/website: pkgdown

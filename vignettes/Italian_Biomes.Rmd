@@ -42,7 +42,7 @@ knitr::opts_chunk$set(
 `climenv` includes three data sets that feature Biome information for Italy. The
 data sets include `it_py`, `it_pt` and `it_data`. The prefix it stands for 
 "Italy". Within `it_py` the Biomes are represented by polygons (py), within 
-`it_pt` the Biomes have been sampled by a gridded (~5km) point (pt) data set. 
+`it_pt` the Biomes have been sampled by a gridded (c. 5km) point (pt) data set. 
 Lastly, `it_data` is the output of the `ce_extract()` function generated using
 WorldClim 2 climate and Mapzen digital elevation.
 
@@ -76,7 +76,7 @@ plot(it_pt, pch = 19, cex = 0.5, key.pos = NULL, main = "")
 ```
 
 By design **Fig 2**, spans almost the same spatial extent as in **Fig 1**. Each 
-of the points (n = 9963) within the Italian point data set is spaced at ~ 5km in 
+of the points (n = 9963) within the Italian point data set is spaced at c. 5m in 
 a grid configuration. Here users containing georeferenced features such as 
 quadrat locations, mapping notes of vegetation typologies, disturbance regimes, 
 etc., they would serve as an ideal candidate for analyses with our package. By 
@@ -138,11 +138,11 @@ plot. Holdridge's life zone classification plot, also known as the Holdridge
 Life Zone System or Holdridge Bioclimatic Classification System, is based on 
 three main factors that influence the distribution of vegetation and ecosystems.
 By combining temperature, precipitation, and potential evapotranspiration 
-Holdridge’s classification plot divides the Earth’s surface into distinct life 
+Holdridge's classification plot divides the Earth’s surface into distinct life 
 zones or biomes (*sensu* Holdridge).
 
-```{r holdridge-diagram, fig.show = 'hold', fig.height = 5, fig.width = 5, fig.align = "center", fig.cap = "**Fig 3**. Position of the Mediterranean (MED) and Nemoral (NEM) Biomes within Italy derived using WorldClim climate within Holdridge’s (1967) life zone classification. The surface shading in the background is new addition to the original life zone classification and helps interpretation by converting a point in evapotranspiration-precipitation space to an appropriate cross-blended hypsometric colour – in this intuitive instance colours tending towards the red spectrum feature higher temperatures blended with lower precipitation compared while colours tending towards the blue colour spectrum have lower temperatures and higher precipitation."}
-# Make Holdridge’s (1967) life zone classification diagram
+```{r holdridge-diagram, fig.show = 'hold', fig.height = 5, fig.width = 5, fig.align = "center", fig.cap = "**Fig 3**. Position of the Mediterranean (MED) and Nemoral (NEM) Biomes within Italy derived using WorldClim climate within Holdridge's (1967) life zone classification. The surface shading in the background is new addition to the original life zone classification and helps interpretation by converting a point in evapotranspiration-precipitation space to an appropriate cross-blended hypsometric colour – in this intuitive instance colours tending towards the red spectrum feature higher temperatures blended with lower precipitation compared while colours tending towards the blue colour spectrum have lower temperatures and higher precipitation."}
+# Make Holdridge's (1967) life zone classification diagram
 plot_h(data = it_data, "MED")
 plot_h(data = it_data, "NEM")
 ```
@@ -164,8 +164,8 @@ Holdridge's (1967) life zone classification, Walter-Lieth's climatic diagram
 (1960), and the widely utilised bioclimatic variables (Hijmans et al., 2005) 
 commonly employed in ecological and environmental research. These variables are 
 crucial in describing environmental factors that shape the distribution and 
-behavior of organisms, including plants, as evidenced by the high citation count
-of works by Holdridge, Walter-Lieth, and Hijmans. 
+behaviour of organisms, including plants, as evidenced by the high citation
+count of works by Holdridge, Walter-Lieth, and Hijmans. 
 
 ```{r custom-climate-diagram, fig.show = 'hold', fig.height = 4, fig.width = 7, fig.align = "center", fig.cap = "**Fig 5**. Custom diagram showing the climatic envelope of the Italian Mediterranean (MED) and Nemoral (NEM) Biomes. The abbreviations used are as follow: biotemperture (BioT), isothermality (ISO), mean annual temperature (MAT), temperature seasonality (TS), number of dry months with < 50 mm rainfall during the month (Dry mo), mean annual precipitation (MAP), potential evapotranspiration (PET), precipitation seasonality (PS), seasonal rainfall percentage in Summer (S), Autumn (A), Winter (W), Vernal (V), elevation (Elv) and latitude (Lat)."}
 # Make the custom climate diagram
@@ -237,22 +237,21 @@ colnames(bioclim) <- c(
   "Precipitation_of_coldest_quarter"
 )
 
-# And now lets get the Holdridge variables
+# Now get the Holdridge variables
 
-hold <- macroBiome::cliHoldridgePoints(
+hold <- bioclimate(
   as.matrix(it_data_extended$tavg[, 1:12]),
-  as.matrix(it_data_extended$prec[, 1:12]),
-  verbose = TRUE
+  as.matrix(it_data_extended$prec[, 1:12])
 )
 
-# Lets make some more intuitive names for these variables
+# Make some more intuitive names for these variables
 colnames(hold)[1:3] <- c(
   "Mean_Annual_Biotemperature",
   "Total_Annual_Precipitation",
   "Potential_Evapotranspiration_Ratio"
 )
 
-# Lets join them together along with elevation and altitude
+# Join them together along with elevation and altitude
 
 dat <- cbind(
   bioclim, hold[, c("Mean_Annual_Biotemperature",

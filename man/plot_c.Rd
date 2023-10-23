@@ -59,9 +59,7 @@ corresponding to the position (left to right) for each column.}
 \value{
 Returns a base R family of plot. This function uses the \pkg{dismo} package
 to calculate isothermality (ISO), temperature seasonality (TS) and
-precipitation seasonality (PS). It also uses the \pkg{macroBiome} package to
-calculate mean annual biotemperature (BioT) and the potential
-evapotranspiration ratio (PET).
+precipitation seasonality (PS).
 }
 \description{
 Creates a graph using the climate and elevation data which has

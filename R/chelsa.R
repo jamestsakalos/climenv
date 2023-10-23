@@ -14,7 +14,7 @@
 #' Returns four subfolders named prec, tmax, tmin and tmean. Each folder
 #' contains 12 GeoTiff (.tif) files, one for each month of the year for the time
 #' period 1981&ndash;2010. Each of the files are downloaded at a spatial
-#' resolution of 30 arc seconds (&sim;1 km sq.). The precipitation folder
+#' resolution of 30 arc seconds (&#126;1 km  sq.). The precipitation folder
 #' contains average monthly precipitation (mm). The tmax folder contains maximum
 #' monthly temperature. The tmin folder contains minimum monthly temperature.
 #' The tmean folder contains the average monthly temperature. The unit of
@@ -23,7 +23,8 @@
 #' @author James L. Tsakalos
 #' @seealso Downloading from WorldClim V2.1 [`worldclim()`] or a more convenient
 #' function for other climate and elevation data [`ce_download()`].
-#' @references{ Karger,  D.N., Conrad, O., B&odblac;hner, J., Kawohl, T.,
+#' @references
+#' Karger,  D.N., Conrad, O., B&odblac;hner, J., Kawohl, T.,
 #' Kreft, H., Soria-Auza, R.W. et al (2017) Climatologies at high resolution for
 #' the earth’s land surface areas. *Scientific Data*, 4, 170122.
 #' \doi{10.1038/sdata.2017.122}
@@ -32,7 +33,6 @@
 #' Soria-Auza, R.W. et al. (2021) Climatologies at high resolution for the
 #' earth’s land surface areas. *EnviDat*. \doi{10.16904/envidat.228.v2.1}
 #'
-#' }
 #' @examples
 #' \dontrun{
 #'
