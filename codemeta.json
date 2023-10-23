@@ -253,17 +253,10 @@
     },
     "9": {
       "@type": "SoftwareApplication",
-      "identifier": "macroBiome",
-      "name": "macroBiome",
-      "version": ">= 0.3.0",
-      "sameAs": "https://github.com/szelepcsenyi/macroBiome"
-    },
-    "10": {
-      "@type": "SoftwareApplication",
       "identifier": "methods",
       "name": "methods"
     },
-    "11": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "plyr",
       "name": "plyr",
@@ -275,7 +268,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=plyr"
     },
-    "12": {
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "randomForest",
       "name": "randomForest",
@@ -287,7 +280,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=randomForest"
     },
-    "13": {
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "sf",
       "name": "sf",
@@ -299,7 +292,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=sf"
     },
-    "14": {
+    "13": {
       "@type": "SoftwareApplication",
       "identifier": "sp",
       "name": "sp",
@@ -311,7 +304,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=sp"
     },
-    "15": {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "Ternary",
       "name": "Ternary",
@@ -323,7 +316,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=Ternary"
     },
-    "16": {
+    "15": {
       "@type": "SoftwareApplication",
       "identifier": "terra",
       "name": "terra",
@@ -337,5 +330,43 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1750.718KB"
+  "fileSize": "1754.637KB",
+  "citation": [
+    {
+      "@type": "ScholarlyArticle",
+      "datePublished": "2023",
+      "author": [
+        {
+          "@type": "Person",
+          "givenName": "James Lee",
+          "familyName": "Tsakalos"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Martin Ross",
+          "familyName": "Smith"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Federico",
+          "familyName": "Luebert"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Ladislav",
+          "familyName": "Mucina"
+        }
+      ],
+      "name": "climenv: download, extract and visualise climatic and elevation data",
+      "description": "R package version 1.0.0",
+      "isPartOf": {
+        "@type": "PublicationIssue",
+        "datePublished": "2023",
+        "isPartOf": {
+          "@type": ["PublicationVolume", "Periodical"],
+          "name": "Journal of Vegetation Science"
+        }
+      }
+    }
+  ]
 }
