@@ -27,10 +27,11 @@ This is a new submission.
 > Possibly misspelled words in DESCRIPTION:
 >  CHELSA (20:56)
 >  Holdridge (25:21, 27:22)
->  Lieth (24:63)
->  SRTM (20:75)
+>  Lieth (24:65)
+>  SRTM (20:77)
 >  WorldClim (20:43)
 >  climatological (18:43)
+>  covariates (22:61)
 >  geospatial (21:49)
 
 We confirm the spelling of these words, which we have listed in inst/WORDLIST.
