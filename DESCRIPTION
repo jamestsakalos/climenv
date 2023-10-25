@@ -17,16 +17,19 @@ Authors@R: c(
 Description: If you are a scientist seeking a convenient solution for 
     downloading, extracting, and plotting climatological data, consider 
     exploring the features of this package. It grants you access to three widely
-    recognised modelled data sets, namely WorldClim 2, CHELSA, and NASA’s SRTM. 
-    It seamlessly handles both multi and single geospatial polygon and point 
-    data, allowing you to extract outputs that can serve as covariates in 
-    various ecological studies. It also allows you to visualise these 
-    extractions using two common graphic options – the Walter-Lieth climate 
-    diagram and the Holdridge life zone classification scheme. The last option 
-    is a scheme of our own design which incorporates aspects of both 
-    Walter-Leigh and Holdridge. The package's user-friendly access and 
-    extraction of globally recognisable data sets significantly enhance its 
-    versatility and usability across a broad spectrum of applications.
+    recognised modelled data sets, namely Global Climate Data (WorldClim 2), 
+    Climatologies at high resolution for the earth's land surface areas (CHELSA)
+    , and National Aeronautics and Space Administration's (NASA) Shuttle Radar
+    Topography Mission (SRTM). It seamlessly handles both multi and single 
+    geospatial polygon and point data, allowing you to extract outputs that can
+    serve as covariates in various ecological studies. It also allows you to 
+    visualise these extractions using two common graphic options – the 
+    Walter-Lieth climate diagram and the Holdridge life zone classification 
+    scheme. The last option is a scheme of our own design which incorporates 
+    aspects of both Walter-Leigh and Holdridge. The package's user-friendly 
+    access and extraction of globally recognisable data sets significantly 
+    enhance its versatility and usability across a broad spectrum of
+    applications.
 License: GPL-3
 BugReports: https://github.com/jamestsakalos/climenv/issues
 URL: https://github.com/jamestsakalos/climenv
