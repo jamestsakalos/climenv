@@ -73,5 +73,5 @@ Downloading from CHELSA \code{\link[=chelsa]{chelsa()}} or a more convenient
 function for downloading other climate and elevation data \code{\link[=ce_download]{ce_download()}}.
 }
 \author{
-James L. Tsakalos
+James L. Tsakalos and Martin R. Smith
 }

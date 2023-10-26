@@ -50,7 +50,7 @@
 #' to calculate isothermality (ISO), temperature seasonality (TS) and
 #' precipitation seasonality (PS).
 #'
-#' @author James L. Tsakalos
+#' @author James L. Tsakalos and Martin R. Smith
 #' @seealso Download climate data: [`ce_download()`]
 #' @references
 #' Pizarro, M, Hernang&oacute;mez, D. &amp;

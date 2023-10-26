@@ -74,7 +74,7 @@
 #' temperature. The tmean folder contains the average monthly temperature.
 #' Temperature values are reported in &deg;C.
 #'
-#' @author James L. Tsakalos
+#' @author James L. Tsakalos and Martin R. Smith
 #' @seealso Downloading from CHELSA [`chelsa()`] or a more convenient
 #' function for downloading other climate and elevation data [`ce_download()`].
 #' @references{ Fick, S.E. & Hijmans, R.J. (2017). WorldClim 2: new 1km

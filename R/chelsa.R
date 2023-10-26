@@ -20,7 +20,7 @@
 #' The tmean folder contains the average monthly temperature. The unit of
 #' measure for temperature is in &deg;C.
 #'
-#' @author James L. Tsakalos
+#' @author James L. Tsakalos and Martin R. Smith
 #' @seealso Downloading from WorldClim V2.1 [`worldclim()`] or a more convenient
 #' function for other climate and elevation data [`ce_download()`].
 #' @references

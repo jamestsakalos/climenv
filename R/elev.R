@@ -113,7 +113,7 @@
 #' corresponding to 611.5 m ground resolution at 60&#176; latitude 864.8 m at
 #' 45&#176; and 1223 m at 0&#176;.
 #'
-#' @author James L. Tsakalos
+#' @author James L. Tsakalos and Martin R. Smith
 #' @seealso A more convenient function for other climate and elevation data
 #' [`ce_download()`]. See [sf::st_polygon] to make polygons and [sf::st_as_sf]
 #' to make point objects.

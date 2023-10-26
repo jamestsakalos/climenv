@@ -16,7 +16,7 @@
 #' See documentation from [`chelsa()`], [`worldclim()`] and
 #' [`elev()`].
 #'
-#' @author James L. Tsakalos
+#' @author James L. Tsakalos and Martin R. Smith
 #' @seealso The underlying functions [`chelsa()`], [`worldclim()`] and
 #' [`elev()`].
 #'

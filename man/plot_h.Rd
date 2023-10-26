@@ -58,5 +58,5 @@ Comprehensive R Archive Network. \doi{10.5281/zenodo.1068996}
 Download climate data: \code{\link[=ce_download]{ce_download()}}
 }
 \author{
-James L. Tsakalos
+James L. Tsakalos and Martin R. Smith
 }

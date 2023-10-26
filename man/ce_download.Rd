@@ -66,5 +66,5 @@ The underlying functions \code{\link[=chelsa]{chelsa()}}, \code{\link[=worldclim
 \code{\link[=elev]{elev()}}.
 }
 \author{
-James L. Tsakalos
+James L. Tsakalos and Martin R. Smith
 }

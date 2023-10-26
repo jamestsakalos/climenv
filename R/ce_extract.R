@@ -354,7 +354,7 @@
 #' or point object. Values returned are either degrees Celsius for (tmax, tavg,
 #' tmin) or mm (prec).
 #'
-#' @author James L. Tsakalos
+#' @author James L. Tsakalos and Martin R. Smith
 #' @seealso The downloading ([`ce_download()`]), and the plotting
 #' ([`plot_h()`] & [`plot_wl()`]) functions.
 #'

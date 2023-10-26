@@ -97,5 +97,5 @@ A more convenient function for other climate and elevation data
 to make point objects.
 }
 \author{
-James L. Tsakalos
+James L. Tsakalos and Martin R. Smith
 }

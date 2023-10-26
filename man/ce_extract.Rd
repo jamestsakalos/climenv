@@ -95,5 +95,5 @@ The downloading (\code{\link[=ce_download]{ce_download()}}), and the plotting
 (\code{\link[=plot_h]{plot_h()}} & \code{\link[=plot_wl]{plot_wl()}}) functions.
 }
 \author{
-James L. Tsakalos
+James L. Tsakalos and Martin R. Smith
 }

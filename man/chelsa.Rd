@@ -68,5 +68,5 @@ Downloading from WorldClim V2.1 \code{\link[=worldclim]{worldclim()}} or a more 
 function for other climate and elevation data \code{\link[=ce_download]{ce_download()}}.
 }
 \author{
-James L. Tsakalos
+James L. Tsakalos and Martin R. Smith
 }

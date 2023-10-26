@@ -13,7 +13,7 @@
 #' Returns a base R family of plot. This function uses the \pkg{Ternary}
 #' package to create a Holdridge simplex plot.
 #'
-#' @author James L. Tsakalos
+#' @author James L. Tsakalos and Martin R. Smith
 #' @seealso Download climate data: [`ce_download()`]
 #' @references{ Holdridge (1947), Determination of world plant formations from
 #' simple climatic data. *Science*, 105:367&ndash;368.

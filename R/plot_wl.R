@@ -13,7 +13,7 @@
 #' Returns a base R family of plot. This function uses the \pkg{climaemet}
 #' package to create the Walter and Lieth (1960) climatic diagram.
 #'
-#' @author James L. Tsakalos
+#' @author James L. Tsakalos and Martin R. Smith
 #' @seealso Download climate data: [`ce_download()`]
 #' @references{ Pizarro, M, Hernang&oacute;mez, D. &
 #' Fern&aacute;ndez-Avil&eacute;s G. (2023). climaemet: Climate AEMET Tools.
