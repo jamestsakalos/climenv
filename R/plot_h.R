@@ -57,10 +57,12 @@ plot_h <- function(
 
   # Holdridge climate diagram
 
-  # I want to export as a ggplot object for consistent output classes.
+  # Store original par options
+  oldpar <- graphics::par()
+  on.exit(graphics::par(oldpar)) # Restore initial parameters
+
   # Suppress plot margins
-  opar1 <- graphics::par(mar = c(0, 0, 0, 0))
-  on.exit(graphics::par(opar1)) # Restore initial parameters
+  graphics::par(mar = c(0, 0, 0, 0))
 
   # Create blank Holdridge plot
   Ternary::HoldridgePlot(hex.labels = Ternary::holdridgeLifeZonesUp)

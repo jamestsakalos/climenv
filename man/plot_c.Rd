@@ -67,6 +67,7 @@ been extracted for a given \code{location}. It accepts the data formatted
 from the \code{ce_extract} function.
 }
 \examples{
+{
 # Step 1. Import the Italian Biome polygon data
 # Step 2. Run the download function
 # Step 3. Run the extract function
@@ -82,14 +83,16 @@ data("it_data", package = "climenv")
 # region.
 
 # Set up plotting parameters
-opar <- par(mar = c(1.5, 2.2, 1.5, 14) + 0.01)
+oldpar <- par()
+on.exit(par(oldpar))
+par(mar = c(1.5, 2.2, 1.5, 14) + 0.01)
 
 plot_c(
   it_data, geo_id = "MED",
   l_tcols = c(14.5, 17, 18.5, 19.5, 21)
 )
-par(opar)
 # This output works if you export to a three column width sized image.
+}
 
 }
 \references{
