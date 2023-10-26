@@ -24,8 +24,7 @@
 #'
 #' }
 #' @encoding UTF-8
-#' @examples{
-#'
+#' @examples
 #' # Step 1. Import the Italian Biome polygon data
 #' # Step 2. Run the download function
 #' # Step 3. Run the extract function
@@ -37,8 +36,6 @@
 #' # Step 4. Visualise the climatic envelope using a Walter-Lieth diagram
 #'
 #' plot_wl(data = it_data, geo_id = "NEM")
-#'
-#' }
 #'
 #' @importFrom climaemet ggclimat_walter_lieth
 #' @export

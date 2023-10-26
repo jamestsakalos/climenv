@@ -61,7 +61,7 @@
 #' Fischer Verlag, Jena.
 #'
 #' @encoding UTF-8
-#' @examples{
+#' @examples
 #' # Step 1. Import the Italian Biome polygon data
 #' # Step 2. Run the download function
 #' # Step 3. Run the extract function
@@ -77,16 +77,15 @@
 #' # region.
 #'
 #' # Set up plotting parameters
-#' oldpar <- par()
-#' on.exit(par(oldpar))
-#' par(mar = c(1.5, 2.2, 1.5, 14) + 0.01)
+#' oldpar <- par(mar = c(1.5, 2.2, 1.5, 14) + 0.01)
 #'
 #' plot_c(
 #'   it_data, geo_id = "MED",
 #'   l_tcols = c(14.5, 17, 18.5, 19.5, 21)
 #' )
+#'
+#' on.exit(par(oldpar))
 #' # This output works if you export to a three column width sized image.
-#' }
 #'
 #' @importFrom dismo biovars
 #' @importFrom plyr round_any
@@ -139,10 +138,6 @@ plot_c <- function(data,
       max(data$tmax_m[geo_id, ] * stretch_temp) * 1.1
     )
   )
-
-  # Lets store original par so we do not change user settings
-  oldpar <- par()
-  on.exit(par(oldpar))
 
   # Precipitation bars (plot) ####
   plot(c(1:12), data$prec_m[geo_id, ], type = "h", lwd = lwd_prec,

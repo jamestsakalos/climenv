@@ -31,8 +31,7 @@
 #'
 #' }
 #' @encoding UTF-8
-#' @examples{
-#'
+#' @examples
 #' # Step 1. Import the Italian Biome polygon data
 #' # Step 2. Run the download function
 #' # Step 3. Run the extract function
@@ -45,8 +44,6 @@
 #'
 #' plot_h(data = it_data, geo_id = "MED")
 #'
-#' }
-#'
 #' @importFrom graphics par
 #' @importFrom Ternary HoldridgePlot HoldridgeBelts HoldridgePoints
 #' @export
@@ -57,12 +54,9 @@ plot_h <- function(
 
   # Holdridge climate diagram
 
-  # Store original par options
-  oldpar <- graphics::par()
-  on.exit(graphics::par(oldpar)) # Restore initial parameters
-
   # Suppress plot margins
-  graphics::par(mar = c(0, 0, 0, 0))
+  oldpar <- graphics::par(mar = c(0, 0, 0, 0))
+  on.exit(graphics::par(oldpar)) # Restore initial parameters
 
   # Create blank Holdridge plot
   Ternary::HoldridgePlot(hex.labels = Ternary::holdridgeLifeZonesUp)
