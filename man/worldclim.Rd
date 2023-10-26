@@ -49,9 +49,13 @@ regents <- sf::st_polygon(
   )
 )
 
+# Create temporary file
+temp_path <- tempfile()
+on.exit(unlink(file.path(temp_path)), add = TRUE)
+
 # Download the WorldClim data
 worldclim(
-  output_dir = "...Desktop/worldclim",
+  output_dir = temp_path,
   location = "regents"
 )
 

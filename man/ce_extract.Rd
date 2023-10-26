@@ -47,8 +47,6 @@ Extracts climate and/or elevation data for generated over an area or at fixed
 point/s.
 }
 \examples{
-{
-
 # Create some random data
 
 # Create temporary file
@@ -70,18 +68,14 @@ r <- terra::rast(ncol = 10, nrow = 10)
 terra::values(r) <- 1:100
 terra::writeRaster(r, paste0(temp_path, "/elev/srtm.tif"))
 
-#* Prec ####
-x <- c(5, 10, 15, 20, 25, 34.40666, 25, 20, 15, 10, 5, 0) * 8
-temp2 <- paste0("prec_", sprintf("\%02d", 1:12), ".tif")
-for (i in seq_along(temp2)) {
-terra::values(r) <- c(rep(x[i], 50), rep(x[i] + 1, 50))
-terra::writeRaster(r, paste0(temp_path, "/prec/", temp2[i]))
+# create and save precipitation and temperature rasters ####
+x <- c(5, 10, 15, 20, 25, 34, 25, 20, 15, 10, 5, 0) * 8
+for (i in sprintf("\%02d", 1:12)) {
+terra::writeRaster(r, paste0(temp_path, paste0("/prec/prec_", i, ".tif")))
+terra::writeRaster(r, paste0(temp_path, paste0("/tmax/tmax_", i, ".tif")))
+terra::writeRaster(r, paste0(temp_path, paste0("/tmin/tmin_", i, ".tif")))
+terra::writeRaster(r, paste0(temp_path, paste0("/tavg/tavg_", i, ".tif")))
 }
-
-# make the same for tmax, tmin and tavg
-terra::writeRaster(r, paste0(temp_path, "/tmax/", temp2[i]))
-terra::writeRaster(r, paste0(temp_path, "/tmin/", temp2[i]))
-terra::writeRaster(r, paste0(temp_path, "/tavg/", temp2[i]))
 
 # Create a polygon file from the raster
 terra::values(r) <- 1:100
@@ -94,7 +88,6 @@ ce_extract(
   location = pol_py,
   location_g = "grp"
 )
-}
 
 }
 \seealso{
