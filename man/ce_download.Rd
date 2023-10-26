@@ -43,16 +43,20 @@ See documentation from \code{\link[=chelsa]{chelsa()}}, \code{\link[=worldclim]{
 \code{chelsa()} and \code{elev()} functions to streamline downloading.
 }
 \examples{
-\dontrun{
+\donttest{
 # Download time will depend on the size of the area you wish to access
 # climate data for and your internet connection speed.
 
 # Import the Italian Biome data set
 data("it_py", package = "climenv")
 
+# Create temporary output directory
+temp_path <- tempdir()
+on.exit(unlink(file.path(temp_path)), add = TRUE)
+
 # Run the download function
 ce_download(
-  output_dir = "../WorkingDirectory",
+  output_dir = temp_path,
   location = it_py
 )
 }

@@ -42,11 +42,16 @@ corresponding to 611.5 m ground resolution at 60° latitude 864.8 m at
 latitudes between -60 and 60 or Mapzen's synthesis digital elevation product.
 }
 \examples{
-\dontrun{
+\donttest{
 # We could do this using Italy's Biome data
 data("italy_py", package = "climenv")
+
+# Create temporary file
+temp_path <- tempfile()
+on.exit(unlink(file.path(temp_path)), add = TRUE)
+
 # elevation will be saved in the output_dir (i.e. output directory)
-   elev(output_dir = "...Desktop/elev", location = italy_py)
+   elev(output_dir = temp_path, location = italy_py)
 }
 
 # As a smaller example, we can make a polygon covering an ocean island.
@@ -67,7 +72,7 @@ class(location) # "sfc_POLYGON" "sfc"
 sf::st_crs(location) = "epsg:4326"
 
 # We are now ready to call elev()
-# elev(location = location, output_dir = <CHOSEN DIRECTORY>)
+# elev(location = location, output_dir = temp_path)
 
 }
 \references{

@@ -34,20 +34,25 @@
 #' earth’s land surface areas. *EnviDat*. \doi{10.16904/envidat.228.v2.1}
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'
 #' # Download time will depend on the size of the area you wish to access
 #' # climate data for and your internet connection speed.
 #'
+#' # Create temporary file
+#' temp_path <- tempfile()
+#' on.exit(unlink(file.path(temp_path)), add = TRUE)
+#'
 #' # Download the WorldClim data
 #' chelsa(
-#'   output_dir = "...Desktop/chelsa"
+#'   output_dir = temp_path
 #' )
 #'
 #' # Note that unlike worldclim() we do not specify the location argument
 #' # because it is not yet possible to extract smaller tile sections
 #'
 #' }
+#'
 #' @export
 chelsa <- function(output_dir = NULL, var = "all",
                    quiet = FALSE, ...) {
