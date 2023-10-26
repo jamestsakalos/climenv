@@ -60,6 +60,10 @@ chelsa <- function(output_dir = NULL, var = "all",
   if (is.null(output_dir))
     stop("Set output directory")
 
+  # Store original options
+  old <- options()
+  on.exit(options(old))
+
   # If you're sitting on a train with bad wifi, maybe we need to have a
   # longer default timeout
   options(timeout = 1000)
