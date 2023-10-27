@@ -58,10 +58,8 @@ We confirm the description of all acronyms in the package description.
 > results in the "# Not run:" as a warning for the user. If they are not 
 > executable in ~5 seconds unwrap them, or replace with `\donttest{}`.
 
-This is a conundrum because our package relies on large climate and elevation
-data sources. We have checked by switching from `\dontrun{}` to `\donttest{}`,
-however the simple examples all exceeded CRAN's 5-second limit. This suggestion 
-refers to: ce_download(), chelsa(), elev() and worldclim().
+We have switched from `\dontrun{}` to `\donttest{}`. This suggestion refers to:
+ce_download(), chelsa(), elev() and worldclim().
 
 > Check that the user's options, par or working directory are not changed
 
