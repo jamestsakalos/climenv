@@ -35,7 +35,7 @@ and precipitation at a resolution of 0.5 minutes of a degree.
 This function uses the \pkg{geodata} to download the worldclim tiles.
 }
 \examples{
-\dontrun{
+\donttest{
 # Download time will depend on the size of the area you wish to access
 # climate data for and your internet connection speed.
 

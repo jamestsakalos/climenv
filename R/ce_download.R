@@ -21,7 +21,7 @@
 #' [`elev()`].
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Download time will depend on the size of the area you wish to access
 #' # climate data for and your internet connection speed.
 #'

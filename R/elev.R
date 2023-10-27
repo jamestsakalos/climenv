@@ -134,7 +134,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # We could do this using Italy's Biome data
 #' data("italy_py", package = "climenv")
 #'

@@ -43,7 +43,7 @@ See documentation from \code{\link[=chelsa]{chelsa()}}, \code{\link[=worldclim]{
 \code{chelsa()} and \code{elev()} functions to streamline downloading.
 }
 \examples{
-\dontrun{
+\donttest{
 # Download time will depend on the size of the area you wish to access
 # climate data for and your internet connection speed.
 

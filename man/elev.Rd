@@ -42,7 +42,7 @@ corresponding to 611.5 m ground resolution at 60° latitude 864.8 m at
 latitudes between -60 and 60 or Mapzen's synthesis digital elevation product.
 }
 \examples{
-\dontrun{
+\donttest{
 # We could do this using Italy's Biome data
 data("italy_py", package = "climenv")
 
