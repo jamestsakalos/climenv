@@ -47,8 +47,7 @@ There are no downstream dependencies.
 > Add references describing the methods in the package to the DESCRIPTION file
 > in the description field.
 
-This information can be accessed `citation(climenv)`. We plan to add the 
-reference once our DOI is confirmed, else we might occur other errors.
+We have included new references describing the methods in the DESCRIPTION.
 
 > Explain all acronyms in the description text. e.g., SRTM, CHELSA.
 
@@ -58,8 +57,7 @@ We confirm the description of all acronyms in the package description.
 > results in the "# Not run:" as a warning for the user. If they are not 
 > executable in ~5 seconds unwrap them, or replace with `\donttest{}`.
 
-We have switched from `\dontrun{}` to `\donttest{}`. This suggestion refers to:
-ce_download(), chelsa(), elev() and worldclim().
+We have switched from `\dontrun{}` to `\donttest{}`.
 
 > Check that the user's options, par or working directory are not changed
 
