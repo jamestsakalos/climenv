@@ -135,15 +135,20 @@
 #'
 #' @examples
 #' \donttest{
-#' # We could do this using Italy's Biome data
-#' data("italy_py", package = "climenv")
+#' # Make a small polygon
+#' polygon_py_sm <- sf::st_polygon(
+#' list(cbind(long = c(156, 156, 155, 156),
+#' lat = c(-60, -59, -60, -60)))
+#' )
+#' polygon_py_sm <- sf::st_geometry(polygon_py_sm)
+#' sf::st_crs(polygon_py_sm) <- "epsg:4326"
 #'
 #' # Create temporary file
 #' temp_path <- tempfile()
 #' on.exit(unlink(file.path(temp_path)), add = TRUE)
 #'
 #' # elevation will be saved in the output_dir (i.e. output directory)
-#'    elev(output_dir = temp_path, location = italy_py)
+#'    elev(output_dir = temp_path, location = polygon_py_sm)
 #' }
 #'
 #' # As a smaller example, we can make a polygon covering an ocean island.
