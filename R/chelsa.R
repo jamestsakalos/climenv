@@ -60,13 +60,10 @@ chelsa <- function(output_dir = NULL, var = "all",
   if (is.null(output_dir))
     stop("Set output directory")
 
-  # Store original options
-  old <- options()
-  on.exit(options(old))
-
   # If you're sitting on a train with bad wifi, maybe we need to have a
   # longer default timeout
-  options(timeout = 1000)
+  old <- options(timeout = 1000)
+  on.exit(options(old))
 
   # I want to use these as a template, to apply correct names later.
   var_options <- c("prec", "tmax", "tmin", "tavg")
