@@ -121,25 +121,30 @@ function for other climate and elevation data <code><a href="ce_download.html">c
     </div>
     <div id="author">
     <h2>Author</h2>
-    <p>James L. Tsakalos</p>
+    <p>James L. Tsakalos and Martin R. Smith</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Download time will depend on the size of the area you wish to access</span></span></span>
 <span class="r-in"><span><span class="co"># climate data for and your internet connection speed.</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Create temporary file</span></span></span>
+<span class="r-in"><span><span class="va">temp_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/on.exit.html" class="external-link">on.exit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_path</span><span class="op">)</span><span class="op">)</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Download the WorldClim data</span></span></span>
 <span class="r-in"><span><span class="fu">chelsa</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  output_dir <span class="op">=</span> <span class="st">"...Desktop/chelsa"</span></span></span>
+<span class="r-in"><span>  output_dir <span class="op">=</span> <span class="va">temp_path</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Note that unlike worldclim() we do not specify the location argument</span></span></span>
 <span class="r-in"><span><span class="co"># because it is not yet possible to extract smaller tile sections</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
