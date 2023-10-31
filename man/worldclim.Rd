@@ -39,7 +39,7 @@ This function uses the \pkg{geodata} to download the worldclim tiles.
 # Download time will depend on the size of the area you wish to access
 # climate data for and your internet connection speed.
 
-# Lets make a polygon file
+# Make a polygon file
 regents <- sf::st_polygon(
   list(
     cbind(
@@ -56,7 +56,7 @@ on.exit(unlink(file.path(temp_path)), add = TRUE)
 # Download the WorldClim data
 worldclim(
   output_dir = temp_path,
-  location = "regents"
+  location = regents
 )
 
 }

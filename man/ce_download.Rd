@@ -47,7 +47,7 @@ See documentation from \code{\link[=chelsa]{chelsa()}}, \code{\link[=worldclim]{
 # Download time will depend on the size of the area you wish to access
 # climate data for and your internet connection speed.
 
-# Lets make a polygon file
+# Make a polygon file
 regents <- sf::st_polygon(
   list(
     cbind(

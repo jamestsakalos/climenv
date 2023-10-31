@@ -161,14 +161,14 @@
 #'    )
 #' )
 #'
-#' # We need to make sure that the polygon the correct class
+#' # Make sure that the polygon the correct class
 #' location <- sf::st_geometry(location)
 #' class(location) # "sfc_POLYGON" "sfc"
 #'
 #' # Set the coordinate reference system
 #' sf::st_crs(location) = "epsg:4326"
 #'
-#' # We are now ready to call elev()
+#' # Call elev()
 #' # elev(location = location, output_dir = temp_path)
 #'
 #' @importFrom elevatr get_elev_raster

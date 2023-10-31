@@ -60,7 +60,7 @@ dir.create(file.path(temp_path, "/tmax"), recursive = TRUE)
 dir.create(file.path(temp_path, "/tavg"), recursive = TRUE)
 dir.create(file.path(temp_path, "/tmin"), recursive = TRUE)
 
-# Create a empty raster serving as a base
+# Create an empty raster
 r <- terra::rast(ncol = 10, nrow = 10)
 
 # Modify the base Raster
