@@ -113,7 +113,7 @@
 #' corresponding to 611.5 m ground resolution at 60&#176; latitude 864.8 m at
 #' 45&#176; and 1223 m at 0&#176;.
 #'
-#' @author James L. Tsakalos
+#' @author James L. Tsakalos and Martin R. Smith
 #' @seealso A more convenient function for other climate and elevation data
 #' [`ce_download()`]. See [sf::st_polygon] to make polygons and [sf::st_as_sf]
 #' to make point objects.
@@ -134,11 +134,21 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
-#' # We could do this using Italy's Biome data
-#' data("italy_py", package = "climenv")
+#' \donttest{
+#' # Make a small polygon
+#' polygon_py_sm <- sf::st_polygon(
+#' list(cbind(long = c(156, 156, 155, 156),
+#' lat = c(-60, -59, -60, -60)))
+#' )
+#' polygon_py_sm <- sf::st_geometry(polygon_py_sm)
+#' sf::st_crs(polygon_py_sm) <- "epsg:4326"
+#'
+#' # Create temporary file
+#' temp_path <- tempfile()
+#' on.exit(unlink(file.path(temp_path)), add = TRUE)
+#'
 #' # elevation will be saved in the output_dir (i.e. output directory)
-#'    elev(output_dir = "...Desktop/elev", location = italy_py)
+#'    elev(output_dir = temp_path, location = polygon_py_sm)
 #' }
 #'
 #' # As a smaller example, we can make a polygon covering an ocean island.
@@ -151,15 +161,15 @@
 #'    )
 #' )
 #'
-#' # We need to make sure that the polygon the correct class
+#' # Make sure that the polygon the correct class
 #' location <- sf::st_geometry(location)
 #' class(location) # "sfc_POLYGON" "sfc"
 #'
 #' # Set the coordinate reference system
 #' sf::st_crs(location) = "epsg:4326"
 #'
-#' # We are now ready to call elev()
-#' # elev(location = location, output_dir = <CHOSEN DIRECTORY>)
+#' # Call elev()
+#' # elev(location = location, output_dir = temp_path)
 #'
 #' @importFrom elevatr get_elev_raster
 #' @importFrom methods as

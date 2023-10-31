@@ -33,20 +33,25 @@ earth’s land surface areas) V2.1 data of temperature and precipitation at a
 resolution of 30 arc sections.
 }
 \examples{
-\dontrun{
+\donttest{
 
 # Download time will depend on the size of the area you wish to access
 # climate data for and your internet connection speed.
 
+# Create temporary file
+temp_path <- tempfile()
+on.exit(unlink(file.path(temp_path)), add = TRUE)
+
 # Download the WorldClim data
 chelsa(
-  output_dir = "...Desktop/chelsa"
+  output_dir = temp_path
 )
 
 # Note that unlike worldclim() we do not specify the location argument
 # because it is not yet possible to extract smaller tile sections
 
 }
+
 }
 \references{
 Karger,  D.N., Conrad, O., Bőhner, J., Kawohl, T.,
@@ -63,5 +68,5 @@ Downloading from WorldClim V2.1 \code{\link[=worldclim]{worldclim()}} or a more 
 function for other climate and elevation data \code{\link[=ce_download]{ce_download()}}.
 }
 \author{
-James L. Tsakalos
+James L. Tsakalos and Martin R. Smith
 }

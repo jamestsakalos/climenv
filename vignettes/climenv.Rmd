@@ -239,6 +239,7 @@ plot_wl(data = data_py, "0")
 ```
 ```{r custom-climate-diagram, fig.height = 4, fig.width = 7, fig.align = "center", fig.cap="Fig 3. Custom diagram showing the climatic envelope of the training data. The abbreviations used are as follow: biotemperture (BioT), isothermality (ISO), mean annual temperature (MAT), temperature seasonality (TS), number of dry months with < 50 mm rainfall during the month (Dry mo), mean annual precipitation (MAP), potential evapotranspiration (PET), precipitation seasonality (PS), seasonal rainfall percentage in Summer (S), Autumn (A), Winter (W), Vernal (V), elevation (Elv) and latitude (Lat)."}
 # Make the custom climate diagram
-par(mar = c(1.5, 2.8, 2, 17))
+oldpar <- par(mar = c(1.5, 2.8, 2, 17))
+on.exit(par(oldpar))
 plot_c(data = data_py, "0")
 ```

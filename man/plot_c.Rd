@@ -82,13 +82,14 @@ data("it_data", package = "climenv")
 # region.
 
 # Set up plotting parameters
-opar <- par(mar = c(1.5, 2.2, 1.5, 14) + 0.01)
+oldpar <- par(mar = c(1.5, 2.2, 1.5, 14) + 0.01)
+on.exit(par(oldpar))
 
 plot_c(
   it_data, geo_id = "MED",
   l_tcols = c(14.5, 17, 18.5, 19.5, 21)
 )
-par(opar)
+
 # This output works if you export to a three column width sized image.
 
 }
@@ -104,5 +105,5 @@ Fischer Verlag, Jena.
 Download climate data: \code{\link[=ce_download]{ce_download()}}
 }
 \author{
-James L. Tsakalos
+James L. Tsakalos and Martin R. Smith
 }

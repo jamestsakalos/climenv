@@ -35,11 +35,11 @@ and precipitation at a resolution of 0.5 minutes of a degree.
 This function uses the \pkg{geodata} to download the worldclim tiles.
 }
 \examples{
-\dontrun{
+\donttest{
 # Download time will depend on the size of the area you wish to access
 # climate data for and your internet connection speed.
 
-# Lets make a polygon file
+# Make a polygon file
 regents <- sf::st_polygon(
   list(
     cbind(
@@ -49,10 +49,14 @@ regents <- sf::st_polygon(
   )
 )
 
+# Create temporary file
+temp_path <- tempfile()
+on.exit(unlink(file.path(temp_path)), add = TRUE)
+
 # Download the WorldClim data
 worldclim(
-  output_dir = "...Desktop/worldclim",
-  location = "regents"
+  output_dir = temp_path,
+  location = regents
 )
 
 }
@@ -69,5 +73,5 @@ Downloading from CHELSA \code{\link[=chelsa]{chelsa()}} or a more convenient
 function for downloading other climate and elevation data \code{\link[=ce_download]{ce_download()}}.
 }
 \author{
-James L. Tsakalos
+James L. Tsakalos and Martin R. Smith
 }

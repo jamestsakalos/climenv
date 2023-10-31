@@ -169,9 +169,10 @@ count of works by Holdridge, Walter-Lieth, and Hijmans.
 
 ```{r custom-climate-diagram, fig.show = 'hold', fig.height = 4, fig.width = 7, fig.align = "center", fig.cap = "**Fig 5**. Custom diagram showing the climatic envelope of the Italian Mediterranean (MED) and Nemoral (NEM) Biomes. The abbreviations used are as follow: biotemperture (BioT), isothermality (ISO), mean annual temperature (MAT), temperature seasonality (TS), number of dry months with < 50 mm rainfall during the month (Dry mo), mean annual precipitation (MAP), potential evapotranspiration (PET), precipitation seasonality (PS), seasonal rainfall percentage in Summer (S), Autumn (A), Winter (W), Vernal (V), elevation (Elv) and latitude (Lat)."}
 # Make the custom climate diagram
-par(mar = c(1.5, 2.8, 2, 17))
+oldpar <- par(mar = c(1.5, 2.8, 2, 17))
 plot_c(data = it_data, "MED")
 plot_c(data = it_data, "NEM")
+on.exit(par(oldpar))
 ```
 
 ### Notes on selecting appropriate climatic variables
@@ -340,8 +341,9 @@ importance <- importance(model)
 print(importance)
 
 # Plot variable importance
-par(mar = c(4, 3, 0, 1) + 0.1)
+oldpar <- par(mar = c(4, 3, 0, 1) + 0.1)
 varImpPlot(model, main = "")
+on.exit(par(oldpar))
 ```
 
 ### References

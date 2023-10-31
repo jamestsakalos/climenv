@@ -50,7 +50,7 @@
 #' to calculate isothermality (ISO), temperature seasonality (TS) and
 #' precipitation seasonality (PS).
 #'
-#' @author James L. Tsakalos
+#' @author James L. Tsakalos and Martin R. Smith
 #' @seealso Download climate data: [`ce_download()`]
 #' @references
 #' Pizarro, M, Hernang&oacute;mez, D. &amp;
@@ -77,13 +77,14 @@
 #' # region.
 #'
 #' # Set up plotting parameters
-#' opar <- par(mar = c(1.5, 2.2, 1.5, 14) + 0.01)
+#' oldpar <- par(mar = c(1.5, 2.2, 1.5, 14) + 0.01)
+#' on.exit(par(oldpar))
 #'
 #' plot_c(
 #'   it_data, geo_id = "MED",
 #'   l_tcols = c(14.5, 17, 18.5, 19.5, 21)
 #' )
-#' par(opar)
+#'
 #' # This output works if you export to a three column width sized image.
 #'
 #' @importFrom dismo biovars

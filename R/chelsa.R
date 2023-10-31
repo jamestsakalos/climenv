@@ -20,7 +20,7 @@
 #' The tmean folder contains the average monthly temperature. The unit of
 #' measure for temperature is in &deg;C.
 #'
-#' @author James L. Tsakalos
+#' @author James L. Tsakalos and Martin R. Smith
 #' @seealso Downloading from WorldClim V2.1 [`worldclim()`] or a more convenient
 #' function for other climate and elevation data [`ce_download()`].
 #' @references
@@ -34,20 +34,25 @@
 #' earth’s land surface areas. *EnviDat*. \doi{10.16904/envidat.228.v2.1}
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'
 #' # Download time will depend on the size of the area you wish to access
 #' # climate data for and your internet connection speed.
 #'
+#' # Create temporary file
+#' temp_path <- tempfile()
+#' on.exit(unlink(file.path(temp_path)), add = TRUE)
+#'
 #' # Download the WorldClim data
 #' chelsa(
-#'   output_dir = "...Desktop/chelsa"
+#'   output_dir = temp_path
 #' )
 #'
 #' # Note that unlike worldclim() we do not specify the location argument
 #' # because it is not yet possible to extract smaller tile sections
 #'
 #' }
+#'
 #' @export
 chelsa <- function(output_dir = NULL, var = "all",
                    quiet = FALSE, ...) {
@@ -57,7 +62,8 @@ chelsa <- function(output_dir = NULL, var = "all",
 
   # If you're sitting on a train with bad wifi, maybe we need to have a
   # longer default timeout
-  options(timeout = 1000)
+  old <- options(timeout = 1000)
+  on.exit(options(old))
 
   # I want to use these as a template, to apply correct names later.
   var_options <- c("prec", "tmax", "tmin", "tavg")

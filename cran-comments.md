@@ -25,14 +25,13 @@ There were two NOTEs:
 This is a new submission.
  
 > Possibly misspelled words in DESCRIPTION:
->  CHELSA (20:56)
->  Holdridge (25:21, 27:22)
->  Lieth (24:65)
->  SRTM (20:77)
->  WorldClim (20:43)
->  climatological (18:43)
->  covariates (22:61)
->  geospatial (21:49)
+>  CHELSA (19:33)
+>  Climatologies (18:40)
+>  geospatial (21:27)
+>  Holdridge (25:29, 28:64)
+>  Lieth (23:41)
+>  SRTM (20:63)
+>  WorldClim (18:26)
 
 We confirm the spelling of these words, which we have listed in inst/WORDLIST.
 
@@ -40,3 +39,25 @@ We confirm the spelling of these words, which we have listed in inst/WORDLIST.
 ## Downstream dependencies
 
 There are no downstream dependencies.
+
+
+## Responses to remarks from CRAN submission
+
+> Add references describing the methods in the package to the DESCRIPTION file
+> in the description field.
+
+We have included new references describing the methods in the DESCRIPTION.
+
+> Explain all acronyms in the description text. e.g., SRTM, CHELSA.
+
+We confirm the description of all acronyms in the package description.
+
+> `\dontrun{}` should only be used if the example really can not be executed and
+> results in the "# Not run:" as a warning for the user. If they are not 
+> executable in ~5 seconds unwrap them, or replace with `\donttest{}`.
+
+We have switched from `\dontrun{}` to `\donttest{}`.
+
+> Check that the user's options, par or working directory are not changed
+
+We have restored user options to default settings throughout the package.

@@ -354,24 +354,53 @@
 #' or point object. Values returned are either degrees Celsius for (tmax, tavg,
 #' tmin) or mm (prec).
 #'
-#' @author James L. Tsakalos
+#' @author James L. Tsakalos and Martin R. Smith
 #' @seealso The downloading ([`ce_download()`]), and the plotting
 #' ([`plot_h()`] & [`plot_wl()`]) functions.
 #'
 #' @examples
-#' \dontrun{
+#' # Create some random data
 #'
-#' # Extraction time will depend on the size of the polygon or point file.
-#' # Import the Italian Biomes data
-#' data("italy_py", package = "climenv")
+#' # Create temporary file
+#' temp_path <- tempfile()
+#' on.exit(unlink(file.path(temp_path)), add = TRUE)
+#'
+#' # Create the required subdirectories
+#' dir.create(file.path(temp_path, "/elev"), recursive = TRUE)
+#' dir.create(file.path(temp_path, "/prec"), recursive = TRUE)
+#' dir.create(file.path(temp_path, "/tmax"), recursive = TRUE)
+#' dir.create(file.path(temp_path, "/tavg"), recursive = TRUE)
+#' dir.create(file.path(temp_path, "/tmin"), recursive = TRUE)
+#'
+#' # Create an empty raster
+#' r <- terra::rast(ncol = 10, nrow = 10)
+#'
+#' # Modify the base Raster
+#' #* Elevation 100m ####
+#' terra::values(r) <- 1:100
+#' terra::writeRaster(r, paste0(temp_path, "/elev/srtm.tif"))
+#'
+#'# create and save precipitation and temperature rasters ####
+#'x <- c(5, 10, 15, 20, 25, 34, 25, 20, 15, 10, 5, 0) * 8
+#'for (i in sprintf("%02d", 1:12)) {
+#'terra::writeRaster(r, paste0(temp_path, paste0("/prec/prec_", i, ".tif")))
+#'terra::writeRaster(r, paste0(temp_path, paste0("/tmax/tmax_", i, ".tif")))
+#'terra::writeRaster(r, paste0(temp_path, paste0("/tmin/tmin_", i, ".tif")))
+#'terra::writeRaster(r, paste0(temp_path, paste0("/tavg/tavg_", i, ".tif")))
+#'}
+#'
+#' # Create a polygon file from the raster
+#' terra::values(r) <- 1:100
+#' pol_py <- sf::st_as_sf(terra::as.polygons(r))
+#' pol_py$grp <- c(rep("low", 25), rep("high", 75))
+#'
 #' # Run the download function
 #' ce_extract(
-#'   path = "../WorkingDirectory",
-#'   location = italy_py,
-#'   location_g = "GB"
+#'   path = temp_path,
+#'   location = pol_py,
+#'   location_g = "grp"
 #' )
 #'
-#' }
 #' @importFrom exactextractr exact_extract
 #' @importFrom glue glue
 #' @importFrom sp SpatialPointsDataFrame SpatialPolygonsDataFrame

@@ -43,17 +43,28 @@ See documentation from \code{\link[=chelsa]{chelsa()}}, \code{\link[=worldclim]{
 \code{chelsa()} and \code{elev()} functions to streamline downloading.
 }
 \examples{
-\dontrun{
+\donttest{
 # Download time will depend on the size of the area you wish to access
 # climate data for and your internet connection speed.
 
-# Import the Italian Biome data set
-data("it_py", package = "climenv")
+# Make a polygon file
+regents <- sf::st_polygon(
+  list(
+    cbind(
+      "lon" = c(51.537, 51.525, 51.523, 51.530, 51.534, 51.537),
+      "lat" = c(-0.150, -0.145, -0.156, -0.167, -0.163, -0.150)
+    )
+  )
+)
+
+# Create temporary output directory
+temp_path <- tempdir()
+on.exit(unlink(file.path(temp_path)), add = TRUE)
 
 # Run the download function
 ce_download(
-  output_dir = "../WorkingDirectory",
-  location = it_py
+  output_dir = temp_path,
+  location = regents
 )
 }
 }
@@ -62,5 +73,5 @@ The underlying functions \code{\link[=chelsa]{chelsa()}}, \code{\link[=worldclim
 \code{\link[=elev]{elev()}}.
 }
 \author{
-James L. Tsakalos
+James L. Tsakalos and Martin R. Smith
 }

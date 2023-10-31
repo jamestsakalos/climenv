@@ -74,7 +74,7 @@
 #' temperature. The tmean folder contains the average monthly temperature.
 #' Temperature values are reported in &deg;C.
 #'
-#' @author James L. Tsakalos
+#' @author James L. Tsakalos and Martin R. Smith
 #' @seealso Downloading from CHELSA [`chelsa()`] or a more convenient
 #' function for downloading other climate and elevation data [`ce_download()`].
 #' @references{ Fick, S.E. & Hijmans, R.J. (2017). WorldClim 2: new 1km
@@ -83,11 +83,11 @@
 #'
 #' }
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Download time will depend on the size of the area you wish to access
 #' # climate data for and your internet connection speed.
 #'
-#' # Lets make a polygon file
+#' # Make a polygon file
 #' regents <- sf::st_polygon(
 #'   list(
 #'     cbind(
@@ -97,10 +97,14 @@
 #'   )
 #' )
 #'
+#' # Create temporary file
+#' temp_path <- tempfile()
+#' on.exit(unlink(file.path(temp_path)), add = TRUE)
+#'
 #' # Download the WorldClim data
 #' worldclim(
-#'   output_dir = "...Desktop/worldclim",
-#'   location = "regents"
+#'   output_dir = temp_path,
+#'   location = regents
 #' )
 #'
 #' }

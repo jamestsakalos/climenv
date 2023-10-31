@@ -27,8 +27,6 @@ been extracted for a given \code{location}. It accepts the data formatted
 from the \code{ce_extract} function.
 }
 \examples{
-{
-
 # Step 1. Import the Italian Biome polygon data
 # Step 2. Run the download function
 # Step 3. Run the extract function
@@ -40,8 +38,6 @@ data("it_data", package = "climenv")
 # Step 4. Visualise the climatic envelope using a Holdridge diagram
 
 plot_h(data = it_data, geo_id = "MED")
-
-}
 
 }
 \references{
@@ -62,5 +58,5 @@ Comprehensive R Archive Network. \doi{10.5281/zenodo.1068996}
 Download climate data: \code{\link[=ce_download]{ce_download()}}
 }
 \author{
-James L. Tsakalos
+James L. Tsakalos and Martin R. Smith
 }
