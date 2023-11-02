@@ -2,7 +2,7 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "climenv",
-  "description": "If you are a scientist seeking a convenient solution for downloading, extracting, and plotting climatological data, consider exploring the features of this package. It grants you access to three widely recognised modelled data sets, namely WorldClim 2, CHELSA, and NASA’s SRTM. It seamlessly handles both multi and single geospatial polygon and point data, allowing you to extract outputs that can serve as covariates in various ecological studies. It also allows you to visualise these extractions using two common graphic options – the Walter-Lieth climate diagram and the Holdridge life zone classification scheme. The last option is a scheme of our own design which incorporates aspects of both Walter-Leigh and Holdridge. The package's user-friendly access and extraction of globally recognisable data sets significantly enhance its versatility and usability across a broad spectrum of applications.",
+  "description": "Grants access to three widely recognised modelled data sets, namely Global Climate Data (WorldClim 2), Climatologies at high resolution for the earth's land surface areas (CHELSA), and National Aeronautics and Space Administration's (NASA) Shuttle Radar Topography Mission (SRTM). It handles both multi and single geospatial polygon and point data, extracts outputs that can serve as covariates in various ecological studies. Provides two common graphic options – the Walter-Lieth (1960) <https://donum.uliege.be/bitstream/2268.1/7079/1/Walter-Lieth_Klimadiagramm-Weltatlas.pdf> climate diagram and the Holdridge (1967) <https://reddcr.go.cr/sites/default/files/centro-de-documentacion/holdridge_1966_-_life_zone_ecology.pdf> life zone classification scheme. Provides one new graphic scheme of our own design which incorporates aspects of both Walter-Leigh and Holdridge. Provides user-friendly access and extraction of globally recognisable data sets to enhance their usability across a broad spectrum of applications.",
   "name": "climenv: Download, Extract and Visualise Climate and Elevation Data",
   "codeRepository": "https://github.com/jamestsakalos/climenv",
   "issueTracker": "https://github.com/jamestsakalos/climenv/issues",
@@ -13,7 +13,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.3.1 (2023-06-16)",
+  "runtimePlatform": "R version 4.3.2 (2023-10-31)",
   "author": [
     {
       "@type": "Person",
@@ -330,7 +330,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1754.637KB",
+  "fileSize": "1758.852KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",
