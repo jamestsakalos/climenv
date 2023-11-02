@@ -152,33 +152,15 @@ to make point objects.</p></div>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Create temporary file</span></span></span>
 <span class="r-in"><span><span class="va">temp_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/on.exit.html" class="external-link">on.exit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_path</span><span class="op">)</span><span class="op">)</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># elevation will be saved in the output_dir (i.e. output directory)</span></span></span>
-<span class="r-in"><span>   <span class="fu">elev</span><span class="op">(</span>output_dir <span class="op">=</span> <span class="va">temp_path</span>, location <span class="op">=</span> <span class="va">polygon_py_sm</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">elev</span><span class="op">(</span>output_dir <span class="op">=</span> <span class="va">temp_path</span>, location <span class="op">=</span> <span class="va">polygon_py_sm</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Mosaicing &amp; Projecting</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Reset user options</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_path</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># As a smaller example, we can make a polygon covering an ocean island.</span></span></span>
-<span class="r-in"><span><span class="va">location</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st.html" class="external-link">st_polygon</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>     <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>       long <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">161</span>, <span class="fl">161</span>, <span class="fl">154</span>, <span class="fl">161</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>       lat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">61</span>, <span class="op">-</span><span class="fl">49</span>, <span class="op">-</span><span class="fl">61</span>, <span class="op">-</span><span class="fl">61</span><span class="op">)</span></span></span>
-<span class="r-in"><span>     <span class="op">)</span></span></span>
-<span class="r-in"><span>   <span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Make sure that the polygon the correct class</span></span></span>
-<span class="r-in"><span><span class="va">location</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry</a></span><span class="op">(</span><span class="va">location</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">location</span><span class="op">)</span> <span class="co"># "sfc_POLYGON" "sfc"</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "sfc_POLYGON" "sfc"        </span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Set the coordinate reference system</span></span></span>
-<span class="r-in"><span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html" class="external-link">st_crs</a></span><span class="op">(</span><span class="va">location</span><span class="op">)</span> <span class="op">=</span> <span class="st">"epsg:4326"</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Call elev()</span></span></span>
-<span class="r-in"><span><span class="co"># elev(location = location, output_dir = temp_path)</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

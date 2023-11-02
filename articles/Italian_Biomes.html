@@ -86,7 +86,7 @@
 Tsakalos (<a href="mailto:james.tsakalos@gmail.com" class="email">james.tsakalos@gmail.com</a>), Martin R. Smith, Federico
 Luebert, Ladislav Mucina</h4>
             
-            <h4 data-toc-skip class="date">2023-10-31</h4>
+            <h4 data-toc-skip class="date">2023-11-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jamestsakalos/climenv/blob/HEAD/vignettes/Italian_Biomes.Rmd" class="external-link"><code>vignettes/Italian_Biomes.Rmd</code></a></small>
       <div class="hidden name"><code>Italian_Biomes.Rmd</code></div>
@@ -255,17 +255,8 @@ visualisation of climate patterns.</p>
 <span><span class="fu"><a href="../reference/plot_wl.html">plot_wl</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">it_data</span>, <span class="st">"MED"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plot_wl.html">plot_wl</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">it_data</span>, <span class="st">"NEM"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="Italian_Biomes_files/figure-html/walter-leigh-diagram-1.png" alt="**Fig 4**. Walter-Lieth’s climatic diagram (1960) of the Mediterranean (MED) and Nemoral (NEM) Biome within Italy derived using WorldClim. When precipitation is &gt;
-100 mm, the scale increases from 2mm C-1 to 20 mm C-1 (as indicated by
-the black horizontal line) to avoid too high diagrams in very wet
-locations. This change is indicated by a black horizontal line, and the
-graph over is filled in solid blue. When the precipitation graph lies
-under the temperature graph (P &lt; 2T) we have an arid period (filled
-in dotted red vertical lines). Otherwise the period is considered humid
-(filled in light blue). Daily maximum average temperature of the hottest
-month and daily minimum average temperature of the coldest month are
-labeled in black on the left margin of the diagram.” width=“480”
-/&gt;&lt;img src=" italian_biomes_files caption><strong>Fig 4</strong>. Walter-Lieth’s climatic diagram (1960) of the
+<img src="Italian_Biomes_files/figure-html/walter-leigh-diagram-1.png" alt="**Fig 4**. Walter-Lieth’s climatic diagram (1960) of the Mediterranean (MED) and Nemoral (NEM) Biome within Italy derived using WorldClim. When precipitation is &gt; 100 mm, the scale increases from 2mm C-1 to 20 mm  C-1 (as indicated by the black horizontal line) to avoid too high diagrams in very wet locations. This change is indicated by a black horizontal line, and the graph over is filled in solid blue. When the precipitation graph lies under the temperature graph (P &lt; 2T) we have an arid period (filled in dotted red vertical lines). Otherwise the period is considered humid (filled in light blue). Daily maximum average temperature of the hottest month and daily minimum average temperature of the coldest month are labeled in black on the left margin of the diagram." width="480"><img src="Italian_Biomes_files/figure-html/walter-leigh-diagram-2.png" alt="**Fig 4**. Walter-Lieth’s climatic diagram (1960) of the Mediterranean (MED) and Nemoral (NEM) Biome within Italy derived using WorldClim. When precipitation is &gt; 100 mm, the scale increases from 2mm C-1 to 20 mm  C-1 (as indicated by the black horizontal line) to avoid too high diagrams in very wet locations. This change is indicated by a black horizontal line, and the graph over is filled in solid blue. When the precipitation graph lies under the temperature graph (P &lt; 2T) we have an arid period (filled in dotted red vertical lines). Otherwise the period is considered humid (filled in light blue). Daily maximum average temperature of the hottest month and daily minimum average temperature of the coldest month are labeled in black on the left margin of the diagram." width="480"><p class="caption">
+<strong>Fig 4</strong>. Walter-Lieth’s climatic diagram (1960) of the
 Mediterranean (MED) and Nemoral (NEM) Biome within Italy derived using
 WorldClim. When precipitation is &gt; 100 mm, the scale increases from
 2mm C-1 to 20 mm C-1 (as indicated by the black horizontal line) to
@@ -277,7 +268,7 @@ Otherwise the period is considered humid (filled in light blue). Daily
 maximum average temperature of the hottest month and daily minimum
 average temperature of the coldest month are labeled in black on the
 left margin of the diagram.
-
+</p>
 </div>
 <p>Lastly, we present our custom diagrams which incorporate elements
 from Holdridge’s (1967) life zone classification, Walter-Lieth’s
@@ -292,7 +283,7 @@ Holdridge, Walter-Lieth, and Hijmans.</p>
 <span><span class="va">oldpar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.5</span>, <span class="fl">2.8</span>, <span class="fl">2</span>, <span class="fl">17</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plot_c.html">plot_c</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">it_data</span>, <span class="st">"MED"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plot_c.html">plot_c</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">it_data</span>, <span class="st">"NEM"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/on.exit.html" class="external-link">on.exit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">oldpar</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">oldpar</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <img src="Italian_Biomes_files/figure-html/custom-climate-diagram-1.png" alt="**Fig 5**. Custom diagram showing the climatic envelope of the Italian Mediterranean (MED) and Nemoral (NEM) Biomes. The abbreviations used are as follow: biotemperture (BioT), isothermality (ISO), mean annual temperature (MAT), temperature seasonality (TS), number of dry months with &lt; 50 mm rainfall during the month (Dry mo), mean annual precipitation (MAP), potential evapotranspiration (PET), precipitation seasonality (PS), seasonal rainfall percentage in Summer (S), Autumn (A), Winter (W), Vernal (V), elevation (Elv) and latitude (Lat)." width="672"><img src="Italian_Biomes_files/figure-html/custom-climate-diagram-2.png" alt="**Fig 5**. Custom diagram showing the climatic envelope of the Italian Mediterranean (MED) and Nemoral (NEM) Biomes. The abbreviations used are as follow: biotemperture (BioT), isothermality (ISO), mean annual temperature (MAT), temperature seasonality (TS), number of dry months with &lt; 50 mm rainfall during the month (Dry mo), mean annual precipitation (MAP), potential evapotranspiration (PET), precipitation seasonality (PS), seasonal rainfall percentage in Summer (S), Autumn (A), Winter (W), Vernal (V), elevation (Elv) and latitude (Lat)." width="672"><p class="caption">
 <strong>Fig 5</strong>. Custom diagram showing the climatic envelope of
@@ -508,7 +499,7 @@ importance measures derived from a Random Forest model.
 </p>
 </div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/on.exit.html" class="external-link">on.exit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">oldpar</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">oldpar</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>

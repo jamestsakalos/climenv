@@ -86,7 +86,7 @@
 Tsakalos (<a href="mailto:james.tsakalos@gmail.com" class="email">james.tsakalos@gmail.com</a>), Martin R. Smith, Federico
 Luebert, Ladislav Mucina</h4>
             
-            <h4 data-toc-skip class="date">2023-10-31</h4>
+            <h4 data-toc-skip class="date">2023-11-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jamestsakalos/climenv/blob/HEAD/vignettes/climenv.Rmd" class="external-link"><code>vignettes/climenv.Rmd</code></a></small>
       <div class="hidden name"><code>climenv.Rmd</code></div>
@@ -166,7 +166,6 @@ the package help documentation or Tsakalos et al. (2021).</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_path</span>, <span class="st">"tmax"</span><span class="op">)</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_path</span>, <span class="st">"tavg"</span><span class="op">)</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_path</span>, <span class="st">"tmin"</span><span class="op">)</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/on.exit.html" class="external-link">on.exit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_path</span><span class="op">)</span><span class="op">)</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create a empty raster serving as a base</span></span>
 <span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">rast</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">10</span>, nrow <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
@@ -257,7 +256,10 @@ to be added to the polygon.</p>
 <span>  location_g <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in .location_helper(location, location_g, location_df): location_g must be one of: lyr.1, grp, id, optional</span></span>
-<span><span class="co">#&gt; Defaulting to a unique id for each polygon or point object</span></span></code></pre></div>
+<span><span class="co">#&gt; Defaulting to a unique id for each polygon or point object</span></span>
+<span></span>
+<span><span class="co"># Remove temporary data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_path</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>The returned data object is a list containing five data sets.
 Specifically, one data set each is returned for precipitation and mean-,
 maximum- and minimum-temperature. One data set is produced for altitude
@@ -318,17 +320,7 @@ higher precipitation.
 <code class="sourceCode R"><span><span class="co"># Make Walter-Leigh's (1960) climate diagram</span></span>
 <span><span class="fu"><a href="../reference/plot_wl.html">plot_wl</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data_py</span>, <span class="st">"0"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="climenv_files/figure-html/walter-leigh-diagram-1.png" alt="Fig 2. Walter-Lieth’s climatic diagram (1960) of the training data. When precipitation is &gt;
-100 mm, the scale increases from 2mm C-1 to 20 mm C-1 (as indicated by
-the black horizontal line) to avoid too high diagrams in very wet
-locations. This change is indicated by a black horizontal line, and the
-graph over is filled in solid blue. When the precipitation graph lies
-under the temperature graph (P &lt; 2T) we have an arid period (filled
-in dotted red vertical lines). Otherwise the period is considered humid
-(filled in light blue). Daily maximum average temperature of the hottest
-month and daily minimum average temperature of the coldest month are
-labeled in black on the left margin of the diagram.” width=“480” /&gt;
-&lt;p class=" caption>
+<img src="climenv_files/figure-html/walter-leigh-diagram-1.png" alt="Fig 2. Walter-Lieth’s climatic diagram (1960) of the training data. When precipitation is &gt; 100 mm, the scale increases from 2mm C-1 to 20 mm  C-1 (as indicated by the black horizontal line) to avoid too high diagrams in very wet locations. This change is indicated by a black horizontal line, and the graph over is filled in solid blue. When the precipitation graph lies under the temperature graph (P &lt; 2T) we have an arid period (filled in dotted red vertical lines). Otherwise the period is considered humid (filled in light blue). Daily maximum average temperature of the hottest month and daily minimum average temperature of the coldest month are labeled in black on the left margin of the diagram." width="480"><p class="caption">
 Fig 2. Walter-Lieth’s climatic diagram (1960) of the training data. When
 precipitation is &gt; 100 mm, the scale increases from 2mm C-1 to 20 mm
 C-1 (as indicated by the black horizontal line) to avoid too high
@@ -340,12 +332,11 @@ period is considered humid (filled in light blue). Daily maximum average
 temperature of the hottest month and daily minimum average temperature
 of the coldest month are labeled in black on the left margin of the
 diagram.
-
+</p>
 </div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Make the custom climate diagram</span></span>
 <span><span class="va">oldpar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.5</span>, <span class="fl">2.8</span>, <span class="fl">2</span>, <span class="fl">17</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/on.exit.html" class="external-link">on.exit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">oldpar</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plot_c.html">plot_c</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data_py</span>, <span class="st">"0"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <img src="climenv_files/figure-html/custom-climate-diagram-1.png" alt="Fig 3. Custom diagram showing the climatic envelope of the training data. The abbreviations used are as follow: biotemperture (BioT), isothermality (ISO), mean annual temperature (MAT), temperature seasonality (TS), number of dry months with &lt; 50 mm rainfall during the month (Dry mo), mean annual precipitation (MAP), potential evapotranspiration (PET), precipitation seasonality (PS), seasonal rainfall percentage in Summer (S), Autumn (A), Winter (W), Vernal (V), elevation (Elv) and latitude (Lat)." width="672"><p class="caption">
@@ -359,6 +350,8 @@ rainfall percentage in Summer (S), Autumn (A), Winter (W), Vernal (V),
 elevation (Elv) and latitude (Lat).
 </p>
 </div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">oldpar</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
   </div>
