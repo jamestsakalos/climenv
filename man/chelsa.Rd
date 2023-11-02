@@ -46,7 +46,7 @@ chelsa(
   output_dir = temp_path
 )
 
-Reset user options
+# Reset user options
 unlink(file.path(temp_path))
 
 # Note that unlike worldclim() we do not specify the location argument

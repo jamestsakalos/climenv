@@ -66,7 +66,7 @@ ce_download(
   location = regents
 )
 
-Reset user options
+# Reset user options
 unlink(file.path(temp_path))
 
 }

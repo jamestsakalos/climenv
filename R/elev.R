@@ -149,7 +149,7 @@
 #' # elevation will be saved in the output_dir (i.e. output directory)
 #' elev(output_dir = temp_path, location = polygon_py_sm)
 #'
-#' Reset user options
+#' # Reset user options
 #' unlink(file.path(temp_path))
 #'
 #' }
