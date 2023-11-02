@@ -41,12 +41,14 @@
 #'
 #' # Create temporary file
 #' temp_path <- tempfile()
-#' on.exit(unlink(file.path(temp_path)), add = TRUE)
 #'
 #' # Download the WorldClim data
 #' chelsa(
 #'   output_dir = temp_path
 #' )
+#'
+#' Reset user options
+#' unlink(file.path(temp_path))
 #'
 #' # Note that unlike worldclim() we do not specify the location argument
 #' # because it is not yet possible to extract smaller tile sections
