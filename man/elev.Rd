@@ -53,31 +53,14 @@ sf::st_crs(polygon_py_sm) <- "epsg:4326"
 
 # Create temporary file
 temp_path <- tempfile()
-on.exit(unlink(file.path(temp_path)), add = TRUE)
 
 # elevation will be saved in the output_dir (i.e. output directory)
-   elev(output_dir = temp_path, location = polygon_py_sm)
+elev(output_dir = temp_path, location = polygon_py_sm)
+
+Reset user options
+unlink(file.path(temp_path))
+
 }
-
-# As a smaller example, we can make a polygon covering an ocean island.
-location <- sf::st_polygon(
-   list(
-     cbind(
-       long = c(161, 161, 154, 161),
-       lat = c(-61, -49, -61, -61)
-     )
-   )
-)
-
-# Make sure that the polygon the correct class
-location <- sf::st_geometry(location)
-class(location) # "sfc_POLYGON" "sfc"
-
-# Set the coordinate reference system
-sf::st_crs(location) = "epsg:4326"
-
-# Call elev()
-# elev(location = location, output_dir = temp_path)
 
 }
 \references{
