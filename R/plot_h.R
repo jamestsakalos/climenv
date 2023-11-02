@@ -72,10 +72,21 @@ plot_h <- function(
 
 }
 
-
 .validate_geo_id <- function(geo_id, data) {
-  if (is.na(match(geo_id, row.names(data[[1]])))) {
+
+  # Preparing parameters for validation
+  nr_geo_id <- length(geo_id)
+  nr_matches <- sum(!is.na(match(geo_id, row.names(data[[1]]))))
+
+  # If there is partial match
+  p_match <- nr_matches != nr_geo_id
+
+  # If there is no match, accepts partials.
+  n_match <- p_match == 0
+
+  if (n_match == FALSE) {
     stop("Invalid geo_id; Choices: ",
          paste(as.character(row.names(data[[1]])), collapse = ", "))
   }
+
 }
