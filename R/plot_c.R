@@ -78,12 +78,14 @@
 #'
 #' # Set up plotting parameters
 #' oldpar <- par(mar = c(1.5, 2.2, 1.5, 14) + 0.01)
-#' on.exit(par(oldpar))
 #'
 #' plot_c(
 #'   it_data, geo_id = "MED",
 #'   l_tcols = c(14.5, 17, 18.5, 19.5, 21)
 #' )
+#'
+#' # Restore user options
+#' par(oldpar)
 #'
 #' # This output works if you export to a three column width sized image.
 #'

@@ -172,7 +172,7 @@ count of works by Holdridge, Walter-Lieth, and Hijmans.
 oldpar <- par(mar = c(1.5, 2.8, 2, 17))
 plot_c(data = it_data, "MED")
 plot_c(data = it_data, "NEM")
-on.exit(par(oldpar))
+par(oldpar)
 ```
 
 ### Notes on selecting appropriate climatic variables
@@ -343,7 +343,7 @@ print(importance)
 # Plot variable importance
 oldpar <- par(mar = c(4, 3, 0, 1) + 0.1)
 varImpPlot(model, main = "")
-on.exit(par(oldpar))
+par(oldpar)
 ```
 
 ### References

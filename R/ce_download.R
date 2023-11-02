@@ -37,13 +37,16 @@
 #'
 #' # Create temporary output directory
 #' temp_path <- tempdir()
-#' on.exit(unlink(file.path(temp_path)), add = TRUE)
 #'
 #' # Run the download function
 #' ce_download(
 #'   output_dir = temp_path,
 #'   location = regents
 #' )
+#'
+#' # Reset user options
+#' unlink(file.path(temp_path))
+#'
 #' }
 #' @export
 ce_download <- function(

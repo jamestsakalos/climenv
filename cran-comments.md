@@ -41,7 +41,7 @@ We confirm the spelling of these words, which we have listed in inst/WORDLIST.
 There are no downstream dependencies.
 
 
-## Responses to remarks from CRAN submission
+## Responses to remarks from CRAN submission - 1
 
 > Add references describing the methods in the package to the DESCRIPTION file
 > in the description field.
@@ -61,3 +61,19 @@ We have switched from `\dontrun{}` to `\donttest{}`.
 > Check that the user's options, par or working directory are not changed
 
 We have restored user options to default settings throughout the package.
+
+## Responses to remarks from CRAN submission - 2
+
+> remove examples that are commented out
+
+We have removed them
+
+> lengthy examples (>5 sec) can be wrapped in `/donttest{}`
+
+All examples that are lengthy are wrapped. Where possible we have attempted to
+reduce their complexity and timing, however, our package works with big,
+global data and, even in simple cases these take time to download.
+
+> only use `on.exit()` within functions.
+
+We have replaced `on.exit()` from examples with appropriate code. 
