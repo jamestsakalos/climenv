@@ -1,7 +1,7 @@
 Package: climenv
 Type: Package
 Title: Download, Extract and Visualise Climate and Elevation Data
-Version: 1.0.0
+Version: 1.0.0.9000
 Authors@R: c(
     person("James L.", "Tsakalos", role = c("aut", "cre", "cph"),
            email = "jamestsakalos@gmail.com",
