@@ -7,13 +7,19 @@
   "codeRepository": "https://github.com/jamestsakalos/climenv",
   "issueTracker": "https://github.com/jamestsakalos/climenv/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "1.0.0",
+  "version": "1.0.0.9000",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
   "runtimePlatform": "R version 4.3.2 (2023-10-31)",
+  "provider": {
+    "@id": "https://cran.r-project.org",
+    "@type": "Organization",
+    "name": "Comprehensive R Archive Network (CRAN)",
+    "url": "https://cran.r-project.org"
+  },
   "author": [
     {
       "@type": "Person",
@@ -330,7 +336,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1758.852KB",
+  "fileSize": "1757.931KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",
@@ -358,7 +364,7 @@
         }
       ],
       "name": "climenv: download, extract and visualise climatic and elevation data",
-      "description": "R package version 1.0.0",
+      "description": "R package version 1.0.0.9000",
       "isPartOf": {
         "@type": "PublicationIssue",
         "datePublished": "2023",
