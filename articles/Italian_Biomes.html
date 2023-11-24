@@ -86,7 +86,7 @@
 Tsakalos (<a href="mailto:james.tsakalos@gmail.com" class="email">james.tsakalos@gmail.com</a>), Martin R. Smith, Federico
 Luebert, Ladislav Mucina</h4>
             
-            <h4 data-toc-skip class="date">2023-11-06</h4>
+            <h4 data-toc-skip class="date">2023-11-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jamestsakalos/climenv/blob/HEAD/vignettes/Italian_Biomes.Rmd" class="external-link"><code>vignettes/Italian_Biomes.Rmd</code></a></small>
       <div class="hidden name"><code>Italian_Biomes.Rmd</code></div>
@@ -109,7 +109,6 @@ p.caption {
   text-align: justify;
 }
 </style>
-<hr>
 <div class="section level2">
 <h2 id="spatial-distribution-of-the-italian-biome-data-sets">Spatial distribution of the Italian Biome data sets<a class="anchor" aria-label="anchor" href="#spatial-distribution-of-the-italian-biome-data-sets"></a>
 </h2>
@@ -316,9 +315,8 @@ climatic variables that play a major role in characterising and
 distinguishing the climatic envelopes of the various biomes in their own
 study areas.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Lets start by extracting the climate data for all points in the</span></span>
+<code class="sourceCode R"><span><span class="co"># Let's start by extracting the climate data for all points in the</span></span>
 <span><span class="co"># italy_pt data.</span></span>
-<span></span>
 <span><span class="va">it_data_extended</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ce_extract.html">ce_extract</a></span><span class="op">(</span></span>
 <span>  path <span class="op">=</span> <span class="st">"C:/Users/jamie/OneDrive/Desktop/temp"</span>,</span>
 <span>  location <span class="op">=</span> <span class="va">it_pt</span></span>
@@ -326,20 +324,18 @@ study areas.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># If you haven't downloaded the climate and elevation data by following the code</span></span>
 <span><span class="co"># above you could simply load the data()</span></span>
-<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"it_data_extended"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># But this data needs to be reformatted a bit</span></span>
+<span><span class="co"># But this data needs to be reformatted a bit.</span></span>
 <span></span>
-<span><span class="co"># Lets start by calculating the bioclim variables</span></span>
-<span></span>
+<span><span class="co"># Let's start by calculating the bioclim variables:</span></span>
 <span><span class="va">bioclim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu">dismo</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dismo/man/biovars.html" class="external-link">biovars</a></span><span class="op">(</span></span>
 <span>  prec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">it_data_extended</span><span class="op">$</span><span class="va">prec</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span>,</span>
 <span>  tmin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">it_data_extended</span><span class="op">$</span><span class="va">tmin</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span>,</span>
 <span>  tmax <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">it_data_extended</span><span class="op">$</span><span class="va">tmax</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Lets make some more intuitive names for these variables</span></span>
+<span><span class="co"># Let's make some more intuitive names for these variables:</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">bioclim</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Mean_annual_temperature"</span>,</span>
 <span>  <span class="st">"Mean_diurnal_range"</span>,</span>
@@ -363,7 +359,6 @@ study areas.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Now get the Holdridge variables</span></span>
-<span></span>
 <span><span class="va">hold</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bioclimate.html">bioclimate</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">it_data_extended</span><span class="op">$</span><span class="va">tavg</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">it_data_extended</span><span class="op">$</span><span class="va">prec</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span></span>
@@ -377,7 +372,6 @@ study areas.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Join them together along with elevation and altitude</span></span>
-<span></span>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span></span>
 <span>  <span class="va">bioclim</span>, <span class="va">hold</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Mean_Annual_Biotemperature"</span>,</span>
 <span>                    <span class="st">"Potential_Evapotranspiration_Ratio"</span><span class="op">)</span><span class="op">]</span>,</span>
@@ -385,11 +379,10 @@ study areas.</p>
 <span>  lat <span class="op">=</span> <span class="va">it_data_extended</span><span class="op">$</span><span class="va">lat</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Lets just fix the last two column names</span></span>
+<span><span class="co"># Let's just fix the last two column names</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">22</span>, <span class="fl">23</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Elevation"</span>, <span class="st">"Latitude"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Now lets add the Biome type as a column</span></span>
-<span></span>
+<span><span class="co"># Now let's add the Biome type as a column</span></span>
 <span><span class="va">dat</span><span class="op">$</span><span class="va">class</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/is.bool.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">it_pt</span><span class="op">$</span><span class="va">GB</span><span class="op">)</span></span></code></pre></div>
 <p>Random Forest is an ensemble learning algorithm that combines
 multiple decision trees to make predictions. Decision trees are
