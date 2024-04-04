@@ -20,12 +20,24 @@ correspond to:
 \item \code{abt}, mean annual biotemperature; mean annual temperature after
 replacing entries outside the range 0° to 30° with zeros;
 \item \code{tap}, total annual precipitation (mm);
-\item \code{per}, potential evapotranspiration ratio
+\item \code{per}, potential evapotranspiration ratio;
+\item \code{zone}, name of associated holdridge zone
 }
 }
 \description{
 Calculates the values of bioclimatic indices from monthly temperature and
 precipitation measurements, following Szelepcsényi et al. 2014.
+}
+\examples{
+# Step 1. Import the Italian Biome polygon data
+# Step 2. Run the download function
+# Step 3. Run the extract function
+#* See ce_download & ce_extract documentation
+
+# Steps 1, 2 & 3 can be skipped by loading the extracted data (it_data)
+data("it_data", package = "climenv")
+
+bioclimate(it_data$tavg_m[, 1:12], it_data$prec_m[, 1:12])
 }
 \references{
 Szelepcsényi Z, Breuer H, Sümegi P (2014)

@@ -18,8 +18,10 @@ data sets. Structured by \code{ce_extract()}.}
 \code{HoldridgePoints()}.}
 }
 \value{
-Returns a base R family of plot. This function uses the \pkg{Ternary}
-package to create a Holdridge simplex plot.
+\code{plot_h()} is principally called for its side-effects: it creates a
+Holdridge simplex plot using the base R graphics functions, \emph{via} the
+\pkg{Ternary} package.  It invisibly returns the results of a call to
+\code{bioclimate()}, which reports the Holdridge data associated with each point.
 }
 \description{
 Creates a graph using the climate and elevation data which has
