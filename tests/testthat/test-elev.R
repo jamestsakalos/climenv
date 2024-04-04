@@ -69,8 +69,16 @@ test_that("elev() downloads tiles not containing a vertex srtm", {
 
   # downloading the data for srtm
   expect_warning(
-    geo_elev <- elev(tmp_dir, island, "GEOdata", quiet = TRUE),
-    "Coordinate reference system not specified"
+    expect_warning(
+      expect_warning(
+        expect_warning(
+          expect_warning(
+            geo_elev <- elev(tmp_dir, island, "GEOdata", quiet = TRUE),
+            "Coordinate reference system not specified"
+          ), "Could not download srtm_69_22: HTTP status 404",
+        ), "Could not download srtm_69_23: HTTP status 404",
+      ), "Could not download srtm_67_24: HTTP status 404",
+    ), "Could not download srtm_69_24: HTTP status 404"
   )
 
   thumb_0 <- terra::aggregate(geo_elev, fact = 20)
