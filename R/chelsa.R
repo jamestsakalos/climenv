@@ -42,7 +42,7 @@
 #' # Create temporary file
 #' temp_path <- tempfile()
 #'
-#' # Download the WorldClim data
+#' # Download the data
 #' chelsa(
 #'   output_dir = temp_path
 #' )
