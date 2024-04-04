@@ -86,7 +86,7 @@
 Tsakalos (<a href="mailto:james.tsakalos@gmail.com" class="email">james.tsakalos@gmail.com</a>), Martin R. Smith, Federico
 Luebert, Ladislav Mucina</h4>
             
-            <h4 data-toc-skip class="date">2023-11-24</h4>
+            <h4 data-toc-skip class="date">2024-04-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jamestsakalos/climenv/blob/HEAD/vignettes/Italian_Biomes.Rmd" class="external-link"><code>vignettes/Italian_Biomes.Rmd</code></a></small>
       <div class="hidden name"><code>Italian_Biomes.Rmd</code></div>
@@ -130,7 +130,7 @@ WorldClim 2 climate and Mapzen digital elevation.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"it_pt"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Make a map of the Italian polygons data set</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">it_py</span>, key.pos <span class="op">=</span> <span class="cn">NULL</span>, border <span class="op">=</span> <span class="cn">NA</span>, main <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">it_py</span>, key.pos <span class="op">=</span> <span class="cn">NULL</span>, border <span class="op">=</span> <span class="cn">NA</span>, main <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <img src="Italian_Biomes_files/figure-html/italian-polygons-map-1.png" alt="**Fig 1**. Mediterranean and Nemoral Biomes of Italy (Mucina et al., 2023). The Mediterranean Biome is shaded green, while the Nemoral Biome is shaded in orange." width="480"><p class="caption">
 <strong>Fig 1</strong>. Mediterranean and Nemoral Biomes of Italy
@@ -150,7 +150,7 @@ communities, habitats, disturbance classes, etc., they would serve as an
 ideal candidate for analyses with our package.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Make a map of the Italian points data set</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">it_pt</span>, pch <span class="op">=</span> <span class="fl">19</span>, cex <span class="op">=</span> <span class="fl">0.5</span>, key.pos <span class="op">=</span> <span class="cn">NULL</span>, main <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">it_pt</span>, pch <span class="op">=</span> <span class="fl">19</span>, cex <span class="op">=</span> <span class="fl">0.5</span>, key.pos <span class="op">=</span> <span class="cn">NULL</span>, main <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <img src="Italian_Biomes_files/figure-html/italian-points-map-1.png" alt="**Fig 2**. Mediterranean and Nemoral Biomes of Italy (Mucina et al., 2023). The Mediterranean Biome is coded as green points, while the Nemoral Biome is coded as orange points." width="480"><p class="caption">
 <strong>Fig 2</strong>. Mediterranean and Nemoral Biomes of Italy
@@ -330,9 +330,9 @@ study areas.</p>
 <span></span>
 <span><span class="co"># Let's start by calculating the bioclim variables:</span></span>
 <span><span class="va">bioclim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu">dismo</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dismo/man/biovars.html" class="external-link">biovars</a></span><span class="op">(</span></span>
-<span>  prec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">it_data_extended</span><span class="op">$</span><span class="va">prec</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span>,</span>
-<span>  tmin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">it_data_extended</span><span class="op">$</span><span class="va">tmin</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span>,</span>
-<span>  tmax <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">it_data_extended</span><span class="op">$</span><span class="va">tmax</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span></span>
+<span>  prec <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">it_data_extended</span><span class="op">$</span><span class="va">prec</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  tmin <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">it_data_extended</span><span class="op">$</span><span class="va">tmin</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  tmax <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">it_data_extended</span><span class="op">$</span><span class="va">tmax</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Let's make some more intuitive names for these variables:</span></span>
@@ -360,8 +360,8 @@ study areas.</p>
 <span></span>
 <span><span class="co"># Now get the Holdridge variables</span></span>
 <span><span class="va">hold</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bioclimate.html">bioclimate</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">it_data_extended</span><span class="op">$</span><span class="va">tavg</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/terra/man/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">it_data_extended</span><span class="op">$</span><span class="va">prec</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rspatial.github.io/terra/reference/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">it_data_extended</span><span class="op">$</span><span class="va">tavg</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rspatial.github.io/terra/reference/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">it_data_extended</span><span class="op">$</span><span class="va">prec</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Make some more intuitive names for these variables</span></span>
@@ -383,7 +383,7 @@ study areas.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">22</span>, <span class="fl">23</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Elevation"</span>, <span class="st">"Latitude"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Now let's add the Biome type as a column</span></span>
-<span><span class="va">dat</span><span class="op">$</span><span class="va">class</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/is.bool.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">it_pt</span><span class="op">$</span><span class="va">GB</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">dat</span><span class="op">$</span><span class="va">class</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/is.bool.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">it_pt</span><span class="op">$</span><span class="va">GB</span><span class="op">)</span></span></code></pre></div>
 <p>Random Forest is an ensemble learning algorithm that combines
 multiple decision trees to make predictions. Decision trees are
 structures that make predictions by splitting data based on if-else
