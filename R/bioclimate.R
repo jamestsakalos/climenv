@@ -41,5 +41,5 @@ bioclimate <- function(temp, prec) {
   per <- ape / tap
 
   # Return:
-  cbind(abt = abt, tap = tap, per = per)
+  data.frame(abt = abt, tap = tap, per = per)
 }
