@@ -10,8 +10,10 @@
 #' `HoldridgePoints()`.
 #'
 #' @returns
-#' Returns a base R family of plot. This function uses the \pkg{Ternary}
-#' package to create a Holdridge simplex plot.
+#' `plot_h()` is principally called for its side-effects: it creates a
+#' Holdridge simplex plot using the base R graphics functions, _via_ the
+#' \pkg{Ternary} package.  It invisibly returns the results of a call to
+#' `bioclimate()`, which reports the Holdridge data associated with each point.
 #'
 #' @author James L. Tsakalos and Martin R. Smith
 #' @seealso Download climate data: [`ce_download()`]
@@ -70,6 +72,8 @@ plot_h <- function(
                            col = col, cex = 2, pch = pch,
                            lwd = 2, ...)
 
+  # Return:
+  invisible(hold)
 }
 
 .validate_geo_id <- function(geo_id, data) {

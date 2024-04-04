@@ -7,8 +7,17 @@ test_that("bioclimate() fails gracefully", {
 
 test_that("bioclimate() returns expected values", {
   data(it_data)
+  if (interactive()) {
+    plot_h(it_data, c("MED", "NEM"), col = hcl.colors(2))
+  }
   expect_equal(tolerance = 0.01,
     bioclimate(it_data$tavg_m["MED", 1:12], it_data$prec_m["MED", 1:12]),
-    data.frame(abt = 15.6, tap = 625, per = 1.47)
+    data.frame(abt = 15.6, tap = 625, per = 1.47,
+               zone = "Tropical very dry forest", row.names = "MED")
+  )
+  expect_equal(
+    bioclimate(it_data$tavg_m[, 1:12], it_data$prec_m[, 1:12])[
+      c("NEM", "MED"), "zone"],
+    c("Subtropical dry forest", "Tropical very dry forest")
   )
 })
