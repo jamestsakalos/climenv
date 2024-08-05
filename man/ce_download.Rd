@@ -24,7 +24,7 @@ climate data source.}
 elevation data source.}
 
 \item{var}{Character. If supplied will download a subset of the climate data.
-Must be one of \code{"all"} (default), \code{"prec"}, \code{"tmax"}, \code{"tmin"} or \code{"tmean"}
+Must be one of \code{"all"} (default), \code{"prec"}, \code{"tmax"}, \code{"tmin"} or \code{"tave"}
 to download the corresponding climate data.}
 
 \item{location}{A \code{"sp"}, \code{"sf"} polygon or point object. See

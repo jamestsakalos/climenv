@@ -65,13 +65,13 @@
 #'
 #' @return
 #' `worldclim()` is called for its side effects and returns `NULL`.
-#' Creates four subfolders named prec, tmax, tmin and tmean. Each folder
+#' Creates four subfolders named prec, tmax, tmin and tave. Each folder
 #' contains 12 GeoTiff (.tif) files, one for each month of the year for the time
 #' period 1970&ndash;2000. Each of the files are downloaded at a spatial
 #' resolution of 0.5 minutes of a degree. The precipitation folder contains
 #' average monthly precipitation (mm). The tmax folder contains maximum monthly
 #' temperature. The tmin folder contains minimum monthly
-#' temperature. The tmean folder contains the average monthly temperature.
+#' temperature. The tave folder contains the average monthly temperature.
 #' Temperature values are reported in &deg;C.
 #'
 #' @author James L. Tsakalos and Martin R. Smith
