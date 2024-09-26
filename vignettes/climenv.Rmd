@@ -133,7 +133,7 @@ for (i in seq_along(temp2)) {
   writeRaster(r, paste0(temp_path, "/tmin/", temp2[i]))
 }
 
-# tmean
+# tave
 x <- c(43, 38, 33, 29, 25, 19.8, 17.01, 21, 25, 30, 37, 44) -
   c(c(43, 38, 33, 29, 25, 19.8, 17.01, 21, 25, 30, 37, 44) / 2) / 2
 temp2 <- paste0("tavg_", sprintf("%02d", 1:12), ".tif")

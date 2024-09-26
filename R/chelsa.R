@@ -11,13 +11,13 @@
 #' `download.file()`.
 #'
 #' @returns
-#' Returns four subfolders named prec, tmax, tmin and tmean. Each folder
+#' Returns four subfolders named prec, tmax, tmin and tave. Each folder
 #' contains 12 GeoTiff (.tif) files, one for each month of the year for the time
 #' period 1981&ndash;2010. Each of the files are downloaded at a spatial
 #' resolution of 30 arc seconds (&#126;1 km  sq.). The precipitation folder
 #' contains average monthly precipitation (mm). The tmax folder contains maximum
 #' monthly temperature. The tmin folder contains minimum monthly temperature.
-#' The tmean folder contains the average monthly temperature. The unit of
+#' The tave folder contains the average monthly temperature. The unit of
 #' measure for temperature is in &deg;C.
 #'
 #' @author James L. Tsakalos and Martin R. Smith

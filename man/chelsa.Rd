@@ -11,20 +11,20 @@ chelsa(output_dir = NULL, var = "all", quiet = FALSE, ...)
 the data will be stored.}
 
 \item{var}{Character. If supplied will download a subset of the climate data.
-Must be one of \code{"all"} (default), \code{"prec"}, \code{"tmax"}, \code{"tmin"} or \code{"tmean"}
+Must be one of \code{"all"} (default), \code{"prec"}, \code{"tmax"}, \code{"tmin"} or \code{"tave"}
 to download the corresponding climate data.}
 
 \item{quiet, \dots}{Arguments to control a download from the Internet
 \code{download.file()}.}
 }
 \value{
-Returns four subfolders named prec, tmax, tmin and tmean. Each folder
+Returns four subfolders named prec, tmax, tmin and tave. Each folder
 contains 12 GeoTiff (.tif) files, one for each month of the year for the time
 period 1981–2010. Each of the files are downloaded at a spatial
 resolution of 30 arc seconds (~1 km  sq.). The precipitation folder
 contains average monthly precipitation (mm). The tmax folder contains maximum
 monthly temperature. The tmin folder contains minimum monthly temperature.
-The tmean folder contains the average monthly temperature. The unit of
+The tave folder contains the average monthly temperature. The unit of
 measure for temperature is in °C.
 }
 \description{

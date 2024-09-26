@@ -270,7 +270,7 @@ test_that("ce_extract() works", {
 
   # .clim_extract
   expect_error(.clim_extract(
-    which_clim = "tmean",
+    which_clim = "tave",
     location = pol_pt,
     location_type = "SpatialPointsDataFrame",
     location_g = "grp",
