@@ -64,5 +64,5 @@ Config/Needs/check: rcmdcheck
 Config/Needs/coverage: covr
 Config/Needs/website: pkgdown
 Config/testthat/edition: 3
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Roxygen: list(markdown = TRUE)

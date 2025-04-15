@@ -26,6 +26,9 @@ contains average monthly precipitation (mm). The tmax folder contains maximum
 monthly temperature. The tmin folder contains minimum monthly temperature.
 The tave folder contains the average monthly temperature. The unit of
 measure for temperature is in °C.
+
+When using the data, you \href{https://chelsa-climate.org/downloads/}{agree}
+to cite Karger \emph{et al.} (2017, 2021).
 }
 \description{
 \code{chelsa()} downloads the CHELSA (Climatologies at high resolution for the

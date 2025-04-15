@@ -2,8 +2,8 @@
 #'
 #' @description
 #' `chelsa()` downloads the CHELSA (Climatologies at high resolution for the
-#'  earth’s land surface areas) V2.1 data of temperature and precipitation at a
-#'  resolution of 30 arc sections.
+#' earth’s land surface areas) V2.1 data of temperature and precipitation at a
+#' resolution of 30 arc sections.
 #'
 #' @template output_dir_param
 #' @template output_var_param
@@ -19,6 +19,9 @@
 #' monthly temperature. The tmin folder contains minimum monthly temperature.
 #' The tave folder contains the average monthly temperature. The unit of
 #' measure for temperature is in &deg;C.
+#'
+#' When using the data, you [agree](https://chelsa-climate.org/downloads/)
+#' to cite Karger _et al._ (2017, 2021).
 #'
 #' @author James L. Tsakalos and Martin R. Smith
 #' @seealso Downloading from WorldClim V2.1 [`worldclim()`] or a more convenient
